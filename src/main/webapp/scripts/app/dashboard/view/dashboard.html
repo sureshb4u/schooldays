@@ -1,0 +1,44 @@
+<div>
+ 	<md-toolbar layout="column" class="light-blue md-tall" layout-padding>
+	  <div class="tc-white-1" flex-container="row">
+	  	<a href="javascript:;" data-activates="slide-out" class="hide-on-large-only" ng-click="toggleLeft()"><i class="mdi-navigation-menu material-icons tiny"></i></a>
+	    <div flex="30" layout-align="start start">	
+	    	<span class="fs-subhead display-block">Dashboard</span>
+	    </div>
+	    <!-- <span flex="5"></span> -->
+	    <div flex="65"  layout-align="start start" class="mlt20">
+		    <form>
+			    <div ng-controller="DemoCtrl as ctrl" layout="column" ng-cloak="" class="autocompletedemoCustomTemplate" ng-app="atrium-frontend">
+			       <md-autocomplete class="light-blue darken-2" ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" 
+				     md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)" 
+				     md-items="item in repos" md-item-text="item.name" md-min-length="0" placeholder="Pick an Angular repository" md-menu-class="autocomplete-custom-template">
+				       <md-item-template>
+				         <span class="item-title">
+				           <!-- <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon> -->
+				           <span> {{item.name}} </span>
+				         </span>
+				       </md-item-template>
+				    </md-autocomplete>
+				</div>
+		    </form>
+	    </div>
+	  </div>
+	  <div layout class="tc-white-1 mt++" flex-container="row" layout-align="space-around center">
+	    <div flex="30"><span class="fs-title display-block">My Evaluations</span></div>
+	    <div flex layout="row" class="mlt10">
+		    <ul layout="row" layout-margin>
+		     	<li flex="50"><span class="white-text" ng-click="mainTemplate('evaluations','inbox');changeFontActivity=true;changeFontInbox=false" ng-class="{fontClass:changeFontInbox}" ng-init="changeFontInbox=false">Inbox</span></li>
+		     	<li flex="50"><span class="white-text" ng-click="mainTemplate('evaluations','activity');changeFontInbox=true;changeFontActivity=false;" ng-class="{fontClass:changeFontActivity}" ng-init="changeFontActivity=true">Activity</span></li>
+		    </ul>
+	    </div>
+	 </div>
+	</md-toolbar>
+ </div>
+ <div><div class="p+ light-blue"></div></div>
+ <div><div class="p+ light-blue"></div></div>
+<div style="position:relative;bottom:70px" layout="row" layout-sm="column" layout-fill layout-wrap ng-init="mainTemplate('evaluations','inbox')">
+  <div layout-fill class="tc-white-1" flex-container="row">
+    <div flex="30" layout-margin class="white" resize style="height:{{windowHeight-150+'px'}};border:1px solid #ddd;overflow:auto"><div ng-include="template1.pageList"></div></div>
+    <div flex="65" layout-margin class="white"  resize style="height:{{windowHeight-150+'px'}};border:1px solid #ddd;overflow:auto"><div ng-include="template1.pageDetails"></div></div>
+  </div>
+</div>

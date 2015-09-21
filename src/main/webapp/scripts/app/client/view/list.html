@@ -1,0 +1,8 @@
+<div>
+	<ul class="collection grey-text m0">
+	    <li class="collection-item avatar" ng-repeat="client in clientList.clientUsersList" ng-click="clientView()" ng-class="{hoverClass:hovering}" ng-mouseenter="hovering=true" ng-mouseleave="hovering=false">
+	      <img src="{{client.imageUrl}}" alt="" class="circle">
+	      <p class="black-text"><span class="titles">{{client.userName}}</span></p>
+	    </li>
+	</ul>
+</div>

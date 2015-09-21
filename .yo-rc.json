@@ -1,0 +1,21 @@
+{
+  "generator-jhipster": {
+    "baseName": "vstodo",
+    "packageName": "com.vernal.is",
+    "packageFolder": "com/vernal/is",
+    "authenticationType": "session",
+    "hibernateCache": "no",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "no",
+    "useCompass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "javaVersion": "8",
+    "enableTranslation": true,
+    "rememberMeKey": "df3598ae3870af3eb9d536e212a5ebc9ff7ce0c7"
+  }
+}

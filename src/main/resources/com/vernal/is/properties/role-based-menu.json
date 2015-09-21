@@ -1,0 +1,54 @@
+{
+	"menuItems" : [
+		{
+			"menuTitle": "Profile",
+			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"style":"",
+			"menuItemDisplay": "profile",
+			"url":"#profile"
+			
+		},	
+		{
+			"menuTitle": "Dashboard",
+			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"style":"",
+			"menuItemDisplay": "dashboard",
+			"url":"#dashboard"
+		},
+		{
+			"menuTitle": "Worker",
+			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"style":"",
+			"menuItemDisplay": "worker",
+			"url":"#worker"
+		},
+		{
+			"menuTitle": "Client",
+			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"style":"",
+			"menuItemDisplay": "client",
+			"url":"#client"
+		},
+		{
+			"menuTitle": "Activity",
+			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"style":"",
+			"menuItemDisplay": "activity",
+			"url":"#activity"
+		},
+		{
+			"menuTitle": "Reports",
+			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"style":"",
+			"menuItemDisplay": "reports",
+			"url":"#reports"
+		},
+		{
+			"menuTitle": "Atrium Info",
+			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"style":"",
+			"menuItemDisplay": "atriumInfo",
+			"url":"#atriumInfo"
+		}
+	]
+}

@@ -1,0 +1,22 @@
+<div>
+	<ul class="collection grey-text m0" ng-init="loadInboxList()">
+	    <li class="collection-item avatar" ng-repeat="inbox in inboxList.inboxList">
+	      <img src="/assets/images/vernalis_home_logo.png" alt="" class="circle">
+	      <p class="black-text">{{inbox.label}}<br>
+	         {{inbox.createdFor}}
+	      </p>
+	      <a><span ng-attr-id="{{inbox.createdFor}}" class="title" ng-click="opendDialog('questions');dynamicFields()">{{inbox.type}}</span></a>
+	      <p><a><span class="title" ng-click="opendDialog('engagement');engagementDetails()">Engagement Request</span></a></p>
+	      <p><a><span class="title" ng-click="opendDialog('EditorView');engagementDetails()">Editor</span></a></p>
+	    </li>
+  </ul>
+</div>
+
+<lx-dialog class="dialog dialog--l" ng-class="scrollFun(dialogId)" ng-attr-id="{{dialogId}}" auto-close="true" onclose="closingDialog()" onscrollend="scrollEndDialog()">
+	    	<div ng-if="dialogId == 'engagement'" ng-include="'scripts/app/dashboard/engagementRequest.html'"></div>
+	    	<div ng-if="dialogId == 'questions'" ng-include="'scripts/app/dashboard/questions.html'"></div>
+	    	<div ng-if="dialogId == 'EditorView'" text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent" ta-disabled='disabled'></div>
+</lx-dialog>
+
+
+ 

@@ -1,0 +1,39 @@
+<!-- <div>
+ 	<md-toolbar layout="column" class="light-blue md-tall" layout-padding>
+	  <div layout class="tc-white-1 mt++" flex-container="row">
+	    <div flex="30" layout-align="start end" layout><span class="fs-title display-block">Peter Dinklage</span></div>
+	    <div flex layout="row" layout-align="space-between center">
+		    <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect layout-fill flex>
+		      <md-tab  flex="30" ng-repeat="tab in tabs"
+		              ng-disabled="tab.disabled"
+		              label="" layout-align="space-between center">
+		              <div style="width:320px;color:#fff;text-transform:capitalize;" ng-click="tabNavigation('{{tab.title}}')">{{tab.title}}</div>
+		      </md-tab>
+		    </md-tabs> 
+		     <lx-tabs style="background-color:transparent;" class="white-text">
+		     <lx-tab ng-repeat="tab in tabs" heading="{{tab.title}}"  ng-click="tabNavigation('{{tab.title}}')"><div ng-click="tabNavigation('{{tab.title}}')">{{tab.title}}</div></lx-tab>
+		        <lx-tab heading="Lorem Ipsum 1">
+		            <p class="p+">Lorem Ipsum Content 1</p>
+		        </lx-tab>
+		
+		        <lx-tab heading="Lorem Ipsum 2">
+		            <p class="p+">Lorem Ipsum Content 2</p>
+		        </lx-tab>
+		
+		        <lx-tab heading="Lorem Ipsum 3">
+		            <p class="p+">Lorem Ipsum Content 3</p>
+		        </lx-tab>
+		    </lx-tabs>
+	    </div>
+	 </div>
+	</md-toolbar>
+ </div>
+ <div><div class="p+ light-blue"></div></div>
+ <div><div class="p+ light-blue"></div></div>
+<div style="position:relative;bottom:70px" layout="row" layout-sm="column" layout-fill layout-wrap ng-init="mainTemplate('list')">
+  <div layout-fill class="tc-white-1" flex-container="row">
+   
+  </div>
+</div>
+ -->
+  <div ng-init="mainTemplate('home')"><div ng-include="template.pageView"></div></div>

@@ -1,0 +1,7 @@
+{
+"organization": "ATRIUM",
+"apiUrl": "http://10.211.50.62:9030",
+"contentUrl": "http://10.211.50.62:9002",
+"theme": "default",
+"authorization": "Basic dnNhZG1pbjpwYXNzd29yZA=="
+}

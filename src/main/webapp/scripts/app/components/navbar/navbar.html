@@ -1,0 +1,50 @@
+<div layout-margin class="m0" layout="column" class="sidenavdemoBasicUsage" show-gt-md ng-init="rolePermission();">
+	<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+	    <md-toolbar class="md-medium-tall blue-grey darken-3" style="border-bottom:1px solid #ddd">
+	    <div layout-fill layout="column" layout-align="center center">
+	    	<span  class="fs-title display-block light-blue-text" >Atrium</span>
+	    </div>
+	    </md-toolbar>
+	       <md-content layout="column" flex class="blue-grey darken-3">
+		       <div layout-fill resize style="height:{{windowHeight-150+'px'}};overflow:auto">
+		       <div  ng-repeat="permissions in permission.roleBasedPermissions.menuItems" ng-init="addSelectedClass(permissions.menuItemDisplay)">
+			    <a href="{{permissions.url}}" class="md-raised white-text" id="{{permissions.menuItemDisplay}}" ng-click="changeClass('{{permissions.menuItemDisplay}}')">
+			    	<md-list-item class="md-3-line aligncenter removeClass">
+				        <div class="md-list-item-text">
+				          <h3>{{permissions.menuTitle}}</h3>
+				        </div>
+			    	</md-list-item>
+		    	</a>
+			    </div>
+			    <!-- <md-list-item class="md-3-line aligncenter removeClass">
+			        <div class="md-list-item-text" id="profiles" ng-click="changeClass('profiles')">
+			          <h3><a class="md-raised white-text">Profiles</a></h3>
+			        </div>
+			    </md-list-item>   -->
+		       	</div> 
+		       	<div layout layout-align="center center">
+			    	<lx-dropdown class="aligncenter">
+			    		<div lx-dropdown-toggle>
+			    		<div class="user-name">{{userName}}</div>
+							<div  class="white-text user-name fs-title display-block aligncenter">Admin</div>
+							<div  class="user-options"><i class="user-options-down"></i></div>
+						</div>
+						<div class="content">
+							<lx-dropdown-menu class="aligncenter">
+								<ul class="user-options-menu">
+									<li><a  href="#login" ng-show="false" class="md-raised fs-subhead display-block  aligncenter" translate="global.menu.login"></a></li>
+						      		<li><a  href="#logout" ng-show="true" class="md-raised fs-subhead display-block  aligncenter" translate="global.menu.logout" ng-click="logout()"></a></li>
+								</ul>
+							</lx-dropdown-menu>
+					    </div> 
+				    </lx-dropdown> 
+		       </div>
+	       </md-content>
+  </md-sidenav>
+</div>
+<div class="countDownRow" style="background: none repeat scroll 0% 0% rgb(233, 41, 42); padding: 10px 21px; position: relative;display:none" ng-init="setSessionTimeout()">
+	<div style="font-family:avenir-book; color:white" class="headingDiv">
+		T0 KEEP YOUR DATA SAFE, YOU WILL BE LOGGED OUT IN <span id="countDown"></span><span class="second"> SECONDS</span><span class="minute"> MINUTES</span>
+	</div>
+	<script></script>
+</div>

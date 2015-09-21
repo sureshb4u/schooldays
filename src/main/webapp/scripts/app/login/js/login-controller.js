@@ -1,0 +1,115 @@
+(function() {
+  'use strict';
+/**
+ * @ngdoc function
+ * @name atrium.controller:loginController
+ * @description
+ * # loginController
+ * Controller of the atrium
+ */
+  vApp.controller('loginController', [ '$scope','$translate','restService','loginService','$translatePartialLoader','$log','$location','temporaryStorage',
+                             'LxDialogService','LxNotificationService','loginAuthService','$state', function($scope,$translate,restService,loginService,$translatePartialLoader,
+                            		 $log,$location,temporaryStorage,LxDialogService,LxNotificationService,loginAuthService,$state) {
+	  $translate.refresh();
+	  var currentUserName = "";	
+	  localStorage.setItem("isAuthenticated", false);
+	  localStorage.setItem("userName", "");
+	  localStorage.setItem("userRole", "");
+	  $scope.helpDesk="Please describe your problem here and an atrium representative will get back to you as soon as possible";
+	  
+	  $scope.login = function (user) {
+		  var data = loginAuthService.getLoginAuthentication(user);
+    	  data.then(function(response){
+    		  $log.debug("Controller Log success"); 
+    		  localStorage.setItem("userName", response.firstName + ' ' +response.lastName);
+    		  localStorage.setItem("userRole", response.userRole);
+    		  loginService.init(true,response.firstName + ' ' +response.lastName);
+    		  $scope.authenticationError = false;
+    		 // $location.path('/dashboard');
+    		  $state.go('home.dashboard');
+    	  },
+    	  function(error){
+    		  $log.debug("Controller Log promise" + error.status); 
+    		  loginService.init(false,'');
+    		  $location.path('/login');
+    		  $scope.authenticationError = true;
+    	  });
+      };
+      
+      $scope.userEmailAddress = function(userName){
+    	  currentUserName = userName;
+    	  temporaryStorage.setDetails(currentUserName);
+    	  alert("inside.."+currentUserName);
+    	  //$location.path('/resetPassword');
+      };
+      
+      $scope.changedPassword = function(confirmUserSecret){
+    	  $scope.currentUserSecret = confirmUserSecret;
+    	  $scope.resetCredential={};
+    	  $scope.resetCredential.userName = temporaryStorage.getDetails(currentUserName);
+    	  $scope.resetCredential.userSecret = $scope.currentUserSecret;
+    	  $scope.credential = angular.toJson($scope.resetCredential);
+      };
+      
+		 $scope.emailValidation = function(email)
+	        {
+			 var emailId=false;
+			 $scope.error = "";
+			 if(email == undefined || email == ""){
+				 emailId = true;
+			 }else{
+				 emailId =  /^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$/.test(email);
+			 }
+			 if(emailId == true){
+				 $scope.userEmailAddress(email);
+			 }else{
+				 $scope.error = "EmailId invalid";
+			 }
+	        };
+      
+      $scope.inputType = 'password';
+      $scope.buttonLabel = 'Show';
+	    // Hide & show password function
+	    $scope.hideShowPassword = function(){
+	      if ($scope.inputType == 'password'){
+	    	  $scope.inputType = 'text';
+		      $scope.buttonLabel = 'Hide';
+	      }else{
+	    	  $scope.inputType = 'password';
+		      $scope.buttonLabel = 'Show';
+	      }
+	    }
+	    
+	    $scope.opendDialog = function(dialogId)
+	     {
+	         LxDialogService.open(dialogId);
+	     };
+
+	     $scope.closingDialog = function()
+	     {
+	         LxNotificationService.info('Dialog closed!');
+	     };
+	} ]);
+	 
+      
+
+  vApp.directive("compareTo", function(){
+		    return {
+		      require: "ngModel",
+		      scope: {
+		    	  confirmUserSecret: "=compareTo"
+		      },
+		      link: function(scope, element, attributes, ngModel) {
+	
+		        ngModel.$validators.compareTo = function(modelValue) {
+		          return modelValue == scope.confirmUserSecret;
+		        };
+	
+		        scope.$watch("confirmUserSecret", function() {
+		          ngModel.$validate();
+		        });
+		      }
+		    };
+	});
+
+ })(); 
