@@ -1,5 +1,5 @@
 var vApp = angular
-    .module('atrium-frontend', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'ngMaterial','pascalprecht.translate', 'lumx', 'treasure-overlay-spinner', 'ngFileUpload','ui.bootstrap','textAngular','ngMdIcons','ui.router','mgcrea.jquery'])
+    .module('atrium-frontend', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngResource', 'ngRoute', 'ngMaterial','pascalprecht.translate', 'lumx', 'treasure-overlay-spinner', 'ngFileUpload','ui.bootstrap','textAngular','ngMdIcons','ui.router','mgcrea.jquery','ngImgCrop'])
 
 vApp.directive('resize', function ($window) {
 return function (scope, element) {

@@ -1,0 +1,31 @@
+ <div>
+	<ul class="collection grey-text m0" ng-init="loadStudentsList()">
+	    <li class="collection-item avatar" ng-repeat="lists in students.studentsList">
+	    <div flex-container="row">
+	    	<div flex="10">
+		      <img src="/assets/images/vernalis_home_logo.png" alt="" class="circle">
+		      </div>
+		      <div flex="60">
+		      <span class="black-text fs-subhead">{{lists.firstName}} </span><br>
+		      <span class="black-text">  ID : {{lists.id}}  </span><br>
+		      <span class="black-text">DOB: {{lists.dateOfBirth}} </span><br>
+		      </div>
+		      <div flex="30" class="black-text"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Present</span><span ng-hide=data.cb1>Absent</span></md-switch>
+		      </div>
+	      </div>
+	    </li>
+  </ul>
+</div>
+ <!-- <div flex-container="column" class="grey-text" layout-fill layout-margin >
+ 		<div flex-container="row">
+ 			<div flex="20"><img src="/assets/images/vernalis_home_logo.png" alt="" class="circle"></div>
+ 			<div flex="50" class="black-text">Student Name</div>
+ 			<div flex="50"><div class="switch"><input type="checkbox" id="switch1" class="switch__input"> <label for="switch1" class="switch__label">Switch</label></div></div>
+ 		
+ 		</div> -->
+ 
+ 
+ 
+ </div>
+
+ 

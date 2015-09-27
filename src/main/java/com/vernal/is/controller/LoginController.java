@@ -47,7 +47,9 @@ public class LoginController extends BaseController{
 					if(login.getUserName()!=null&&!login.getUserName().isEmpty()&&login.getUserSecret()!=null&&!login.getUserSecret().isEmpty()) {
 						user = loginService.userAuthentication(login.getUserName(), login.getUserSecret(), session, baseController.locale);
 						System.out.println(gson.toJson(user));
-						System.out.println("inside session........");
+						user.setFirstName("Vignesh");
+						user.setLastName(".P");
+						user.setUserRole("Admin");
 					/*	if(user.getSessionToken() != null && user.getSessionToken().isEmpty())
 							session.setAttribute(CommonConstants.SESSION_TOKEN, user.getSessionToken());
 						if(user.getOrgId() != null && user.getOrgId().isEmpty())
@@ -58,7 +60,7 @@ public class LoginController extends BaseController{
 							session.setAttribute(CommonConstants.SESSION_USERNAME, user.getUserName());
 						if(user.getUserRole()!=null && !user.getUserRole().isEmpty()){
 							session.setAttribute(CommonConstants.SESSION_USERROLE, user.getUserRole());*/
-							 session.setAttribute(CommonConstants.SESSION_USERROLE, "Vernalis Admin");
+							 session.setAttribute(CommonConstants.SESSION_USERROLE, "Admin");
 					/*	}
 						if(user.getFirstName() != null && user.getFirstName().isEmpty())
 							session.setAttribute(CommonConstants.SESSION_FIRSTNAME, user.getFirstName());

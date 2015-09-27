@@ -1,0 +1,96 @@
+<div resize style="height:{{windowHeight-70+'px'}}" ng-init="edit=false">
+		<div layout-margin layout-padding class="frt mrt mt">
+			<ng-md-icon icon="mode_edit" ng-hide="edit" style="fill: grey; cursor: pointer;" size="30" ng-click="edit=true">
+				<md-tooltip md-autohide="true">
+                        EDIT
+                 </md-tooltip>
+			</ng-md-icon>
+			<ng-md-icon icon="save" ng-show="edit" style="fill: grey; cursor: pointer;" size="30" ng-click="edit=false">
+			<md-tooltip md-autohide="true">
+                        SAVE
+                 </md-tooltip>
+			</ng-md-icon>
+		</div>
+		<div layout-margin layout-padding flex-container="column">
+		<div flex-item layout-margin layout-padding flex-container="row">
+			<div  flex="30">
+				<md-input-container style="  margin-top: 69px;" ng-hide="edit"> 
+						<label>Designation</label>
+		          		<input ng-model="user.designation" disabled>
+		        </md-input-container>
+		        <md-input-container style="  margin-top: 69px;"  ng-show="edit" >
+		        		 <label>Designation</label>
+		          		<input ng-model="user.designation">
+		        </md-input-container>
+	        </div> 
+	        <div  flex="40">
+			 	<img layout-margin layout-padding src="/assets/images/viki.jpg" alt="" class="circle aligncenter" style="width:150px;height:150px">
+			 </div>
+			 <div layout-fill layout-margin flex="20" class="frt">
+        	</div>
+		</div>
+		<md-divider layout-fill></md-divider>
+		<div flex-item layout-margin layout-padding>
+	 	 		<div layout-margin layout-padding flex-container="row">
+						<div flex="50" class="fs-subhead black-text">
+						 	<md-input-container > <label>First Name</label>
+	          					<input ng-model="user.firstName" disabled>
+	        				</md-input-container> 
+						</div>	 	 		
+	 	 				<div flex="50" class="fs-subhead black-text">
+						 	<md-input-container> <label>Last Name</label>
+	          					<input ng-model="user.lastName" disabled >
+	        				</md-input-container> 
+						</div>	
+						<!-- <div flex="20" class="fs-subhead black-text">
+						 	<md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date"></md-datepicker>
+						</div> -->
+	 	 		</div>
+	 	 		<div layout-margin layout-padding flex-container="row">
+	 	 			<div flex="50"  class="fs-subhead black-text">
+	 	 					<md-input-container ng-hide="edit">
+	 	 						 <label>Contact</label>
+	          					<input ng-model="user.contacts" disabled>
+	        				</md-input-container> 
+	        				<md-input-container ng-show="edit">
+	 	 						 <label>Contact</label>
+	          					<input ng-model="user.contacts" >
+	        				</md-input-container>
+	 	 			</div>
+	 	 			<div  flex="50"  class="fs-subhead black-text">
+		 	 			<md-input-container ng-hide="edit">
+	      					<label>Email</label>
+	      					<input ng-model="user.email" type="email" disabled>
+	   					 </md-input-container>
+	   					 <md-input-container ng-show="edit">
+	      					<label>Email</label>
+	      					<input ng-model="user.email" type="email" >
+	   					 </md-input-container>
+   					 </div>
+   				</div>
+   				<div layout-margin layout-padding flex-container="row">
+   					<div  flex="50"  class="fs-subhead black-text">
+   						<md-input-container ng-hide="edit">
+	      				 	 <label>Address</label>
+	       					 <textarea ng-model="user.address" columns="1" md-maxlength="150" disabled></textarea>
+	      				</md-input-container>
+	   					 <md-input-container ng-show="edit" >
+	      					<label>Address</label>
+	      					<textarea ng-model="user.address" columns="1" md-maxlength="150"></textarea>
+	   					 </md-input-container>
+   					</div>
+	   				<div  flex="50"  class="fs-subhead black-text">
+	   					<md-input-container ng-hide="edit">
+	      				 	 <label>Biography</label>
+	       					 <textarea ng-model="user.biography" columns="1" md-maxlength="150" disabled></textarea>
+	      				</md-input-container>
+	      				<md-input-container ng-show="edit">
+	      				 	 <label>Biography</label>
+	       					 <textarea ng-model="user.biography" columns="1" md-maxlength="150"></textarea>
+	      				</md-input-container>
+	   				</div>
+   				</div>
+	 	</div>
+	 	
+	</div>
+</div>

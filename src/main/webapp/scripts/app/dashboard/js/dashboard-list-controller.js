@@ -25,16 +25,11 @@
         	  $scope.dashboardList = success;
           });
 	  };*/
-	  
-	  $scope.loadInboxList = function() {
-          var data = dashboardListService.getInboxList();
+	  $scope.status = 'Absent';
+	  $scope.loadStudentsList = function() {
+          var data = dashboardListService.getStudentsList();
 		  data.then(function(success){
-			  $scope.inboxList = success;
-			  $timeout(function() {
-	    			 if($scope.ids != ""){
-	    				 angular.element(".title#"+ids[0]).trigger('click');
-	    			 }
-	 	     }, 100);
+			  $scope.students = success;
 		  });
 	  };
 	  

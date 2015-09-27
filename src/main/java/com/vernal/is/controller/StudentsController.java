@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.vernal.is.model.DashBoard;
+import com.vernal.is.model.Student;
 import com.vernal.is.model.EngagementQuestion;
 import com.vernal.is.model.Evaluations;
 import com.vernal.is.model.Question;
@@ -22,12 +22,12 @@ import com.vernal.is.model.Repository;
 import com.vernal.is.service.DashBoardService;
 
 /**
- * @author bashelu
+ * @author Vignesh
  * 
  */
 @Controller
-@RequestMapping("/dashboard")
-public class DashBoardController extends BaseController {
+@RequestMapping("/students")
+public class StudentsController extends BaseController {
 
 	@Resource
 	DashBoardService dashBoardService;
@@ -62,15 +62,16 @@ public class DashBoardController extends BaseController {
 		 return new ResponseEntity<Evaluations>(evaluations,HttpStatus.OK);
 	 }
 
-	 @RequestMapping(value = "/inbox", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	 public ResponseEntity<?> getInboxDetail() throws Exception{
-		 DashBoard dashBoard = dashBoardService.getInboxDetail();
-		 return new ResponseEntity<DashBoard>(dashBoard,HttpStatus.OK);
+	 @RequestMapping(value = "/list", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+	 public ResponseEntity<?> getStudentsList() throws Exception{
+		 Student students = dashBoardService.getStudentsList();
+		 System.out.println("students>>>>>>>>>.."+gson.toJson(students));
+		 return new ResponseEntity<Student>(students,HttpStatus.OK);
 	 }
 	 
 	 @RequestMapping(value = "/activity", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	 public ResponseEntity<?> getActivity() throws Exception{
-		 DashBoard dashBoard = dashBoardService.getActivity();
-		 return new ResponseEntity<DashBoard>(dashBoard,HttpStatus.OK);
+		 Student dashBoard = dashBoardService.getActivity();
+		 return new ResponseEntity<Student>(dashBoard,HttpStatus.OK);
 	 }
 }

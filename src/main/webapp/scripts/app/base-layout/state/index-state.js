@@ -111,7 +111,7 @@
             })
          .state(home)
         .state('home.dashboard', {
-            url: '/dashboard',
+            url: '/students',
             parent: 'home',
             views: {
                 'viewPage': {
@@ -142,6 +142,17 @@
                    
                 }
             }
+        })
+        
+        .state('home.profile',{
+        url: '/profile',
+        parent:'home',
+        views:{
+        	'viewPage': {
+        		templateUrl :'/scripts/app/profile/view/profile.html',
+        		controller:'profileController'
+        	}
+        }
         })
 }] );
 })();

@@ -34,9 +34,9 @@
             return deferred.promise;
         };*/
         
-        this.getInboxList = function () {
+        this.getStudentsList = function () {
             var deferred = $q.defer();
-  		    var url = "/api/dashboard/inbox";
+  		    var url = "/api/students/list";
 		    var data = restService.restCall("",url,'GET');
 			data.$promise.then(function(response){
 				deferred.resolve(response);
