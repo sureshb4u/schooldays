@@ -11,9 +11,12 @@ import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
-import org.springframework.stereotype.Component;
 
-import com.vernal.is.model.DashBoard;
+import org.springframework.stereotype.Component;
+/*
+import com.vernal.is.dao.UserDAO;
+import com.vernal.is.dao.impl.UserDAOImpl;*/
+import com.vernal.is.model.Student;
 import com.vernal.is.model.EngagementQuestion;
 import com.vernal.is.model.Evaluations;
 import com.vernal.is.model.Question;
@@ -115,34 +118,37 @@ public class DashBoardService extends BaseService{
 		evaluations = gson.fromJson(commonUtil.getStringFromInputStream(inputStream), Evaluations.class);
 		return evaluations;
 	}
-
-	public DashBoard getInboxDetail() throws IOException {
-		File file = new File("dashboard-inbox.json");
+	
+	public Student getStudentsList() throws IOException {
+		File file = new File("students-list.json");
 		InputStream inputStream = null;
-		DashBoard dashBoard =null;
+		Student dashBoard =null;
 		if (!file.exists()) {
 			/* if not exists, reading file from appln file path */
 			inputStream =  this
 					.getClass()
 					.getClassLoader()
 					.getResourceAsStream(
-							"com/vernal/is/properties/dashboard-inbox.json");
+							"com/vernal/is/properties/students-list.json");
 		} else {
 			/* file exists, reading file */
 			try {
-				inputStream = new FileInputStream("dashboard-inbox.json");
+				inputStream = new FileInputStream("students-list.json");
 			} catch (FileNotFoundException exception) {
 				throw exception;
 			}
 		}
-		dashBoard = gson.fromJson(commonUtil.getStringFromInputStream(inputStream), DashBoard.class);
+		dashBoard = gson.fromJson(commonUtil.getStringFromInputStream(inputStream), Student.class);
+		System.out.println("stu list-=------" + gson.toJson(dashBoard));
+		//UserDAOImpl userDAO = new UserDAOImpl();
+	//	System.out.println("userDAO.getUserInfo()"+gson.toJson(userDAO.getUserInfo()));
 		return dashBoard;
 	}
 	
-	public DashBoard getActivity() throws IOException{
+	public Student getActivity() throws IOException{
 		File file = new File("dashboard-activity.json");
 		InputStream inputStream = null;
-		DashBoard dashBoard =null;
+		Student dashBoard =null;
 		if (!file.exists()) {
 			/* if not exists, reading file from appln file path */
 			inputStream =  this
@@ -158,7 +164,7 @@ public class DashBoardService extends BaseService{
 				throw exception;
 			}
 		}
-		dashBoard = gson.fromJson(commonUtil.getStringFromInputStream(inputStream), DashBoard.class);
+		dashBoard = gson.fromJson(commonUtil.getStringFromInputStream(inputStream), Student.class);
 		System.out.println("acti list-=------" + gson.toJson(dashBoard));
 		return dashBoard;
 	}

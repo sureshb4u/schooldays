@@ -95,6 +95,7 @@ public class BaseController {
 	public Roles getRoleBasedPermission(HttpSession session) throws Exception {
 		Roles role = new Roles();
 		String userRole = session.getAttribute(CommonConstants.SESSION_USERROLE).toString();
+		System.out.println("userRole>>>>>>>>>>>>>>>>>>>>>"+userRole);
 		String jsonString = baseService.getJsonConfig(CommonConstants.ROLE_BASED_NAVIGATION_MENU);
 		role.setUserName(session.getAttribute(CommonConstants.SESSION_FIRSTNAME) + " " + session.getAttribute(CommonConstants.SESSION_LASTNAME));
 		role.setUserRole(userRole);

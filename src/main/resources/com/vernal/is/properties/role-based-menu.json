@@ -2,50 +2,50 @@
 	"menuItems" : [
 		{
 			"menuTitle": "Profile",
-			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"viewby": ["Admin", "SCHEDULER"],
 			"style":"",
 			"menuItemDisplay": "profile",
 			"url":"#profile"
 			
 		},	
 		{
-			"menuTitle": "Dashboard",
-			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"menuTitle": "Students",
+			"viewby": ["Admin", "SCHEDULER"],
 			"style":"",
 			"menuItemDisplay": "dashboard",
-			"url":"#dashboard"
+			"url":"#students"
 		},
 		{
-			"menuTitle": "Worker",
-			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"menuTitle": "Teaching Staffs",
+			"viewby": ["Admin", "SCHEDULER"],
 			"style":"",
 			"menuItemDisplay": "worker",
 			"url":"#worker"
 		},
 		{
-			"menuTitle": "Client",
-			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"menuTitle": "Non-Teaching Staffs",
+			"viewby": ["Admin", "SCHEDULER"],
 			"style":"",
 			"menuItemDisplay": "client",
 			"url":"#client"
 		},
 		{
-			"menuTitle": "Activity",
-			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"menuTitle": "Leave Management System",
+			"viewby": ["Admin", "SCHEDULER"],
 			"style":"",
 			"menuItemDisplay": "activity",
 			"url":"#activity"
 		},
 		{
-			"menuTitle": "Reports",
-			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"menuTitle": "Logs",
+			"viewby": ["Admin", "SCHEDULER"],
 			"style":"",
 			"menuItemDisplay": "reports",
 			"url":"#reports"
 		},
 		{
 			"menuTitle": "Atrium Info",
-			"viewby": ["Vernalis Admin", "SCHEDULER"],
+			"viewby": ["Admin", "SCHEDULER"],
 			"style":"",
 			"menuItemDisplay": "atriumInfo",
 			"url":"#atriumInfo"

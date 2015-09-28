@@ -64,6 +64,7 @@ public class StudentsController extends BaseController {
 
 	 @RequestMapping(value = "/list", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	 public ResponseEntity<?> getStudentsList() throws Exception{
+		 System.out.println("students>>>>>>>>>..");
 		 Student students = dashBoardService.getStudentsList();
 		 System.out.println("students>>>>>>>>>.."+gson.toJson(students));
 		 return new ResponseEntity<Student>(students,HttpStatus.OK);
