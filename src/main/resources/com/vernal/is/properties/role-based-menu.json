@@ -44,11 +44,11 @@
 			"url":"#reports"
 		},
 		{
-			"menuTitle": "Atrium Info",
+			"menuTitle": "School Info",
 			"viewby": ["Admin", "SCHEDULER"],
 			"style":"",
-			"menuItemDisplay": "atriumInfo",
-			"url":"#atriumInfo"
+			"menuItemDisplay": "schoolInfo",
+			"url":"#schoolInfo"
 		}
 	]
 }
