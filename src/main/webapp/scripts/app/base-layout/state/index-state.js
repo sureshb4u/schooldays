@@ -154,5 +154,16 @@
         	}
         }
         })
+        
+        .state('home.lms',{
+        url: '/lms',
+        parent:'home',
+        views:{
+        	'viewPage': {
+        		templateUrl :'/scripts/app/lms/view/lms.html',
+        		controller:'lmsController'
+        	}
+        }
+        })
 }] );
 })();
