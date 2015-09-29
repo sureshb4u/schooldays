@@ -43,12 +43,12 @@
 		$scope.disabled = false;
 		
 		$scope.user = {
-				firstName :'Vignesh',
-				lastName : 'Periyanayagam',
-				email : 'viki19nesh@gmail.com',
+				firstName :'firstName',
+				lastName : 'lastName',
+				email : 'emailh@gmail.com',
 				designation : 'Junior Software Developer',
-				address : 'madurai',
-				contacts : '9629400474',
+				address : 'address',
+				contacts : '999999999',
 				biography : 'First WebApp with Angular'
 		}
 		
