@@ -26,7 +26,11 @@
     		  loginService.init(true,response.firstName + ' ' +response.lastName);
     		  $scope.authenticationError = false;
     		 // $location.path('/dashboard');
-    		  $state.go('home.dashboard');
+    		  if(localStorage.getItem('userRole')=='Staff'){
+    			  $state.go('home.profile');
+    		  }else if(localStorage.getItem('userRole')=='Admin'){
+    			  $state.go('home.dashboard');
+    		  }
     	  },
     	  function(error){
     		  $log.debug("Controller Log promise" + error.status); 

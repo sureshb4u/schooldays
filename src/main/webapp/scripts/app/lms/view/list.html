@@ -1,6 +1,6 @@
 <div>
 <div>
-  <md-content class="md-padding">
+  <md-content class="md-padding" ng-init="roleCheck();">
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="LMS pending">
         <md-content class="md-padding" >
@@ -8,12 +8,13 @@
           <div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-hide="display">Approved</div>
 			</div>
 		</div>
 		<md-divider ng-if="!$last"></md-divider>
@@ -21,12 +22,13 @@
 		<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-hide="display">Approved</div>
 			</div>
 		</div>
 		<md-divider ng-if="!$last"></md-divider>
@@ -34,12 +36,13 @@
 		<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-hide="display">Approved</div>
 			</div>
 		</div>
 		<md-divider ng-if="!$last"></md-divider>
@@ -47,12 +50,13 @@
 		<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-hide="display">Approved</div>
 			</div>
 		</div>
 		<md-divider ng-if="!$last"></md-divider>
@@ -60,12 +64,13 @@
 		<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-hide="display">Approved</div>
 			</div>
 		</div>
 		<md-divider ng-if="!$last"></md-divider>
@@ -73,12 +78,13 @@
 		<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-hide="display">Approved</div>
 			</div>
 		</div>
 		<md-divider ng-if="!$last"></md-divider>
@@ -86,12 +92,13 @@
 		<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-hide="display">Approved</div>
 			</div>
 		</div>
 		<md-divider ng-if="!$last"></md-divider>
@@ -99,12 +106,13 @@
 		<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Vignesh</div>
+					<div class="fs-title" ng-show="display"> Vignesh</div>
 					<div class="fs-subhead">Reason : Sick Leave</div>
 					<div class="black-text">Date : 19-08-15</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30"><md-switch ng-model="data.cb2"  ng-init="data.cb2=false" aria-label="Switch 1"><span ng-show=data.cb2 >Approved</span><span ng-hide=data.cb2>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-hide="display">Approved</div>
 			</div>
 		</div>
 		</div>
@@ -115,7 +123,7 @@
 			<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>
@@ -128,7 +136,7 @@
 		<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>
@@ -141,7 +149,7 @@
 		<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>
@@ -154,7 +162,7 @@
 		<div flex-container="column" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title"> Joseph</div>
+					<div class="fs-title" ng-show="display"> Joseph</div>
 					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
 					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
 				</div>

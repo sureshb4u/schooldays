@@ -18,10 +18,10 @@
         * This controller will retrieve and display the dashboard list
         */
 	  
-	    $scope.loadUserList = function(){
+	    $scope.loadNTStaffList = function(){
 	    	  var data = clientListService.getUserList();
   	    	  data.then(function(success){
-	  	    		 $scope.userList = success;
+	  	    		 $scope.ntStaffList = success;
 	  	     });
 	    };
 	    

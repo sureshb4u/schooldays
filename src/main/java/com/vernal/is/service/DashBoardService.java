@@ -19,7 +19,6 @@ import com.vernal.is.dao.impl.UserDAOImpl;*/
 import com.vernal.is.model.Student;
 import com.vernal.is.model.EngagementQuestion;
 import com.vernal.is.model.Evaluations;
-import com.vernal.is.model.Question;
 import com.vernal.is.model.Repository;
 import com.vernal.is.translator.DashBoardTranslator;
 
@@ -42,32 +41,6 @@ public class DashBoardService extends BaseService{
 
 	}
 
-	public Question getQuestion() throws IOException {
-		File file = new File("dynamic-fields.json");
-		InputStream inputStream = null;
-		Question question = null;
-		if (!file.exists()) {
-			/* if not exists, reading file from appln file path */
-			inputStream = this
-					.getClass()
-					.getClassLoader()
-					.getResourceAsStream(
-							"com/vernal/is/properties/dynamic-fields.json");
-		} else {
-			/* file exists, reading file */
-			try {
-				inputStream = new FileInputStream("dynamic-fields.json");
-			} catch (FileNotFoundException exception) {
-				// LOGGER.error("Error getting getApiConfig:",
-				// exception.getMessage());
-				throw exception;
-			}
-		}
-		question = gson.fromJson(
-				commonUtil.getStringFromInputStream(inputStream),
-				Question.class);
-		return question;
-	}
 
 	public EngagementQuestion getEngagementQuestion() throws IOException {
 		File file = new File("engagement-question.json");

@@ -14,11 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.vernal.is.model.Student;
 import com.vernal.is.model.EngagementQuestion;
 import com.vernal.is.model.Evaluations;
-import com.vernal.is.model.Question;
 import com.vernal.is.model.Repository;
+import com.vernal.is.model.Student;
 import com.vernal.is.service.DashBoardService;
 
 /**
@@ -44,11 +43,6 @@ public class StudentsController extends BaseController {
 		return new ResponseEntity<List<Repository>>(repositories, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/dynamicFields", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getDynamicFields() throws Exception {
-		Question question = dashBoardService.getQuestion();
-		return new ResponseEntity<Question>(question, HttpStatus.OK);
-	}
 
 	@RequestMapping(value = "/engagementQuestion", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getengagementQuestion() throws Exception {

@@ -16,7 +16,7 @@
         */
         this.loadWorkerList = function () {
             var deferred = $q.defer();
-            var url = "/api/person/getPersonList";
+            var url = "/api/staff/getStaffsList";
   		    var data = restService.restCall("",url,'GET');
 			data.$promise.then(function(response){
 				deferred.resolve(response);

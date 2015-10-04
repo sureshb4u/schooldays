@@ -13,11 +13,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.vernal.is.model.Organization;
 import com.vernal.is.model.User;
 import com.vernal.is.service.BaseService;
 import com.vernal.is.service.UserService;
@@ -29,7 +29,7 @@ import com.vernal.is.util.MessageUtils;
  * Date : 08/21/2015
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/staff")
 public class UserController extends BaseController{
 	
 	
@@ -42,14 +42,14 @@ public class UserController extends BaseController{
 	@Resource
 	BaseService baseService;
 	
-	@RequestMapping(value = "/user",method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?>  createUser(@RequestBody User user,HttpSession session){
-		Object result=null;
+	@RequestMapping(value = "/getStaffsList",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?>  getStaffsList(HttpSession session){
+		Organization result = null;
 		String organizationId = null;
 		try{
-			  String orgMnemonic = baseService.getOrganizationId();
-			  organizationId = baseService.getOrganizationId(orgMnemonic, session);	
-			  result = userService.createUser(user,organizationId,session);
+			//  String orgMnemonic = baseService.getOrganizationId();
+			  //organizationId = baseService.getOrganizationId(orgMnemonic, session);	
+			  result = userService.getStaffsList(organizationId,session);
 		}catch(Exception ex){
 			return new ResponseEntity<>(baseController.setResponse(MessageUtils.getMessage("error.create.user"),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),HttpStatus.INTERNAL_SERVER_ERROR);

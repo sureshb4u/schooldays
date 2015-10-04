@@ -3,8 +3,27 @@
 	  <div class="tc-white-1" flex-container="row">
 	  	<a href="javascript:;" data-activates="slide-out" class="hide-on-large-only" ng-click="toggleLeft()"><i class="mdi-navigation-menu material-icons tiny"></i></a>
 	  </div>
-	  <div  layout="column" layout-align="space-around center" >
-	     <div><span class="fs-display-1 display-block">LMS</span></div>
+	  <div  layout="row" >
+	     <div flex="80" class="aligncenter"><span class="fs-display-1 display-block">LMS</span></div>
+	     <div flex="20" class="aligncenter" ng-init="create=false">
+	     <ng-md-icon icon="mode_edit" style="color : rgb(89, 226, 168); cursor: pointer;" size="30" ng-hide="create" ng-click="create=true;mainTemplate('','details');loader=true" >
+			<md-tooltip md-autohide="true">
+                        Create New Leave Request
+            </md-tooltip>
+		</ng-md-icon>
+		<ng-md-icon icon="cancel" style="color : rgb(89, 226, 168); cursor: pointer;" size="30" ng-show="create" ng-click="create=false;mainTemplate('','list'); loader=false">
+			<md-tooltip md-autohide="true">
+                       Cancel
+            </md-tooltip>
+		</ng-md-icon>
+		<ng-md-icon icon="save"  style="fill: grey; cursor: pointer;" size="30" ng-show="create" ng-click="mainTemplate('','list');create=false;loader=false">
+			<md-tooltip md-autohide="true">
+                        Send Leave Request
+                 </md-tooltip>
+			</ng-md-icon>
+		</div>
+	 </div>
+	 <md-progress-linear ng-show="loader" md-mode="indeterminate"></md-progress-linear>
 	 </div>
 	</md-toolbar>
  </div>

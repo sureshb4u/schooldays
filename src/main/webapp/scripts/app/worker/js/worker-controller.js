@@ -32,11 +32,12 @@
 	          };
 	          
 	          $scope.mainTemplate = function(type1,type2){
+	        	  console.log('type1---------'+type1+'type2------------->'+type2);
 	  	    		$scope.template1={
-	  						     "pageList":"scripts/app/worker/view/"+type1+".html",
+	  						  //   "pageList":"scripts/app/worker/view/"+type1+".html",
 	  						     "pageDetails":"scripts/app/worker/view/"+type2+".html"
 	  						   };  
-	  				   angular.element(".org-details-title .dropdown").show();
+	  				 //  angular.element(".org-details-title .dropdown").show();
 	  			};
 	} ]);
  })(); 

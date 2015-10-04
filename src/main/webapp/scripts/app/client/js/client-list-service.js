@@ -16,8 +16,8 @@
         */
         this.getUserList = function () {
             var deferred = $q.defer();
-	    	var url = '/api/user/2631b21f-77d6-4f8f-8cf7-8dab675e6e33/users?typeKey=USER';
-	    	var data = restService.restCall("",url,'GETLIST');
+	    	var url = '/api/staff/getStaffsList';
+	    	var data = restService.restCall("",url,'GET');
 			data.$promise.then(function(response){
 				deferred.resolve(response);
 			},

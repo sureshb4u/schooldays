@@ -441,7 +441,7 @@ public class PersonTranslator extends BaseTranslator {
 		LOGGER.debug("translate PersonDTO to Person Model");
 			Person person = new Person();
 			if(personDTO.getId()!=null)	{
-				person.setId(personDTO.getId());
+				person.setId(personDTO.getId().toString());
 			}
 			if(personDTO.getFirstName()!=null && !personDTO.getFirstName().isEmpty()){
 				person.setFirstName(personDTO.getFirstName());

@@ -12,6 +12,7 @@ public class Organization {
 	private String id;
 	private String orgType;
 	private AccountLink accountLink;
+	private List<Staff> staffList;
 	private List<Address> addresses;
 	private List<EmailAddress> emailAddresses;
     private List<PhoneNumber> phoneNumbers;
@@ -287,4 +288,11 @@ public class Organization {
 	public void setAlias(List<Alias> alias) {
 		this.alias = alias;
 	}
+	public List<Staff> getStaffList() {
+		return staffList;
+	}
+	public void setStaffList(List<Staff> staffList) {
+		this.staffList = staffList;
+	}
+
 }

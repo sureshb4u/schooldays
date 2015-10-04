@@ -36,15 +36,13 @@
 		    	$scope.loadUsersByRoleCMT();
 		    };
 		    
-		    $scope.$watchCollection('data.tags',function(val){
-		        console.log(val);
-		    });
 		    $scope.tabNavigation=function(tabLabel){
 				 var tablabel = tabLabel.replace(' ','');
 			     $scope.viewTemplate('details',tablabel.toLowerCase());
 		       }
 			 
 		    $scope.mainTemplate = function(type){
+		    	console.log("type>>>>>>>>>>>>>>"+type);
 		    		$scope.template={
 							     "pageView":"scripts/app/client/view/"+type+".html",
 							   };  

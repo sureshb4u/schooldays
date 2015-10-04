@@ -18,11 +18,14 @@
         * This controller will retrieve and display the dashboard list
         */
 	  
-      $scope.getWorkerList = function(){
+      $scope.loadStaffList = function(){
+    	  console.log('sadasdasfa');
 		  var data = workerListService.loadWorkerList();
 		  data.then(function(success){
-			  $scope.workerList = success;
+			  $scope.staffList = success;
 		  });
+		  
+		  
       };
 	  
     }]);

@@ -49,7 +49,7 @@ public class LoginController extends BaseController{
 						System.out.println(gson.toJson(user));
 						user.setFirstName("Vignesh");
 						user.setLastName(".P");
-						user.setUserRole("Admin");
+						user.setUserRole(login.getUserName());
 					/*	if(user.getSessionToken() != null && user.getSessionToken().isEmpty())
 							session.setAttribute(CommonConstants.SESSION_TOKEN, user.getSessionToken());
 						if(user.getOrgId() != null && user.getOrgId().isEmpty())
@@ -60,7 +60,7 @@ public class LoginController extends BaseController{
 							session.setAttribute(CommonConstants.SESSION_USERNAME, user.getUserName());
 						if(user.getUserRole()!=null && !user.getUserRole().isEmpty()){
 							session.setAttribute(CommonConstants.SESSION_USERROLE, user.getUserRole());*/
-							 session.setAttribute(CommonConstants.SESSION_USERROLE, "Admin");
+							 session.setAttribute(CommonConstants.SESSION_USERROLE, user.getUserRole());
 					/*	}
 						if(user.getFirstName() != null && user.getFirstName().isEmpty())
 							session.setAttribute(CommonConstants.SESSION_FIRSTNAME, user.getFirstName());

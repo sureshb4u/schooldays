@@ -50,8 +50,10 @@ public class LoginService extends BaseService{
 							+ CommonConstants.USERS_BASE_URL 
 							+ CommonConstants.SESSION_BASE_URL, 
 							HttpMethod.POST, entity, Object.class);
-			userDTO = loginTranslator.convertToUserDTO(response.getBody());
-			user = loginTranslator.translateToUser(userDTO, locale);*/
+			
+			userDTO = loginTranslator.convertToUserDTO(userDTO);*/
+			user = loginTranslator.translateToUser(userDTO, locale);
+			System.out.println("user>>>>>>>>>>>>"+gson.toJson(user));
 		}catch (IOException e) {
 			throw e;
 		}catch (JsonSyntaxException e) {

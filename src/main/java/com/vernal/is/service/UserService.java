@@ -1,6 +1,10 @@
 package com.vernal.is.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +19,8 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import com.google.gson.JsonSyntaxException;
 import com.vernal.is.dto.UserDTO;
+import com.vernal.is.model.Organization;
+import com.vernal.is.model.Student;
 import com.vernal.is.model.User;
 import com.vernal.is.translator.LoginTranslator;
 import com.vernal.is.translator.UserTranslator;
@@ -86,6 +92,32 @@ public class UserService  extends BaseService{
 		}catch (HttpClientErrorException e) {
 			throw e;
 		}
+	}
+
+	public Organization getStaffsList(String organizationId, HttpSession session) throws JsonSyntaxException, IOException {
+		File file = new File("staff-list.json");
+		InputStream inputStream = null;
+		Organization org = null;
+		if (!file.exists()) {
+			/* if not exists, reading file from appln file path */
+			inputStream =  this
+					.getClass()
+					.getClassLoader()
+					.getResourceAsStream(
+							"com/vernal/is/properties/staff-list.json");
+		} else {
+			/* file exists, reading file */
+			try {
+				inputStream = new FileInputStream("staff-list.json");
+			} catch (FileNotFoundException exception) {
+				throw exception;
+			}
+		}
+		org = gson.fromJson(commonUtil.getStringFromInputStream(inputStream), Organization.class);
+		System.out.println("staff list-=------" + gson.toJson(org));
+		//UserDAOImpl userDAO = new UserDAOImpl();
+	//	System.out.println("userDAO.getUserInfo()"+gson.toJson(userDAO.getUserInfo()));
+		return org;
 	}
 
 }

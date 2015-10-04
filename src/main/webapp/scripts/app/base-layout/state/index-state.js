@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    vApp.config(['$stateProvider', '$httpProvider', '$logProvider', '$urlRouterProvider', function ($stateProvider, $httpProvider, $log, $urlRouterProvider) {
+    vApp.config(['$stateProvider', '$httpProvider', '$logProvider', '$urlRouterProvider','$mdThemingProvider', function ($stateProvider, $httpProvider, $log, $urlRouterProvider,$mdThemingProvider) {
         
         var home = {
             name: "home",
@@ -121,23 +121,23 @@
                 }
             }
         })
-          .state('home.worker', {
-            url: '/worker',
+          .state('home.teachingStaffs', {
+            url: '/teachingStaffs',
             parent: 'home',
             views: {
                 'viewPage': {
-                    templateUrl: '/scripts/app/worker/view/worker.html',
+                    templateUrl: '/scripts/app/worker/view/t-staff.html',
                     controller: 'workerController',
                    
                 }
             }
         })
-           .state('home.client', {
-            url: '/client',
+           .state('home.ntStaffs', {
+            url: '/ntStaffs',
             parent: 'home',
             views: {
                 'viewPage': {
-                    templateUrl: '/scripts/app/client/view/client.html',
+                    templateUrl: '/scripts/app/client/view/ntStaffs.html',
                     controller: 'clientController',
                    
                 }
