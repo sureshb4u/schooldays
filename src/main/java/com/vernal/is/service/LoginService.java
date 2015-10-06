@@ -42,16 +42,15 @@ public class LoginService extends BaseService{
 		UserDTO userDTO = new UserDTO();
 		UserAuthenticationDTO userAuthenticationDTO = loginTranslator.translateToUserAuthenticationDTO(userName, secret);
 		String postString = gson.toJson(userAuthenticationDTO);
+		System.out.println("postString>>>>>>>>>>."+postString);
 		try {
 			HttpEntity<String> entity = preparePost(postString, session);
 			// This will authenticate the user
-		/*	ResponseEntity<Object> response = restTemplate.exchange(getAPIBaseURL()
-							+ CommonConstants.ORGANIZATIONS_BASE_URL 
-							+ CommonConstants.USERS_BASE_URL 
-							+ CommonConstants.SESSION_BASE_URL, 
+			System.out.println("ssssssssss");
+			ResponseEntity<Object> response = restTemplate.exchange("http://180.215.113.236:8080/services/users/authenticate", 
 							HttpMethod.POST, entity, Object.class);
 			
-			userDTO = loginTranslator.convertToUserDTO(userDTO);*/
+			userDTO = loginTranslator.convertToUserDTO(userDTO);
 			user = loginTranslator.translateToUser(userDTO, locale);
 			System.out.println("user>>>>>>>>>>>>"+gson.toJson(user));
 		}catch (IOException e) {
