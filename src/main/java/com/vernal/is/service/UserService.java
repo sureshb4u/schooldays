@@ -96,6 +96,7 @@ public class UserService  extends BaseService{
 
 	public Organization getStaffsList(String organizationId, HttpSession session) throws JsonSyntaxException, IOException {
 		File file = new File("staff-list.json");
+		System.out.println("staffffffffffffffffff");
 		InputStream inputStream = null;
 		Organization org = null;
 		if (!file.exists()) {

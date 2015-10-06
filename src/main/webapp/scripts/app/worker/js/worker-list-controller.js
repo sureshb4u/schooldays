@@ -19,10 +19,11 @@
         */
 	  
       $scope.loadStaffList = function(){
-    	  console.log('sadasdasfa');
-		  var data = workerListService.loadWorkerList();
+    	  $scope.loader = true;
+    	  var data = workerListService.loadWorkerList();
 		  data.then(function(success){
 			  $scope.staffList = success;
+			  setTimeout(function(){ $scope.loader = false;},500);
 		  });
 		  
 		  

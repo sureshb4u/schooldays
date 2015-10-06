@@ -1,0 +1,34 @@
+<div resize style="height:{{windowHeight-70+'px'}}" ng-init="">
+		<div layout-margin layout-padding class="frt mrt mt">
+			
+		</div>
+		<div layout-margin layout-padding flex-container="column">
+		
+		<div flex-item layout-margin layout-padding>
+				<div layout-margin layout-padding flex-container="column">
+   					<div  class="fs-subhead black-text">
+	   					 <div flex="100">Leave Availed : 5</div>
+	   					  <div flex="100">Pending Leave : 15</div>
+   					</div>
+   				</div>
+	 	 		<div layout-margin layout-padding flex-container="row">
+						 <div flex="50" class="fs-subhead black-text">
+						 <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+						</div> 
+						 <div flex="50" class="fs-subhead black-text">
+						 	<lx-date-picker model="myDate" label="Pick a date" locale="fr" fixed-label="true" icon="calendar"></lx-date-picker>
+						</div> 
+	 	 		</div>
+	 	 		<div layout-margin layout-padding flex-container="column">
+   					<div  class="fs-subhead black-text">
+	   					 <md-input-container >
+	      					<label>Reason For Leave</label>
+	      					<textarea ng-model="user.address" columns="1" md-maxlength="150"></textarea>
+	   					 </md-input-container>
+   					</div>
+   				</div>
+   				
+	 	</div>
+	 	
+	</div>
+</div>

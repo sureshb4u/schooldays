@@ -27,9 +27,14 @@
 	  };*/
 	  $scope.status = 'Absent';
 	  $scope.loadStudentsList = function() {
+		  $scope.loader = true;
           var data = dashboardListService.getStudentsList();
 		  data.then(function(success){
+			 
 			  $scope.students = success;
+			  setTimeout(function(){
+				  $scope.loader = false;
+			  },1000);
 		  });
 	  };
 	  

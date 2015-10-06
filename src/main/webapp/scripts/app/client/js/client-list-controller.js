@@ -19,9 +19,11 @@
         */
 	  
 	    $scope.loadNTStaffList = function(){
+	    	$scope.loader=true;
 	    	  var data = clientListService.getUserList();
   	    	  data.then(function(success){
 	  	    		 $scope.ntStaffList = success;
+	  	    		 setTimeout(function(){$scope.loader=false;},800);
 	  	     });
 	    };
 	    

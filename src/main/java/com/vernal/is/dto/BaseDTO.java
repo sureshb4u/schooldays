@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(value= JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseDTO{
-	
 	private UUID id;
 	private PersonDTO createdBy;
 	private Date createdOn;

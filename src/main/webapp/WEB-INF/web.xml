@@ -2,14 +2,24 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name>atrium-frontend</display-name>
   	<servlet>
+    <servlet-name>restview</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <load-on-startup>1</load-on-startup>
+  	</servlet>
+  	<servlet-mapping>
+	    <servlet-name>restview</servlet-name>
+	    <url-pattern>/api/*</url-pattern>
+  	</servlet-mapping>
+  	<servlet>
     <servlet-name>rest</servlet-name>
 	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 	    <load-on-startup>1</load-on-startup>
   	</servlet>
   	<servlet-mapping>
 	    <servlet-name>rest</servlet-name>
-	    <url-pattern>/api/*</url-pattern>
+	    <url-pattern>/services/*</url-pattern>
   	</servlet-mapping>
+  	
   	<welcome-file-list>
     	<welcome-file>/index.html</welcome-file>
   	</welcome-file-list>
@@ -19,6 +29,7 @@
   	<context-param>
     	<param-name>contextConfigLocation</param-name>
     	<param-value>
+			/WEB-INF/restview-servlet.xml,
 			/WEB-INF/rest-servlet.xml
 		</param-value>
   	</context-param>

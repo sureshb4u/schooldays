@@ -128,9 +128,9 @@ public class LoginTranslator extends BaseTranslator {
 			gender.setKey(user.getGender() .toUpperCase());
 			userDTO.setGender(gender);
 		}
-		if(user.getOrgId() != null && !user.getOrgId().isEmpty()){
+	/*	if(user.getOrgId() != null && !user.getOrgId().isEmpty()){
 			userDTO.setOrgId(UUID.fromString(user.getOrgId()));
-		}
+		}*/
 		if(user.getPersonId() != null && !user.getPersonId().isEmpty()){
 			userDTO.setPersonId(UUID.fromString(user.getPersonId()));
 		}

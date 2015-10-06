@@ -10,7 +10,7 @@
 		},	
 		{
 			"menuTitle": "Students",
-			"viewby": ["Admin"],
+			"viewby": ["Admin","Staff"],
 			"style":"",
 			"menuItemDisplay": "dashboard",
 			"url":"#students"
