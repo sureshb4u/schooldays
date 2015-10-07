@@ -165,5 +165,16 @@
         	}
         }
         })
+        
+        .state('home.exams',{
+        url: '/exams',
+        parent:'home',
+        views:{
+        	'viewPage': {
+        		templateUrl :'/scripts/app/exam/view/exam.html',
+        		controller:'examController'
+        	}
+        }
+        })
 }] );
 })();
