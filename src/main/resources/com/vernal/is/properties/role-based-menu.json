@@ -49,6 +49,13 @@
 			"style":"",
 			"menuItemDisplay": "schoolInfo",
 			"url":"#schoolInfo"
+		},
+		{
+			"menuTitle": "Exam",
+			"viewby": ["Admin"],
+			"style":"",
+			"menuItemDisplay": "exam",
+			"url":"#exams"
 		}
 	]
 }

@@ -133,7 +133,7 @@ md-ink-bar{
  
 .login-gradient {
     height: 100%;
-    background: linear-gradient(180deg, #03AA75 50%, #F6FAFA 50%);
+    background: linear-gradient(180deg, #03AA75 18%, #F6FAFA 5%);
     overflow-y: auto;
     overflow-x: hidden;
 } 
