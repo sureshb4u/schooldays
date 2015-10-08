@@ -12,35 +12,40 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(value=Include.NON_EMPTY)
 public class RoleDTO extends BaseDTO{
 
-	private DomainReferenceDTO name;
+	private Integer idRole;
+	private String role;
 	
-	private List<DomainReferenceDTO> privileges;
+	private List<String> privileges;
 
 	/**
 	 * @return the privileges
 	 */
-	public List<DomainReferenceDTO> getPrivileges() {
+	
+	public List<String> getPrivileges() {
 		return privileges;
 	}
 	
+	public Integer getIdRole() {
+		return idRole;
+	}
+
+	public void setIdRole(Integer idRole) {
+		this.idRole = idRole;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	/**
 	 * @param privileges the privileges to set
 	 */
-	public void setPrivileges(List<DomainReferenceDTO> privileges) {
+	public void setPrivileges(List<String> privileges) {
 		this.privileges = privileges;
-	}
-
-	public DomainReferenceDTO getName() {
-		return name;
-	}
-
-	public void setName(DomainReferenceDTO name) {
-		this.name = name;
-	}
-
-	public boolean isActive() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

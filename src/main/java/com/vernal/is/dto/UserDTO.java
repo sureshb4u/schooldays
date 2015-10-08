@@ -1,125 +1,147 @@
 package com.vernal.is.dto;
 
 import java.util.List;
-import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-
-/**
- * An User DTO 
- * User : Rubini
- * Date : 28/04/2015
- */
 @JsonInclude(value=Include.NON_EMPTY)
-public class UserDTO extends PersonDTO{
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserDTO extends BaseDTO {
 
-	private UUID orgPersonId;
-	private UUID personId;
-	private String userName;
-	private DomainReferenceDTO status;
-	private DomainReferenceDTO userNameType;
-	private String userNameValue;
-	private boolean isPrimary;
-	private String secret;
-	private String secretType;
-	private UUID userId;
-	//private OrganizationPerson orgPerson;
-	//private AccountLinkDTO _links;
-	private PersonDTO profile;
-	private String sessionToken;
+	private Integer id;
 	
-	private List<OrganizationRoleDTO> orgRoleDTOList;
-	/**
-	 * @return the orgRoleDTOList
-	 */
-	public List<OrganizationRoleDTO> getOrgRoleDTOList() {
-		return orgRoleDTOList;
+    private String firstName;
+
+    private String lastName;
+
+    private String fatherName;
+
+    private String dateOfBirth;
+    
+    private String year;
+    
+    private CommunityDTO community;
+    
+    private ReligionDTO religion;
+    
+    private String gender;
+    
+    private List<String> addresses;
+    
+    private List<String> emailAddresses;
+   
+    private List<String> phoneNumbers;
+
+    private List<RoleDTO> roles;
+
+	public Integer getId() {
+		return id;
 	}
-	/**
-	 * @param orgRoleDTOList the orgRoleDTOList to set
-	 */
-	public void setOrgRoleDTOList(List<OrganizationRoleDTO> orgRoleDTOList) {
-		this.orgRoleDTOList = orgRoleDTOList;
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	public UUID getOrgPersonId() {
-		return orgPersonId;
+
+	public String getFirstName() {
+		return firstName;
 	}
-	public void setOrgPersonId(UUID orgPersonId) {
-		this.orgPersonId = orgPersonId;
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
-	public UUID getPersonId() {
-		return personId;
+
+	public String getLastName() {
+		return lastName;
 	}
-	public void setPersonId(UUID personId) {
-		this.personId = personId;
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	public String getUserName() {
-		return userName;
+
+	public String getFatherName() {
+		return fatherName;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
 	}
-	public DomainReferenceDTO getStatus() {
-		return status;
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
 	}
-	public void setStatus(DomainReferenceDTO status) {
-		this.status = status;
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
-	public DomainReferenceDTO getUserNameType() {
-		return userNameType;
+
+	public String getYear() {
+		return year;
 	}
-	public void setUserNameType(DomainReferenceDTO userNameType) {
-		this.userNameType = userNameType;
+
+	public void setYear(String year) {
+		this.year = year;
 	}
-	public String getUserNameValue() {
-		return userNameValue;
+
+	public CommunityDTO getCommunity() {
+		return community;
 	}
-	public void setUserNameValue(String userNameValue) {
-		this.userNameValue = userNameValue;
+
+	public void setCommunity(CommunityDTO community) {
+		this.community = community;
 	}
-	public boolean isPrimary() {
-		return isPrimary;
+
+	public ReligionDTO getReligion() {
+		return religion;
 	}
-	public void setPrimary(boolean isPrimary) {
-		this.isPrimary = isPrimary;
+
+	public void setReligion(ReligionDTO religion) {
+		this.religion = religion;
 	}
-	public String getSecret() {
-		return secret;
+
+	public String getGender() {
+		return gender;
 	}
-	public void setSecret(String secret) {
-		this.secret = secret;
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
-	public String getSecretType() {
-		return secretType;
+
+	public List<String> getAddresses() {
+		return addresses;
 	}
-	public void setSecretType(String secretType) {
-		this.secretType = secretType;
+
+	public void setAddresses(List<String> addresses) {
+		this.addresses = addresses;
 	}
-	public UUID getUserId() {
-		return userId;
+
+	public List<String> getEmailAddresses() {
+		return emailAddresses;
 	}
-	public void setUserId(UUID userId) {
-		this.userId = userId;
+
+	public void setEmailAddresses(List<String> emailAddresses) {
+		this.emailAddresses = emailAddresses;
 	}
-	/*public OrganizationPerson getOrgPerson() {
-		return orgPerson;
+
+	public List<String> getPhoneNumbers() {
+		return phoneNumbers;
 	}
-	public void setOrgPerson(OrganizationPerson orgPerson) {
-		this.orgPerson = orgPerson;
-	}*/
-	public PersonDTO getProfile() {
-		return profile;
+
+	public void setPhoneNumbers(List<String> phoneNumbers) {
+		this.phoneNumbers = phoneNumbers;
 	}
-	public void setProfile(PersonDTO profile) {
-		this.profile = profile;
+
+	public List<RoleDTO> getRoles() {
+		return roles;
 	}
-	public String getSessionToken() {
-		return sessionToken;
+
+	public void setRoles(List<RoleDTO> roles) {
+		this.roles = roles;
 	}
-	public void setSessionToken(String sessionToken) {
-		this.sessionToken = sessionToken;
-	}
+
+
+  
+     
 	
 }

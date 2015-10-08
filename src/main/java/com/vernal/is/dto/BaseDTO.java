@@ -1,7 +1,6 @@
 package com.vernal.is.dto;
 
 import java.util.Date;
-import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -14,22 +13,23 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(value= JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseDTO{
-	private UUID id;
-	private PersonDTO createdBy;
+	private UserDTO createdBy;
 	private Date createdOn;
-	private PersonDTO updatedBy;
+	private UserDTO updatedBy;
 	private Date updatedOn;
+	private Integer isDeleted;
 	
-	public UUID getId() {
-		return id;
+	
+	public Integer getIsDeleted() {
+		return isDeleted;
 	}
-	public void setId(UUID id) {
-		this.id = id;
+	public void setIsDeleted(Integer isDeleted) {
+		this.isDeleted = isDeleted;
 	}
-	public PersonDTO getCreatedBy() {
+	public UserDTO getCreatedBy() {
 		return createdBy;
 	}
-	public void setCreatedBy(PersonDTO createdBy) {
+	public void setCreatedBy(UserDTO createdBy) {
 		this.createdBy = createdBy;
 	}
 	public Date getCreatedOn() {
@@ -38,10 +38,10 @@ public class BaseDTO{
 	public void setCreatedOn(Date createdOn) {
 		this.createdOn = createdOn;
 	}
-	public PersonDTO getUpdatedBy() {
+	public UserDTO getUpdatedBy() {
 		return updatedBy;
 	}
-	public void setUpdatedBy(PersonDTO updatedBy) {
+	public void setUpdatedBy(UserDTO updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 	public Date getUpdatedOn() {
