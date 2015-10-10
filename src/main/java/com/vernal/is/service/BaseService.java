@@ -1,13 +1,22 @@
 package com.vernal.is.service;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.Principal;
+import java.util.Enumeration;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +34,6 @@ import com.google.gson.JsonSyntaxException;
 import com.googlecode.ehcache.annotations.Cacheable;
 import com.googlecode.ehcache.annotations.KeyGenerator;
 import com.googlecode.ehcache.annotations.PartialCacheKey;
-import com.vernal.is.dto.DomainReferenceDTO;
-import com.vernal.is.dto.OrganizationDTO;
 import com.vernal.is.model.APIConfig;
 import com.vernal.is.model.RoleMenu;
 import com.vernal.is.translator.BaseTranslator;
@@ -185,15 +192,7 @@ public class BaseService {
 	public String getOrganizationId(HttpSession session) {
 		return baseTranslator.getOrganizationId(session);
 	}
-	
-	/**
-	 * Translate to DomainReferenceDTO.
-	 * @param key the String value of key.
-	 * @return {@link DomainReferenceDTO}
-	 */
-	public DomainReferenceDTO translateToDomainReferenceDTO(String key){
-		return baseTranslator.translateToDomainReferenceDTO(key);
-	}
+
 	
 	public String translateObjectToJson(Object obj) {
 		return baseTranslator.translateObjectToJson(obj);
@@ -307,10 +306,10 @@ public class BaseService {
 							+ CommonConstants.ORGANIZATION_BASE_URL + params,
 							HttpMethod.GET, entity, Object.class);
 			
-			OrganizationDTO organizationDTO = baseTranslator.convertOrganizationDTO(response.getBody());
+		/*//	OrganizationDTO organizationDTO = baseTranslator.convertOrganizationDTO(response.getBody());
 			if (organizationDTO != null) {
 				return organizationDTO.getId().toString();
-			}
+			}*/
 			return null;
 		}catch (IOException e) {
 			throw e;
@@ -326,5 +325,16 @@ public class BaseService {
 	 */
 	public RoleMenu convertRoleMenu(Object object) {
 		return baseTranslator.convertRoleMenu(object);
+	}
+	
+	
+	public String getServiceURL(){
+	HttpServletRequest httpServletRequest = null;
+	String ip = httpServletRequest.getContextPath();
+	System.out.println("ip>>>>>>>>"+ip);
+	int portNo = httpServletRequest.getLocalPort();
+	System.out.println("portNo>>>>>>>>>>"+portNo);
+	
+	return ip+"/"+portNo;
 	}
 }

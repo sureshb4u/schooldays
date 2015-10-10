@@ -52,16 +52,4 @@ public class ClientService {
 		return client;
 	}
 	
-	public Object getclientProfile(){
-		Object obj = null;
-		try {
-			obj = personService.getPerson(null);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return obj;
-	}
-	
-	
 }

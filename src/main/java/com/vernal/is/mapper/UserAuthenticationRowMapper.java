@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.vernal.is.dto.UserAuthenticationDTO;
-import com.vernal.is.model.User;
 
 public class UserAuthenticationRowMapper implements RowMapper<UserAuthenticationDTO> {
 
@@ -21,7 +20,7 @@ public class UserAuthenticationRowMapper implements RowMapper<UserAuthentication
 		//user.setId(rs.getInt("id"));
 		userAuthentication.setUserName(rs.getString("USER_NAME"));
 		userAuthentication.setUserSecret(rs.getString("USER_SECRET"));
-		userAuthentication.setUserId(rs.getInt("ID_USER"));
+		userAuthentication.setId(rs.getInt("ID_USER"));
 		return userAuthentication;
 	}
 

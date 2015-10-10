@@ -48,7 +48,7 @@ public class UsersController {
 		@ResponseBody
 		public ResponseBean addBills(@RequestBody UserAuthenticationDTO userAuthenticationDTO) throws Exception {
 			ResponseBean responseBean = new ResponseBean();
-			responseBean = userDAO.aurthentication(userAuthenticationDTO);
+		//	responseBean = userDAO.aurthentication(userAuthenticationDTO);
 			return responseBean;
 		}
 	}

@@ -3,6 +3,7 @@ package com.vernal.is.service;
 import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpEntity;
@@ -37,7 +38,7 @@ public class LoginService extends BaseService{
 	 * @return user A not null {@link User}
 	 * @throws Exception 
 	 */
-	public User userAuthentication(String userName,String secret, HttpSession session, String locale) throws IOException {	
+	public User userAuthentication(String userName,String secret, HttpSession session, String locale, HttpServletRequest request) throws IOException {	
 		User user= new User();
 		UserDTO userDTO = new UserDTO();
 		UserAuthenticationDTO userAuthenticationDTO = loginTranslator.translateToUserAuthenticationDTO(userName, secret);
@@ -46,7 +47,6 @@ public class LoginService extends BaseService{
 		try {
 			HttpEntity<String> entity = preparePost(postString, session);
 			// This will authenticate the user
-			System.out.println("ssssssssss");
 			ResponseEntity<Object> response = restTemplate.exchange("http://180.215.113.236:8080/services/users/authenticate", 
 							HttpMethod.POST, entity, Object.class);
 			

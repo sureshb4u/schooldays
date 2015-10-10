@@ -1,8 +1,6 @@
 package com.vernal.is.model;
 
 import java.util.UUID;
-import com.vernal.is.dto.DomainReferenceDTO;
-import com.vernal.is.dto.ParentDTO;
 
 public class Asset {
 	

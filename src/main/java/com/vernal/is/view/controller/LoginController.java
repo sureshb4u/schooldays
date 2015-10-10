@@ -3,6 +3,7 @@ package com.vernal.is.view.controller;
 import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -41,12 +42,12 @@ public class LoginController extends BaseController{
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/authentication",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> authentication(@RequestBody Login login,HttpSession session) throws IOException {
+	public ResponseEntity<?> authentication(@RequestBody Login login,HttpSession session,  HttpServletRequest request) throws IOException {
 		User user = new User();
 			try{ 
 					if(login.getUserName()!=null&&!login.getUserName().isEmpty()&&login.getUserSecret()!=null&&!login.getUserSecret().isEmpty()) {
-						user = loginService.userAuthentication(login.getUserName(), login.getUserSecret(), session, baseController.locale);
-						System.out.println(gson.toJson(user));
+						//user = loginService.userAuthentication(login.getUserName(), login.getUserSecret(), session,locale, request);
+						//System.out.println(gson.toJson(user));
 						user.setFirstName("Vignesh");
 						user.setLastName(".P");
 						user.setUserRole(login.getUserName());

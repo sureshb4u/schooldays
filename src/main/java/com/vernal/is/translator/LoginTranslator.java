@@ -1,7 +1,6 @@
 package com.vernal.is.translator;
 
 import java.lang.reflect.Type;
-import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -10,9 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.reflect.TypeToken;
-import com.vernal.is.dto.DomainReferenceDTO;
-import com.vernal.is.dto.OrganizationRoleDTO;
-import com.vernal.is.dto.RoleDTO;
 import com.vernal.is.dto.UserAuthenticationDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.model.User;
@@ -62,18 +58,18 @@ public class LoginTranslator extends BaseTranslator {
 	public User translateToUser(UserDTO userDTO, String locale){
 		LOGGER.info("Converting UserDTO model to User");
 		User user= new User();
-		if(userDTO.getProfile() != null){
-			if(userDTO.getProfile().getDateOfBirth()!=null){
-				user.setDateOfBirth(userDTO.getProfile().getDateOfBirth());
+		if(userDTO != null){
+			if(userDTO.getDateOfBirth()!=null){
+				user.setDateOfBirth(userDTO.getDateOfBirth());
 			}
-			if(userDTO.getProfile().getGender() != null){
-				user.setGender(commonUtil.getLocaleValue(userDTO.getProfile().getGender().getDisplays(), locale));
+			if(userDTO.getGender() != null){
+				user.setGender(userDTO.getGender());
 			}
-			if(userDTO.getProfile().getFirstName() !=null && !userDTO.getProfile().getFirstName().isEmpty()){
-				user.setFirstName(userDTO.getProfile().getFirstName());
+			if(userDTO.getFirstName() !=null && !userDTO.getFirstName().isEmpty()){
+				user.setFirstName(userDTO.getFirstName());
 			}
-			if(userDTO.getProfile().getLastName()!=null && !userDTO.getProfile().getLastName().isEmpty()){
-				user.setLastName(userDTO.getProfile().getLastName());
+			if(userDTO.getLastName()!=null && !userDTO.getLastName().isEmpty()){
+				user.setLastName(userDTO.getLastName());
 			}
 		}
 		if(userDTO.getFirstName() !=null && !userDTO.getFirstName().isEmpty()){
@@ -81,29 +77,12 @@ public class LoginTranslator extends BaseTranslator {
 		}
 		if(userDTO.getLastName()!=null && !userDTO.getLastName().isEmpty()){
 			user.setLastName(userDTO.getLastName());
+		}if(userDTO.getId()!=null){
+			user.setId(userDTO.getId().toString());
 		}
-		if(userDTO.getOrgId()!=null){
-			user.setOrgId(userDTO.getOrgId().toString());
-		}
-		if(userDTO.getPersonId()!=null){
-			user.setPersonId(userDTO.getPersonId().toString());
-		}
-		if(userDTO.getSessionToken()!=null && !userDTO.getSessionToken().isEmpty()){
-			user.setSessionToken(userDTO.getSessionToken());
-		}
-		if(userDTO.getUserName() != null && !userDTO.getUserName().isEmpty()){
-			user.setUserName(userDTO.getUserName());
-		}
-		if(userDTO.getOrgRoleDTOList()!=null && !userDTO.getOrgRoleDTOList().isEmpty()){
-			for(OrganizationRoleDTO orgroleDTO : userDTO.getOrgRoleDTOList()){
-				for(RoleDTO roleDTO : orgroleDTO.getRoles()){
-					if(roleDTO.getName() != null){
+		/*if(userDTO.getRole()!=null && !userDTO.getRole().isEmpty()){
 						user.setUserRole(commonUtil.getLocaleValue(roleDTO.getName().getDisplays(),locale));	
-					}
-					
-				}
-			}
-		}
+		}*/
 		return user;
 	}
 
@@ -124,18 +103,16 @@ public class LoginTranslator extends BaseTranslator {
 			userDTO.setDateOfBirth(user.getDateOfBirth());
 		}
 		if(user.getGender() != null && !user.getGender().isEmpty()){
-			DomainReferenceDTO gender = new DomainReferenceDTO();
-			gender.setKey(user.getGender() .toUpperCase());
-			userDTO.setGender(gender);
+			userDTO.setGender(user.getGender());
 		}
 	/*	if(user.getOrgId() != null && !user.getOrgId().isEmpty()){
 			userDTO.setOrgId(UUID.fromString(user.getOrgId()));
 		}*/
-		if(user.getPersonId() != null && !user.getPersonId().isEmpty()){
-			userDTO.setPersonId(UUID.fromString(user.getPersonId()));
+		if(user.getId() != null && !user.getId().isEmpty()){
+			userDTO.setId(Integer.valueOf(user.getId()));
 		}
 		if(user.getUserName() != null && !user.getUserName() .isEmpty()){
-			userDTO.setUserName(user.getUserName());
+		//	userDTO.setUserName(user.getUserName());
 		}
 	 return userDTO;
 	}

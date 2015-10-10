@@ -1,10 +1,7 @@
 package com.vernal.is.translator;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.lang.reflect.Type;
-import com.google.gson.reflect.TypeToken;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -13,9 +10,6 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.vernal.is.dto.DomainReferenceDTO;
-import com.vernal.is.dto.I18nDisplayDTO;
-import com.vernal.is.dto.OrganizationDTO;
 import com.vernal.is.model.RoleMenu;
 import com.vernal.is.service.BaseService;
 import com.vernal.is.util.CommonConstants;
@@ -46,32 +40,7 @@ public class BaseTranslator {
 		return organizationId;
 	}
 	
-	/**
-	 * Translate to Domain reference DTO
-	 * @param key the String value of key.
-	 * @return {@link DomainReferenceDTO}
-	 */
-	public DomainReferenceDTO translateToDomainReferenceDTO(String key) {
-		DomainReferenceDTO domainReferenceDTO = new DomainReferenceDTO();
-		if(key != null && !key.isEmpty()){
-		domainReferenceDTO.setKey(key);
-		}
-		return domainReferenceDTO;
-	}
-	
-	/**
-	 * Translate to I18nDisplayDTO
-	 * @param value the String value of value.
-	 * @param locale the Locale of URI.
-	 * @return {@link I18nDisplayDTO}
-	 */
-	public I18nDisplayDTO translateToI18nDisplayDTO(String value, String locale) {
-		Map<String, String> map = new HashMap<String, String>();
-		I18nDisplayDTO i18nDisplayDTO = new I18nDisplayDTO();
-		map.put(locale, value);
-		i18nDisplayDTO.setDisplays(map, locale);
-		return i18nDisplayDTO;
-	}
+
 	
 	/**
 	 * Translate to I18nStringMap
@@ -106,16 +75,7 @@ public class BaseTranslator {
 		return gson.toJson(obj);
 	}
 	
-	/**
-	 * converts object to OrganizationDTO
-	 * @param object
-	 * @return
-	 */
-	public OrganizationDTO convertOrganizationDTO(Object object) {
-		Type listType = new TypeToken<OrganizationDTO>() {}.getType();
-		OrganizationDTO organizationDTO = gson.fromJson(translateObjectToJson(object), listType);
-		return organizationDTO;
-	}
+	
 	
 	 /**Translate to RoleMenu.
 	 * @param object The Object.

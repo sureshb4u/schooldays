@@ -40,7 +40,7 @@ public class PersonController extends BaseController{
 	public ResponseEntity<?>  createPerson(){
 		Object result=null;
 		try{
-			result= personService.createPerson(locale);
+	//		result= personService.createPerson(locale);
 		}catch(Exception ex){
 			return new ResponseEntity<>(baseController.setResponse(MessageUtils.getMessage("error.creating.person"),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),HttpStatus.INTERNAL_SERVER_ERROR);
@@ -52,7 +52,7 @@ public class PersonController extends BaseController{
 	public ResponseEntity<?>  getPerson(){
 		Object result=null;
 		try{
-			result= personService.getPerson(locale);
+		//sss	result= personService.getPerson(locale);
 		}catch(Exception ex){
 			return new ResponseEntity<>(baseController.setResponse(MessageUtils.getMessage("error.creating.person"),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),HttpStatus.INTERNAL_SERVER_ERROR);
@@ -105,7 +105,7 @@ public class PersonController extends BaseController{
 				if(roleType!=null && !roleType.isEmpty()){
 					queryString.put(CommonConstants.ROLE_TYPE,roleType);
 				}
-			personList = personService.getPersonsByOrgIdAndRoleType(organizationId,roleType,queryString,session);
+			//sspersonList = personService.getPersonsByOrgIdAndRoleType(organizationId,roleType,queryString,session);
 		}catch(Exception ex){
 			return new ResponseEntity<>(baseController.setResponse(MessageUtils.getMessage("error.getting.person.roles"),
 					HttpStatus.INTERNAL_SERVER_ERROR.toString()),HttpStatus.INTERNAL_SERVER_ERROR);
