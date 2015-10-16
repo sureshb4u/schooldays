@@ -137,8 +137,8 @@
             parent: 'home',
             views: {
                 'viewPage': {
-                    templateUrl: '/scripts/app/client/view/ntStaffs.html',
-                    controller: 'clientController',
+                    templateUrl: '/scripts/app/ntStaff/view/ntStaffs.html',
+                    controller: 'ntStaffController',
                    
                 }
             }

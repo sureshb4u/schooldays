@@ -1,27 +1,16 @@
 <div resize style="height:{{windowHeight-70+'px'}}" ng-init="edit=false">
-		<div layout-margin layout-padding class="frt mrt mt">
-			<ng-md-icon icon="mode_edit" ng-hide="edit" style="fill: grey; cursor: pointer;" size="30" ng-click="edit=true">
-				<md-tooltip md-autohide="true">
-                        EDIT
-                 </md-tooltip>
-			</ng-md-icon>
-			<ng-md-icon icon="save" ng-show="edit" style="fill: grey; cursor: pointer;" size="30" ng-click="edit=false">
-			<md-tooltip md-autohide="true">
-                        SAVE
-                 </md-tooltip>
-			</ng-md-icon>
-		</div>
 		<div layout-margin layout-padding flex-container="column">
-		<div flex-item layout-margin layout-padding flex-container="row">
-			<div  flex="30">
-				<md-input-container style="  margin-top: 69px;" ng-hide="edit"> 
+		<div flex-item layout-margin layout-padding flex-container="row" >
+			<div  flex="30" ng-init="editDesignation = true">			 
+				<md-input-container style="  margin-top: 69px; " ng-show="editDesignation" ng-dblclick ="editDesignation=false;" > 
 						<label>Designation</label>
-		          		<input ng-model="user.designation" disabled>
+		          		<input ng-model="user.designation" disabled >
 		        </md-input-container>
-		        <md-input-container style="  margin-top: 69px;"  ng-show="edit" >
+		        <md-input-container style="  margin-top: 69px;" ng-hide="editDesignation"  >
 		        		 <label>Designation</label>
-		          		<input ng-model="user.designation">
+		          		<input ng-model="user.designation" ng-blur ="editDesignation=true;">
 		        </md-input-container>
+		          <lx-date-picker model="datepicker.date" class="black-text" label="Pick a date" locale="en" fixed-label="true" icon="calendar"></lx-date-picker>
 	        </div> 
 	        <div  flex="40">
 			 	<img layout-margin layout-padding src="/assets/images/profile.jpg" alt="" class="circle aligncenter" style="width:150px;height:150px">
@@ -31,8 +20,8 @@
 		</div>
 		<md-divider layout-fill></md-divider>
 		<div flex-item layout-margin layout-padding>
-	 	 		<div layout-margin layout-padding flex-container="row">
-						<div flex="50" class="fs-subhead black-text">
+	 	 		<div layout-margin layout-padding flex-container="row" >
+						<div flex="50" class="fs-subhead black-text" >
 						 	<md-input-container > <label>First Name</label>
 	          					<input ng-model="user.firstName" disabled>
 	        				</md-input-container> 
@@ -41,56 +30,59 @@
 						 	<md-input-container> <label>Last Name</label>
 	          					<input ng-model="user.lastName" disabled >
 	        				</md-input-container> 
-						</div>	
-						<!-- <div flex="20" class="fs-subhead black-text">
-						 	<md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date"></md-datepicker>
-						</div> -->
+						</div>							
 	 	 		</div>
 	 	 		<div layout-margin layout-padding flex-container="row">
-	 	 			<div flex="50"  class="fs-subhead black-text">
-	 	 					<md-input-container ng-hide="edit">
+	 	 			<div flex="50"  class="fs-subhead black-text" ng-init="editContact = true">
+	 	 					<md-input-container ng-show="editContact" ng-dblclick="editContact = false">
 	 	 						 <label>Contact</label>
-	          					<input ng-model="user.contacts" disabled>
+	          					<input ng-model="user.contacts" disabled >
 	        				</md-input-container> 
-	        				<md-input-container ng-show="edit">
+	        				<md-input-container ng-hide="editContact" >
 	 	 						 <label>Contact</label>
-	          					<input ng-model="user.contacts" >
+	          					<input ng-model="user.contacts" ng-blur="editContact=true; updateProfile(user, 'contact');">
 	        				</md-input-container>
 	 	 			</div>
-	 	 			<div  flex="50"  class="fs-subhead black-text">
-		 	 			<md-input-container ng-hide="edit">
+	 	 			<div  flex="50"  class="fs-subhead black-text" ng-init="editEmail = true">
+		 	 			<md-input-container ng-show="editEmail" ng-dblclick="editEmail = false">
 	      					<label>Email</label>
 	      					<input ng-model="user.email" type="email" disabled>
 	   					 </md-input-container>
-	   					 <md-input-container ng-show="edit">
+	   					 <md-input-container ng-hide="editEmail">
 	      					<label>Email</label>
-	      					<input ng-model="user.email" type="email" >
+	      					<input ng-model="user.email" type="email" ng-blur="editEmail = true">
 	   					 </md-input-container>
    					 </div>
    				</div>
    				<div layout-margin layout-padding flex-container="row">
-   					<div  flex="50"  class="fs-subhead black-text">
-   						<md-input-container ng-hide="edit">
+   					<div  flex="50"  class="fs-subhead black-text" ng-init="editAddress = true">
+   						<md-input-container ng-show="editAddress" ng-dblclick="editAddress = false">
 	      				 	 <label>Address</label>
-	       					 <textarea ng-model="user.address" columns="1" md-maxlength="150" disabled></textarea>
+	       					 <textarea ng-model="user.address" columns="1" md-maxlength="150" disabled ></textarea>
 	      				</md-input-container>
-	   					 <md-input-container ng-show="edit" >
+	   					 <md-input-container ng-hide="editAddress" >
 	      					<label>Address</label>
-	      					<textarea ng-model="user.address" columns="1" md-maxlength="150"></textarea>
+	      					<textarea ng-model="user.address" columns="1" md-maxlength="150" ng-blur="editAddress = true"></textarea>
 	   					 </md-input-container>
    					</div>
-	   				<div  flex="50"  class="fs-subhead black-text">
-	   					<md-input-container ng-hide="edit">
+	   				<div  flex="50"  class="fs-subhead black-text" ng-init="editBiography = true" >
+	   					<md-input-container ng-show="editBiography" ng-dblclick="editBiography = false">
 	      				 	 <label>Biography</label>
 	       					 <textarea ng-model="user.biography" columns="1" md-maxlength="150" disabled></textarea>
 	      				</md-input-container>
-	      				<md-input-container ng-show="edit">
+	      				<md-input-container ng-hide="editBiography">
 	      				 	 <label>Biography</label>
-	       					 <textarea ng-model="user.biography" columns="1" md-maxlength="150"></textarea>
+	       					 <textarea ng-model="user.biography" columns="1" md-maxlength="150" ng-blur="editBiography = true"></textarea>
 	      				</md-input-container>
 	   				</div>
+	 	</div>	 	
+	 	<div layout-margin layout-padding flex-container="row">	
+   				<div flex="50" class="fs-subhead black-text">
+						 <md-input-container> 
+						 	<label>Date of Birth</label>
+						 		<input type="text" pick-a-date="dateOfBirth" ng-model="user.dateOfBirth" md-placeholder="Enter date"></md-datepicker>
+						</md-input-container>
+						</div>	
    				</div>
-	 	</div>
-	 	
 	</div>
 </div>

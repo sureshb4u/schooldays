@@ -8,7 +8,7 @@
  * Controller of the atrium
  */
   
-  vApp.controller('clientController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','clientService','$controller', function($scope,$translate,restService,$translatePartialLoader,$log,$location,$timeout,clientService,$controller) {
+  vApp.controller('ntStaffController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','$controller', function($scope,$translate,restService,$translatePartialLoader,$log,$location,$timeout,$controller) {
 	  $translate.refresh();
 	    var tabs = [
 	                { title: 'Users', content: "scripts/app/worker/view/profile.html"},
@@ -18,10 +18,7 @@
 	              selected = null,
 	              previous = null;
 	          $scope.tabs = tabs;
-	          $scope.selectedIndex = 2;
-	          angular.extend(this, $controller('clientListController', { $scope: $scope }));
-	          angular.extend(this, $controller('clientDetailController', { $scope: $scope }));
-	          
+	          $scope.selectedIndex = 2;	          
 	          $scope.$watch('selectedIndex', function(current, old){
 	            previous = selected;
 	            selected = tabs[current];
@@ -35,6 +32,20 @@
 		    	$scope.loadUsersByRoleCA("ADMIN");
 		    	$scope.loadUsersByRoleCMT();
 		    };
+		    $scope.religion = [
+	                             { religion: 'Adam',      email: 'adam@email.com',      age: 10 },
+	                             { religion: 'Amalie',    email: 'amalie@email.com',    age: 12 },
+	                             { religion: 'Wladimir',  email: 'wladimir@email.com',  age: 30 },
+	                             { religion: 'Samantha',  email: 'samantha@email.com',  age: 31 },
+	                             { religion: 'Estefanía', email: 'estefanía@email.com', age: 16 },
+	                             { religion: 'Natasha',   email: 'natasha@email.com',   age: 54 },
+	                             { religion: 'Nicole',    email: 'nicole@email.com',    age: 43 },
+	                             { religion: 'Adrian',    email: 'adrian@email.com',    age: 21 }
+	                         ];
+		    var check = function(){
+		    	console.log('dsdf');
+		    	
+		    };
 		    
 		    $scope.tabNavigation=function(tabLabel){
 				 var tablabel = tabLabel.replace(' ','');
@@ -44,14 +55,14 @@
 		    $scope.mainTemplate = function(type){
 		    	console.log("type>>>>>>>>>>>>>>"+type);
 		    		$scope.template={
-							     "pageView":"scripts/app/client/view/"+type+".html",
+							     "pageView":"scripts/app/ntStaff/view/"+type+".html",
 							   };  
 					   angular.element(".org-details-title .dropdown").show();
 				};
 				 $scope.viewTemplate = function(type1,type2){
 			    		$scope.template1={
-								     "pageList":"scripts/app/client/view/"+type1+".html",
-								     "pageDetails":"scripts/app/client/view/"+type2+".html"
+								     "pageList":"scripts/app/ntStaff/view/"+type1+".html",
+								     "pageDetails":"scripts/app/ntStaff/view/"+type2+".html"
 								   };  
 						   angular.element(".org-details-title .dropdown").show();
 					};
@@ -124,6 +135,7 @@ vApp.directive('autoComplete',['$http','restService','clientService',function($h
                     scope.searchText = scope.suggestions[scope.selectedIndex];
                 }
             });
+           
         }
         
     }

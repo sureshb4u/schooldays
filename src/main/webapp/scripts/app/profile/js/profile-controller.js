@@ -49,8 +49,23 @@
 				designation : 'Junior Software Developer',
 				address : 'address',
 				contacts : '999999999',
-				biography : 'First WebApp with Angular'
+				biography : 'First WebApp with Angular',
+				dateOfBirth : '28/05/1994'	
 		}
+		
+		$scope.getProfile = function(){
+			
+		};
+		
+		$scope.updateUser = {};
+		
+		$scope.updateProfile = function(user, feild){
+			if(feild == 'contact'){
+				$scope.updateUser.contact = user.contact;
+			}
+			
+			console.log(JSON.stringify($scope.updateUser));
+		};
 		
 	} ]);
  })(); 
