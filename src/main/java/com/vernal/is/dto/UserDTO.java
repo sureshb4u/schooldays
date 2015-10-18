@@ -1,7 +1,7 @@
 package com.vernal.is.dto;
 
+import java.util.Date;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -18,23 +18,31 @@ public class UserDTO extends BaseDTO {
 
     private String fatherName;
 
-    private String dateOfBirth;
-    
-    private String year;
+    private Date dateOfBirth;
     
     private CommunityDTO community;
     
     private ReligionDTO religion;
     
-    private String gender;
+    private GenderDTO gender;
     
-    private List<String> addresses;
+    private Integer age;
     
-    private List<String> emailAddresses;
+    private List<StaffAddressDTO> addresses;
+    
+    private String  emailAddresses;
+    
+    private DesignationDTO  designation;
+    
+    private String  bioGraphy;
+    
+    private Integer experience;
+    
+    private  Date   dateOfJoining; 
    
-    private List<String> phoneNumbers;
+    private List<StaffPhoneNumberDTO> phoneNumbers;
 
-    private List<RoleDTO> roles;
+    private UserRoleDTO roles;
 
 	public Integer getId() {
 		return id;
@@ -68,20 +76,55 @@ public class UserDTO extends BaseDTO {
 		this.fatherName = fatherName;
 	}
 
-	public String getDateOfBirth() {
+	
+
+
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getYear() {
-		return year;
+	public GenderDTO getGender() {
+		return gender;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setGender(GenderDTO gender) {
+		this.gender = gender;
+	}
+
+	public DesignationDTO getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(DesignationDTO designation) {
+		this.designation = designation;
+	}
+
+	public String getBioGraphy() {
+		return bioGraphy;
+	}
+
+	public void setBioGraphy(String bioGraphy) {
+		this.bioGraphy = bioGraphy;
+	}
+
+	public Integer getExperience() {
+		return experience;
+	}
+
+	public void setExperience(Integer experience) {
+		this.experience = experience;
+	}
+
+	public Date getDateOfJoining() {
+		return dateOfJoining;
+	}
+
+	public void setDateOfJoining(Date dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
 	}
 
 	public CommunityDTO getCommunity() {
@@ -100,48 +143,51 @@ public class UserDTO extends BaseDTO {
 		this.religion = religion;
 	}
 
-	public String getGender() {
-		return gender;
-	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public List<String> getAddresses() {
+	public List<StaffAddressDTO> getAddresses() {
 		return addresses;
 	}
 
-	public void setAddresses(List<String> addresses) {
+	public void setAddresses(List<StaffAddressDTO> addresses) {
 		this.addresses = addresses;
 	}
 
-	public List<String> getEmailAddresses() {
+	public String getEmailAddresses() {
 		return emailAddresses;
 	}
 
-	public void setEmailAddresses(List<String> emailAddresses) {
+	public void setEmailAddresses(String emailAddresses) {
 		this.emailAddresses = emailAddresses;
 	}
 
-	public List<String> getPhoneNumbers() {
+	public List<StaffPhoneNumberDTO> getPhoneNumbers() {
 		return phoneNumbers;
 	}
 
-	public void setPhoneNumbers(List<String> phoneNumbers) {
+	public void setPhoneNumbers(List<StaffPhoneNumberDTO> phoneNumbers) {
 		this.phoneNumbers = phoneNumbers;
 	}
 
-	public List<RoleDTO> getRoles() {
+	public UserRoleDTO getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<RoleDTO> roles) {
+	public void setRoles(UserRoleDTO roles) {
 		this.roles = roles;
 	}
 
+	public Integer getAge() {
+		return age;
+	}
 
-  
-     
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	
+
+
+
+	   
 	
 }

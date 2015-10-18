@@ -40,4 +40,16 @@ public class CommonConstants {
 	public static final String PERSONS_BASE_URL = "/persons";
 	public static final String ROLE_TYPE = "roleType";
 	public static final String ROLE_BASE_URL = "/role";
+	
+	String toAddr = "viki19nesh@gmail.com";
+	public static final String FROMADDRESS = "viki19nesh@gmail.com";
+
+	// email subject
+	public static final String  CREDENTIALS = "School Days Credentials";
+	public static final String  USERNAME ="Your Login Id is "; 
+	public static final String  PASSWORD ="Your password is "; 
+	// email body
+	public static final String FOOTER = "There you go.. You got an account in schooldays.. Let's understand details on how schooldays works, if"
+			+ "you have any further doubts fee free to contact us -- By Support Team";
+	
 }

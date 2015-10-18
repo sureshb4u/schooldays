@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.reflect.TypeToken;
@@ -59,30 +60,21 @@ public class LoginTranslator extends BaseTranslator {
 		LOGGER.info("Converting UserDTO model to User");
 		User user= new User();
 		if(userDTO != null){
+			BeanUtils.copyProperties(userDTO, user);
+			
+			if(userDTO.getLastName()!=null && !userDTO.getLastName().isEmpty() && userDTO.getFirstName() !=null && !userDTO.getFirstName().isEmpty() ){
+				user.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
+			}
+			if(userDTO.getId()!=null){
+				user.setId(userDTO.getId().toString());
+			}
 			if(userDTO.getDateOfBirth()!=null){
-				user.setDateOfBirth(userDTO.getDateOfBirth());
+				user.setDateOfBirth(userDTO.getDateOfBirth().toString());
 			}
 			if(userDTO.getGender() != null){
-				user.setGender(userDTO.getGender());
-			}
-			if(userDTO.getFirstName() !=null && !userDTO.getFirstName().isEmpty()){
-				user.setFirstName(userDTO.getFirstName());
-			}
-			if(userDTO.getLastName()!=null && !userDTO.getLastName().isEmpty()){
-				user.setLastName(userDTO.getLastName());
+				user.setGender(userDTO.getGender().getGender());
 			}
 		}
-		if(userDTO.getFirstName() !=null && !userDTO.getFirstName().isEmpty()){
-			user.setFirstName(userDTO.getFirstName());
-		}
-		if(userDTO.getLastName()!=null && !userDTO.getLastName().isEmpty()){
-			user.setLastName(userDTO.getLastName());
-		}if(userDTO.getId()!=null){
-			user.setId(userDTO.getId().toString());
-		}
-		/*if(userDTO.getRole()!=null && !userDTO.getRole().isEmpty()){
-						user.setUserRole(commonUtil.getLocaleValue(roleDTO.getName().getDisplays(),locale));	
-		}*/
 		return user;
 	}
 
@@ -99,12 +91,12 @@ public class LoginTranslator extends BaseTranslator {
 		if(user.getLastName() != null && !user.getLastName().isEmpty()){
 			userDTO.setLastName(user.getLastName());
 		}
-		if(user.getDateOfBirth() != null && !user.getDateOfBirth().isEmpty()){
+		/*if(user.getDateOfBirth() != null && !user.getDateOfBirth().isEmpty()){
 			userDTO.setDateOfBirth(user.getDateOfBirth());
 		}
 		if(user.getGender() != null && !user.getGender().isEmpty()){
 			userDTO.setGender(user.getGender());
-		}
+		}*/
 	/*	if(user.getOrgId() != null && !user.getOrgId().isEmpty()){
 			userDTO.setOrgId(UUID.fromString(user.getOrgId()));
 		}*/
