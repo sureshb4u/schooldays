@@ -2,7 +2,7 @@ package com.vernal.is.dto;
 
 public class CommunityDTO {
 	private Integer id;
-	private String name;
+	private String community;
 	
 	public Integer getId() {
 		return id;
@@ -10,11 +10,11 @@ public class CommunityDTO {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getCommunity() {
+		return community;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setCommunity(String community) {
+		this.community = community;
 	}
 	
 	

@@ -47,8 +47,6 @@ public class UserController extends BaseController{
 		Organization result = null;
 		String organizationId = null;
 		try{
-			//  String orgMnemonic = baseService.getOrganizationId();
-			  //organizationId = baseService.getOrganizationId(orgMnemonic, session);	
 			  result = userService.getStaffsList(organizationId,session);
 		}catch(Exception ex){
 			System.out.println("errrorrrrrrrr0");

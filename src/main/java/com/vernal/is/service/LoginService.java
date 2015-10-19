@@ -38,21 +38,19 @@ public class LoginService extends BaseService{
 	 * @return user A not null {@link User}
 	 * @throws Exception 
 	 */
-	public User userAuthentication(String userName,String secret, HttpSession session, String locale, HttpServletRequest request) throws IOException {	
+	public User userAuthentication(String userName, String secret, HttpSession session, String locale, HttpServletRequest request) throws IOException {	
 		User user= new User();
 		UserDTO userDTO = new UserDTO();
 		UserAuthenticationDTO userAuthenticationDTO = loginTranslator.translateToUserAuthenticationDTO(userName, secret);
 		String postString = gson.toJson(userAuthenticationDTO);
-		System.out.println("postString>>>>>>>>>>."+postString);
+
 		try {
 			HttpEntity<String> entity = preparePost(postString, session);
-			// This will authenticate the user
-			ResponseEntity<Object> response = restTemplate.exchange("http://180.215.113.236:8080/services/users/authenticate", 
+			ResponseEntity<Object> response = restTemplate.exchange(getAPIBaseURL()+"/users/authentication", 
 							HttpMethod.POST, entity, Object.class);
-			
-			userDTO = loginTranslator.convertToUserDTO(userDTO);
+			System.out.println("response.getBody()>>>>>>>>>"+gson.toJson(response.getBody()));
+			userDTO = loginTranslator.convertToUserDTO(response.getBody());
 			user = loginTranslator.translateToUser(userDTO, locale);
-			System.out.println("user>>>>>>>>>>>>"+gson.toJson(user));
 		}catch (IOException e) {
 			throw e;
 		}catch (JsonSyntaxException e) {

@@ -1,10 +1,18 @@
 package com.vernal.is.controller;
 
-import org.apache.http.client.methods.HttpGet;
-import org.springframework.beans.BeanUtils;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,44 +20,78 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.vernal.is.dao.UserDAO;
+import com.vernal.is.backservice.UsersService;
 import com.vernal.is.dto.ResponseBean;
 import com.vernal.is.dto.UserAuthenticationDTO;
 import com.vernal.is.dto.UserDTO;
-import com.vernal.is.model.UserList;
 import com.vernal.is.util.CommonConstants;
 
 @Controller
 @RequestMapping("/users")
 public class UsersController {
-
+	
 	@Autowired
-	UserDAO userDAO;
-
+	UsersService userService;
+	
 	public static final Gson gson = new GsonBuilder().setDateFormat(CommonConstants.ISO_DATE_FORMAT).create();
 	
-	@RequestMapping(value = "/getUsersList", method = RequestMethod.GET)
+    @RequestMapping(value = "/authentication", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?>  Authentication(HttpEntity<String> entity) throws Exception {
+        UserDTO user = new UserDTO();
+        String postString = entity.getBody();
+        UserAuthenticationDTO userAuthenticationDTO = gson.fromJson(postString, UserAuthenticationDTO.class);
+        user = userService.aurthentication(userAuthenticationDTO);
+        System.out.println("user>>>>>>>"+gson.toJson(user));
+        return new ResponseEntity<UserDTO>(user, HttpStatus.OK);
+    }
+
+
+	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	@ResponseBody
-	public UserList getUsers() throws Exception {
+	public List<UserDTO> getUsers() throws Exception {
 		System.out.println("Get Users>>>>>>>>>>");
-		UserList userList = new UserList();
-		userList.setUsers(userDAO.getUsers());
-		return userList;
+		return userService.getUsers();
 	}
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/getUser/{userId}", method = RequestMethod.GET)
 	@ResponseBody
-	public Object getUsers1() throws Exception {
-		System.out.println("Get Users>>>>>>>>>>");
-		return "WELCOME";
+	public UserDTO getUser(@PathVariable Integer userId) throws Exception {
+		System.out.println("Get User>>>>>>>>>>");
+		return userService.getUser(userId);
 	}
 	
-		@RequestMapping(value = "addBills", method = RequestMethod.POST)
-		@ResponseBody
-		public ResponseBean addBills(@RequestBody UserAuthenticationDTO userAuthenticationDTO) throws Exception {
-			ResponseBean responseBean = new ResponseBean();
-		//	responseBean = userDAO.aurthentication(userAuthenticationDTO);
-			return responseBean;
-		}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	@ResponseBody
+	public Object saveUsers(@ModelAttribute("userForm") UserDTO user,
+            Map<String, Object> model) throws Exception {
+		System.out.println("saveUsers>>>>>>>>>>");
+		return "success";
+	}
+	@RequestMapping(value = "/{accessId}/addUser", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseBean addUsers(@PathVariable Integer accessId, @RequestBody UserDTO userDTO, HttpSession session) throws Exception {
+		ResponseBean responseBean = new ResponseBean();
+		responseBean = userService.insertUser(userDTO, accessId);
+		return responseBean;
 	}
 
+
+	@RequestMapping(value = "updateUser/{userId}", method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseBean updateBills(@PathVariable Integer userId, @RequestBody UserDTO userDTO, HttpSession session) throws Exception {
+		ResponseBean responseBean = new ResponseBean();
+		responseBean = userService.updateUser(userDTO, userId);
+		return responseBean;
+	}
+
+	@RequestMapping(value = "deleteBill/{userId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseBean deleteBill(@PathVariable Integer userId, HttpSession session) throws Exception {
+		ResponseBean responseBean = new ResponseBean();
+		responseBean = userService.deleteUser(userId, userId);
+		return responseBean;
+	}
+
+}

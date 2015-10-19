@@ -20,14 +20,13 @@ import org.springframework.web.client.HttpClientErrorException;
 import com.google.gson.JsonSyntaxException;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.model.Organization;
-import com.vernal.is.model.Student;
 import com.vernal.is.model.User;
 import com.vernal.is.translator.LoginTranslator;
 import com.vernal.is.translator.UserTranslator;
 import com.vernal.is.util.CommonConstants;
 
 /**
- * User : Lupna
+ * User : Vignesh2p
  * Date : 08/21/2015
  */
 @Component
@@ -67,20 +66,14 @@ public class UserService  extends BaseService{
 	 * @return
 	 * @throws IOException
 	 */
-	public List<User> getUsersList(Map<String, String> queryString,String organizationId, HttpSession session, String locale) throws IOException {
+	public List<User> getUsersList(Map<String, String> queryString, String organizationId, HttpSession session, String locale) throws IOException {
 		List<UserDTO> userDTOList = null;
 		List<User> userList = null;
-		String parameterList=null;
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
-			parameterList=translateQueryParams(queryString);
-			System.out.println("api---"+getAPIBaseURL() 
-							+ CommonConstants.ORGANIZATIONS_BASE_URL+ CommonConstants.SLASH+ organizationId +
-							CommonConstants.PERSONS_BASE_URL +"?"+parameterList.toString());
 			ResponseEntity<Object> response =
-							restTemplate.exchange("http://10.213.50.68:9000"
-							+ CommonConstants.ORGANIZATIONS_BASE_URL+ CommonConstants.SLASH+ organizationId +
-							CommonConstants.PERSONS_BASE_URL +"?"+parameterList.toString(),							
+							restTemplate.exchange(getAPIBaseURL()
+							+ CommonConstants.USERS_BASE_URL + CommonConstants.USERS_BASE_URL ,
 							HttpMethod.GET,requestEntity, Object.class);
 			userDTOList = userTranslator.translateToUserDTOList(response.getBody());
 			userList = userTranslator.translateToUserList(userDTOList, locale);

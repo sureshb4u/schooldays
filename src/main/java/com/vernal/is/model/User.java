@@ -3,7 +3,6 @@ package com.vernal.is.model;
 public class User extends Person{
 	private String id;
 	private String personId;
-	private String orgId;
 	private String sessionToken;
 	private String userName;
 	private String dateOfBirth;
@@ -52,10 +51,6 @@ public class User extends Person{
 	}
 	public void setPersonId(String personId) {
 		this.personId = personId;
-	}
-	
-	public void setOrgId(String orgId) {
-		this.orgId = orgId;
 	}
 	public String getSessionToken() {
 		return sessionToken;

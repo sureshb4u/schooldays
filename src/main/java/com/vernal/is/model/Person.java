@@ -46,6 +46,14 @@ public class Person {
     
     private String designation;
 
+    private String bioGraphy;
+    
+    public String getBioGraphy() {
+		return bioGraphy;
+	}
+	public void setBioGraphy(String bioGraphy) {
+		this.bioGraphy = bioGraphy;
+	}
 	public String getId() {
 		return id;
 	}
