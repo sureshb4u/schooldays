@@ -26,16 +26,16 @@ public class Person {
 
     private String type;
 
+    private String contact;
+    
     private String gender;
     
     private String _links;
     
     private List<Address> addresses;
     
-    private List<EmailAddress> emailAddresses;
+    private String emailAddresses;
    
-    private List<PhoneNumber> phoneNumbers;
-    
     private List<Role> roles;
     
     private List<Asset> assets;
@@ -47,6 +47,12 @@ public class Person {
     private String designation;
 
     private String bioGraphy;
+    
+    private String experience;
+    
+    private String dateOfJoining;
+    
+    private String fathersName;
     
     public String getBioGraphy() {
 		return bioGraphy;
@@ -139,35 +145,6 @@ public class Person {
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
 	}
-
-	/**
-	 * @return the emailAddresses
-	 */
-	public List<EmailAddress> getEmailAddresses() {
-		return emailAddresses;
-	}
-
-	/**
-	 * @param emailAddresses the emailAddresses to set
-	 */
-	public void setEmailAddresses(List<EmailAddress> emailAddresses) {
-		this.emailAddresses = emailAddresses;
-	}
-
-	/**
-	 * @return the phoneNumbers
-	 */
-	public List<PhoneNumber> getPhoneNumbers() {
-		return phoneNumbers;
-	}
-
-	/**
-	 * @param phoneNumbers the phoneNumbers to set
-	 */
-	public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
-		this.phoneNumbers = phoneNumbers;
-	}
-
 	/**
 	 * @return the roles
 	 */
@@ -236,6 +213,36 @@ public class Person {
 	 */
 	public void setDesignation(String designation) {
 		this.designation = designation;
+	}
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+	public String getEmailAddresses() {
+		return emailAddresses;
+	}
+	public void setEmailAddresses(String emailAddresses) {
+		this.emailAddresses = emailAddresses;
+	}
+	public String getExperience() {
+		return experience;
+	}
+	public void setExperience(String experience) {
+		this.experience = experience;
+	}
+	public String getDateOfJoining() {
+		return dateOfJoining;
+	}
+	public void setDateOfJoining(String dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
+	public String getFathersName() {
+		return fathersName;
+	}
+	public void setFathersName(String fathersName) {
+		this.fathersName = fathersName;
 	}
 	
 	
