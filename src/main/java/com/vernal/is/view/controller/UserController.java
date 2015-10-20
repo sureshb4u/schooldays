@@ -76,6 +76,13 @@ public class UserController extends BaseController{
 	@RequestMapping(value = "/createStaff", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?>  createStaff(@RequestBody User user, HttpSession session){
 		System.out.println("json>>>>>>>>>>>>"+gson.toJson(user));
+		String userId =(String) session.getAttribute("userId");
+		try {
+			Object obj = userService.createUser(user, userId, session);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	

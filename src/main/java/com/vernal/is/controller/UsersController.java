@@ -64,12 +64,12 @@ public class UsersController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public Object saveUsers(@ModelAttribute("userForm") UserDTO user,
+	public Object saveUsers(@ModelAttribute("user") UserDTO user,
             Map<String, Object> model) throws Exception {
 		System.out.println("saveUsers>>>>>>>>>>");
 		return "success";
 	}
-	@RequestMapping(value = "/{accessId}/addUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/{accessId}/createUser", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseBean addUsers(@PathVariable Integer accessId, @RequestBody UserDTO userDTO, HttpSession session) throws Exception {
 		ResponseBean responseBean = new ResponseBean();
