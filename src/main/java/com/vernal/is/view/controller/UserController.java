@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,8 +71,12 @@ public class UserController extends BaseController{
 			return new ResponseEntity<>(setCustomExceptionHandler(ex, MessageUtils.getMessage("error.getting.users")),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<List<User>>(userList,HttpStatus.OK);
+	}//
+	
+	@RequestMapping(value = "/createStaff", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?>  createStaff(@RequestBody User user, HttpSession session){
+		System.out.println("json>>>>>>>>>>>>"+gson.toJson(user));
+		return null;
 	}
-	
-	
 	
 }

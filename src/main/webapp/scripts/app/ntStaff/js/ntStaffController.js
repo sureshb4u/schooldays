@@ -8,7 +8,7 @@
  * Controller of the atrium
  */
   
-  vApp.controller('ntStaffController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','$controller', function($scope,$translate,restService,$translatePartialLoader,$log,$location,$timeout,$controller) {
+  vApp.controller('ntStaffController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','$controller','ntStaffservice', function($scope,$translate,restService,$translatePartialLoader,$log,$location,$timeout,$controller,ntStaffservice) {
 	  $translate.refresh();
 	    var tabs = [
 	                { title: 'Users', content: "scripts/app/worker/view/profile.html"},
@@ -42,9 +42,16 @@
 	                             { religion: 'Nicole',    email: 'nicole@email.com',    age: 43 },
 	                             { religion: 'Adrian',    email: 'adrian@email.com',    age: 21 }
 	                         ];
-		    var check = function(){
+		    
+		    $scope.nonTchngStaff = {};
+		   
+		    $scope.check = function(obj){
 		    	console.log('dsdf');
-		    	
+		    	ntStaffservice.createStaff(obj);
+		    };
+		    
+		    $scope.createNewStaff = function(obj){
+		    	console.log(JSON.stringify(obj));
 		    };
 		    
 		    $scope.tabNavigation=function(tabLabel){
