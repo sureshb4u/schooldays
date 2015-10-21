@@ -47,10 +47,12 @@ public class UsersController {
     }
 
 
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@RequestMapping(value = "/users", method = RequestMethod.GET )
 	@ResponseBody
-	public List<UserDTO> getUsers() throws Exception {
+	public List<UserDTO> getUsers(HttpEntity<String> entity, HttpSession session)  {
 		System.out.println("Get Users>>>>>>>>>>");
+		System.out.println(entity.getHeaders());
+		System.out.println(session.getAttribute(CommonConstants.SESSION_USER_ID));
 		return userService.getUsers();
 	}
 	
@@ -64,17 +66,26 @@ public class UsersController {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
-	public Object saveUsers(@ModelAttribute("userForm") UserDTO user,
+	public Object saveUsers(@ModelAttribute("user") UserDTO user,
             Map<String, Object> model) throws Exception {
 		System.out.println("saveUsers>>>>>>>>>>");
 		return "success";
 	}
-	@RequestMapping(value = "/{accessId}/addUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/{accessId}/createUser", headers="Accept=*/*", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseBean addUsers(@PathVariable Integer accessId, @RequestBody UserDTO userDTO, HttpSession session) throws Exception {
-		ResponseBean responseBean = new ResponseBean();
-		responseBean = userService.insertUser(userDTO, accessId);
-		return responseBean;
+	public ResponseEntity<?> addUsers( @PathVariable(value ="accessId") String accessId, HttpEntity<String> entity) throws Exception {
+		 String postString = entity.getBody();
+		
+	        UserDTO userDTO = gson.fromJson(postString, UserDTO.class);
+	       System.out.println("userDTO>>>>>dfsf>>>>>>>>>."+gson.toJson(userDTO));
+		Integer userid = null ;
+		if(accessId != null && !accessId.isEmpty()){
+			System.out.println("accessId>>>>>>>"+accessId);
+			 userid = Integer.valueOf(accessId);
+			 userService.insertUser(userDTO, userid);
+		}
+		
+		return new ResponseEntity<String>("SUCESS", HttpStatus.OK);
 	}
 
 

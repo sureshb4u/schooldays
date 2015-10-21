@@ -1,6 +1,7 @@
 package com.vernal.is.service;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import com.vernal.is.dto.UserAuthenticationDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.model.User;
 import com.vernal.is.translator.LoginTranslator;
+import com.vernal.is.translator.UserTranslator;
 import com.vernal.is.util.CommonConstants;
 
 @Component
@@ -30,15 +32,18 @@ public class LoginService extends BaseService{
 	@Resource
 	LoginTranslator loginTranslator;
 	
+	@Resource
+	UserTranslator userTranslator;
 	/***
 	 * Authenticates the User from API.
 	 * @param userName The String value of UserName (cannot be null).
 	 * @param secret The String value of secret (cannot be null).
 	 * @param session The HttpSession.
 	 * @return user A not null {@link User}
+	 * @throws ParseException 
 	 * @throws Exception 
 	 */
-	public User userAuthentication(String userName, String secret, HttpSession session, String locale, HttpServletRequest request) throws IOException {	
+	public User userAuthentication(String userName, String secret, HttpSession session, String locale, HttpServletRequest request) throws IOException, ParseException {	
 		User user= new User();
 		UserDTO userDTO = new UserDTO();
 		UserAuthenticationDTO userAuthenticationDTO = loginTranslator.translateToUserAuthenticationDTO(userName, secret);
@@ -50,7 +55,7 @@ public class LoginService extends BaseService{
 							HttpMethod.POST, entity, Object.class);
 			System.out.println("response.getBody()>>>>>>>>>"+gson.toJson(response.getBody()));
 			userDTO = loginTranslator.convertToUserDTO(response.getBody());
-			user = loginTranslator.translateToUser(userDTO, locale);
+			user = userTranslator.translateToUser(userDTO, locale);
 		}catch (IOException e) {
 			throw e;
 		}catch (JsonSyntaxException e) {

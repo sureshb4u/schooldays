@@ -3,6 +3,7 @@
  */
 package com.vernal.is.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,8 +12,7 @@ import java.util.UUID;
  *
  */
 public class Person {
-
-	private String id;
+	private Integer id;
 	 
     private String firstName;
 
@@ -26,16 +26,15 @@ public class Person {
 
     private String type;
 
+    private String contact;
+    
     private String gender;
     
     private String _links;
     
-    private List<Address> addresses;
-    
-    private List<EmailAddress> emailAddresses;
+    private String addresses;
+    private String  emailAddresses;
    
-    private List<PhoneNumber> phoneNumbers;
-    
     private List<Role> roles;
     
     private List<Asset> assets;
@@ -48,17 +47,26 @@ public class Person {
 
     private String bioGraphy;
     
-    public String getBioGraphy() {
+    private Integer experience;
+    
+    private String dateOfJoining;
+    
+    private String fatherName;
+    
+   
+	public String getBioGraphy() {
 		return bioGraphy;
 	}
+
 	public void setBioGraphy(String bioGraphy) {
 		this.bioGraphy = bioGraphy;
 	}
-	public String getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -126,46 +134,13 @@ public class Person {
 		this._links = _links;
 	}
 
-	/**
-	 * @return the addresses
-	 */
-	public List<Address> getAddresses() {
+	
+	public String getAddresses() {
 		return addresses;
 	}
 
-	/**
-	 * @param addresses the addresses to set
-	 */
-	public void setAddresses(List<Address> addresses) {
+	public void setAddresses(String addresses) {
 		this.addresses = addresses;
-	}
-
-	/**
-	 * @return the emailAddresses
-	 */
-	public List<EmailAddress> getEmailAddresses() {
-		return emailAddresses;
-	}
-
-	/**
-	 * @param emailAddresses the emailAddresses to set
-	 */
-	public void setEmailAddresses(List<EmailAddress> emailAddresses) {
-		this.emailAddresses = emailAddresses;
-	}
-
-	/**
-	 * @return the phoneNumbers
-	 */
-	public List<PhoneNumber> getPhoneNumbers() {
-		return phoneNumbers;
-	}
-
-	/**
-	 * @param phoneNumbers the phoneNumbers to set
-	 */
-	public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
-		this.phoneNumbers = phoneNumbers;
 	}
 
 	/**
@@ -236,6 +211,38 @@ public class Person {
 	 */
 	public void setDesignation(String designation) {
 		this.designation = designation;
+	}
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+	public String getEmailAddresses() {
+		return emailAddresses;
+	}
+	public void setEmailAddresses(String emailAddresses) {
+		this.emailAddresses = emailAddresses;
+	}
+	public Integer getExperience() {
+		return experience;
+	}
+
+	public void setExperience(Integer experience) {
+		this.experience = experience;
+	}
+
+	public String getDateOfJoining() {
+		return dateOfJoining;
+	}
+	public void setDateOfJoining(String dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
+	public String getFatherName() {
+		return fatherName;
+	}
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
 	}
 	
 	

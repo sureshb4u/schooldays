@@ -10,7 +10,8 @@ public class CommonConstants {
 	
 	public static final String LOCALE_EN_US="en-US";
 	public static final String ISO_DATE_FORMAT="yyyy-MM-dd'T'HH:mm:ssZ";
-	
+	public static final String DATE_FORMAT="yyyy-dd-MM";
+	public static final String DATE_DD_MMMM_YYYY = "dd MMMM, yyyy";
 	//Login variable
 	public static final String LOGIN_PAGE = "index";
 	
@@ -23,7 +24,7 @@ public class CommonConstants {
 	
 	//Session variable
 	public static final String SESSION_PERSON_ID="_pId";
-	public static final String SESSION_USER_ID = "_uid";
+	public static final String SESSION_USER_ID = "userId";
 	public static final String SESSION_FIRSTNAME="_fn";
 	public static final String SESSION_LASTNAME="_ln";
 	public static final String SESSION_USERROLE="_rn";
@@ -51,5 +52,7 @@ public class CommonConstants {
 	// email body
 	public static final String FOOTER = "There you go.. You got an account in schooldays.. Let's understand details on how schooldays works, if"
 			+ "you have any further doubts fee free to contact us -- By Support Team";
+	public static final String CREATE_USERS_BASEURL = "/createUser";
+	public static final String SESSION_EMAILADDRESS = "emailAddress";
 	
 }
