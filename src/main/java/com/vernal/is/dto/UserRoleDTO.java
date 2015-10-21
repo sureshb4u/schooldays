@@ -25,7 +25,6 @@ public class UserRoleDTO extends BaseDTO{
 		return privileges;
 	}
 	
-	
 	public Integer getId() {
 		return id;
 	}

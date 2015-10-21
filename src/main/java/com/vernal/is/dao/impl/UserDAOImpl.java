@@ -19,6 +19,7 @@ import com.vernal.is.dto.UserAuthenticationDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.mapper.SessionMapper;
 import com.vernal.is.mapper.UserListRowMapper;
+import com.vernal.is.mapper.UserRowMapper;
 import com.vernal.is.util.CommonConstants;
 import com.vernal.is.util.CommonUtil;
 
@@ -292,9 +293,9 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				+ " WHERE A.ID= ? and A.IS_DELETED = 0";
 		try{
 		 Object inputs = new Object[] {userId};
-		// UserDTO user =  getJdbcTemplate().queryForObject(
-           //     GET_USER, inputs,new UserRowMapper());
-	
+	//	  UserDTO user =  getJdbcTemplate().query(
+      //            GET_USER, inputs,new UserRowMapper());
+		return null;
 		}
 		catch (Exception e){
 			 responseBean.setStatus("FAILED");

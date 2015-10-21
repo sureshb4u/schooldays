@@ -52,6 +52,9 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<bean id="CommonDAO" class="com.vernal.is.dao.impl.CommonDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
 		<!-- <property name="messageConverters">

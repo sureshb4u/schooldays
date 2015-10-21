@@ -45,9 +45,9 @@
 		    
 		    $scope.nonTchngStaff = {};
 		   
-		    $scope.check = function(obj){
-		    	console.log('dsdf');
-		    	ntStaffservice.createStaff(obj);
+		    $scope.check = function(){
+		    	console.log($scope.nonTchngStaff);
+		    	ntStaffservice.createStaff($scope.nonTchngStaff);
 		    };
 		    
 		    $scope.createNewStaff = function(obj){
@@ -64,7 +64,6 @@
 		    		$scope.template={
 							     "pageView":"scripts/app/ntStaff/view/"+type+".html",
 							   };  
-					   angular.element(".org-details-title .dropdown").show();
 				};
 				 $scope.viewTemplate = function(type1,type2){
 			    		$scope.template1={
@@ -77,7 +76,20 @@
 				$scope.clientView=function(){
 					$scope.mainTemplate("clientAtriumUserView");
 				}
-	} ]);
+	
+				$scope.nonTeachingStaff = function() {
+					console.log("INSIDE CONTRLLER----------------"); 
+					$scope.loader = true;
+			          var data = ntStaffservice.getStaffList();
+					  data.then(function(success){						 
+						  $scope.staffList = success;
+						  setTimeout(function(){
+							  $scope.loader = false;
+						  },1000);
+					  });
+				  }
+	
+  } ]);
  })(); 
 
 vApp.directive('autoComplete',['$http','restService','clientService',function($http,restService,clientService){

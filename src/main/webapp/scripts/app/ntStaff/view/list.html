@@ -1,11 +1,11 @@
- <div>
-	<ul class="collection grey-text m0" ng-init="loadNTStaffList();">
-	    <li class="collection-item avatar" ng-repeat="lists in ntStaffList.staffList">
+ <div ng-init="nonTeachingStaff();">
+	<ul class="collection grey-text m0" >
+	    <li class="collection-item avatar" ng-repeat="lists in staffList">
 	    <div flex-container="row">
 	    	  <div flex="10">
 		      <img src="/assets/images/vernalis_home_logo.png" alt="" class="circle">
 		      </div>
-		      <div flex="60">
+		      <div flex="60" >
 		      <span class="black-text fs-subhead">{{lists.firstName}} </span><br>
 		      <span class="black-text">  ID : {{lists.id}}  </span><br>
 		      <span class="black-text">DOB: {{lists.dateOfBirth}} </span><br>
@@ -14,7 +14,6 @@
 	      </div>
 	    </li>
   </ul>
-</div>
 </div>
 
  
