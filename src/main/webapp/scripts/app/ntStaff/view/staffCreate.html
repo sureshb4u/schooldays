@@ -26,12 +26,12 @@
 	 	 		<div layout-margin layout-padding flex-container="row">
 						<div flex="50" class="fs-subhead black-text">
 						 	<md-input-container > <label>First Name</label>
-	          					<input ng-model="nonTchngStaff.firstName">
+	          					<input ng-model="nonTchngStaff.firstName" required>
 	        				</md-input-container> 
 						</div>	 	 		
 	 	 				<div flex="50" class="fs-subhead black-text">
 						 	<md-input-container> <label>Last Name</label>
-	          					<input ng-model="nonTchngStaff.lastName" >
+	          					<input ng-model="nonTchngStaff.lastName" required>
 	        				</md-input-container> 
 						</div>	
 						<!-- <div flex="20" class="fs-subhead black-text">
@@ -42,29 +42,39 @@
 	 	 			<div flex="50"  class="fs-subhead black-text">
 	 	 					<md-input-container>
 	      						<label>Date of Birth</label>
-						 		<input type="text" pick-a-date="dateOfBirth" ng-model="nonTchngStaff.dateOfBirth" md-placeholder="Enter your date"></md-datepicker>
+						 		<input type="text" pick-a-date="dateOfBirth" ng-model="nonTchngStaff.dateOfBirth" md-placeholder="Enter your date" required></md-datepicker>
 	      				</md-input-container>
 	 	 					
 	 	 			</div>
+	 	 			
 	 	 			<div  flex="50"  class="fs-subhead black-text">
-		 	 				<md-input-container >
-	 	 						 <label>Contact</label>
-	          					<input ng-model="nonTchngStaff.contacts">
-	        				</md-input-container> 
-		 	 		
+		 	 			<label> Gender </label>
+		 	 			<br>
+		 	 			<div class="radio-group">
+ 						   	<div class="radio-button">
+        						<input type="radio" id="male" name="gender" value="male" ng-model="nonTchngStaff.gender" class="radio-button__input">
+        						<label for="male" class="radio-button__label">Male</label>
+    					   	</div>
+
+    						<div class="radio-button">
+        						<input type="radio" id="female" name="gender" value="female" ng-model="nonTchngStaff.gender" class="radio-button__input">
+        						<label for="female" class="radio-button__label">Female</label>
+   	 						</div>
+						</div>
+ 		
 		 	 		 </div>
    				</div>
    				<div layout-margin layout-padding flex-container="row">
    					<div  flex="50"  class="fs-subhead black-text">
    						<md-input-container >
 	      					<label>Email</label>
-	      					<input ng-model="nonTchngStaff.emailAddresses" type="email">
+	      					<input ng-model="nonTchngStaff.emailAddresses" type="emailAddresses" required>
 	   					 </md-input-container>
    					</div>
 	   				<div  flex="50"  class="fs-subhead black-text">
 	   					<md-input-container>
 	      				 	 <label>Address</label>
-	       					 <textarea ng-model="nonTchngStaff.address" columns="1" md-maxlength="150" ></textarea>
+	       					 <textarea ng-model="nonTchngStaff.addresses" columns="1" md-maxlength="150" ></textarea>
 	      				</md-input-container>
 	   				</div>
    				</div>
@@ -80,31 +90,26 @@
    							<md-input-container >
 	      				 	 <label>Experience</label>
 	       					 <input ng-model="nonTchngStaff.experience" ></input>
-	      				</md-input-container>
-	      				
+	      				</md-input-container>	      				
 	 				</div>		
-	 	
 	 	</div>
 	 		<div layout-margin layout-padding flex-container="row">
    					<div  flex="50"  class="fs-subhead black-text">
-   							<md-input-container >
+   						<md-input-container >
 	      				 	 <label>Date of Joining</label>
-	       					 <input type="text" pick-a-date="dateOfJoinig" ng-model="nonTchngStaff.dateOfJoining"></input>
-	      				</md-input-container>
-	   				
+	       					 <input type="text" pick-a-date="dateOfJoinig" ng-model="nonTchngStaff.dateOfJoining" required></input>
+	      				</md-input-container>			
 	 				</div>
-	 		<div  flex="50"  class="fs-subhead black-text">
+	 				<div  flex="50"  class="fs-subhead black-text">
    							<md-input-container >
 	      				 	 <label>FatherName</label>
 	       					 <input ng-model="nonTchngStaff.fatherName" ></input>
 	      				</md-input-container>
 	 				</div>
-	 	
-	 	
-	 	</div>
+	 		</div>
 	 		<div layout-margin layout-padding flex-container="row">
    					<div  flex="50"  class="fs-subhead black-text">
-   							 <lx-select ng-model="nonTchngStaff.community" placeholder="Community" choices="community" floating-label>
+   							 <lx-select ng-model="nonTchngStaff.community" placeholder="Community" choices="community" floating-label required>
             					<lx-select-selected>
                						 {{ $selected.name + ' ' + $selected.age }}
            						 </lx-select-selected>
@@ -118,7 +123,7 @@
 	      				</md-input-container> -->
 	 				</div>
 	 		<div  flex="50"  class="fs-subhead black-text" ng-init="check();">
-   							<lx-select ng-model="nonTchngStaff.religion" placeholder="Religion" choices="religion" floating-label>
+   							<lx-select ng-model="nonTchngStaff.religion" placeholder="Religion" choices="religion" floating-label required>
             					<lx-select-selected>
                						 {{ $selected.religion + ' ' + $selected.age }}
            						 </lx-select-selected>
@@ -134,7 +139,14 @@
 	 				</div>
 	 	
 	 	</div>
-	 	
-	 	
+	 		<div layout-margin layout-padding flex-container="row">
+   				<div  flex="50"  class="fs-subhead black-text">
+	 				<md-input-container >
+	 	 				 <label>Contact</label>
+	          				<input ng-model="nonTchngStaff.contacts">
+	     			</md-input-container> 
+	 			</div>
+	 		</div>	
 	</div>
+</div>
 </div>
