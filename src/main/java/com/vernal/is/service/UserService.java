@@ -54,6 +54,7 @@ public class UserService  extends BaseService {
 		List<User> userList = null;
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
+			
 			ResponseEntity<Object> response =
 							restTemplate.exchange(getAPIBaseURL()
 							+ CommonConstants.USERS_BASE_URL + CommonConstants.USERS_BASE_URL ,

@@ -10,6 +10,7 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
@@ -109,6 +110,11 @@ public class CommonUtil {
 			return dateStr;
 	}
 	
+	
+	
+	public  String stringFeilds(String str){
+		return "'"+str+"'";
+	}
 	/**
 	 * 
 	 * @param strDate
@@ -120,11 +126,15 @@ public class CommonUtil {
 	public Date formatgivenStringToDate(String strDate, String fromFormat, String toFormat) throws ParseException{
 		SimpleDateFormat formatter = new SimpleDateFormat(fromFormat);
 		try {
+			Calendar cal = Calendar.getInstance();
 			Date date = formatter.parse(strDate);
+			System.out.println(date);
 			SimpleDateFormat formatter2 = new SimpleDateFormat(toFormat);
 			String dateStr = formatter2.format(date);
+			System.out.println("dateStr>>>>>>>>"+dateStr);
 			Date dateToFormat = formatter2.parse(dateStr);
-			return dateToFormat;
+			System.out.println("dateToFormat>>>"+dateToFormat);
+			return new Date();
 		} catch (ParseException e) {
 			LOGGER.error("Exception in formatDateTogiven{} ", e.getMessage());
 			throw e;

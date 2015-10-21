@@ -4,16 +4,22 @@
 package com.vernal.is.translator;
 
 import java.lang.reflect.Type;
+import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+
 import com.google.gson.reflect.TypeToken;
+import com.vernal.is.dto.GenderDTO;
 import com.vernal.is.dto.UserDTO;
+import com.vernal.is.dto.UserRoleDTO;
 import com.vernal.is.model.User;
 import com.vernal.is.util.CommonConstants;
 
@@ -78,7 +84,7 @@ public class UserTranslator extends BaseTranslator{
 			BeanUtils.copyProperties(userDTO, user);
 			user.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
 			if(userDTO.getDateOfBirth()!=null){
-				user.setDateOfBirth(commonUtil.formatDateTogiven(userDTO.getDateOfBirth(), CommonConstants.DATE_DD_MMMM_YYYY));
+				user.setDateOfBirth(commonUtil.formatDateTogiven( userDTO.getDateOfBirth(), CommonConstants.DATE_DD_MMMM_YYYY));
 			}
 			if(userDTO.getDateOfJoining()!=null){
 				user.setDateOfJoining(commonUtil.formatDateTogiven(userDTO.getDateOfJoining(), CommonConstants.DATE_DD_MMMM_YYYY));
@@ -102,11 +108,19 @@ public class UserTranslator extends BaseTranslator{
 			userDTO = new UserDTO();
 			BeanUtils.copyProperties(user, userDTO);
 			if(user.getDateOfBirth() != null){
+				System.out.println("user.getDateOfBirth()>>>>>>."+user.getDateOfBirth());
 				userDTO.setDateOfBirth(commonUtil.formatgivenStringToDate(user.getDateOfBirth() , CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT));
+				System.out.println(">>>>>>>>>>"+userDTO.getDateOfBirth());
 			}
 			if(user.getDateOfJoining() != null){
 				userDTO.setDateOfJoining(commonUtil.formatgivenStringToDate(user.getDateOfJoining() , CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT));
 			}
+			UserRoleDTO userRole = new UserRoleDTO();
+			userRole.setId(3);
+			userDTO.setRoles(userRole);
+			GenderDTO gender = new GenderDTO();
+			gender.setId(1);
+			userDTO.setGender(gender);
 		}
 		return userDTO;
 	}

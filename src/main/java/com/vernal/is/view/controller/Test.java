@@ -22,7 +22,9 @@ public class Test {
 		
 	}
 	
-	
+	public static String stringFeilds(String str){
+		return "'"+str+"'";
+	}
 	public static void dateFormatter() throws ParseException{
 		CommonUtil common = new CommonUtil();
 		Date d = common.formatgivenStringToDate("21 October, 2015", CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT);
