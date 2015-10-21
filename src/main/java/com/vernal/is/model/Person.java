@@ -3,6 +3,7 @@
  */
 package com.vernal.is.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,8 +12,7 @@ import java.util.UUID;
  *
  */
 public class Person {
-
-	private String id;
+	private Integer id;
 	 
     private String firstName;
 
@@ -32,9 +32,8 @@ public class Person {
     
     private String _links;
     
-    private List<Address> addresses;
-    
-    private String emailAddresses;
+    private String addresses;
+    private String  emailAddresses;
    
     private List<Role> roles;
     
@@ -48,23 +47,26 @@ public class Person {
 
     private String bioGraphy;
     
-    private String experience;
+    private Integer experience;
     
     private String dateOfJoining;
     
-    private String fathersName;
+    private String fatherName;
     
-    public String getBioGraphy() {
+   
+	public String getBioGraphy() {
 		return bioGraphy;
 	}
+
 	public void setBioGraphy(String bioGraphy) {
 		this.bioGraphy = bioGraphy;
 	}
-	public String getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -132,19 +134,15 @@ public class Person {
 		this._links = _links;
 	}
 
-	/**
-	 * @return the addresses
-	 */
-	public List<Address> getAddresses() {
+	
+	public String getAddresses() {
 		return addresses;
 	}
 
-	/**
-	 * @param addresses the addresses to set
-	 */
-	public void setAddresses(List<Address> addresses) {
+	public void setAddresses(String addresses) {
 		this.addresses = addresses;
 	}
+
 	/**
 	 * @return the roles
 	 */
@@ -226,23 +224,25 @@ public class Person {
 	public void setEmailAddresses(String emailAddresses) {
 		this.emailAddresses = emailAddresses;
 	}
-	public String getExperience() {
+	public Integer getExperience() {
 		return experience;
 	}
-	public void setExperience(String experience) {
+
+	public void setExperience(Integer experience) {
 		this.experience = experience;
 	}
+
 	public String getDateOfJoining() {
 		return dateOfJoining;
 	}
 	public void setDateOfJoining(String dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
-	public String getFathersName() {
-		return fathersName;
+	public String getFatherName() {
+		return fatherName;
 	}
-	public void setFathersName(String fathersName) {
-		this.fathersName = fathersName;
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
 	}
 	
 	

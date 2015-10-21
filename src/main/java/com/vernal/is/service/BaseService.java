@@ -88,8 +88,9 @@ public class BaseService {
 	public HttpHeaders prepareHeader(HttpSession session) throws  IOException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json");
-		headers.add("Accept", "application/x-gzip");
-		headers.add("Authorization", getAuthorizationHeader());
+	//	headers.add("Accept", "application/x-gzip");
+	//	headers.add("Authorization", getAuthorizationHeader());
+		headers.add(CommonConstants.SESSION_USER_ID, (String) session.getAttribute(CommonConstants.SESSION_USER_ID));
 		if(session.getAttribute(CommonConstants.SESSION_TOKEN) != null && session.getAttribute(CommonConstants.SESSION_ORG_ID) != null){
 			headers.add(CommonConstants.X_AUTH_TOKEN, session.getAttribute(CommonConstants.SESSION_TOKEN).toString());
 			headers.add(CommonConstants.XORG_ID, session.getAttribute(CommonConstants.SESSION_ORG_ID).toString());

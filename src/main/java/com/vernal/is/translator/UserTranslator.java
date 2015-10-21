@@ -3,29 +3,21 @@
  */
 package com.vernal.is.translator;
 
-import java.awt.color.CMMException;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-
 import com.google.gson.reflect.TypeToken;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.model.User;
 import com.vernal.is.util.CommonConstants;
 
-/**
- * @author bashelu
- *
- */
+
 @Component
 public class UserTranslator extends BaseTranslator{
 	
@@ -59,14 +51,14 @@ public class UserTranslator extends BaseTranslator{
      * @param userDTOList
      * @param locale
      * @return
+     * @throws ParseException 
      */
-    public List<User> translateToUserList(List<UserDTO> userDTOList, String locale){
+    public List<User> translateToUserList(List<UserDTO> userDTOList, String locale) throws ParseException{
     	LOGGER.debug("Translating UserDTO List to User List");
 		List<User> userList = new ArrayList<User>(); 
 		if(userDTOList != null && !userDTOList.isEmpty()){
 			for(UserDTO userDTO : userDTOList){
-				User user = translateToUser(userDTO, locale);
-				userList.add(user);
+				userList.add(translateToUser(userDTO, locale));
 			}
 		}
 		return userList;
@@ -77,24 +69,22 @@ public class UserTranslator extends BaseTranslator{
 	 * @param userDTO
 	 * @param locale
 	 * @return user
+     * @throws ParseException 
 	 */
-	public User translateToUser(UserDTO userDTO, String locale){
+	public User translateToUser(UserDTO userDTO, String locale) throws ParseException{
 		LOGGER.info("Converting UserDTO model to User");
 		User user= new User();
 		if(userDTO != null){
 			BeanUtils.copyProperties(userDTO, user);
-			
-			if(userDTO.getLastName()!=null && !userDTO.getLastName().isEmpty() && userDTO.getFirstName() !=null && !userDTO.getFirstName().isEmpty() ){
-				user.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
-			}
-			if(userDTO.getId()!=null){
-				user.setId(userDTO.getId().toString());
-			}
+			user.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
 			if(userDTO.getDateOfBirth()!=null){
-				user.setDateOfBirth(userDTO.getDateOfBirth().toString());
+				user.setDateOfBirth(commonUtil.formatDateTogiven(userDTO.getDateOfBirth(), CommonConstants.DATE_DD_MMMM_YYYY));
+			}
+			if(userDTO.getDateOfJoining()!=null){
+				user.setDateOfJoining(commonUtil.formatDateTogiven(userDTO.getDateOfJoining(), CommonConstants.DATE_DD_MMMM_YYYY));
 			}
 			if(userDTO.getGender() != null){
-				user.setGender(userDTO.getGender().getGender());
+			//	user.setGender(userDTO.getGender().getGender());
 			}
 		}
 		return user;

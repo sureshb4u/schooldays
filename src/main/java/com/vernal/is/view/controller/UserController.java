@@ -44,34 +44,19 @@ public class UserController extends BaseController{
 	@Resource
 	BaseService baseService;
 	
-	@RequestMapping(value = "/getStaffsList",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?>  getStaffsList(HttpSession session){
-		Organization result = null;
-		String organizationId = null;
-		try{
-			  result = userService.getStaffsList(organizationId,session);
-		}catch(Exception ex){
-			System.out.println("errrorrrrrrrr0");
-			return new ResponseEntity<>(baseController.setResponse(MessageUtils.getMessage("error.create.user"),
-					HttpStatus.INTERNAL_SERVER_ERROR.toString()),HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<>(result,HttpStatus.OK);
-	}
+	
 
-	@RequestMapping(value = "/{orgId}/users",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getClientsList(@PathVariable(value = "orgId")String organizationId,
-			@RequestParam(value = "typeKey", required=false)String typeKey,HttpSession session)throws IOException {
+	@RequestMapping(value = "/staffs",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getStaffsList(HttpSession session) throws IOException {
 		 List<User> userList = null;
 		 Map<String, String> queryString = new TreeMap<String, String>();
-		 if(typeKey !=null && !typeKey.isEmpty()){
-				queryString.put(CommonConstants.TYPE_KEY, typeKey);
-			}
 			try{
-			userList = userService.getUsersList(queryString,organizationId,session,locale);
+			userList = userService.getUsersList(queryString,"",session,locale);
 		}catch(Exception ex){
+			ex.printStackTrace();
 			return new ResponseEntity<>(setCustomExceptionHandler(ex, MessageUtils.getMessage("error.getting.users")),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<List<User>>(userList,HttpStatus.OK);
+		return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
 	}//
 	
 	@RequestMapping(value = "/createStaff", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -80,9 +65,9 @@ public class UserController extends BaseController{
 		String userId =(String) session.getAttribute("userId");
 		try {
 			Object obj = userService.createUser(user, "1", session);
-		} /*catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-		} */catch (ParseException e) {
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

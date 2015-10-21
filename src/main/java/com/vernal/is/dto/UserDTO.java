@@ -2,9 +2,12 @@ package com.vernal.is.dto;
 
 import java.util.Date;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.vernal.is.serializers.JsonDateSerializer;
 
 @JsonInclude(value=Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -75,7 +78,8 @@ public class UserDTO extends BaseDTO {
 	public void setFatherName(String fatherName) {
 		this.fatherName = fatherName;
 	}
-
+	
+	@JsonSerialize(using = JsonDateSerializer.class)
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -115,7 +119,8 @@ public class UserDTO extends BaseDTO {
 	public void setExperience(Integer experience) {
 		this.experience = experience;
 	}
-
+	
+	@JsonSerialize(using = JsonDateSerializer.class)
 	public Date getDateOfJoining() {
 		return dateOfJoining;
 	}

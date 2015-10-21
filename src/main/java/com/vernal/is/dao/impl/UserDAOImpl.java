@@ -3,9 +3,6 @@ package com.vernal.is.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -20,7 +17,6 @@ import com.vernal.is.dto.UserAuthenticationDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.mapper.SessionMapper;
 import com.vernal.is.mapper.UserListRowMapper;
-import com.vernal.is.mapper.UserRowMapper;
 import com.vernal.is.util.CommonConstants;
 
 public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO{
@@ -72,10 +68,11 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 	}
 
 	@Override
-	public ResponseBean insertUser(UserDTO user,Integer accessId) {
+	public ResponseBean insertUser(UserDTO user, Integer accessId) {
 		   ResponseBean responseBean = new ResponseBean();
+		   System.out.println("Insert............");
 		   String INSERT_USER = "INSERT INTO user(";
-				   if(user.getRoles().getId()!= null){
+				   if(user.getRoles() != null){
 					   INSERT_USER = INSERT_USER+ "`ID_ROLE`,";
 		   		     }
 				   if(user.getFirstName()!= null){
@@ -99,10 +96,10 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				   if(user.getDateOfJoining() !=null){
 					   INSERT_USER = INSERT_USER+ "`DATE_OF_JOINING`, ";
 					   }
-				   if(user.getDesignation().getId() !=null){
+				   if(user.getDesignation() !=null && user.getDesignation().getId()!= null){
 					   INSERT_USER = INSERT_USER+ "`ID_DESIGNATION`, ";
 					   }
-				   if(user.getGender().getId()!= null){
+				   if(user.getGender()!= null){
 				   INSERT_USER = INSERT_USER+ "`ID_GENDER`,";
 				   }
 				   if(user.getFatherName()!= null){
@@ -111,16 +108,16 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				   if(user.getAge() != null){
 				   INSERT_USER = INSERT_USER+ " `AGE`,";
 				   }
-				   if(user.getReligion().getId() != null){
+				   if(user.getReligion() != null){
 				   INSERT_USER = INSERT_USER+ "`ID_RELIGON`,";
 				   }
-				   if(user.getCommunity().getId() != null){
+				   if(user.getCommunity() != null){
 				   INSERT_USER = INSERT_USER+ "`ID_COMMUNITY`,";
 				   }
 				   INSERT_USER = INSERT_USER+ "`IS_DELETED`,`CREATED_ON`,`CREATED_BY`)";
 		   		
 				   INSERT_USER = INSERT_USER+ " VALUES (";
-				   if(user.getRoles().getId()!= null){
+				   if(user.getRoles() != null){
 					   INSERT_USER = INSERT_USER+ user.getRoles().getId()+",";
 		   		     }
 				   if(user.getFirstName()!= null){
@@ -132,7 +129,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				   if(user.getDateOfBirth()!=null){
 				   INSERT_USER = INSERT_USER+user.getDateOfBirth()+",";
 				   }
-				   if(user.getGender().getId()!= null){
+				   if(user.getGender()!= null){
 				   INSERT_USER = INSERT_USER+ user.getGender().getId()+",";
 				   }
 				   if(user.getFatherName()!= null){
@@ -141,21 +138,22 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				   if(user.getAge() != null){
 				   INSERT_USER = INSERT_USER+ user.getAge()+",";
 				   }
-				   if(user.getReligion().getId() != null){
+				   if(user.getReligion() != null){
 				   INSERT_USER = INSERT_USER+user.getReligion().getId()+",";
 				   }
-				   if(user.getCommunity().getId() != null){
+				   if(user.getCommunity() != null){
 				   INSERT_USER = INSERT_USER+user.getCommunity().getId()+",";
 				   }
 				   INSERT_USER = INSERT_USER+"0,NOW(),";
 				   INSERT_USER = INSERT_USER+ accessId;
 				   INSERT_USER = INSERT_USER+ ")";
+				   System.out.println("INSERT_USER>>>...."+INSERT_USER);
 		   try{
 			   KeyHolder keyHolder = new GeneratedKeyHolder();
 			   SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(
 					   user);
 			if(user != null)
-			   getNamedParameterJdbcTemplate().update(INSERT_USER, namedParameters, keyHolder );
+			getNamedParameterJdbcTemplate().update(INSERT_USER, namedParameters, keyHolder );
 			Number id = keyHolder.getKey();
 			System.out.println("id ------------>"+id);
 			if(id != null){
@@ -165,6 +163,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				
 			}
 		   }catch(Exception e){
+			   e.printStackTrace();
 			   responseBean.setStatus("FAILED");
 			   String eStr = e.getMessage();
 				responseBean.setMessage(eStr);
@@ -219,12 +218,15 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 		   if(user.getCommunity().getId() != null){
 		   UPDATE_USER = UPDATE_USER+ "`ID_COMMUNITY`="+user.getCommunity().getId();
 		   }
+		   
+		   System.out.println("UPDATE_USER>>>>>>>>>....."+UPDATE_USER);
 		   UPDATE_USER = UPDATE_USER+ "`UPDATED_BY` ="+accessId;
 		   UPDATE_USER = UPDATE_USER+ "WHERE ID="+user.getId();
 		   UPDATE_USER = UPDATE_USER+ "AND IS_DELETED = 0";
 		   try{
 			   SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(
 					   user);
+			   
 			if(user.getId() != null){
 			   getNamedParameterJdbcTemplate().update(UPDATE_USER, namedParameters );
 				responseBean.setStatus("SUCCESS");
@@ -270,16 +272,17 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				+ "INNER JOIN COMMUNITY C ON A.ID_COMMUNITY = C.ID"
 				+ " WHERE A.ID= ? and A.IS_DELETED = 0";
 		try{
-		 Object inputs = new Object[] {userId}
-		  UserDTO user =  getJdbcTemplate().queryForObject(
-                  GET_USER, inputs,new UserRowMapper());
-		return null;
+		 Object inputs = new Object[] {userId};
+		// UserDTO user =  getJdbcTemplate().queryForObject(
+           //     GET_USER, inputs,new UserRowMapper());
+	
 		}
 		catch (Exception e){
 			 responseBean.setStatus("FAILED");
 			   String eStr = e.getMessage();
 				responseBean.setMessage(eStr);
 		}
+		return null;
 	}
 
 }

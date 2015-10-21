@@ -58,16 +58,24 @@ public class UserService  extends BaseService {
 							restTemplate.exchange(getAPIBaseURL()
 							+ CommonConstants.USERS_BASE_URL + CommonConstants.USERS_BASE_URL ,
 							HttpMethod.GET, requestEntity, Object.class);
+			System.out.println("response.getBody()>>>>>>>"+gson.toJson(response.getBody()));
 			userDTOList = userTranslator.translateToUserDTOList(response.getBody());
 			userList = userTranslator.translateToUserList(userDTOList, locale);
-			return userList;
 		}catch (IOException e) {
+			e.printStackTrace();
 			throw e;
 		}catch (JsonSyntaxException e) {
+			e.printStackTrace();
 			throw e;
 		}catch (HttpClientErrorException e) {
+			e.printStackTrace();
 			throw e;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			e.printStackTrace();
 		}
+		return userList;
 	}
 
 	/**
@@ -80,18 +88,17 @@ public class UserService  extends BaseService {
 	 * @throws ParseException 
 	 * @throws IOException
 	 */
-	public Object createUser(User user, String userID, HttpSession session) throws ParseException {
+	public Object createUser(User user, String userID, HttpSession session) throws ParseException, IOException {
 		UserDTO userDTO = userTranslator.translateToUserDTO(user);
 		String postString = gson.toJson(userDTO);
 		System.out.println("postString>>>>"+postString);
-		try {/*
+		try {
 			HttpEntity<String> entity = preparePost(postString, session);
 			ResponseEntity<Object> response = restTemplate.exchange(getAPIBaseURL() 
 							+ CommonConstants.SLASH + CommonConstants.USERS_BASE_URL + CommonConstants.SLASH 
 							+ userID + CommonConstants.CREATE_USERS_BASEURL, HttpMethod.POST, entity ,Object.class);
 			
-			return response.getBody();*/
-		return null;
+			return response.getBody();
 		} catch (JsonSyntaxException e) {
 			throw e;
 		} catch (HttpClientErrorException e) {
@@ -117,15 +124,17 @@ public class UserService  extends BaseService {
 							HttpMethod.GET, requestEntity, Object.class);
 			userDTO = userTranslator.translateToUserDTO(response.getBody());
 			user = userTranslator.translateToUser(userDTO, locale);
-			return user;
 		}catch (IOException e) {
 			throw e;
 		}catch (JsonSyntaxException e) {
 			throw e;
 		}catch (HttpClientErrorException e) {
 			throw e;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
+		return user;
 	}
 	
 	

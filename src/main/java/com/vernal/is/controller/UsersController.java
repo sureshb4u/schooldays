@@ -47,10 +47,12 @@ public class UsersController {
     }
 
 
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	@RequestMapping(value = "/users", method = RequestMethod.GET )
 	@ResponseBody
-	public List<UserDTO> getUsers() throws Exception {
+	public List<UserDTO> getUsers(HttpEntity<String> entity, HttpSession session)  {
 		System.out.println("Get Users>>>>>>>>>>");
+		System.out.println(entity.getHeaders());
+		System.out.println(session.getAttribute(CommonConstants.SESSION_USER_ID));
 		return userService.getUsers();
 	}
 	

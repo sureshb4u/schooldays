@@ -47,26 +47,26 @@ public class LoginController extends BaseController{
 		User user = new User();
 			try{ 
 					if(login.getUserName()!=null&&!login.getUserName().isEmpty()&&login.getUserSecret()!=null&&!login.getUserSecret().isEmpty()) {
-						//user = loginService.userAuthentication(login.getUserName(), login.getUserSecret(), session, locale, request);
-						//System.out.println(gson.toJson(user));
-						user.setFirstName("Vignesh");
-						user.setLastName(".P");
-						user.setUserRole(login.getUserName());
-						String msgBody = CommonConstants.USERNAME + login.getUserName() +" and "+CommonConstants.PASSWORD+ login.getUserSecret()+" "
-								+ CommonConstants.FOOTER;
-						//emailService.readyToSendEmail(login.getUserName(), CommonConstants.FROMADDRESS, CommonConstants.CREDENTIALS, msgBody);
-						if(user.getPersonId() != null && user.getPersonId().isEmpty())
-							session.setAttribute(CommonConstants.SESSION_PERSON_ID, user.getPersonId());
-						if(user.getUserName() != null && user.getUserName().isEmpty())
+						user = loginService.userAuthentication(login.getUserName(), login.getUserSecret(), session, locale, request);
+						user.setUserRole("Admin");
+						/*String msgBody = CommonConstants.USERNAME + login.getUserName() +" and "+CommonConstants.PASSWORD+ login.getUserSecret()+" "
+								+ CommonConstants.FOOTER;*/
+						if(user.getId() != null )
+							session.setAttribute(CommonConstants.SESSION_USER_ID, user.getId().toString());
+						if(user.getUserName() != null && !user.getUserName().isEmpty())
 							session.setAttribute(CommonConstants.SESSION_USERNAME, user.getUserName());
 						if(user.getUserRole()!=null && !user.getUserRole().isEmpty())
 							session.setAttribute(CommonConstants.SESSION_USERROLE, user.getUserRole());
-						if(user.getFirstName() != null && user.getFirstName().isEmpty())
+						if(user.getFirstName() != null && !user.getFirstName().isEmpty())
 							session.setAttribute(CommonConstants.SESSION_FIRSTNAME, user.getFirstName());
-						if(user.getLastName() != null && user.getLastName().isEmpty())
+						if(user.getLastName() != null && !user.getLastName().isEmpty())
 							session.setAttribute(CommonConstants.SESSION_LASTNAME, user.getLastName());
+						if(user.getEmailAddresses() != null && !user.getEmailAddresses().isEmpty())
+							session.setAttribute(CommonConstants.SESSION_EMAILADDRESS, user.getEmailAddresses());
 					 }
+					System.out.println(session.getAttribute(CommonConstants.SESSION_USER_ID));
 			}catch(Exception exception){
+				exception.printStackTrace();
 				return new ResponseEntity<>(setCustomExceptionHandler(exception, MessageUtils.getMessage("error.invalid.login")), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		 return new ResponseEntity<User>(user,HttpStatus.OK);
