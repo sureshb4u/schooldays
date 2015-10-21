@@ -76,9 +76,6 @@ public class UserDTO extends BaseDTO {
 		this.fatherName = fatherName;
 	}
 
-	
-
-
 	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
@@ -184,10 +181,4 @@ public class UserDTO extends BaseDTO {
 		this.age = age;
 	}
 
-	
-
-
-
-	   
-	
 }

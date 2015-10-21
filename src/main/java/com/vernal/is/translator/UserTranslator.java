@@ -3,8 +3,11 @@
  */
 package com.vernal.is.translator;
 
+import java.awt.color.CMMException;
 import java.lang.reflect.Type;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.reflect.TypeToken;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.model.User;
+import com.vernal.is.util.CommonConstants;
 
 /**
  * @author bashelu
@@ -100,14 +104,18 @@ public class UserTranslator extends BaseTranslator{
 	 * 
 	 * @param user
 	 * @return
+	 * @throws ParseException 
 	 */
-	public UserDTO translateToUserDTO(User user){
+	public UserDTO translateToUserDTO(User user) throws ParseException{
 		UserDTO userDTO = null;
 		if(user != null){
+			userDTO = new UserDTO();
 			BeanUtils.copyProperties(user, userDTO);
-			
 			if(user.getDateOfBirth() != null){
-				//userDTO.setDateOfBirth(dateOfBirth);
+				userDTO.setDateOfBirth(commonUtil.formatgivenStringToDate(user.getDateOfBirth() , CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT));
+			}
+			if(user.getDateOfJoining() != null){
+				userDTO.setDateOfJoining(commonUtil.formatgivenStringToDate(user.getDateOfJoining() , CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT));
 			}
 		}
 		return userDTO;

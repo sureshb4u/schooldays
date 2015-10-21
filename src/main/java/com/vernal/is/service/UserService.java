@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -69,18 +70,28 @@ public class UserService  extends BaseService {
 		}
 	}
 
-	
-	public Object createUser(User user, String userID, HttpSession session) throws IOException{
+	/**
+	 * 
+	 * 
+	 * @param user
+	 * @param userID
+	 * @param session
+	 * @return
+	 * @throws ParseException 
+	 * @throws IOException
+	 */
+	public Object createUser(User user, String userID, HttpSession session) throws ParseException {
 		UserDTO userDTO = userTranslator.translateToUserDTO(user);
 		String postString = gson.toJson(userDTO);
-		try {
-			HttpEntity<String> entity = preparePut(postString, session);
+		System.out.println("postString>>>>"+postString);
+		try {/*
+			HttpEntity<String> entity = preparePost(postString, session);
 			ResponseEntity<Object> response = restTemplate.exchange(getAPIBaseURL() 
-							+ CommonConstants.SLASH + CommonConstants.USER_BASE_URL + CommonConstants.SLASH 
-							+ userID, HttpMethod.POST, entity ,Object.class);
-			return response.getBody();
-		}catch (IOException e) {
-			throw e;
+							+ CommonConstants.SLASH + CommonConstants.USERS_BASE_URL + CommonConstants.SLASH 
+							+ userID + CommonConstants.CREATE_USERS_BASEURL, HttpMethod.POST, entity ,Object.class);
+			
+			return response.getBody();*/
+		return null;
 		} catch (JsonSyntaxException e) {
 			throw e;
 		} catch (HttpClientErrorException e) {

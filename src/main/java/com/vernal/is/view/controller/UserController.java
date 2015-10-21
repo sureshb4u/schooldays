@@ -1,6 +1,7 @@
 package com.vernal.is.view.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -78,8 +79,10 @@ public class UserController extends BaseController{
 		System.out.println("json>>>>>>>>>>>>"+gson.toJson(user));
 		String userId =(String) session.getAttribute("userId");
 		try {
-			Object obj = userService.createUser(user, userId, session);
-		} catch (IOException e) {
+			Object obj = userService.createUser(user, "1", session);
+		} /*catch (IOException e) {
+			e.printStackTrace();
+		} */catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

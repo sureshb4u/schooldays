@@ -116,6 +116,19 @@ public class CommonUtil {
 		}
 	}
 	
+	public Date formatgivenStringToDate(String strDate, String fromFormat, String toFormat) throws ParseException{
+		SimpleDateFormat formatter = new SimpleDateFormat(fromFormat);
+		try {
+			Date date = formatter.parse(strDate);
+			SimpleDateFormat formatter2 = new SimpleDateFormat(toFormat);
+			String dateStr = formatter2.format(date);
+			Date dateToFormat = formatter2.parse(dateStr);
+			return dateToFormat;
+		} catch (ParseException e) {
+			LOGGER.error("Exception in formatDateTogiven{} ", e.getMessage());
+			throw e;
+		}
+	}
 	/**
 	 * Convert Timestamp to Date format
 	 * @param strDate
