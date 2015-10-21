@@ -22,7 +22,7 @@ public class UserListRowMapper implements RowMapper<UserDTO> {
 		user.setId(rs.getInt("ID"));
 	    if(rs.getInt("ID_ROLE")!=0){
 	       UserRoleDTO role = new UserRoleDTO();
-		   role.setIdRole(rs.getInt("ID"));
+		   role.setId(rs.getInt("ID"));
 		   role.setRole(rs.getString("ROLE"));
 		   user.setRoles(role);
 	    }

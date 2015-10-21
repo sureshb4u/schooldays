@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(value=Include.NON_EMPTY)
 public class UserRoleDTO extends BaseDTO{
 
-	private Integer idRole;
+	private Integer id;
 	private String role;
 	
 	private List<String> privileges;
@@ -25,13 +25,19 @@ public class UserRoleDTO extends BaseDTO{
 		return privileges;
 	}
 	
-	public Integer getIdRole() {
-		return idRole;
+
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdRole(Integer idRole) {
-		this.idRole = idRole;
+
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
+
+
 
 	public String getRole() {
 		return role;

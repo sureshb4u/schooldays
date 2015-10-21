@@ -270,7 +270,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				+ "INNER JOIN COMMUNITY C ON A.ID_COMMUNITY = C.ID"
 				+ " WHERE A.ID= ? and A.IS_DELETED = 0";
 		try{
-		 Object inputs = new Object[] {userId}
+		 Object inputs = new Object[] {userId};
 		  UserDTO user =  getJdbcTemplate().queryForObject(
                   GET_USER, inputs,new UserRowMapper());
 		return null;
