@@ -12,11 +12,29 @@
    					</div>
    				</div>
 	 	 		<div layout-margin layout-padding flex-container="row">
+						 <div flex="50"  class="fs-subhead black-text">
+						 <div flex-container="row">
+	 	 					<md-input-container  flex="50">
+	      						<label>From Date</label>
+						 		<input type="text" pick-a-date="from" ng-model="lms.from" md-placeholder="Enter your date" required></md-datepicker>
+	      					</md-input-container>
+	      					<md-input-container  flex="50">
+	      						<label>From Time</label>
+						 		<input type="text" pick-a-time="time" ng-model="lms.fromTime" md-placeholder="Enter your time" required></md-datepicker>
+	      					</md-input-container>
+	 	 				</div>
+	 	 				</div> 
 						 <div flex="50" class="fs-subhead black-text">
-						 <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
-						</div> 
-						 <div flex="50" class="fs-subhead black-text">
-						 	<lx-date-picker model="myDate" label="Pick a date" locale="fr" fixed-label="true" icon="calendar"></lx-date-picker>
+						 	<div flex-container="row">
+	 	 					<md-input-container  flex="50">
+	      						<label>From Date</label>
+						 		<input type="text" pick-a-date="to" ng-model="lms.to" md-placeholder="Enter your date" required></md-datepicker>
+	      					</md-input-container>
+	      					<md-input-container  flex="50">
+	      						<label>From Time</label>
+						 		<input type="text" pick-a-time="time" ng-model="lms.toTime" md-placeholder="Enter your time" required></md-datepicker>
+	      					</md-input-container>
+	 	 				</div>
 						</div> 
 	 	 		</div>
 	 	 		<div layout-margin layout-padding flex-container="column">
