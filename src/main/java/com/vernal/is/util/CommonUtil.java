@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -109,6 +110,11 @@ public class CommonUtil {
 			return dateStr;
 	}
 	
+	
+	
+	public  String stringFeilds(String str){
+		return "'"+str+"'";
+	}
 	/**
 	 * 
 	 * @param strDate
@@ -121,35 +127,36 @@ public class CommonUtil {
 		SimpleDateFormat formatter = new SimpleDateFormat(fromFormat);
 		try {
 			Date date = formatter.parse(strDate);
+			System.out.println(date);
 			SimpleDateFormat formatter2 = new SimpleDateFormat(toFormat);
 			String dateStr = formatter2.format(date);
+			System.out.println("dateStr>>>>>>>>"+dateStr);
 			Date dateToFormat = formatter2.parse(dateStr);
+			System.out.println("dateToFormat>>>"+dateToFormat);
 			return dateToFormat;
 		} catch (ParseException e) {
 			LOGGER.error("Exception in formatDateTogiven{} ", e.getMessage());
 			throw e;
 		}
 	}
+	
 	/**
-	 * Convert Timestamp to Date format
+	 * Convert Timestamp to Date in String format
 	 * @param strDate
 	 * @param toFormat
 	 * @return
 	 */
-	public String formatTimeStampToDate(String strDate, String toFormat) throws Exception{
-		try {
-			long timeStamp = Long.parseLong(strDate);
-			Date date = new Date(timeStamp);
-			SimpleDateFormat formatter = new SimpleDateFormat(toFormat);
-			String dateStr = formatter.format(date);
-			return dateStr;
-		} catch (Exception e) {
-			LOGGER.error("Exception in formatTimeStampToDate{} ", e.getMessage());
-			throw e;
-		}
+	public String formatTimeStampToDateString(Timestamp timestamp, String toFormat){
+		SimpleDateFormat formatter = new SimpleDateFormat(toFormat);
+		return formatter.format(timestamp);
 	}
 	
-
+	public Timestamp stringToTimestamp(String dateStr, String dateFormat) throws ParseException{
+		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+		Date date = formatter.parse(dateStr);
+		Timestamp timestamp = new Timestamp(date.getTime());
+		return timestamp;
+	}
 	
 	
 	  public String findRedirectedURL(String url) throws Exception{

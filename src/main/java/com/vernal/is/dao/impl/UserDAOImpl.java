@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.annotation.Resource;
+
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -20,10 +22,13 @@ import com.vernal.is.mapper.SessionMapper;
 import com.vernal.is.mapper.UserListRowMapper;
 import com.vernal.is.mapper.UserRowMapper;
 import com.vernal.is.util.CommonConstants;
+import com.vernal.is.util.CommonUtil;
 
 public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO{
 	
 
+	@Resource
+	CommonUtil commonUtil;
 	public static final Gson gson = new GsonBuilder().setDateFormat(CommonConstants.ISO_DATE_FORMAT).create();
 	
     @Override
@@ -56,7 +61,9 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
             }
 			return user;
     }
-
+    public  String stringFeilds(String str){
+		return "'"+str+"'";
+	}
 	@Override
 	public List<UserDTO> getUsers(String role) {
 		List<UserDTO> userList = new ArrayList<UserDTO>();
@@ -129,19 +136,31 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 					   INSERT_USER = INSERT_USER+ user.getRoles().getId()+",";
 		   		     }
 				   if(user.getFirstName()!= null){
-				   INSERT_USER = INSERT_USER+ user.getFirstName()+",";
+				   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getFirstName())+",";
 	               }
 				   if(user.getLastName()!=null){
-				   INSERT_USER = INSERT_USER+user.getLastName()+",";
+				   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getLastName())+",";
 				   }
 				   if(user.getDateOfBirth()!=null){
-				   INSERT_USER = INSERT_USER+user.getDateOfBirth()+",";
+				   INSERT_USER = INSERT_USER+ user.getDateOfBirth();
 				   }
+				   if(user.getEmailAddresses()!=null){
+					      INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getEmailAddresses())+",";
+					   }
+				   if(user.getExperience()!=null){
+						   INSERT_USER = INSERT_USER+ user.getExperience()+",";
+						   }
+				    if(user.getBioGraphy()!=null){
+						   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getBioGraphy())+",";
+						   }
+				    if(user.getDateOfJoining() !=null){
+						   INSERT_USER = INSERT_USER+ user.getDateOfJoining();
+						   }
 				   if(user.getGender()!= null){
 				   INSERT_USER = INSERT_USER+ user.getGender().getId()+",";
 				   }
 				   if(user.getFatherName()!= null){
-				   INSERT_USER = INSERT_USER+user.getFatherName()+",";
+				   INSERT_USER = INSERT_USER+commonUtil.stringFeilds(user.getFatherName())+",";
 				   }
 				   if(user.getAge() != null){
 				   INSERT_USER = INSERT_USER+ user.getAge()+",";

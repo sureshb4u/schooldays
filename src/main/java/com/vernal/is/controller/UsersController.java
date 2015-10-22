@@ -3,6 +3,7 @@ package com.vernal.is.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class UsersController {
 
 	@RequestMapping(value = "/{role}/users", method = RequestMethod.GET )
 	@ResponseBody
-	public List<UserDTO> getUsers(HttpEntity<String> entity,@PathVariable String role, HttpSession session)  {
+	public List<UserDTO> getUsers(HttpEntity<String> entity, @PathVariable String role, HttpSession session)  {
 		System.out.println("Get Users>>>>>>>>>>");
 		System.out.println(entity.getHeaders());
 		System.out.println(session.getAttribute(CommonConstants.SESSION_USER_ID));
@@ -84,7 +85,6 @@ public class UsersController {
 			 userid = Integer.valueOf(accessId);
 			 userService.insertUser(userDTO, userid);
 		}
-		
 		return new ResponseEntity<String>("SUCESS", HttpStatus.OK);
 	}
 

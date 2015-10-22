@@ -22,8 +22,8 @@ public class UserListRowMapper implements RowMapper<UserDTO> {
 		user.setId(rs.getInt("ID"));
 	    if(rs.getInt("ID_ROLE")!=0){
 	       UserRoleDTO role = new UserRoleDTO();
-		   role.setId(rs.getInt("ID"));
-		   role.setRole(rs.getString("ROLE"));
+	       	 role.setId(rs.getInt("ID"));
+		//   role.setRole(rs.getString("ROLE"));
 		   user.setRoles(role);
 	    }
 		user.setFirstName(rs.getString("FIRST_NAME"));
@@ -37,26 +37,26 @@ public class UserListRowMapper implements RowMapper<UserDTO> {
 		user.setAge(rs.getInt("AGE"));
 		if(rs.getInt("ID_DESIGNATION")!= 0){
 			DesignationDTO designation = new DesignationDTO();
-			designation.setId(rs.getInt("ID"));
-			designation.setDesignation(rs.getString("DESIGNATION"));
+			designation.setId(rs.getInt("ID_DESIGNATION"));
+			//designation.setDesignation(rs.getString("DESIGNATION"));
 		    user.setDesignation(designation);
 		}
 		if((rs.getInt("ID_GENDER")) != 0){
 			GenderDTO gender = new GenderDTO();
-			gender.setId(rs.getInt("ID"));
-			gender.setGender(rs.getString("GENDER"));
+			gender.setId(rs.getInt("ID_GENDER"));
+			//gender.setGender(rs.getString("GENDER"));
 			user.setGender(gender);
 		}
 		if(rs.getInt("ID_COMMUNITY") !=0){
 			CommunityDTO community = new CommunityDTO();
-			community.setId(rs.getInt("ID"));
-			community.setCommunity(rs.getString("COMMUNITY"));
+			community.setId(rs.getInt("ID_COMMUNITY"));
+		//	community.setCommunity(rs.getString("COMMUNITY"));
 			user.setCommunity(community);
 		}
 		if(rs.getInt("ID_RELIGION") !=0){
 			ReligionDTO religion = new ReligionDTO();
-			religion.setId(rs.getInt("ID"));
-			religion.setReligion(rs.getString("RELIGION"));
+			religion.setId(rs.getInt("ID_RELIGION") );
+			//religion.setReligion(rs.getString("RELIGION"));
 			user.setReligion(religion);
 		}
 		return user;

@@ -28,8 +28,28 @@
 			});
             return deferred.promise;
 		};
-    	
-        
+		
+	       this.getStaffList = function () {
+				console.log("------------------------------INSIDE SERVICE-------------------")
+ 
+	    	   var deferred = $q.defer();
+	  		    var url = "/api/staff/staffs";
+			    var data = restService.restCall("",url,'GETLIST');
+				data.$promise.then(function(response){
+					deferred.resolve(response);
+					console.log(JSON.stringify(response));
+				},
+	            function (error) {
+	                if (error.status == "401") {
+	                    $state.go('login');
+	                } else {
+	                    LxNotificationService.warning(error.data.Message);
+	                }
+	                deferred.reject('ajaxError');
+	            });
+	            return deferred.promise;
+	        };
+	             
     }]);
 
 })();
