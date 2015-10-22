@@ -2,6 +2,7 @@ package com.vernal.is.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
@@ -22,7 +23,6 @@ import com.vernal.is.util.CommonConstants;
 
 public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO{
 	
-	private static final String GET_USERS = "SELECT * FROM user";
 
 	public static final Gson gson = new GsonBuilder().setDateFormat(CommonConstants.ISO_DATE_FORMAT).create();
 	
@@ -58,10 +58,17 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
     }
 
 	@Override
-	public List<UserDTO> getUsers() {
+	public List<UserDTO> getUsers(String role) {
 		List<UserDTO> userList = new ArrayList<UserDTO>();
+		    String GET_USERS = "SELECT * FROM user ";
+			String ID_ROLE = "SELECT ID FROM user_role WHERE ROLE ="+role;
 		try {
+			Integer idRole =  getJdbcTemplate().queryForObject(
+                    ID_ROLE, Integer.class);
+			if(idRole != null){
+				GET_USERS = GET_USERS+ "WHERE ID_ROLE = "+idRole;
 			userList = getJdbcTemplate().query(GET_USERS, new UserListRowMapper());
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

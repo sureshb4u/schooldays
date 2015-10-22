@@ -6,15 +6,12 @@ import com.vernal.is.dto.LeaveManagementDTO;
 
 public interface LeaveDAO {
 
-	public List<LeaveManagementDTO> getPendingLeave();
 
-	public List<LeaveManagementDTO> getPendingLeaveById();
+	public List<LeaveManagementDTO> getLeaveByStatus(String status,Integer userId,String accessId);
 
-	public List<LeaveManagementDTO> getHistory();
+	public List<LeaveManagementDTO> statusChange(
+			List<LeaveManagementDTO> leaveDTO);
 
-	public List<LeaveManagementDTO> getHistoryById();
-
-	public List<LeaveManagementDTO> statusChange();
 	
 	
 	

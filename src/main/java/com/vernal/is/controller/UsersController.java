@@ -47,13 +47,13 @@ public class UsersController {
     }
 
 
-	@RequestMapping(value = "/users", method = RequestMethod.GET )
+	@RequestMapping(value = "/{role}/users", method = RequestMethod.GET )
 	@ResponseBody
-	public List<UserDTO> getUsers(HttpEntity<String> entity, HttpSession session)  {
+	public List<UserDTO> getUsers(HttpEntity<String> entity,@PathVariable String role, HttpSession session)  {
 		System.out.println("Get Users>>>>>>>>>>");
 		System.out.println(entity.getHeaders());
 		System.out.println(session.getAttribute(CommonConstants.SESSION_USER_ID));
-		return userService.getUsers();
+		return userService.getUsers(role);
 	}
 	
 	@RequestMapping(value = "/getUser/{userId}", method = RequestMethod.GET)

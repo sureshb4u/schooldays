@@ -48,8 +48,8 @@ public class UsersService {
 	 * 
 	 * @return
 	 */
-	public List<UserDTO> getUsers() {
-		return userDAO.getUsers();
+	public List<UserDTO> getUsers(String role) {
+		return userDAO.getUsers(role);
 	}
 
 	public UserDTO aurthentication(UserAuthenticationDTO userAuthenticationDTO) {

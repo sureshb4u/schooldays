@@ -14,27 +14,14 @@ public class LeaveManagementService {
 	@Resource
       LeaveDAO leaveDAO;
 	
-	public List<LeaveManagementDTO> getPendingLeave() {
+	public List<LeaveManagementDTO> getPendingLeave(String status,Integer userId, String role) {
 		// TODO Auto-generated method stub
-		return leaveDAO.getPendingLeave();
+		return leaveDAO.getLeaveByStatus(status,userId,role);
 	}
 	
-	public List<LeaveManagementDTO> getPendingLeaveById() {
+
+	public List<LeaveManagementDTO> statusChange(List<LeaveManagementDTO> leaveDTO) {
 		// TODO Auto-generated method stub
-		return leaveDAO.getPendingLeaveById();
-	}
-	
-	public List<LeaveManagementDTO> getHistory() {
-		// TODO Auto-generated method stub
-		return leaveDAO.getHistory();
-	}
-	public List<LeaveManagementDTO> getHistoryById() {
-		// TODO Auto-generated method stub
-		return leaveDAO.getHistoryById();
-	}
-   
-	public List<LeaveManagementDTO> statusChange() {
-		// TODO Auto-generated method stub
-		return leaveDAO.statusChange();
+		return leaveDAO.statusChange(leaveDTO);
 	}
 }

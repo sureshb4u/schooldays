@@ -54,5 +54,9 @@ public class CommonConstants {
 			+ "you have any further doubts fee free to contact us -- By Support Team";
 	public static final String CREATE_USERS_BASEURL = "/createUser";
 	public static final String SESSION_EMAILADDRESS = "emailAddress";
+	public static final String STATUS_PENDING = "PENDING";
+	public static final String STATUS_DECLINED = "DECLINED";
+	public static final String STATUS_APPROVED = "APPROVED";
+	public static final String ROLE_ADMIN = "ADMIN";
 	
 }

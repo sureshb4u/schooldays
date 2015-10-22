@@ -8,7 +8,6 @@ import com.vernal.is.dto.UserDTO;
 
 public interface UserDAO {
 
-	public List<UserDTO> getUsers();
 	
 	public UserDTO getUser(Integer userId);
 	
@@ -19,5 +18,7 @@ public interface UserDAO {
 	 public ResponseBean updateUser(UserDTO user, Integer userId);
 
 	public ResponseBean deleteUser(Integer userId, Integer accessId);
+
+	public List<UserDTO> getUsers(String role);
 	
 }
