@@ -135,7 +135,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getLastName())+",";
 				   }
 				   if(user.getDateOfBirth()!=null){
-				   INSERT_USER = INSERT_USER+/*user.getDateOfBirth()*/"07/19/1994,";
+				   INSERT_USER = INSERT_USER+ user.getDateOfBirth();
 				   }
 				   if(user.getEmailAddresses()!=null){
 					      INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getEmailAddresses())+",";
@@ -147,7 +147,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 						   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getBioGraphy())+",";
 						   }
 				    if(user.getDateOfJoining() !=null){
-						   INSERT_USER = INSERT_USER+/* user.getDateOfJoining()*/"10/21/2015,";
+						   INSERT_USER = INSERT_USER+ user.getDateOfJoining();
 						   }
 				   if(user.getGender()!= null){
 				   INSERT_USER = INSERT_USER+ user.getGender().getId()+",";

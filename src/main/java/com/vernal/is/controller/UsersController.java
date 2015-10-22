@@ -3,6 +3,7 @@ package com.vernal.is.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,11 @@ public class UsersController {
 
 	@RequestMapping(value = "/users", method = RequestMethod.GET )
 	@ResponseBody
-	public List<UserDTO> getUsers(HttpEntity<String> entity, HttpSession session)  {
+	public List<UserDTO> getUsers(HttpEntity<String> entity, HttpSession session, HttpServletRequest request)  {
+		String role = request.getHeader(CommonConstants.ROLE_TYPE);
+		String userId = request.getHeader(CommonConstants.SESSION_USER_ID);
+		System.out.println("role>>>....."+role);
+		System.out.println("userId>>>....."+userId);
 		return userService.getUsers();
 	}
 	

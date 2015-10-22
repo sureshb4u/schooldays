@@ -11,6 +11,7 @@ public class CommonConstants {
 	public static final String LOCALE_EN_US="en-US";
 	public static final String ISO_DATE_FORMAT="yyyy-MM-dd'T'HH:mm:ssZ";
 	public static final String DATE_FORMAT="yyyy-dd-MM";
+	public static final String DATE_TIME= "yyyy-dd-MM";
 	public static final String DATE_DD_MMMM_YYYY = "dd MMMM, yyyy";
 	//Login variable
 	public static final String LOGIN_PAGE = "index";
@@ -21,6 +22,7 @@ public class CommonConstants {
 	public static final String SESSION_BASE_URL = "/session";
 	public static final String USER_BASE_URL = "/user";
 	public static final String ORGANIZATION_BASE_URL = "/organization";
+	public static final String LMS_BASE_URL = "/leaveManagement";
 	
 	//Session variable
 	public static final String SESSION_PERSON_ID="_pId";
@@ -54,5 +56,9 @@ public class CommonConstants {
 			+ "you have any further doubts fee free to contact us -- By Support Team";
 	public static final String CREATE_USERS_BASEURL = "/createUser";
 	public static final String SESSION_EMAILADDRESS = "emailAddress";
+	public static final Object STATUS_PENDING = "pending";
+	public static final Object STATUS_HISTORY = "history";
+	public static final String CREATE_LEAVE_REQUEST = "/createRequest";
+	public static final String UPDATE_REQUEST = "/updateRequest";
 	
 }
