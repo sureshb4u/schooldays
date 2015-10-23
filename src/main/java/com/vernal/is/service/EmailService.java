@@ -4,6 +4,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
+import com.vernal.is.util.CommonConstants;
  
 /**
  * @author 
@@ -16,13 +18,13 @@ public class EmailService {
 	private MailSender emailService; // MailSender interface defines a strategy
 										// for sending simple mails
  
-	public void readyToSendEmail(String toAddress, String fromAddress, String subject, String msgBody) {
- 
+	public String readyToSendEmail(String toAddress, String subject, String msgBody) {
 		SimpleMailMessage crunchifyMsg = new SimpleMailMessage();
-		crunchifyMsg.setFrom(fromAddress);
+		crunchifyMsg.setFrom(CommonConstants.FROMADDRESS);
 		crunchifyMsg.setTo(toAddress);
 		crunchifyMsg.setSubject(subject);
 		crunchifyMsg.setText(msgBody);
 		emailService.send(crunchifyMsg);
+		return "success";
 	}
 }

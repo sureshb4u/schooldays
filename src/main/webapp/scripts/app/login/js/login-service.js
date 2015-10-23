@@ -34,6 +34,16 @@
             return deferred.promise;
         };
         
+        this.mailVerification = function (userName){
+            var deferred = $q.defer();
+            var url ='/api/common/'+userName+'/email-verification';
+            var data = restService.restCall('', url, 'POST');
+			data.$promise.then(function(response){
+				deferred.resolve(response);
+			});
+            return deferred.promise;
+        };
+        
     }]);
 
 })();

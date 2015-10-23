@@ -63,5 +63,12 @@ public class CommonConstants {
 	public static final Object STATUS_HISTORY = "HISTORY";
 	public static final String CREATE_LEAVE_REQUEST = "/createRequest";
 	public static final String UPDATE_REQUEST = "/updateRequest";
+	public static final String EMAIL_VERIFICATION = "/email-verification";
+	public static final String COMMON_BASE_URL = "/common-base";
+	public static final String PASSWORD_RESET_SUBJECT = "School Days password reset";
+	public static final String PASSWORD_RESET_CONTENT = "To log in and access your account, please click on the link below. http://192.168.1.3:8080/#/resetPassword "
+			+ "You will now be able to view and modify your profile as required, check the status of your application and apply for jobs."
+			+ "Yours sincerely,"
+			+ "School Name";
 	
 }
