@@ -1,28 +1,52 @@
 package com.vernal.is.model;
 
+import java.util.List;
+
 public class Class {
 
-	private String id ;
-	private String name;
+	private Section Section;
+	private Staff classTeacher;
 	private Standard standard;
+	private Integer count;
+	private List<Student> students;
+	private List<Staff> staffsList;
 	
-	public String getId() {
-		return id;
+	
+	public Staff getClassTeacher() {
+		return classTeacher;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public List<Staff> getStaffsList() {
+		return staffsList;
 	}
-	public String getName() {
-		return name;
+	public void setStaffsList(List<Staff> staffsList) {
+		this.staffsList = staffsList;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setClassTeacher(Staff classTeacher) {
+		this.classTeacher = classTeacher;
 	}
 	public Standard getStandard() {
 		return standard;
 	}
 	public void setStandard(Standard standard) {
 		this.standard = standard;
+	}
+	public Section getSection() {
+		return Section;
+	}
+	public void setSection(Section section) {
+		Section = section;
+	}
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+	public List<Student> getStudents() {
+		return students;
+	}
+	public void setStudents(List<Student> students) {
+		this.students = students;
 	}
 	
 

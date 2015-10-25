@@ -2,7 +2,7 @@
 	"menuItems" : [
 		{
 			"menuTitle": "Profile",
-			"viewby": ["Admin", "Staff"],
+			"viewby": ["ADMIN", "Staff"],
 			"style":"",
 			"menuItemDisplay": "profile",
 			"url":"#profile"
@@ -10,49 +10,49 @@
 		},	
 		{
 			"menuTitle": "Students",
-			"viewby": ["Admin","Staff"],
+			"viewby": ["ADMIN","Staff"],
 			"style":"",
 			"menuItemDisplay": "dashboard",
 			"url":"#students"
 		},
 		{
 			"menuTitle": "Teaching Staffs",
-			"viewby": ["Admin"],
+			"viewby": ["ADMIN"],
 			"style":"",
 			"menuItemDisplay": "teachingStaffs",
 			"url":"#teachingStaffs"
 		},
 		{
 			"menuTitle": "Non-Teaching Staffs",
-			"viewby": ["Admin"],
+			"viewby": ["ADMIN"],
 			"style":"",
 			"menuItemDisplay": "ntStaffs",
 			"url":"#ntStaffs"
 		},
 		{
 			"menuTitle": "Leave Management System",
-			"viewby": ["Admin", "Staff"],
+			"viewby": ["ADMIN", "Staff"],
 			"style":"",
 			"menuItemDisplay": "lms",
 			"url":"#lms"
 		},
 		{
 			"menuTitle": "Logs",
-			"viewby": ["Admin"],
+			"viewby": ["ADMIN"],
 			"style":"",
 			"menuItemDisplay": "reports",
 			"url":"#reports"
 		},
 		{
 			"menuTitle": "School Info",
-			"viewby": ["Admin"],
+			"viewby": ["ADMIN"],
 			"style":"",
 			"menuItemDisplay": "schoolInfo",
 			"url":"#schoolInfo"
 		},
 		{
 			"menuTitle": "Exam",
-			"viewby": ["Admin"],
+			"viewby": ["ADMIN"],
 			"style":"",
 			"menuItemDisplay": "exam",
 			"url":"#exams"

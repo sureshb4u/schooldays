@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.GenderDTO;
+import com.vernal.is.dto.RoleDTO;
 import com.vernal.is.dto.UserDTO;
 
 public class SessionMapper implements RowMapper<UserDTO>{
@@ -23,7 +24,6 @@ public class SessionMapper implements RowMapper<UserDTO>{
 		user.setId(rs.getInt("ID"));
 		user.setFirstName(rs.getString("FIRST_NAME"));
 		user.setLastName(rs.getString("LAST_NAME"));
-		
 		//user.setDateOfBirth(rs.getDate("DATE_OF_BIRTH"));
 		user.setEmailAddresses(rs.getString("EMAIL_ADDRESS"));
 		//user.setExperience(rs.getInt("EXPERIENCE"));
@@ -31,6 +31,12 @@ public class SessionMapper implements RowMapper<UserDTO>{
 		//user.setDateOfJoining(rs.getDate("DATE_OF_JOINING"));
 		//user.setFatherName(rs.getString("FATHER_NAME"));
 		//user.setAge(rs.getInt("AGE"));
+		if(rs.getInt("ID_ROLE")!= 0){
+			RoleDTO role = new RoleDTO();
+			role.setId(rs.getInt("ID"));
+			role.setRole(rs.getString("ROLE"));
+		    user.setRole(role);
+		}
 		if(rs.getInt("ID_DESIGNATION")!= 0){
 			DesignationDTO designation = new DesignationDTO();
 			designation.setId(rs.getInt("ID"));

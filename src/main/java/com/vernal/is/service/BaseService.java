@@ -92,7 +92,8 @@ public class BaseService {
 	//	headers.add("Authorization", getAuthorizationHeader());
 		if(session.getAttribute(CommonConstants.SESSION_USER_ID)!= null)
 			headers.add(CommonConstants.SESSION_USER_ID, session.getAttribute(CommonConstants.SESSION_USER_ID).toString());
-		headers.add(CommonConstants.ROLE_TYPE, "ADMIN");
+		if(session.getAttribute(CommonConstants.SESSION_USERROLE)!= null)	
+			headers.add(CommonConstants.SESSION_USERROLE, session.getAttribute(CommonConstants.SESSION_USERROLE).toString());
 		if(session.getAttribute(CommonConstants.SESSION_TOKEN) != null && session.getAttribute(CommonConstants.SESSION_ORG_ID) != null){
 			headers.add(CommonConstants.X_AUTH_TOKEN, session.getAttribute(CommonConstants.SESSION_TOKEN).toString());
 			headers.add(CommonConstants.XORG_ID, session.getAttribute(CommonConstants.SESSION_ORG_ID).toString());
@@ -220,8 +221,8 @@ public class BaseService {
 		}
 		
 		if(!parameters.isEmpty()){
-			int index=parameters.lastIndexOf("&");
-			parametersList= parameters.substring(0, index);
+			int index = parameters.lastIndexOf("&");
+			parametersList = parameters.substring(0, index);
 		}
 		
 		return parametersList;

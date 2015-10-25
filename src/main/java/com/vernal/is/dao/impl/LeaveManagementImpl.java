@@ -53,7 +53,7 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 		ResponseBean responseBean= new ResponseBean(); 
 		String ID_STATUS = "SELECT ID FROM form_status where STATUS =? ";
 		String INSERT_LEAVE = "INSERT INTO `leave_management`(";
-				if(leave.getIdStaff() != null){
+				if(leave.getStaff() != null && leave.getStaff().getId() != null){
 				INSERT_LEAVE = INSERT_LEAVE+"`ID_STAFF`,";
 				}
 				if(leave.getStartTime()!=null){
@@ -75,8 +75,8 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 				+ "`CREATED_ON`,"
 				+ " `CREATED_BY`) "
 				+ "VALUES (";
-				if(leave.getIdStaff() != null){
-					INSERT_LEAVE = INSERT_LEAVE+ leave.getIdStaff()+",";
+				if(leave.getStaff() != null){
+					INSERT_LEAVE = INSERT_LEAVE+ leave.getStaff()+",";
 					
 					}
 					if(leave.getStartTime()!=null){
@@ -115,6 +115,8 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 							responseBean.setMessage("The new user is added successfully");
 						}
 					}
+					}
+				}
 					catch(Exception e){
 						
 					}

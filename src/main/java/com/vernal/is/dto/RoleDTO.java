@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * Description: RoleService is used to Manage the Role Details
  */
 @JsonInclude(value=Include.NON_EMPTY)
-public class UserRoleDTO extends BaseDTO{
+public class RoleDTO extends BaseDTO{
 
 	private Integer id;
 	private String role;

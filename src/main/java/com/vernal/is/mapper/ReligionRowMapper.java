@@ -16,7 +16,7 @@ public class ReligionRowMapper implements RowMapper<ReligionDTO>{
 		}
 		
 		ReligionDTO religionDTO = new ReligionDTO();
-		religionDTO.setName(rs.getString("NAME"));
+		religionDTO.setReligion(rs.getString("RELIGION"));
 		religionDTO.setId(rs.getInt("ID"));
 		return religionDTO;
 	}

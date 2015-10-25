@@ -28,7 +28,7 @@
     		 // $location.path('/dashboard');
     		  if(localStorage.getItem('userRole')=='Staff'){
     			  $state.go('home.profile');
-    		  }else if(localStorage.getItem('userRole')=='Admin'){
+    		  }else if(localStorage.getItem('userRole')=='ADMIN'){
     			  $state.go('home.dashboard');
     		  }
     	  },

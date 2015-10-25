@@ -3,7 +3,6 @@
  */
 package com.vernal.is.model;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,7 +13,9 @@ import java.util.UUID;
 public class Person {
 	private Integer id;
 	 
-    private String firstName;
+	private String regNo;
+	
+	private String firstName;
 
     private String lastName;
 
@@ -33,6 +34,7 @@ public class Person {
     private String _links;
     
     private String addresses;
+    
     private String  emailAddresses;
    
     private List<Role> roles;
@@ -62,6 +64,15 @@ public class Person {
 		this.bioGraphy = bioGraphy;
 	}
 
+
+    public String getRegNo() {
+		return regNo;
+	}
+
+	public void setRegNo(String regNo) {
+		this.regNo = regNo;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

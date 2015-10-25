@@ -1,12 +1,8 @@
 package com.vernal.is.service;
 
-import java.io.IOException;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
@@ -14,7 +10,7 @@ import org.springframework.web.client.RestClientException;
 import com.vernal.is.util.CommonConstants;
 
 @Component
-public class CommonService extends BaseService {
+public class CommonServices extends BaseService {
 
 	@Resource
 	EmailService emailService;

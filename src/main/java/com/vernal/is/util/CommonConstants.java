@@ -60,6 +60,8 @@ public class CommonConstants {
 	public static final String STATUS_DECLINED = "DECLINED";
 	public static final String STATUS_APPROVED = "APPROVED";
 	public static final String ROLE_ADMIN = "ADMIN";
+	public static final String ROLE_T_STAFF = "TEACHING STAFF";
+	public static final String ROLE_NT_STAFF = "NON TEACHING STAFF";
 	public static final Object STATUS_HISTORY = "HISTORY";
 	public static final String CREATE_LEAVE_REQUEST = "/createRequest";
 	public static final String UPDATE_REQUEST = "/updateRequest";
@@ -70,5 +72,16 @@ public class CommonConstants {
 			+ "You will now be able to view and modify your profile as required, check the status of your application and apply for jobs."
 			+ "Yours sincerely,"
 			+ "School Name";
-	
+	public static final String STUDENTS_BASE_URL = "/students";
+	public static final String STANDARD_URL = "/standard";
+	public static final String SECTION_URL = "/section";
+	public static final String CLASSES_URL = "/classes";
+	public static final String MALE = "MALE";
+	public static final String FEMALE = "FEMALE";
+	public static final String GENDER = "GENDER";
+	public static final String ROLE = "ROLE";
+	public static final String RELIGION = "RELIGION";
+	public static final String COMMUNITY = "COMMUNITY";
+	public static final String DESIGNATION = "DESIGNATION";
+	public static final String LIST_TYPE = "type";
 }

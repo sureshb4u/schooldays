@@ -154,6 +154,7 @@ public class CommonUtil {
 	public Timestamp stringToTimestamp(String dateStr, String dateFormat) throws ParseException{
 		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 		Date date = formatter.parse(dateStr);
+		System.out.println("date>>>>>"+date);
 		Timestamp timestamp = new Timestamp(date.getTime());
 		return timestamp;
 	}

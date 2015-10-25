@@ -14,4 +14,6 @@ public interface CommonDAO {
 
     public List<DesignationDTO> getDesignation();
 
+	public Integer getId(String entity, String type);
+
 }
