@@ -1,13 +1,10 @@
 package com.vernal.is.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.vernal.is.serializers.JsonDateSerializer;
 
 @JsonInclude(value=Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -21,7 +18,7 @@ public class UserDTO extends BaseDTO {
 
     private String fatherName;
 
-    private Date dateOfBirth;
+    private Timestamp dateOfBirth;
     
     private CommunityDTO community;
     
@@ -41,11 +38,11 @@ public class UserDTO extends BaseDTO {
     
     private Integer experience;
     
-    private  Date   dateOfJoining; 
+    private  Timestamp   dateOfJoining; 
    
     private List<StaffPhoneNumberDTO> phoneNumbers;
 
-    private UserRoleDTO roles;
+    private RoleDTO role;
 
 	public Integer getId() {
 		return id;
@@ -79,12 +76,11 @@ public class UserDTO extends BaseDTO {
 		this.fatherName = fatherName;
 	}
 	
-	@JsonSerialize(using = JsonDateSerializer.class)
-	public Date getDateOfBirth() {
+	public Timestamp getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(Timestamp dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -120,12 +116,11 @@ public class UserDTO extends BaseDTO {
 		this.experience = experience;
 	}
 	
-	@JsonSerialize(using = JsonDateSerializer.class)
-	public Date getDateOfJoining() {
+	public Timestamp getDateOfJoining() {
 		return dateOfJoining;
 	}
 
-	public void setDateOfJoining(Date dateOfJoining) {
+	public void setDateOfJoining(Timestamp dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
 
@@ -170,12 +165,12 @@ public class UserDTO extends BaseDTO {
 		this.phoneNumbers = phoneNumbers;
 	}
 
-	public UserRoleDTO getRoles() {
-		return roles;
+	public RoleDTO getRole() {
+		return role;
 	}
 
-	public void setRoles(UserRoleDTO roles) {
-		this.roles = roles;
+	public void setRole(RoleDTO role) {
+		this.role = role;
 	}
 
 	public Integer getAge() {

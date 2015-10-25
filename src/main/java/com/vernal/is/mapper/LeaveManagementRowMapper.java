@@ -17,12 +17,12 @@ public class LeaveManagementRowMapper implements RowMapper<LeaveManagementDTO>{
 		}
 		LeaveManagementDTO leaveManagementDTO = new LeaveManagementDTO();
 		leaveManagementDTO.setId(rs.getInt("ID"));
-		leaveManagementDTO.setIdStaff(rs.getInt("ID_STATUS"));
+		//leaveManagementDTO.setIdStaff(rs.getInt("ID_STATUS"));
 		leaveManagementDTO.setStartTime(rs.getTimestamp("START_TIME"));
 		leaveManagementDTO.setEndTime(rs.getTimestamp("END_DATE"));
 		leaveManagementDTO.setReason(rs.getString("REASON"));
 		leaveManagementDTO.setIsTaken(rs.getInt("IS_TAKEN"));
-		leaveManagementDTO.setIdFormStatus(rs.getInt("ID_FORM_STATUS"));
+		//leaveManagementDTO.setIdFormStatus(rs.getInt("ID_FORM_STATUS"));
 		return leaveManagementDTO;
 	}
 

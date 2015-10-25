@@ -12,9 +12,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import com.vernal.is.dao.LeaveDAO;
 import com.vernal.is.dto.LeaveManagementDTO;
 import com.vernal.is.dto.ResponseBean;
-import com.vernal.is.mapper.CommunityRowMapper;
 import com.vernal.is.mapper.LeaveManagementRowMapper;
-import com.vernal.is.mapper.UserListRowMapper;
 import com.vernal.is.util.CommonConstants;
 
 public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implements LeaveDAO{
@@ -76,9 +74,13 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 				+ "`CREATED_ON`,"
 				+ " `CREATED_BY`) "
 				+ "VALUES (";
+
 				if(leave.getStaff() != null && leave.getStaff().getId() != null){
 					INSERT_LEAVE = INSERT_LEAVE+ leave.getStaff().getId()+",";
-					
+				}
+				if(leave.getStaff() != null){
+					INSERT_LEAVE = INSERT_LEAVE+ leave.getStaff()+",";
+
 					}
 					if(leave.getStartTime()!=null){
 						INSERT_LEAVE = INSERT_LEAVE+ leave.getStartTime()+",";
@@ -113,7 +115,7 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 						System.out.println("id ------------>"+id);
 						if(id != null){
 							responseBean.setStatus("SUCCESS");
-							responseBean.setMessage("The new user is added successfully");
+							responseBean.setMessage("Leave Is applied");
 						}
 					}
 					}
@@ -123,8 +125,9 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 						responseBean.setMessage( e.getMessage());
 					}
 		        return responseBean;
+				
 
-				}
+}
 
 	
 	@Override

@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Standard {
 
-	private String id;
-	private String name;
+	private Integer id;
+	private String standard;
 	private List<Class> classes;
 	
 	
@@ -15,18 +15,17 @@ public class Standard {
 	public void setClasses(List<Class> classes) {
 		this.classes = classes;
 	}
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getStandard() {
+		return standard;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setStandard(String standard) {
+		this.standard = standard;
 	}
-	
 	
 }

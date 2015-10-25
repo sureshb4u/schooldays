@@ -13,7 +13,7 @@ public interface UserDAO {
 	
     public UserDTO aurthentication(UserAuthenticationDTO userAuthenticationDTO);
 
-	 public ResponseBean insertUser(UserDTO user, Integer accessId);
+	 public ResponseBean insertUser(UserDTO user, Integer accessId) throws Exception;
 
 	 public ResponseBean updateUser(UserDTO user, Integer userId);
 

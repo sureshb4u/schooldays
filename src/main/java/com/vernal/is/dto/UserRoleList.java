@@ -4,13 +4,13 @@ import java.util.List;
 
 public class UserRoleList {
 
-	private List<UserRoleDTO> userRoleList;
+	private List<RoleDTO> userRoleList;
 
-	public List<UserRoleDTO> getUserRoleList() {
+	public List<RoleDTO> getUserRoleList() {
 		return userRoleList;
 	}
 
-	public void setUserRoleList(List<UserRoleDTO> userRoleList) {
+	public void setUserRoleList(List<RoleDTO> userRoleList) {
 		this.userRoleList = userRoleList;
 	}
 	

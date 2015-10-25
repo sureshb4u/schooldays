@@ -28,7 +28,7 @@
     		 // $location.path('/dashboard');
     		  if(localStorage.getItem('userRole')=='Staff'){
     			  $state.go('home.profile');
-    		  }else if(localStorage.getItem('userRole')=='Admin'){
+    		  }else if(localStorage.getItem('userRole')=='ADMIN'){
     			  $state.go('home.dashboard');
     		  }
     	  },
@@ -42,11 +42,25 @@
       
       $scope.userEmailAddress = function(userName){
     	  currentUserName = userName;
-    	  temporaryStorage.setDetails(currentUserName);
-    	  alert("inside.."+currentUserName);
-    	  //$location.path('/resetPassword');
+    	  var data = loginAuthService.mailVerification(userName);
+    	  data.then(function(response){
+    		  console.log(response.status);
+    		  if(response.status ='200'){
+    			  temporaryStorage.setDetails(currentUserName);
+    			  $location.path('/checkEmail');
+    		  }else{
+    			  $scope.error = "Email Id does not exists";
+    		  }
+    	  },
+    	  function(error){
+    		  $scope.error = "Email Id does not exists";
+    	  });
       };
       
+      $scope.getMailedTo = function(){
+    	  $scope.mailedTo = temporaryStorage.getDetails(currentUserName);
+      };
+    
       $scope.changedPassword = function(confirmUserSecret){
     	  $scope.currentUserSecret = confirmUserSecret;
     	  $scope.resetCredential={};
@@ -57,7 +71,7 @@
       
 		 $scope.emailValidation = function(email)
 	        {
-			 var emailId=false;
+			 var emailId = false;
 			 $scope.error = "";
 			 if(email == undefined || email == ""){
 				 emailId = true;
@@ -67,7 +81,7 @@
 			 if(emailId == true){
 				 $scope.userEmailAddress(email);
 			 }else{
-				 $scope.error = "EmailId invalid";
+				 $scope.error = "Invalid emailid";
 			 }
 	        };
       

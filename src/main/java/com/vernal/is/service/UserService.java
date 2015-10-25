@@ -54,12 +54,15 @@ public class UserService  extends BaseService {
 		List<User> userList = null;
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
-			
+			String param ="";
+			if(queryString != null){
+				param = translateQueryParams(queryString);
+			}
 			ResponseEntity<Object> response =
 							restTemplate.exchange(getAPIBaseURL()
-							+ CommonConstants.USERS_BASE_URL + CommonConstants.USERS_BASE_URL ,
+							+ CommonConstants.USERS_BASE_URL + CommonConstants.USERS_BASE_URL +"?"+param,
 							HttpMethod.GET, requestEntity, Object.class);
-			System.out.println("response.getBody()>>>>>>>"+gson.toJson(response.getBody()));
+
 			userDTOList = userTranslator.translateToUserDTOList(response.getBody());
 			userList = userTranslator.translateToUserList(userDTOList, locale);
 		}catch (IOException e) {
@@ -138,35 +141,5 @@ public class UserService  extends BaseService {
 		return user;
 	}
 	
-	
-	
-	
-	
-	public Organization getStaffsList(String organizationId, HttpSession session) throws JsonSyntaxException, IOException {
-		File file = new File("staff-list.json");
-		System.out.println("staffffffffffffffffff");
-		InputStream inputStream = null;
-		Organization org = null;
-		if (!file.exists()) {
-			/* if not exists, reading file from appln file path */
-			inputStream =  this
-					.getClass()
-					.getClassLoader()
-					.getResourceAsStream(
-							"com/vernal/is/properties/staff-list.json");
-		} else {
-			/* file exists, reading file */
-			try {
-				inputStream = new FileInputStream("staff-list.json");
-			} catch (FileNotFoundException exception) {
-				throw exception;
-			}
-		}
-		org = gson.fromJson(commonUtil.getStringFromInputStream(inputStream), Organization.class);
-		System.out.println("staff list-=------" + gson.toJson(org));
-		//UserDAOImpl userDAO = new UserDAOImpl();
-	//	System.out.println("userDAO.getUserInfo()"+gson.toJson(userDAO.getUserInfo()));
-		return org;
-	}
 
 }

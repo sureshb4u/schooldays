@@ -3,39 +3,29 @@ package com.vernal.is.dto;
 
 public class StaffClassDTO {
     private Integer id;
-    private Integer idStaff;
-    private Integer idSection;
-    private Integer idSubject;
     private Integer idYear;
+    private UserDTO staff;
     private Integer isClassTeacher; 
     private StandardDTO standard;
     private SectionDTO section;
     private SubjectDTO subject;
     private YearDTO year;
+    
+    
 	public Integer getId() {
 		return id;
 	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getIdStaff() {
-		return idStaff;
+	public UserDTO getStaff() {
+		return staff;
 	}
-	public void setIdStaff(Integer idStaff) {
-		this.idStaff = idStaff;
+	public void setStaff(UserDTO staff) {
+		this.staff = staff;
 	}
-	public Integer getIdSection() {
-		return idSection;
-	}
-	public void setIdSection(Integer idSection) {
-		this.idSection = idSection;
-	}
-	public Integer getIdSubject() {
-		return idSubject;
-	}
-	public void setIdSubject(Integer idSubject) {
-		this.idSubject = idSubject;
-	}
+	
+
 	public Integer getIdYear() {
 		return idYear;
 	}

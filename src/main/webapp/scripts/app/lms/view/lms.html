@@ -6,11 +6,7 @@
 	  <div  layout="row" >
 	     <div flex="80" class="aligncenter"><span class="fs-display-1 display-block">LMS</span></div>
 	     <div flex="20" class="aligncenter" ng-init="create=false">
-	     <ng-md-icon icon="mode_edit" style="color : rgb(89, 226, 168); cursor: pointer;" size="30" ng-hide="create" ng-click="create=true;mainTemplate('','details');loader=true" >
-			<md-tooltip md-autohide="true">
-                        Create New Leave Request
-            </md-tooltip>
-		</ng-md-icon>
+		<button class="btn btn--m btn--transparent btn--fab"  ng-hide="create" ng-click="create=true;mainTemplate('','details');loader=true"  lx-ripple lx-tooltip="Create New Leave Request" tooltip-position="left" ><i class="mdi mdi-plus"></i></button>
 		<ng-md-icon icon="cancel" style="color : rgb(89, 226, 168); cursor: pointer;" size="30" ng-show="create" ng-click="create=false;mainTemplate('','list'); loader=false;">
 			<md-tooltip md-autohide="true">
                        Cancel
@@ -23,13 +19,14 @@
 			</ng-md-icon>
 		</div>
 	 </div>
-	 </div>
 	</md-toolbar>
  </div>
+ <div>
+ </div> 
 <div class="details" layout-fill layout-wrap ng-init="mainTemplate('','list')">
   
   <div layout-fill class="tc-white-1" >
   	<md-progress-linear layout-margin ng-show="loader" class="md-warn md-hue-3" md-mode="indeterminate"></md-progress-linear>
-    <div layout-margin class="white"  resize style="height:{{windowHeight-120+'px'}};border:1px solid #ddd;overflow:auto"><div ng-include="template1.pageDetails"></div></div>
+    <div layout-margin class="white"  resize style="height:{{windowHeight-120+'px'}};overflow:auto"><div ng-include="template1.pageDetails"></div></div>
   </div>
 </div>

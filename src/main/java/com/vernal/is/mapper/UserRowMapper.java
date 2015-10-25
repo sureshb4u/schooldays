@@ -9,8 +9,8 @@ import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.GenderDTO;
 import com.vernal.is.dto.ReligionDTO;
+import com.vernal.is.dto.RoleDTO;
 import com.vernal.is.dto.UserDTO;
-import com.vernal.is.dto.UserRoleDTO;
 
 public class UserRowMapper implements RowMapper<UserDTO> {
 
@@ -23,18 +23,18 @@ public class UserRowMapper implements RowMapper<UserDTO> {
 	    UserDTO user = new UserDTO();
 		user.setId(rs.getInt("ID"));
 	    if(rs.getInt("ID_ROLE")!=0){
-	    UserRoleDTO role = new UserRoleDTO();
+	    RoleDTO role = new RoleDTO();
 		role.setId(rs.getInt("ID"));
 	   role.setRole(rs.getString("ROLE"));
-	   user.setRoles(role);
+	   user.setRole(role);
 	    }
 		user.setFirstName(rs.getString("FIRST_NAME"));
 		user.setLastName(rs.getString("LAST_NAME"));
-		user.setDateOfBirth(rs.getDate("DATE_OF_BIRTH"));
+		user.setDateOfBirth(rs.getTimestamp("DATE_OF_BIRTH"));
 		user.setEmailAddresses(rs.getString("EMAIL_ADDRESS"));
 		user.setExperience(rs.getInt("EXPERIENCE"));
 		user.setBioGraphy(rs.getString("BIO_GRAPHY"));
-		user.setDateOfJoining(rs.getDate("DATE_OF_JOINING"));
+		user.setDateOfJoining(rs.getTimestamp("DATE_OF_JOINING"));
 		user.setFatherName(rs.getString("FATHER_NAME"));
 		user.setAge(rs.getInt("AGE"));
 		if(rs.getInt("ID_DESIGNATION")!= 0){

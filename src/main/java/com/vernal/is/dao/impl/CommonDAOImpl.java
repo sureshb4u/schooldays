@@ -3,6 +3,8 @@ package com.vernal.is.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 
 import com.vernal.is.dao.CommonDAO;
@@ -12,9 +14,13 @@ import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.mapper.CommunityRowMapper;
 import com.vernal.is.mapper.DesignationRowMapper;
 import com.vernal.is.mapper.ReligionRowMapper;
+import com.vernal.is.util.CommonUtil;
 
 public class CommonDAOImpl  extends NamedParameterJdbcDaoSupport implements CommonDAO {
 
+	@Resource
+	CommonUtil commonUtil;
+	
 	@Override
 	public List<CommunityDTO> getCommunity() {
 		List<CommunityDTO> communityList = new ArrayList<CommunityDTO>();
@@ -59,6 +65,15 @@ public class CommonDAOImpl  extends NamedParameterJdbcDaoSupport implements Comm
 		}
 		
 		return designationList;
+	}
+
+
+	@Override
+	public Integer getId(String entity, String type) {
+	 String GET_ID = "SELECT ID FROM "+type+" WHERE "+type+" = "+ commonUtil.stringFeilds(entity);
+	 Integer id = getJdbcTemplate().queryForObject(
+				GET_ID,Integer.class); 
+	return id;
 	}
 
 

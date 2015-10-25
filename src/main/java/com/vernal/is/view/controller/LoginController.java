@@ -46,11 +46,8 @@ public class LoginController extends BaseController{
 	public ResponseEntity<?> authentication(@RequestBody Login login,HttpSession session,  HttpServletRequest request) throws IOException {
 		User user = new User();
 			try{ 
-					if(login.getUserName()!=null&&!login.getUserName().isEmpty()&&login.getUserSecret()!=null&&!login.getUserSecret().isEmpty()) {
+					if(login.getUserName()!=null && !login.getUserName().isEmpty()&&login.getUserSecret()!=null&&!login.getUserSecret().isEmpty()) {
 						user = loginService.userAuthentication(login.getUserName(), login.getUserSecret(), session, locale, request);
-						user.setUserRole("Admin");
-						/*String msgBody = CommonConstants.USERNAME + login.getUserName() +" and "+CommonConstants.PASSWORD+ login.getUserSecret()+" "
-								+ CommonConstants.FOOTER;*/
 						if(user.getId() != null )
 							session.setAttribute(CommonConstants.SESSION_USER_ID, user.getId().toString());
 						if(user.getUserName() != null && !user.getUserName().isEmpty())
@@ -64,7 +61,8 @@ public class LoginController extends BaseController{
 						if(user.getEmailAddresses() != null && !user.getEmailAddresses().isEmpty())
 							session.setAttribute(CommonConstants.SESSION_EMAILADDRESS, user.getEmailAddresses());
 					 }
-					System.out.println(session.getAttribute(CommonConstants.SESSION_USER_ID));
+					System.out.println("user---------"+gson.toJson(user));
+					
 			}catch(Exception exception){
 				exception.printStackTrace();
 				return new ResponseEntity<>(setCustomExceptionHandler(exception, MessageUtils.getMessage("error.invalid.login")), HttpStatus.INTERNAL_SERVER_ERROR);

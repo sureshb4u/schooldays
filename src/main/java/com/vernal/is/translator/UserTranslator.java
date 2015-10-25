@@ -4,7 +4,6 @@
 package com.vernal.is.translator;
 
 import java.lang.reflect.Type;
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +17,8 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.reflect.TypeToken;
 import com.vernal.is.dto.GenderDTO;
+import com.vernal.is.dto.RoleDTO;
 import com.vernal.is.dto.UserDTO;
-import com.vernal.is.dto.UserRoleDTO;
 import com.vernal.is.model.User;
 import com.vernal.is.util.CommonConstants;
 
@@ -90,7 +89,10 @@ public class UserTranslator extends BaseTranslator{
 				user.setDateOfJoining(commonUtil.formatDateTogiven(userDTO.getDateOfJoining(), CommonConstants.DATE_DD_MMMM_YYYY));
 			}
 			if(userDTO.getGender() != null){
-			//	user.setGender(userDTO.getGender().getGender());
+				user.setGender(userDTO.getGender().getGender());
+			}
+			if(userDTO.getRole() != null){
+				user.setUserRole(userDTO.getRole().getRole());
 			}
 		}
 		return user;
@@ -109,17 +111,17 @@ public class UserTranslator extends BaseTranslator{
 			BeanUtils.copyProperties(user, userDTO);
 			if(user.getDateOfBirth() != null){
 				System.out.println("user.getDateOfBirth()>>>>>>."+user.getDateOfBirth());
-				userDTO.setDateOfBirth(commonUtil.formatgivenStringToDate(user.getDateOfBirth() , CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT));
+				userDTO.setDateOfBirth(commonUtil.stringToTimestamp(user.getDateOfBirth(), CommonConstants.DATE_DD_MMMM_YYYY));
 				System.out.println(">>>>>>>>>>"+userDTO.getDateOfBirth());
 			}
 			if(user.getDateOfJoining() != null){
-				userDTO.setDateOfJoining(commonUtil.formatgivenStringToDate(user.getDateOfJoining() , CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT));
+				userDTO.setDateOfJoining(commonUtil.stringToTimestamp(user.getDateOfJoining() , CommonConstants.DATE_DD_MMMM_YYYY));
 			}
-			UserRoleDTO userRole = new UserRoleDTO();
-			userRole.setId(3);
-			userDTO.setRoles(userRole);
+			RoleDTO userRole = new RoleDTO();
+			userRole.setRole(CommonConstants.ROLE_T_STAFF);
+			userDTO.setRole(userRole);
 			GenderDTO gender = new GenderDTO();
-			gender.setId(1);
+			gender.setGender(CommonConstants.MALE);
 			userDTO.setGender(gender);
 		}
 		return userDTO;

@@ -12,7 +12,7 @@ import java.util.List;
 public class DashBoard {
 
 	private List<Inbox> inboxList;
-	private List<Activity> activityList;
+	private List<Section> activityList;
 	/**
 	 * @return the inboxList
 	 */
@@ -30,14 +30,14 @@ public class DashBoard {
 	/**
 	 * @return the activityList
 	 */
-	public List<Activity> getActivityList() {
+	public List<Section> getActivityList() {
 		return activityList;
 	}
 
 	/**
 	 * @param activityList the activityList to set
 	 */
-	public void setActivityList(List<Activity> activityList) {
+	public void setActivityList(List<Section> activityList) {
 		this.activityList = activityList;
 	}
 	

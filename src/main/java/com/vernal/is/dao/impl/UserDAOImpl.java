@@ -21,12 +21,15 @@ import com.vernal.is.dto.UserDTO;
 import com.vernal.is.mapper.SessionMapper;
 import com.vernal.is.mapper.UserListRowMapper;
 import com.vernal.is.mapper.UserRowMapper;
+import com.vernal.is.service.EmailService;
 import com.vernal.is.util.CommonConstants;
 import com.vernal.is.util.CommonUtil;
 
 public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO{
 	
-
+	@Resource
+	EmailService emailService;
+	
 	@Resource
 	CommonUtil commonUtil;
 	public static final Gson gson = new GsonBuilder().setDateFormat(CommonConstants.ISO_DATE_FORMAT).create();
@@ -45,7 +48,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
                      String USER_INFO = "SELECT A.ID,A.FIRST_NAME,A.ID_ROLE,A.LAST_NAME,"
                      		+ "R.ID,R.ROLE,A.ID_GENDER,G.ID,G.GENDER,A.EMAIL_ADDRESS,A.ID_DESIGNATION,D.ID,D.DESIGNATION "
                      		+ "FROM USER A "
-                     		+ "INNER JOIN USER_ROLE R ON A.ID_ROLE = R.ID"
+                     		+ "INNER JOIN ROLE R ON A.ID_ROLE = R.ID"
                      		+ " INNER JOIN DESIGNATION D ON A.ID_DESIGNATION = D.ID "
                      		+ "INNER JOIN GENDER G ON A.ID_GENDER = G.ID "
                      		+ "WHERE A.ID = ?";
@@ -68,9 +71,9 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 	public List<UserDTO> getUsers(String role) {
 		List<UserDTO> userList = new ArrayList<UserDTO>();
 		    String GET_USERS = "SELECT * FROM user ";
-			String ID_ROLE = "SELECT ID FROM user_role WHERE ROLE ="+role;
+			String ID_ROLE = "SELECT ID FROM role WHERE ROLE = "+commonUtil.stringFeilds(role);
 		try {
-			Integer idRole =  getJdbcTemplate().queryForObject(
+		Integer idRole =  getJdbcTemplate().queryForObject(
                     ID_ROLE, Integer.class);
 			if(idRole != null){
 				GET_USERS = GET_USERS+ "WHERE ID_ROLE = "+idRole;
@@ -83,11 +86,11 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 	}
 
 	@Override
-	public ResponseBean insertUser(UserDTO user, Integer accessId) {
+	public ResponseBean insertUser(UserDTO user, Integer accessId) throws Exception{
 		   ResponseBean responseBean = new ResponseBean();
 		   System.out.println("Insert............");
 		   String INSERT_USER = "INSERT INTO user(";
-				   if(user.getRoles() != null){
+				   if(user.getRole() != null){
 					   INSERT_USER = INSERT_USER+ "`ID_ROLE`,";
 		   		     }
 				   if(user.getFirstName()!= null){
@@ -132,8 +135,8 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				   INSERT_USER = INSERT_USER+ "`IS_DELETED`,`CREATED_ON`,`CREATED_BY`)";
 		   		
 				   INSERT_USER = INSERT_USER+ " VALUES (";
-				   if(user.getRoles() != null){
-					   INSERT_USER = INSERT_USER+ user.getRoles().getId()+",";
+				   if(user.getRole() != null){
+					   INSERT_USER = INSERT_USER+ user.getRole().getId()+",";
 		   		     }
 				   if(user.getFirstName()!= null){
 				   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getFirstName())+",";
@@ -142,7 +145,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getLastName())+",";
 				   }
 				   if(user.getDateOfBirth()!=null){
-				   INSERT_USER = INSERT_USER+ user.getDateOfBirth();
+				   INSERT_USER = INSERT_USER+ user.getDateOfBirth()+",";
 				   }
 				   if(user.getEmailAddresses()!=null){
 					      INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getEmailAddresses())+",";
@@ -154,9 +157,9 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 						   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getBioGraphy())+",";
 						   }
 				    if(user.getDateOfJoining() !=null){
-						   INSERT_USER = INSERT_USER+ user.getDateOfJoining();
+						   INSERT_USER = INSERT_USER+ user.getDateOfJoining()+",";
 						   }
-				   if(user.getGender()!= null){
+				   if(user.getGender() != null){
 				   INSERT_USER = INSERT_USER+ user.getGender().getId()+",";
 				   }
 				   if(user.getFatherName()!= null){
@@ -181,13 +184,18 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 					   user);
 			if(user != null)
 			getNamedParameterJdbcTemplate().update(INSERT_USER, namedParameters, keyHolder );
-			Number id = keyHolder.getKey();
-			System.out.println("id ------------>"+id);
-			if(id != null){
-				responseBean.setStatus("SUCCESS");
-				responseBean.setMessage("The new user is added successfully");
-			}else{
-				
+			Number idStaff = keyHolder.getKey();
+			user.setId(idStaff.intValue());
+			System.out.println("id ------------>"+idStaff);
+			if(idStaff != null){
+				UserAuthenticationDTO authentication = new UserAuthenticationDTO();
+				authentication.setStaff(user);
+				authentication.setUserSecret(user.getFatherName());
+				authentication.setUserName(user.getEmailAddresses());
+				insertPassword(authentication);
+				String msgBody = CommonConstants.USERNAME + authentication.getUserName()
+						+ CommonConstants.PASSWORD +authentication.getUserSecret(); 
+				emailService.readyToSendEmail(authentication.getUserName(), CommonConstants.CREDENTIALS, msgBody);
 			}
 		   }catch(Exception e){
 			   e.printStackTrace();
@@ -199,12 +207,25 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 		return responseBean;
 	}
   
+	public void insertPassword(UserAuthenticationDTO authentication){
+	String AUTHENTICATION = "INSERT INTO `user_authentication`( "
+			+ "`USER_NAME`, `USER_SECRET`, `ID_USER`)"
+		+"VALUES ("+
+		commonUtil.stringFeilds(authentication.getUserName())+","+
+				commonUtil.stringFeilds(authentication.getUserSecret())+","+
+						authentication.getStaff().getId()+")";
+	
+	getJdbcTemplate().update(AUTHENTICATION);
+	
+	}
+	
+	
 	@Override
 	public ResponseBean updateUser(UserDTO user, Integer accessId){
 		ResponseBean responseBean= new ResponseBean();
 		String UPDATE_USER = "UPDATE `user` SET ";
-		   if(user.getRoles().getId()!= null){
-			   UPDATE_USER = UPDATE_USER+ "`ID_ROLE`="+user.getRoles().getId()+",";
+		   if(user.getRole().getId()!= null){
+			   UPDATE_USER = UPDATE_USER+ "`ID_ROLE`="+user.getRole().getId()+",";
    		     }
 		   if(user.getFirstName()!= null){
 		   UPDATE_USER = UPDATE_USER+ " `FIRST_NAME`= "+ user.getFirstName()+",";

@@ -3,10 +3,10 @@ package com.vernal.is.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -31,37 +32,38 @@ import com.vernal.is.util.CommonConstants;
 @RequestMapping("/users")
 public class UsersController {
 	
-	@Autowired
-	UsersService userService;
+	@Resource
+	UsersService usersService;
 	
 	public static final Gson gson = new GsonBuilder().setDateFormat(CommonConstants.ISO_DATE_FORMAT).create();
 	
     @RequestMapping(value = "/authentication", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?>  Authentication(HttpEntity<String> entity) throws Exception {
+    public ResponseEntity<?>  Authentication(@RequestBody UserAuthenticationDTO userAuthenticationDTO) throws Exception {
         UserDTO user = new UserDTO();
-        String postString = entity.getBody();
-        UserAuthenticationDTO userAuthenticationDTO = gson.fromJson(postString, UserAuthenticationDTO.class);
-        user = userService.aurthentication(userAuthenticationDTO);
+        System.out.println("user>>>>>>>"+gson.toJson(userAuthenticationDTO));
+        user = usersService.aurthentication(userAuthenticationDTO);
         System.out.println("user>>>>>>>"+gson.toJson(user));
         return new ResponseEntity<UserDTO>(user, HttpStatus.OK);
     }
 
 
-	@RequestMapping(value = "/{role}/users", method = RequestMethod.GET )
+	@RequestMapping(value = "/users", method = RequestMethod.GET )
 	@ResponseBody
-	public List<UserDTO> getUsers(HttpEntity<String> entity, @PathVariable String role, HttpSession session)  {
-		System.out.println("Get Users>>>>>>>>>>");
-		System.out.println(entity.getHeaders());
-		System.out.println(session.getAttribute(CommonConstants.SESSION_USER_ID));
-		return userService.getUsers(role);
+	public List<UserDTO> getUsers(@RequestParam( value="type", required = true) String type, HttpServletRequest request, HttpSession session)  {
+		String role = request.getHeader(CommonConstants.SESSION_USERROLE);
+		if(type != null){
+			System.out.println(type);
+			return usersService.getUsers(CommonConstants.ROLE_NT_STAFF);
+		}
+		return null;
 	}
 	
 	@RequestMapping(value = "/getUser/{userId}", method = RequestMethod.GET)
 	@ResponseBody
 	public UserDTO getUser(@PathVariable Integer userId) throws Exception {
 		System.out.println("Get User>>>>>>>>>>");
-		return userService.getUser(userId);
+		return usersService.getUser(userId);
 	}
 	
 	
@@ -83,7 +85,7 @@ public class UsersController {
 		if(accessId != null && !accessId.isEmpty()){
 			System.out.println("accessId>>>>>>>"+accessId);
 			 userid = Integer.valueOf(accessId);
-			 userService.insertUser(userDTO, userid);
+			 usersService.insertUser(userDTO, userid);
 		}
 		return new ResponseEntity<String>("SUCESS", HttpStatus.OK);
 	}
@@ -93,7 +95,7 @@ public class UsersController {
 	@ResponseBody
 	public ResponseBean updateBills(@PathVariable Integer userId, @RequestBody UserDTO userDTO, HttpSession session) throws Exception {
 		ResponseBean responseBean = new ResponseBean();
-		responseBean = userService.updateUser(userDTO, userId);
+		responseBean = usersService.updateUser(userDTO, userId);
 		return responseBean;
 	}
 
@@ -101,7 +103,7 @@ public class UsersController {
 	@ResponseBody
 	public ResponseBean deleteBill(@PathVariable Integer userId, HttpSession session) throws Exception {
 		ResponseBean responseBean = new ResponseBean();
-		responseBean = userService.deleteUser(userId, userId);
+		responseBean = usersService.deleteUser(userId, userId);
 		return responseBean;
 	}
 

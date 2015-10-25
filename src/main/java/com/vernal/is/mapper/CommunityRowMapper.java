@@ -17,7 +17,7 @@ public class CommunityRowMapper implements RowMapper<CommunityDTO>{
 		
 		CommunityDTO communityDTO = new CommunityDTO();
 		communityDTO.setId(rs.getInt("ID"));
-		communityDTO.setName(rs.getString("NAME"));
+		communityDTO.setCommunity(rs.getString("COMMUNITY"));
 		return communityDTO;
 	}
 }

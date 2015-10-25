@@ -51,7 +51,8 @@ public class UserController extends BaseController{
 		 List<User> userList = null;
 		 Map<String, String> queryString = new TreeMap<String, String>();
 			try{
-			userList = userService.getUsersList(queryString,"",session,locale);
+				queryString.put(CommonConstants.LIST_TYPE, "NON TEACHING STAFFS");
+				userList = userService.getUsersList(queryString,"",session,locale);
 		}catch(Exception ex){
 			ex.printStackTrace();
 			return new ResponseEntity<>(setCustomExceptionHandler(ex, MessageUtils.getMessage("error.getting.users")),HttpStatus.INTERNAL_SERVER_ERROR);

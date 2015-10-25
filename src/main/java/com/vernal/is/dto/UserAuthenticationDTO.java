@@ -5,7 +5,6 @@ public class UserAuthenticationDTO {
 	private Integer id;
 	private String userName;
 	private String userSecret;
-	private Integer idStaff;
 	private UserDTO Staff;
 	
 	public Integer getId() {
@@ -26,12 +25,7 @@ public class UserAuthenticationDTO {
 	public void setUserSecret(String userSecret) {
 		this.userSecret = userSecret;
 	}
-	public Integer getIdStaff() {
-		return idStaff;
-	}
-	public void setIdStaff(Integer idStaff) {
-		this.idStaff = idStaff;
-	}
+
 	public UserDTO getStaff() {
 		return Staff;
 	}
