@@ -1,12 +1,18 @@
 package com.vernal.is.controller;
 
 import java.util.List;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.vernal.is.backservice.LMSService;
 import com.vernal.is.dto.LeaveManagementDTO;
 import com.vernal.is.model.LeaveManagement;
 import com.vernal.is.util.CommonConstants;
@@ -15,6 +21,8 @@ import com.vernal.is.util.CommonConstants;
 @RequestMapping(value= "/leaveManagement")
 public class LMController {
 
+	@Resource
+	LMSService lMSService;
 	/**
 	 * 
 	 * @param status
@@ -23,11 +31,16 @@ public class LMController {
 	 */
 	@RequestMapping(value= "/pending")
 	@ResponseBody
-	public Object getPendingLMSList(HttpEntity<String> entity){
-		List<LeaveManagement> lmsList = null;
+	public List<LeaveManagementDTO> getPendingLMSList(HttpEntity<String> entity, HttpServletRequest request){
+		List<LeaveManagementDTO> lmsList = null;
 		try {
-			entity.getHeaders();
-		//	lmsList = lMSService.getLMSByStatus(CommonConstants.STATUS_PENDING, session);
+			String userID = request.getHeader(CommonConstants.SESSION_USER_ID);
+			String role = request.getHeader(CommonConstants.SESSION_USERROLE);
+			if(userID != null && role != null){
+				Integer userId = Integer.valueOf(userID);
+				lmsList = lMSService.getLMSList(CommonConstants.STATUS_PENDING, userId, role);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

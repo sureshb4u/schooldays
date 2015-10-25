@@ -9,12 +9,5 @@ public interface LeaveDAO {
 
 	public List<LeaveManagementDTO> getLeaveByStatus(String status,Integer userId,String accessId);
 
-	public List<LeaveManagementDTO> statusChange(
-			List<LeaveManagementDTO> leaveDTO);
-
-	
-	
-	
-	
-
+	public List<LeaveManagementDTO> statusChange(List<LeaveManagementDTO> leaveDTO,Integer userId);
 }

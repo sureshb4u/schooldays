@@ -10,13 +10,13 @@ import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.LeaveManagementDTO;
 import com.vernal.is.dto.ReligionDTO;
 
-public class LeaveManagementService {
+public class LMSService {
 	@Resource
       LeaveDAO leaveDAO;
 	
-	public List<LeaveManagementDTO> getPendingLeave(String status,Integer userId, String role) {
+	public List<LeaveManagementDTO> getLMSList(String status,Integer userId, String role) {
 		// TODO Auto-generated method stub
-		return leaveDAO.getLeaveByStatus(status,userId,role);
+		return leaveDAO.getLeaveByStatus(status, userId,role);
 	}
 	
 
