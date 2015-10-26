@@ -162,6 +162,9 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 			
 			getJdbcTemplate().execute(UPDATE_LEAVE);
 		}
+		responceBean.setStatus("SUCCESS");
+		responceBean.setMessage("Your Leave Form is updated successfully");
+		
 		}catch(Exception e){
 			responceBean.setStatus("FAILED");
 			   String eStr = e.getMessage();

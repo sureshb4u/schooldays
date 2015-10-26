@@ -4,12 +4,15 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Component;
+
 import com.vernal.is.dao.LeaveDAO;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.LeaveManagementDTO;
 import com.vernal.is.dto.ReligionDTO;
-
+import com.vernal.is.dto.ResponseBean;
+@Component
 public class LMSService {
 	@Resource
       LeaveDAO leaveDAO;
@@ -18,10 +21,14 @@ public class LMSService {
 		// TODO Auto-generated method stub
 		return leaveDAO.getLeaveByStatus(status, userId,role);
 	}
-	
-
-	/*public List<LeaveManagementDTO> statusChange(List<LeaveManagementDTO> leaveDTO, Integer userId) {
+	public ResponseBean Applyleave(LeaveManagementDTO leaveDTO, Integer userId) {
 		// TODO Auto-generated method stub
-		//return leaveDAO.statusChange(leaveDTO,userId);
-	}*/
+		return leaveDAO.Applyleave(leaveDTO,userId);
+	}
+	
+	 
+	public ResponseBean statusChange(List<LeaveManagementDTO> leaveDTO, Integer userId) {
+		// TODO Auto-generated method stub
+		return  leaveDAO.statusChange(leaveDTO,userId);
+	}
 }

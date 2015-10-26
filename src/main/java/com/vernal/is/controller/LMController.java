@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vernal.is.backservice.LMSService;
 import com.vernal.is.dto.LeaveManagementDTO;
+import com.vernal.is.dto.ResponseBean;
 import com.vernal.is.model.LeaveManagement;
 import com.vernal.is.util.CommonConstants;
 
@@ -73,15 +74,22 @@ public class LMController {
 	 */
 	@RequestMapping(value = CommonConstants.CREATE_LEAVE_REQUEST)
 	@ResponseBody
-	public Object createLeaveRequest(@RequestBody LeaveManagementDTO leaveManagementDTO, HttpSession session){
-		Object obj = null;
+	public Object createLeaveRequest(@RequestBody LeaveManagementDTO leaveManagementListDTO,HttpServletRequest request){
+		ResponseBean responseBean = new ResponseBean();
 		try {
-		} catch (Exception e) {
+			if(leaveManagementListDTO != null ){
+				String userID = request.getHeader(CommonConstants.SESSION_USER_ID);
+				String role = request.getHeader(CommonConstants.SESSION_USERROLE);
+				if(userID != null && role != null){
+					Integer userId = Integer.valueOf(userID);
+					responseBean = lMSService.Applyleave(leaveManagementListDTO,userId);
+			}
+			}
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return  obj ;
+		return  responseBean ;
 	}
-	
 	
 
 	/**
@@ -91,16 +99,21 @@ public class LMController {
 	 * @return
 	 */
 	@RequestMapping(value = CommonConstants.UPDATE_REQUEST)
-	public Object updateStatusForLeaveRequest(@RequestBody List<LeaveManagementDTO> leaveManagementListDTO, HttpSession session){
-		Object obj = null;
+	public Object updateStatusForLeaveRequest(@RequestBody List<LeaveManagementDTO> leaveManagementListDTO,HttpServletRequest request){
+		ResponseBean responseBean = new ResponseBean();
 		try {
 			if(leaveManagementListDTO != null && !leaveManagementListDTO.isEmpty()){
-				//obj = lMSService.statusChange(leaveManagementListDTO, Integer userI);
+				String userID = request.getHeader(CommonConstants.SESSION_USER_ID);
+				String role = request.getHeader(CommonConstants.SESSION_USERROLE);
+				if(userID != null && role != null){
+					Integer userId = Integer.valueOf(userID);
+					responseBean = lMSService.statusChange(leaveManagementListDTO, userId);
+			}
 			}
 		} catch (Exception e) {
 				e.printStackTrace();
 		}
-		return  obj ;
+		return  responseBean ;
 	}
 	
 	
