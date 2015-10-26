@@ -28,7 +28,7 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 			Integer statusId=  getJdbcTemplate().queryForObject(
                     ID_STATUS, statusInput, Integer.class);
 			
-					
+				
 			if(role != CommonConstants.ROLE_ADMIN){
 				LEAVE_FORM = LEAVE_FORM+" AND ID_STAFF =?";
 				Integer[] inputs = {statusId,userId};
@@ -38,6 +38,7 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 			leaveList = getJdbcTemplate().query(LEAVE_FORM,input, new LeaveManagementRowMapper());
 
 			}
+			
 		}
 			catch (Exception e){
 				   String eStr = e.getMessage();
@@ -97,7 +98,7 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 					if(leave.getFormStatus() != null ){
 					INSERT_LEAVE = INSERT_LEAVE+"?,";
 					}
-				INSERT_LEAVE = INSERT_LEAVE+ "0,NOW(),"+accessId
+				INSERT_LEAVE = INSERT_LEAVE+ CommonConstants.IS_DELETED+","+"NOW()"+","+accessId
 				+")";
 				try{
 					if(leave.getFormStatus() != null && leave.getFormStatus().getStatus()!= null){
@@ -112,6 +113,7 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 						if(leave != null)
 						getNamedParameterJdbcTemplate().update(INSERT_LEAVE, namedParameters, keyHolder );
 						Number id = keyHolder.getKey();
+						leave.setId(id.intValue());
 						System.out.println("id ------------>"+id);
 						if(id != null){
 							responseBean.setStatus("SUCCESS");
@@ -130,9 +132,9 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 }
 
 	
-	@Override
-	public List<LeaveManagementDTO> statusChange(List<LeaveManagementDTO> leaveDTO, Integer userId) {
+	public  ResponseBean statusChange(List<LeaveManagementDTO> leaveDTO, Integer userId) {
 		// TODO Auto-generated method stub
+		ResponseBean responceBean = new ResponseBean();
 		try{
 		for(LeaveManagementDTO leave : leaveDTO){
 		String UPDATE_LEAVE = "UPDATE `leave_management` SET"; 
@@ -161,7 +163,9 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 			getJdbcTemplate().execute(UPDATE_LEAVE);
 		}
 		}catch(Exception e){
-			
+			responceBean.setStatus("FAILED");
+			   String eStr = e.getMessage();
+			   responceBean.setMessage(eStr);
 		}
 		return null;
 	}

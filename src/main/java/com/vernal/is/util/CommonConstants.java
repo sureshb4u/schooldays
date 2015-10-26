@@ -84,4 +84,5 @@ public class CommonConstants {
 	public static final String COMMUNITY = "COMMUNITY";
 	public static final String DESIGNATION = "DESIGNATION";
 	public static final String LIST_TYPE = "type";
+	public static final String IS_DELETED = "0";
 }

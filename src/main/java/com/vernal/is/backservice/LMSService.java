@@ -20,8 +20,8 @@ public class LMSService {
 	}
 	
 
-	public List<LeaveManagementDTO> statusChange(List<LeaveManagementDTO> leaveDTO) {
+	/*public List<LeaveManagementDTO> statusChange(List<LeaveManagementDTO> leaveDTO, Integer userId) {
 		// TODO Auto-generated method stub
-		return leaveDAO.statusChange(leaveDTO);
-	}
+		//return leaveDAO.statusChange(leaveDTO,userId);
+	}*/
 }

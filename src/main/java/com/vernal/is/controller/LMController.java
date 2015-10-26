@@ -50,11 +50,16 @@ public class LMController {
 	
 	@RequestMapping(value= "/history")
 	@ResponseBody
-	public Object getHistoryLMSList(HttpEntity<String> entity, HttpSession session){
-		List<LeaveManagement> lmsList = null;
+	public Object getHistoryLMSList( HttpServletRequest request){
+		List<LeaveManagementDTO> lmsList = null;
 		try {
-		//	lmsList = lMSService.getLMSByStatus(CommonConstants.STATUS_HISTORY, session);
-		} catch (Exception e) {
+			String userID = request.getHeader(CommonConstants.SESSION_USER_ID);
+			String role = request.getHeader(CommonConstants.SESSION_USERROLE);
+			if(userID != null && role != null){
+				Integer userId = Integer.valueOf(userID);
+				lmsList = lMSService.getLMSList(CommonConstants.STATUS_PENDING, userId, role);
+		}
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		return lmsList;
@@ -90,7 +95,7 @@ public class LMController {
 		Object obj = null;
 		try {
 			if(leaveManagementListDTO != null && !leaveManagementListDTO.isEmpty()){
-			//	obj = lMSService.updateLMS(leaveManagementList, session);
+				//obj = lMSService.statusChange(leaveManagementListDTO, Integer userI);
 			}
 		} catch (Exception e) {
 				e.printStackTrace();
