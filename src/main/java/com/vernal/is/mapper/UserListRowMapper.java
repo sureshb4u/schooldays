@@ -34,21 +34,21 @@ public class UserListRowMapper implements RowMapper<UserDTO> {
 		user.setEmailAddresses(rs.getString("EMAIL_ADDRESS"));
 		user.setExperience(rs.getInt("EXPERIENCE"));
 		user.setBioGraphy(rs.getString("BIO_GRAPHY"));
-		user.setDateOfJoining(rs.getTimestamp("DATE_OF_JOINING"));
-		user.setFatherName(rs.getString("FATHER_NAME"));
-		user.setAge(rs.getInt("AGE"));
+		//user.setDateOfJoining(rs.getTimestamp("DATE_OF_JOINING"));
+		//user.setFatherName(rs.getString("FATHER_NAME"));
+		//user.setAge(rs.getInt("AGE"));
 //		if(rs.getInt("ID_DESIGNATION")!= 0){
 //			DesignationDTO designation = new DesignationDTO();
 //			designation.setId(rs.getInt("ID_DESIGNATION"));
 //			//designation.setDesignation(rs.getString("DESIGNATION"));
 //		    user.setDesignation(designation);
 //		}
-		if((rs.getInt("ID_GENDER")) != 0){
+		/*if((rs.getInt("ID_GENDER")) != 0){
 			GenderDTO gender = new GenderDTO();
 			gender.setId(rs.getInt("ID_GENDER"));
 			gender.setGender(rs.getString("GENDER"));
 			user.setGender(gender);
-		}
+		}*/
 //		if(rs.getInt("ID_COMMUNITY") !=0){
 //			CommunityDTO community = new CommunityDTO();
 //			community.setId(rs.getInt("ID_COMMUNITY"));

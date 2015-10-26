@@ -13,13 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vernal.is.model.Organization;
 import com.vernal.is.model.User;
 import com.vernal.is.service.BaseService;
 import com.vernal.is.service.UserService;
@@ -51,14 +48,26 @@ public class UserController extends BaseController{
 		 List<User> userList = null;
 		 Map<String, String> queryString = new TreeMap<String, String>();
 			try{
-				queryString.put(CommonConstants.LIST_TYPE, "NON TEACHING STAFFS");
-				userList = userService.getUsersList(queryString,"",session,locale);
+				userList = userService.getUsersList(CommonConstants.ROLE_NT_STAFF,session,locale);
 		}catch(Exception ex){
 			ex.printStackTrace();
 			return new ResponseEntity<>(setCustomExceptionHandler(ex, MessageUtils.getMessage("error.getting.users")),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
-	}//
+	}
+	
+	@RequestMapping(value = "/teachingStaffs",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getTeachingStaffs(HttpSession session) throws IOException {
+		 List<User> userList = null;
+			try{
+				userList = userService.getUsersList(CommonConstants.ROLE_T_STAFF,session,locale);
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return new ResponseEntity<>(setCustomExceptionHandler(ex, MessageUtils.getMessage("error.getting.users")),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<List<User>>(userList, HttpStatus.OK);
+	}
+	
 	
 	@RequestMapping(value = "/createStaff", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?>  createStaff(@RequestBody User user, HttpSession session){

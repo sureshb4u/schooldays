@@ -49,18 +49,14 @@ public class UserService  extends BaseService {
 	 * @return
 	 * @throws IOException
 	 */
-	public List<User> getUsersList(Map<String, String> queryString, String organizationId, HttpSession session, String locale) throws IOException {
+	public List<User> getUsersList(String role, HttpSession session, String locale) throws IOException {
 		List<UserDTO> userDTOList = null;
 		List<User> userList = null;
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
-			String param ="";
-			if(queryString != null){
-				param = translateQueryParams(queryString);
-			}
 			ResponseEntity<Object> response =
 							restTemplate.exchange(getAPIBaseURL()
-							+ CommonConstants.USERS_BASE_URL + CommonConstants.USERS_BASE_URL +"?"+param,
+							+ CommonConstants.USERS_BASE_URL + CommonConstants.USERS_BASE_URL +"/"+role,
 							HttpMethod.GET, requestEntity, Object.class);
 
 			userDTOList = userTranslator.translateToUserDTOList(response.getBody());

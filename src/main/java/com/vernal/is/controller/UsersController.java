@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -48,13 +47,13 @@ public class UsersController {
     }
 
 
-	@RequestMapping(value = "/users", method = RequestMethod.GET )
+	@RequestMapping(value = "/users/{role}", method = RequestMethod.GET )
 	@ResponseBody
-	public List<UserDTO> getUsers(@RequestParam( value="type", required = true) String type, HttpServletRequest request, HttpSession session)  {
-		String role = request.getHeader(CommonConstants.SESSION_USERROLE);
-		if(type != null){
-			System.out.println(type);
-			return usersService.getUsers(CommonConstants.ROLE_NT_STAFF);
+	public List<UserDTO> getUsers(@PathVariable( value="role") String role, HttpServletRequest request, HttpSession session)  {
+		//String role = request.getHeader(CommonConstants.SESSION_USERROLE);
+		if(role != null){
+			System.out.println(role);
+			return usersService.getUsers(role);
 		}
 		return null;
 	}
