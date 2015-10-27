@@ -16,7 +16,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.reflect.TypeToken;
+import com.vernal.is.dto.CommunityDTO;
+import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.GenderDTO;
+import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.dto.RoleDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.model.User;
@@ -123,9 +126,32 @@ public class UserTranslator extends BaseTranslator{
 			else if(role.equals("nonTeaching"))
 				userRole.setRole(CommonConstants.ROLE_NT_STAFF);
 			userDTO.setRole(userRole);
-			GenderDTO gender = new GenderDTO();
-			gender.setGender(CommonConstants.MALE);
-			userDTO.setGender(gender);
+			
+			if(user.getCommunity() != null){
+				CommunityDTO communityDTO = new CommunityDTO();
+				communityDTO.setId(Integer.valueOf(user.getCommunity().getId()));
+				communityDTO.setCommunity(user.getCommunity().getValue());
+				userDTO.setCommunity(communityDTO);
+			}
+			
+			if(user.getReligion() != null){
+				ReligionDTO religionDTO = new ReligionDTO();
+				religionDTO.setId(Integer.valueOf(user.getCommunity().getId()));
+				religionDTO.setReligion(user.getReligion().getValue());
+				userDTO.setReligion(religionDTO);
+			}
+			if(user.getDesignation() != null){
+				DesignationDTO designationDTO = new DesignationDTO();
+				designationDTO.setId(Integer.valueOf(user.getDesignation().getId()));
+				designationDTO.setDesignation(user.getDesignation().getValue());
+				userDTO.setDesignation(designationDTO);
+			}
+			if(user.getGender() != null && !user.getGender().isEmpty()){
+				GenderDTO gender = new GenderDTO();
+				gender.setGender(user.getGender());
+				userDTO.setGender(gender);
+			}
+			
 		}
 		return userDTO;
 	}

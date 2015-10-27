@@ -45,8 +45,6 @@ public class Person {
     
     private List<Alias> alias;
     
-    private String designation;
-
     private String bioGraphy;
     
     private Integer experience;
@@ -55,7 +53,27 @@ public class Person {
     
     private String fatherName;
     
+    private DropDownValue community;
+    
+    private DropDownValue religion;
    
+    private DropDownValue designation;
+	public DropDownValue getCommunity() {
+		return community;
+	}
+
+	public void setCommunity(DropDownValue community) {
+		this.community = community;
+	}
+
+	public DropDownValue getReligion() {
+		return religion;
+	}
+
+	public void setReligion(DropDownValue religion) {
+		this.religion = religion;
+	}
+
 	public String getBioGraphy() {
 		return bioGraphy;
 	}
@@ -210,19 +228,16 @@ public class Person {
 		this.alias = alias;
 	}
 
-	/**
-	 * @return the designation
-	 */
-	public String getDesignation() {
+	
+	
+	public DropDownValue getDesignation() {
 		return designation;
 	}
 
-	/**
-	 * @param designation the designation to set
-	 */
-	public void setDesignation(String designation) {
+	public void setDesignation(DropDownValue designation) {
 		this.designation = designation;
 	}
+
 	public String getContact() {
 		return contact;
 	}
