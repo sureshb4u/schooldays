@@ -23,7 +23,7 @@
     	  var data = workerListService.loadWorkerList();
 		  data.then(function(success){
 			  $scope.staffList = success;
-			  setTimeout(function(){ $scope.loader = false;},500);
+			  console.log(JSON.stringify(success));
 		  });
 		  
 		  

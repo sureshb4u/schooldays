@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
-
 import com.vernal.is.dao.CommonDAO;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.DesignationDTO;
