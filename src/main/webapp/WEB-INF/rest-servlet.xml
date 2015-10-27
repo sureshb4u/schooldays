@@ -55,6 +55,14 @@
 	<bean id="CommonDAO" class="com.vernal.is.dao.impl.CommonDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
+	<bean id="leaveDAO" class="com.vernal.is.dao.impl.LeaveManagementImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="StaffDAO" class="com.vernal.is.dao.impl.StaffDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
 		<!-- <property name="messageConverters">
