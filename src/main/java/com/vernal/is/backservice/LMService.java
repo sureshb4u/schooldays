@@ -7,13 +7,10 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import com.vernal.is.dao.LeaveDAO;
-import com.vernal.is.dto.CommunityDTO;
-import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.LeaveManagementDTO;
-import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.dto.ResponseBean;
 @Component
-public class LMSService {
+public class LMService {
 	@Resource
       LeaveDAO leaveDAO;
 	

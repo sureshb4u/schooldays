@@ -46,7 +46,6 @@ public class UserController extends BaseController{
 	@RequestMapping(value = "/staffs",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getStaffsList(HttpSession session) throws IOException {
 		 List<User> userList = null;
-		 Map<String, String> queryString = new TreeMap<String, String>();
 			try{
 				userList = userService.getUsersList(CommonConstants.ROLE_NT_STAFF,session,locale);
 		}catch(Exception ex){

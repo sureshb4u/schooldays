@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
@@ -12,10 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.vernal.is.backservice.LMSService;
+import com.vernal.is.backservice.LMService;
 import com.vernal.is.dto.LeaveManagementDTO;
 import com.vernal.is.dto.ResponseBean;
-import com.vernal.is.model.LeaveManagement;
 import com.vernal.is.util.CommonConstants;
 
 @Controller
@@ -23,7 +21,7 @@ import com.vernal.is.util.CommonConstants;
 public class LMController {
 
 	@Resource
-	LMSService lMSService;
+	LMService lMService;
 	/**
 	 * 
 	 * @param status
@@ -39,7 +37,7 @@ public class LMController {
 			String role = request.getHeader(CommonConstants.SESSION_USERROLE);
 			if(userID != null && role != null){
 				Integer userId = Integer.valueOf(userID);
-				lmsList = lMSService.getLMSList(CommonConstants.STATUS_PENDING, userId, role);
+				lmsList = lMService.getLMSList(CommonConstants.STATUS_PENDING, userId, role);
 			}
 			
 		} catch (Exception e) {
@@ -58,7 +56,7 @@ public class LMController {
 			String role = request.getHeader(CommonConstants.SESSION_USERROLE);
 			if(userID != null && role != null){
 				Integer userId = Integer.valueOf(userID);
-				lmsList = lMSService.getLMSList(CommonConstants.STATUS_PENDING, userId, role);
+				lmsList = lMService.getLMSList(CommonConstants.STATUS_PENDING, userId, role);
 		}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -82,7 +80,7 @@ public class LMController {
 				String role = request.getHeader(CommonConstants.SESSION_USERROLE);
 				if(userID != null && role != null){
 					Integer userId = Integer.valueOf(userID);
-					responseBean = lMSService.Applyleave(leaveManagementListDTO,userId);
+					responseBean = lMService.Applyleave(leaveManagementListDTO,userId);
 			}
 			}
 		}catch (Exception e) {
@@ -107,7 +105,7 @@ public class LMController {
 				String role = request.getHeader(CommonConstants.SESSION_USERROLE);
 				if(userID != null && role != null){
 					Integer userId = Integer.valueOf(userID);
-					responseBean = lMSService.statusChange(leaveManagementListDTO, userId);
+					responseBean = lMService.statusChange(leaveManagementListDTO, userId);
 			}
 			}
 		} catch (Exception e) {
