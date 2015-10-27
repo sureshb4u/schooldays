@@ -21,14 +21,13 @@ import com.vernal.is.dto.UserDTO;
 import com.vernal.is.mapper.SessionMapper;
 import com.vernal.is.mapper.UserListRowMapper;
 import com.vernal.is.mapper.UserRowMapper;
-import com.vernal.is.service.EmailService;
 import com.vernal.is.util.CommonConstants;
 import com.vernal.is.util.CommonUtil;
 
 public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO{
 	
-	@Resource
-	EmailService emailService;
+/*	@Resource
+	EmailService emailService;*/
 	
 	@Resource
 	CommonUtil commonUtil;
@@ -46,10 +45,10 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
                             sql, inputs, Integer.class);
                     if (staffId!=null) {
                      String USER_INFO = "SELECT A.ID,A.FIRST_NAME,A.ID_ROLE,A.LAST_NAME,"
-                     		+ "R.ID,R.ROLE,A.ID_GENDER,G.ID,G.GENDER,A.EMAIL_ADDRESS,A.ID_DESIGNATION,D.ID,D.DESIGNATION "
+                     		+ "R.ID,R.ROLE,A.ID_GENDER,G.ID,G.GENDER,A.EMAIL_ADDRESS,A.ID_DESIGNATION "
                      		+ "FROM USER A "
-                     		+ "INNER JOIN ROLE R ON A.ID_ROLE = R.ID"
-                     		+ " INNER JOIN DESIGNATION D ON A.ID_DESIGNATION = D.ID "
+                     		+ "INNER JOIN ROLE R ON A.ID_ROLE = R.ID "
+                     		//+ " INNER JOIN DESIGNATION D ON A.ID_DESIGNATION = D.ID "
                      		+ "INNER JOIN GENDER G ON A.ID_GENDER = G.ID "
                      		+ "WHERE A.ID = ?";
                          Object[] input = new Object[] {staffId};
@@ -193,9 +192,9 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				authentication.setUserSecret(user.getFatherName());
 				authentication.setUserName(user.getEmailAddresses());
 				insertPassword(authentication);
-				String msgBody = CommonConstants.USERNAME + authentication.getUserName()
+/*				String msgBody = CommonConstants.USERNAME + authentication.getUserName()
 						+ CommonConstants.PASSWORD +authentication.getUserSecret(); 
-				emailService.readyToSendEmail(authentication.getUserName(), CommonConstants.CREDENTIALS, msgBody);
+				emailService.readyToSendEmail(authentication.getUserName(), CommonConstants.CREDENTIALS, msgBody);*/
 			}
 		   }catch(Exception e){
 			   e.printStackTrace();

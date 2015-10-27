@@ -11,10 +11,12 @@ public class StudentDTO {
 	private StandardDTO standard;
 	private SectionDTO section;
 	private YearDTO year;
+	private GenderDTO gender;
 	private Integer age;
 	private String fatherName;
 	private CommunityDTO community;
 	private ReligionDTO religion;
+	private BloodGroupDTO bloodGroup;
 	
 	public Integer getId() {
 		return id;
@@ -82,6 +84,18 @@ public class StudentDTO {
 	public void setReligion(ReligionDTO religion) {
 		this.religion = religion;
 	}
-	
-	
+	public BloodGroupDTO getBloodGroup() {
+		return bloodGroup;
+	}
+	public void setBloodGroup(BloodGroupDTO bloodGroup) {
+		this.bloodGroup = bloodGroup;
+	}
+	public GenderDTO getGender() {
+		return gender;
+	}
+	public void setGender(GenderDTO gender) {
+		this.gender = gender;
+	}
+
+		
 }
