@@ -14,11 +14,12 @@
         * Service : getDashboardList
         * This service will retrieve the dashboard list
         */
-    	this.createStaff = function(obj){
+    	this.createStaff = function(obj,staff){
+    		
     		console.log('service------------>'+JSON.stringify(obj));
     	    $rootScope.master = angular.copy(obj);
     		var deferred = $q.defer();
-  		    var url = "/api/staff/createStaff";
+  		    var url = "/api/staff/createStaff/"+staff;
   		    var data = restService.restCall($rootScope.master, url, 'POST');
 			data.$promise.then(function(response){
 				deferred.resolve(response);

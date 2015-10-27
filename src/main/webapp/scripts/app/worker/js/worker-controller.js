@@ -7,7 +7,7 @@
  * # workerController
  * Controller of the atrium
  */
-  vApp.controller('workerController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','$controller', function($scope,$translate,restService,$translatePartialLoader,$log,$location,$timeout,$controller) {
+  vApp.controller('workerController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','$controller','ntStaffservice', function($scope,$translate,restService,$translatePartialLoader,$log,$location,$timeout,$controller,ntStaffservice) {
 	  $translate.refresh();
 	    var tabs = [
 	                { title: 'Profile', content: "scripts/app/worker/view/profile.html"},
@@ -39,5 +39,36 @@
 	  						   };  
 	  				 //  angular.element(".org-details-title .dropdown").show();
 	  			};
+	  			
+	  			$scope.religion = [
+	  			                   { religion: 'Hindu',      },
+	  			                   { religion: 'Christian',    },
+	  			                   { religion: 'Muslim',  },
+	  			                   { religion: 'Jain',  },
+	  			                   { religion: 'Buddhism', }
+	  			                   ];
+	  			
+	  			$scope.community = [
+	  			                    { community: 'OC',      },
+	  			                    { community: 'BC',    },
+	  			                    { community: 'FC',  },
+	  			                    { community: 'MBC',  },
+	  			                    { community: 'SC/ST', }
+	  			                    ];
+	  			
+	  			$scope.designation = [
+	  			                      { designation: 'Principal', },
+	  			                      { designation: 'Professor',    },
+	  			                      { designation: 'HeadMaster',  },
+	  			                      { designation: 'Head of the Department',  }
+	  			                     ];
+	  			
+	  			$scope.tchngStaff = {};
+	  			
+	  			$scope.save = function(){
+	  				console.log("SUBMITTED");
+	  				var data = ntStaffservice.createStaff($scope.tchngStaff,'teaching');
+	  			};
+	  			
 	} ]);
  })(); 

@@ -104,7 +104,7 @@ public class UserTranslator extends BaseTranslator{
 	 * @return
 	 * @throws ParseException 
 	 */
-	public UserDTO translateToUserDTO(User user) throws ParseException{
+	public UserDTO translateToUserDTO(User user, String role) throws ParseException{
 		UserDTO userDTO = null;
 		if(user != null){
 			userDTO = new UserDTO();
@@ -118,7 +118,10 @@ public class UserTranslator extends BaseTranslator{
 				userDTO.setDateOfJoining(commonUtil.stringToTimestamp(user.getDateOfJoining() , CommonConstants.DATE_DD_MMMM_YYYY));
 			}
 			RoleDTO userRole = new RoleDTO();
-			userRole.setRole(CommonConstants.ROLE_T_STAFF);
+			if(role.equals("teaching"))
+				userRole.setRole(CommonConstants.ROLE_T_STAFF);
+			else if(role.equals("nonTeaching"))
+				userRole.setRole(CommonConstants.ROLE_NT_STAFF);
 			userDTO.setRole(userRole);
 			GenderDTO gender = new GenderDTO();
 			gender.setGender(CommonConstants.MALE);

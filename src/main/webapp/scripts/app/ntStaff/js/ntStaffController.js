@@ -59,7 +59,7 @@
 
 		$scope.save = function(){
 			console.log("SUBMITTED");
-			var data = ntStaffservice.createStaff($scope.nonTchngStaff);
+			var data = ntStaffservice.createStaff($scope.nonTchngStaff,'nonTeaching');
 		};
 
 		$scope.tabNavigation=function(tabLabel){

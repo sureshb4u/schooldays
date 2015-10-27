@@ -13,7 +13,7 @@ import com.vernal.is.dto.LeaveManagementDTO;
 import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.dto.ResponseBean;
 @Component
-public class LMSService {
+public class LMService {
 	@Resource
       LeaveDAO leaveDAO;
 	

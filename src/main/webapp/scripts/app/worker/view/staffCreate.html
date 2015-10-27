@@ -1,15 +1,15 @@
 <div resize style="height:{{windowHeight-70+'px'}}">
-<div layout-margin layout-padding flex-container="column">
+		<div layout-margin layout-padding flex-container="column">
 		<div flex-item layout-margin layout-padding flex-container="row">
 			<div  flex="30">
 		        <lx-select ng-model="tchngStaff.designation" placeholder="Designation" choices="designation" floating-label>
             					<lx-select-selected>
-               						 {{ $selected.name + ' ' + $selected.age }}
+               						 {{ $selected.designation }}
            						 </lx-select-selected>
-           						 <lx-select-choices>
-                					{{ $choice.email }}
+           						 <lx-select-choices class="black-text">
+                					{{ $choice.designation }}
             					 </lx-select-choices>
-        					 </lx-select>
+        		</lx-select>
 		       <!--  <md-input-container style="  margin-top: 69px;" >
 		        		 <label>Designation</label>
 		          		<input ng-model="tchngStaff.designation">
@@ -44,7 +44,6 @@
 	      						<label>Date of Birth</label>
 						 		<input type="text" pick-a-date="dateOfBirth" ng-model="tchngStaff.dateOfBirth" md-placeholder="Enter your date" required></md-datepicker>
 	      				</md-input-container>
-	 	 					
 	 	 			</div>
 	 	 			
 	 	 			<div  flex="50"  class="fs-subhead black-text">
@@ -70,8 +69,6 @@
 	      					<label>Email</label>
 	      					<input ng-model="tchngStaff.emailAddresses" type="emailAddresses" required>
 	   					 </md-input-container>
-   					
-   					
    					</div>
 	   				<div  flex="50"  class="fs-subhead black-text">
 	   					<md-input-container>
@@ -102,21 +99,21 @@
 	       					 <input type="text" pick-a-date="dateOfJoinig" ng-model="tchngStaff.dateOfJoining" required></input>
 	      				</md-input-container>			
 	 				</div>
-	 		<div  flex="50"  class="fs-subhead black-text">
-   						 <md-input-container >	    
-	      				 	 <label>FatherName</label>	    
-	       					 <input ng-model="tchngStaff.fathersName" required></input>	    
-	      				 </md-input-container>
+	 				<div  flex="50"  class="fs-subhead black-text">
+   							<md-input-container >
+	      				 	 <label>FatherName</label>
+	       					 <input ng-model="tchngStaff.fatherName" ></input>
+	      				</md-input-container>
 	 				</div>
 	 		</div>
 	 		<div layout-margin layout-padding flex-container="row">
    					<div  flex="50"  class="fs-subhead black-text">
    							 <lx-select ng-model="tchngStaff.community" placeholder="Community" choices="community" floating-label required>
             					<lx-select-selected>
-               						 {{ $selected.name + ' ' + $selected.age }}
+               						 {{ $selected.community }}
            						 </lx-select-selected>
-           						 <lx-select-choices>
-                					{{ $choice.email }}
+           						 <lx-select-choices class="black-text">
+                					{{ $choice.community }}
             					 </lx-select-choices>
         					 </lx-select>
    							<!-- <md-input-container >
@@ -124,10 +121,10 @@
 	       					 <input ng-model="tchngStaff.community" ></input>
 	      				</md-input-container> -->
 	 				</div>
-	 		<div  flex="50"  class="fs-subhead black-text" ng-init="check();">
+	 		<div  flex="50"  class="fs-subhead black-text">
    							<lx-select ng-model="tchngStaff.religion" placeholder="Religion" choices="religion" floating-label required>
             					<lx-select-selected>
-               						 {{ $selected.religion + ' ' + $selected.age }}
+               						 {{ $selected.religion}}
            						 </lx-select-selected>
            						 <lx-select-choices class="black-text">
                 					{{ $choice.religion }}
@@ -143,7 +140,7 @@
 	 	</div>
 	 		<div layout-margin layout-padding flex-container="row">
    				<div  flex="50"  class="fs-subhead black-text">
-	 				<md-input-container >
+	 				<md-input-container>
 	 	 				 <label>Contact</label>
 	          				<input ng-model="tchngStaff.contacts">
 	     			</md-input-container> 

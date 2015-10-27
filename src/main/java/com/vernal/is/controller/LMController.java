@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.vernal.is.backservice.LMSService;
+import com.vernal.is.backservice.LMService;
 import com.vernal.is.dto.LeaveManagementDTO;
 import com.vernal.is.dto.ResponseBean;
 import com.vernal.is.model.LeaveManagement;
@@ -23,7 +23,7 @@ import com.vernal.is.util.CommonConstants;
 public class LMController {
 
 	@Resource
-	LMSService lMSService;
+	LMService lMSService;
 	/**
 	 * 
 	 * @param status

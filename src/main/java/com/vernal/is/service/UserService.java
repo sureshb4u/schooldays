@@ -88,8 +88,8 @@ public class UserService  extends BaseService {
 	 * @throws ParseException 
 	 * @throws IOException
 	 */
-	public Object createUser(User user, String userID, HttpSession session) throws ParseException, IOException {
-		UserDTO userDTO = userTranslator.translateToUserDTO(user);
+	public Object createUser(User user, String userID, HttpSession session , String role) throws ParseException, IOException {
+		UserDTO userDTO = userTranslator.translateToUserDTO(user, role);
 		String postString = gson.toJson(userDTO);
 		System.out.println("postString>>>>"+postString);
 		try {
@@ -98,7 +98,7 @@ public class UserService  extends BaseService {
 							+ CommonConstants.SLASH + CommonConstants.USERS_BASE_URL + CommonConstants.SLASH 
 							+ userID + CommonConstants.CREATE_USERS_BASEURL, HttpMethod.POST, entity ,Object.class);
 			
-			return response.getBody();
+			return response.getStatusCode();
 		} catch (JsonSyntaxException e) {
 			throw e;
 		} catch (HttpClientErrorException e) {

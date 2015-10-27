@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,19 +70,23 @@ public class UserController extends BaseController{
 	}
 	
 	
-	@RequestMapping(value = "/createStaff", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?>  createStaff(@RequestBody User user, HttpSession session){
+	@RequestMapping(value = "/createStaff/{role}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?>  createStaff(@PathVariable(value="role")String role, @RequestBody User user, HttpSession session){
 		System.out.println("json>>>>>>>>>>>>"+gson.toJson(user));
 		String userId =(String) session.getAttribute("userId");
+		Object obj = null;
 		try {
-			Object obj = userService.createUser(user, "1", session);
+			if(role != null){
+			obj = userService.createUser(user, "1", session, role);
+			
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return new ResponseEntity<Object>(obj, HttpStatus.OK);
 	}
 	
 }

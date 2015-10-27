@@ -170,6 +170,6 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 			   String eStr = e.getMessage();
 			   responceBean.setMessage(eStr);
 		}
-		return null;
+		return responceBean;
 	}
 	}
