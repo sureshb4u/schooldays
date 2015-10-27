@@ -51,12 +51,12 @@
 		 	 			<br>
 		 	 			<div class="radio-group">
  						   	<div class="radio-button">
-        						<input type="radio" id="male" name="gender" value="male" ng-model="tchngStaff.gender" class="radio-button__input">
+        						<input type="radio" id="male" name="gender" value="MALE" ng-model="tchngStaff.gender" class="radio-button__input">
         						<label for="male" class="radio-button__label">Male</label>
     					   	</div>
 
     						<div class="radio-button">
-        						<input type="radio" id="female" name="gender" value="female" ng-model="tchngStaff.gender" class="radio-button__input">
+        						<input type="radio" id="female" name="gender" value="FEMALE" ng-model="tchngStaff.gender" class="radio-button__input">
         						<label for="female" class="radio-button__label">Female</label>
    	 						</div>
 						</div>
@@ -106,14 +106,14 @@
 	      				</md-input-container>
 	 				</div>
 	 		</div>
-	 		<div layout-margin layout-padding flex-container="row">
+	 		<div layout-margin layout-padding flex-container="row" ng-init="loadCommunityList();">
    					<div  flex="50"  class="fs-subhead black-text">
-   							 <lx-select ng-model="tchngStaff.community" placeholder="Community" choices="community" floating-label required>
+   							 <lx-select ng-model="tchngStaff.community" placeholder="Community" choices="communityList" floating-label required>
             					<lx-select-selected>
-               						 {{ $selected.community }}
+               						 {{ $selected.value }}
            						 </lx-select-selected>
            						 <lx-select-choices class="black-text">
-                					{{ $choice.community }}
+                					{{ $choice.value }}
             					 </lx-select-choices>
         					 </lx-select>
    							<!-- <md-input-container >
@@ -121,13 +121,13 @@
 	       					 <input ng-model="tchngStaff.community" ></input>
 	      				</md-input-container> -->
 	 				</div>
-	 		<div  flex="50"  class="fs-subhead black-text">
-   							<lx-select ng-model="tchngStaff.religion" placeholder="Religion" choices="religion" floating-label required>
+	 		<div  flex="50"  class="fs-subhead black-text" ng-init="loadReligionList();">
+   							<lx-select ng-model="tchngStaff.religion" placeholder="Religion" choices="religionList" floating-label required>
             					<lx-select-selected>
-               						 {{ $selected.religion}}
+               						 {{ $selected.value}}
            						 </lx-select-selected>
            						 <lx-select-choices class="black-text">
-                					{{ $choice.religion }}
+                					{{ $choice.value }}
             					 </lx-select-choices>
         					 </lx-select>
    							<!-- <md-input-container >

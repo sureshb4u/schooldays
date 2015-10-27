@@ -59,19 +59,27 @@
 	  	  });
     };
     
-  /*  if(location =="/dashboard"){
-    	$location.path('/main/dashboard');
-    }
-    if(location =="/profile"){
-    	$location.path('/main/profile');
-    }
-    if(location =="/worker"){
-    	$location.path('/main/worker');
-    }
-    if(location =="/client"){
-    	$location.path('/main/client');
-    }
-    */
+    $scope.loadReligionList =function(){
+		  var url ='/api/common/dropdown/religion';
+		  var data = restService.restCall("",url,'GETLIST');
+		  data.$promise.then(function(response){
+			  $scope.religionList = response;
+		  },
+		  function(error){
+		  });
+    };
+    
+    $scope.loadCommunityList =function(){
+		  var url ='/api/common/dropdown/community';
+		  var data = restService.restCall("",url,'GETLIST');
+		  data.$promise.then(function(response){
+			  $scope.communityList = response;
+		  },
+		  function(error){
+		  });
+  };
+    
+    
     $scope.changeLanguage = function (key) {
 	    $translate.use(key);
 	    $translate.refresh();
