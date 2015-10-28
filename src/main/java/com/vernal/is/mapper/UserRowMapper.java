@@ -30,11 +30,11 @@ public class UserRowMapper implements RowMapper<UserDTO> {
 	    }
 		user.setFirstName(rs.getString("FIRST_NAME"));
 		user.setLastName(rs.getString("LAST_NAME"));
-		user.setDateOfBirth(rs.getTimestamp("DATE_OF_BIRTH"));
+		user.setDateOfBirth(rs.getDate("DATE_OF_BIRTH").toString());
 		user.setEmailAddresses(rs.getString("EMAIL_ADDRESS"));
 		user.setExperience(rs.getInt("EXPERIENCE"));
 		user.setBioGraphy(rs.getString("BIO_GRAPHY"));
-		user.setDateOfJoining(rs.getTimestamp("DATE_OF_JOINING"));
+		user.setDateOfJoining(rs.getDate("DATE_OF_JOINING").toString());
 		user.setFatherName(rs.getString("FATHER_NAME"));
 		user.setAge(rs.getInt("AGE"));
 		if(rs.getInt("ID_DESIGNATION")!= 0){

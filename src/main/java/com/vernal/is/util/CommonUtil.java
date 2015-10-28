@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +25,21 @@ public class CommonUtil {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommonUtil.class);
 	
+	
+	
+	/*
+	 * Convert String to Date.
+	 */
+	public static Date convertStrToDateFormat(String date, String dateFormat) {
+		Date outputDate = null;
+		try {
+			DateFormat formatter = new SimpleDateFormat(dateFormat);
+			outputDate = (Date) formatter.parse(date);
+		} catch (Exception ex) {
+			LOGGER.error("Error getting convertStrToDateFormat " + ex);
+		}
+		return outputDate;
+	}
 	/**
 	 * Read API configuration details from api-config file
 	 * @param is
@@ -123,7 +139,7 @@ public class CommonUtil {
 	 * @return
 	 * @throws ParseException
 	 */
-	public Date formatgivenStringToDate(String strDate, String fromFormat, String toFormat) throws ParseException{
+	public String formatgivenStringToDate(String strDate, String fromFormat, String toFormat) throws ParseException{
 		SimpleDateFormat formatter = new SimpleDateFormat(fromFormat);
 		try {
 			Date date = formatter.parse(strDate);
@@ -131,9 +147,7 @@ public class CommonUtil {
 			SimpleDateFormat formatter2 = new SimpleDateFormat(toFormat);
 			String dateStr = formatter2.format(date);
 			System.out.println("dateStr>>>>>>>>"+dateStr);
-			Date dateToFormat = formatter2.parse(dateStr);
-			System.out.println("dateToFormat>>>"+dateToFormat);
-			return dateToFormat;
+			return dateStr;
 		} catch (ParseException e) {
 			LOGGER.error("Exception in formatDateTogiven{} ", e.getMessage());
 			throw e;

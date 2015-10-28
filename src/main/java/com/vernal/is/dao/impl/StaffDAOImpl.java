@@ -1,7 +1,11 @@
 package com.vernal.is.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -9,11 +13,15 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import com.vernal.is.dao.StaffDAO;
+import com.vernal.is.dto.CommunityDTO;
+import com.vernal.is.dto.DesignationDTO;
+import com.vernal.is.dto.GenderDTO;
+import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.dto.ResponseBean;
 import com.vernal.is.dto.StaffClassDTO;
 import com.vernal.is.dto.StudentClassDTO;
 import com.vernal.is.dto.StudentDTO;
-import com.vernal.is.dto.UserAuthenticationDTO;
+import com.vernal.is.mapper.UserListRowMapper;
 import com.vernal.is.util.CommonConstants;
 
 public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffDAO{
@@ -129,13 +137,13 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		        CREATE_STUDENT = CREATE_STUDENT + "`FATHER_NAME`, ";
 		        }
 		        if(student.getBloodGroup() != null && student.getBloodGroup().getId() != null){
-		        CREATE_STUDENT = CREATE_STUDENT + "`ID_BLOOD_GROUP`, ";
+		        		CREATE_STUDENT = CREATE_STUDENT + "`ID_BLOOD_GROUP`, ";
 		        }
 		        if(student.getCommunity() != null && student.getCommunity().getId() != null){
-		        CREATE_STUDENT = CREATE_STUDENT + "`ID_COMMUNITY`,";
+		        		CREATE_STUDENT = CREATE_STUDENT + "`ID_COMMUNITY`,";
 		        }
 		        if(student.getReligion() != null && student.getReligion().getId() != null){
-		        CREATE_STUDENT = CREATE_STUDENT + " `ID_RELIGION`,";
+		        	CREATE_STUDENT = CREATE_STUDENT + " `ID_RELIGION`,";
 		        }
 		        CREATE_STUDENT = CREATE_STUDENT + " `IS_DELETED`,";
 		        CREATE_STUDENT = CREATE_STUDENT + " `CREATED_ON`, ";
@@ -194,8 +202,46 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 
 	@Override
 	public StudentDTO getStudent(Integer studentId) {
+		
+		StudentDTO studentList = new StudentDTO();
 		String GET_STUDENT_BY_ID = "SELECT * FROM student WHERE ID = "+studentId;
-		return null;
+		return studentList = getJdbcTemplate().query(GET_STUDENT_BY_ID,new ResultSetExtractor<StudentDTO>(){
+
+			@Override
+			public StudentDTO extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+
+				StudentDTO student = new StudentDTO();
+				student.setId(rs.getInt("ID"));
+			 
+			    
+				student.setFirstName(rs.getString("FIRST_NAME"));
+				student.setLastName(rs.getString("LAST_NAME"));
+				student.setDateOfBirth(rs.getDate("DATE_OF_BIRTH"));
+			/*	student.setEmailAddresses(rs.getString("EMAIL_ADDRESS"));
+				student.setExperience(rs.getInt("EXPERIENCE"));
+				student.setBioGraphy(rs.getString("BIO_GRAPHY"));
+				student.setDateOfJoining(rs.getDate("DATE_OF_JOINING"));*/
+				student.setFatherName(rs.getString("FATHER_NAME"));
+				student.setAge(rs.getInt("AGE"));
+				
+					GenderDTO gender = new GenderDTO();
+					gender.setId(rs.getInt("ID"));
+					gender.setGender(rs.getString("GENDER"));
+					student.setGender(gender);
+					CommunityDTO community = new CommunityDTO();
+					community.setId(rs.getInt("ID"));
+					community.setCommunity("COMMUNITY");
+					student.setCommunity(community);
+					ReligionDTO religion = new ReligionDTO();
+					religion.setId(rs.getInt("ID"));
+					religion.setReligion("RELIGION");
+					student.setReligion(religion);
+					return student;
+				
+			}
+			
+		});
 	}
 
 	@Override

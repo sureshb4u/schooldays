@@ -1,6 +1,6 @@
 package com.vernal.is.dto;
 
-import java.sql.Timestamp;
+
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -18,7 +18,7 @@ public class UserDTO extends BaseDTO {
 
     private String fatherName;
 
-    private Timestamp dateOfBirth;
+    private String dateOfBirth;
     
     private CommunityDTO community;
     
@@ -38,7 +38,7 @@ public class UserDTO extends BaseDTO {
     
     private Integer experience;
     
-    private  Timestamp   dateOfJoining; 
+    private  String  dateOfJoining; 
    
     private List<StaffPhoneNumberDTO> phoneNumbers;
 
@@ -76,13 +76,7 @@ public class UserDTO extends BaseDTO {
 		this.fatherName = fatherName;
 	}
 	
-	public Timestamp getDateOfBirth() {
-		return dateOfBirth;
-	}
 
-	public void setDateOfBirth(Timestamp dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
 
 	public GenderDTO getGender() {
 		return gender;
@@ -116,11 +110,21 @@ public class UserDTO extends BaseDTO {
 		this.experience = experience;
 	}
 	
-	public Timestamp getDateOfJoining() {
+
+
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getDateOfJoining() {
 		return dateOfJoining;
 	}
 
-	public void setDateOfJoining(Timestamp dateOfJoining) {
+	public void setDateOfJoining(String dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
 

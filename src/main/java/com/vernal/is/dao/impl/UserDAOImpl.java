@@ -126,7 +126,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				   INSERT_USER = INSERT_USER+ " `AGE`,";
 				   }
 				   if(user.getReligion() != null){
-				   INSERT_USER = INSERT_USER+ "`ID_RELIGON`,";
+				   INSERT_USER = INSERT_USER+ "`ID_RELIGION`,";
 				   }
 				   if(user.getCommunity() != null){
 				   INSERT_USER = INSERT_USER+ "`ID_COMMUNITY`,";
@@ -260,7 +260,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 		   UPDATE_USER = UPDATE_USER+ " `AGE`="+user.getAge();
 		   }
 		   if(user.getReligion().getId() != null){
-		   UPDATE_USER = UPDATE_USER+ "`ID_RELIGON`="+user.getReligion().getId();
+		   UPDATE_USER = UPDATE_USER+ "`ID_RELIGION`="+user.getReligion().getId();
 		   }
 		   if(user.getCommunity().getId() != null){
 		   UPDATE_USER = UPDATE_USER+ "`ID_COMMUNITY`="+user.getCommunity().getId();

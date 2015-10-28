@@ -5,11 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.vernal.is.dto.CommunityDTO;
-import com.vernal.is.dto.DesignationDTO;
-import com.vernal.is.dto.GenderDTO;
-import com.vernal.is.dto.ReligionDTO;
-import com.vernal.is.dto.RoleDTO;
 import com.vernal.is.dto.UserDTO;
 
 public class UserListRowMapper implements RowMapper<UserDTO> {
@@ -30,7 +25,7 @@ public class UserListRowMapper implements RowMapper<UserDTO> {
 //	    }
 		user.setFirstName(rs.getString("FIRST_NAME"));
 		user.setLastName(rs.getString("LAST_NAME"));
-		user.setDateOfBirth(rs.getTimestamp("DATE_OF_BIRTH"));
+		user.setDateOfBirth(rs.getDate("DATE_OF_BIRTH").toString());
 		user.setEmailAddresses(rs.getString("EMAIL_ADDRESS"));
 		user.setExperience(rs.getInt("EXPERIENCE"));
 		user.setBioGraphy(rs.getString("BIO_GRAPHY"));

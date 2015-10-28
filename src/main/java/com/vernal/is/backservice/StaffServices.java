@@ -23,7 +23,7 @@ import com.vernal.is.util.CommonConstants;
 public class StaffServices {
 
 	public static final Gson gson = new GsonBuilder().setDateFormat(CommonConstants.ISO_DATE_FORMAT).create();
-	@Resource
+	
 	StaffDAO staffDAO;
 	
 	@Resource

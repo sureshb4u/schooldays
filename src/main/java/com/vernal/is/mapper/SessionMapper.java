@@ -24,7 +24,7 @@ public class SessionMapper implements RowMapper<UserDTO>{
 		user.setId(rs.getInt("ID"));
 		user.setFirstName(rs.getString("FIRST_NAME"));
 		user.setLastName(rs.getString("LAST_NAME"));
-		//user.setDateOfBirth(rs.getDate("DATE_OF_BIRTH"));
+		//user.setDateOfBirth(rs.getDate("DATE_OF_BIRTH").toString());
 		user.setEmailAddresses(rs.getString("EMAIL_ADDRESS"));
 		//user.setExperience(rs.getInt("EXPERIENCE"));
 		//user.setBioGraphy(rs.getString("BIO_GRAPHY"));

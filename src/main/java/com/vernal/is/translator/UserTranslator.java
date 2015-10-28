@@ -86,10 +86,10 @@ public class UserTranslator extends BaseTranslator{
 			BeanUtils.copyProperties(userDTO, user);
 			user.setUserName(userDTO.getFirstName()+" "+userDTO.getLastName());
 			if(userDTO.getDateOfBirth()!=null){
-				user.setDateOfBirth(commonUtil.formatDateTogiven( userDTO.getDateOfBirth(), CommonConstants.DATE_DD_MMMM_YYYY));
+				user.setDateOfBirth(commonUtil.formatgivenStringToDate(userDTO.getDateOfBirth(), CommonConstants.DATE_FORMAT,CommonConstants.DATE_DD_MMMM_YYYY));
 			}
 			if(userDTO.getDateOfJoining()!=null){
-				user.setDateOfJoining(commonUtil.formatDateTogiven(userDTO.getDateOfJoining(), CommonConstants.DATE_DD_MMMM_YYYY));
+				user.setDateOfJoining(commonUtil.formatgivenStringToDate(userDTO.getDateOfJoining(),  CommonConstants.DATE_FORMAT, CommonConstants.DATE_DD_MMMM_YYYY));
 			}
 			if(userDTO.getGender() != null){
 				user.setGender(userDTO.getGender().getGender());
@@ -114,12 +114,12 @@ public class UserTranslator extends BaseTranslator{
 			BeanUtils.copyProperties(user, userDTO);
 			if(user.getDateOfBirth() != null){
 				System.out.println("user.getDateOfBirth()>>>>>>."+user.getDateOfBirth());
-				userDTO.setDateOfBirth(commonUtil.stringToTimestamp(user.getDateOfBirth(), CommonConstants.DATE_DD_MMMM_YYYY));
+				userDTO.setDateOfBirth(commonUtil.formatgivenStringToDate(user.getDateOfBirth(), CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT));
 				System.out.println(">>>>>>>>>>"+userDTO.getDateOfBirth());
 			}
 			if(user.getDateOfJoining() != null){
-				userDTO.setDateOfJoining(commonUtil.stringToTimestamp(user.getDateOfJoining() , CommonConstants.DATE_DD_MMMM_YYYY));
-			}
+				userDTO.setDateOfJoining(commonUtil.formatgivenStringToDate(user.getDateOfJoining(), CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT));
+				}
 			RoleDTO userRole = new RoleDTO();
 			if(role.equals("teaching"))
 				userRole.setRole(CommonConstants.ROLE_T_STAFF);

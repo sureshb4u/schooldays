@@ -55,7 +55,6 @@ public class CommonDAOImpl  extends NamedParameterJdbcDaoSupport implements Comm
 		try{
 			designationList =  getJdbcTemplate().query(
 					designations,new DesignationRowMapper());
-		return null;
 		}
 		catch (Exception e){
 			   String eStr = e.getMessage();
