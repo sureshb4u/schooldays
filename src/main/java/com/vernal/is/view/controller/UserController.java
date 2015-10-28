@@ -3,10 +3,9 @@ package com.vernal.is.view.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -87,5 +86,20 @@ public class UserController extends BaseController{
 		}
 		return new ResponseEntity<Object>(obj, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/getProfile")
+	public ResponseEntity<?> getProfileByUserId(HttpSession session){
+		String userId = session.getAttribute(CommonConstants.SESSION_USER_ID).toString();
+		User obj = null;
+		try {
+			if(userId != null){
+				obj = userService.getUserById(userId, session);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Object>(obj, HttpStatus.OK);
+	}
+	
 	
 }

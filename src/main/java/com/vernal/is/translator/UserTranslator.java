@@ -22,6 +22,7 @@ import com.vernal.is.dto.GenderDTO;
 import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.dto.RoleDTO;
 import com.vernal.is.dto.UserDTO;
+import com.vernal.is.model.DropDownValue;
 import com.vernal.is.model.User;
 import com.vernal.is.util.CommonConstants;
 
@@ -31,6 +32,9 @@ public class UserTranslator extends BaseTranslator{
 	
 	@Resource
 	LoginTranslator loginTranslator;
+	
+	@Resource
+	CommonTranslator commonTranslator;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserTranslator.class);
 	
@@ -97,6 +101,16 @@ public class UserTranslator extends BaseTranslator{
 			if(userDTO.getRole() != null){
 				user.setUserRole(userDTO.getRole().getRole());
 			}
+			if(userDTO.getReligion() != null){
+				user.setReligion(commonTranslator.translateToDropDown(userDTO.getReligion().getId().toString(), userDTO.getReligion().getReligion()));
+			}
+			if(userDTO.getDesignation() != null){
+				user.setDesignation(commonTranslator.translateToDropDown(userDTO.getDesignation().getId().toString(), userDTO.getDesignation().getDesignation()));
+			}
+			if(userDTO.getCommunity() != null){
+				user.setCommunity(commonTranslator.translateToDropDown(userDTO.getCommunity().getId().toString(), userDTO.getCommunity().getCommunity()));
+			}
+			
 		}
 		return user;
 	}

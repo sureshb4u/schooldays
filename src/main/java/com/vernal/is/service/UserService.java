@@ -108,16 +108,17 @@ public class UserService  extends BaseService {
 	 * @return
 	 * @throws IOException
 	 */
-	public User getUserById(String userId, String locale, HttpSession session) throws IOException{
+	public User getUserById(String userId, HttpSession session) throws IOException{
 		UserDTO userDTO = null; User user = null;
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
 			ResponseEntity<Object> response =
 							restTemplate.exchange(getAPIBaseURL()
-							+ CommonConstants.USERS_BASE_URL + CommonConstants.USERS_BASE_URL ,
-							HttpMethod.GET, requestEntity, Object.class);
+							+ CommonConstants.USERS_BASE_URL + CommonConstants.GET_USER 
+							+ CommonConstants.SLASH + userId, HttpMethod.GET, requestEntity, Object.class);
+		
 			userDTO = userTranslator.translateToUserDTO(response.getBody());
-			user = userTranslator.translateToUser(userDTO, locale);
+			user = userTranslator.translateToUser(userDTO, null);
 		}catch (IOException e) {
 			throw e;
 		}catch (JsonSyntaxException e) {
@@ -129,6 +130,10 @@ public class UserService  extends BaseService {
 			e.printStackTrace();
 		}
 		return user;
+	}
+
+	public User getStaffDetails(String userId) {
+		return null;
 	}
 	
 
