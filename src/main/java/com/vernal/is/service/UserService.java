@@ -116,7 +116,7 @@ public class UserService  extends BaseService {
 							restTemplate.exchange(getAPIBaseURL()
 							+ CommonConstants.USERS_BASE_URL + CommonConstants.GET_USER 
 							+ CommonConstants.SLASH + userId, HttpMethod.GET, requestEntity, Object.class);
-		
+		System.out.println("response.getBody()>>>>>>>"+gson.toJson(response.getBody()));
 			userDTO = userTranslator.translateToUserDTO(response.getBody());
 			user = userTranslator.translateToUser(userDTO, null);
 		}catch (IOException e) {
@@ -132,8 +132,22 @@ public class UserService  extends BaseService {
 		return user;
 	}
 
-	public User getStaffDetails(String userId) {
-		return null;
+	public Object updateUserById(String userId, User user, String role, HttpSession session) throws ParseException, IOException {
+		UserDTO userDTO = userTranslator.translateToUserDTO(user, role);
+		String postString = gson.toJson(userDTO);
+		System.out.println("postString>>>>"+postString);
+		try {
+			HttpEntity<String> entity = preparePut(postString, session);
+			ResponseEntity<Object> response = restTemplate.exchange(getAPIBaseURL() 
+							+ CommonConstants.SLASH + CommonConstants.USERS_BASE_URL + CommonConstants.UPDATE_USER 
+							+ CommonConstants.SLASH + userId, HttpMethod.PUT, entity ,Object.class);
+			
+			return response.getStatusCode();
+		} catch (JsonSyntaxException e) {
+			throw e;
+		} catch (HttpClientErrorException e) {
+			throw e;
+		}
 	}
 	
 
