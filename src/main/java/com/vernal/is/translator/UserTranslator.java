@@ -139,6 +139,8 @@ public class UserTranslator extends BaseTranslator{
 				userRole.setRole(CommonConstants.ROLE_T_STAFF);
 			else if(role.equals("nonTeaching"))
 				userRole.setRole(CommonConstants.ROLE_NT_STAFF);
+			else if(role.equals("ADMIN"))
+				userRole.setRole(CommonConstants.ROLE_ADMIN);
 			userDTO.setRole(userRole);
 			
 			if(user.getCommunity() != null){

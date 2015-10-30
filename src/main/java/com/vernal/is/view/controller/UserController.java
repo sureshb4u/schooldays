@@ -101,5 +101,19 @@ public class UserController extends BaseController{
 		return new ResponseEntity<Object>(obj, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/updateProfile" , method = RequestMethod.PUT)
+	public ResponseEntity<?> updateProfile(@RequestBody User user, HttpSession session){
+		String userId = session.getAttribute(CommonConstants.SESSION_USER_ID).toString();
+		String role = session.getAttribute(CommonConstants.SESSION_USERROLE).toString();
+		Object obj = null;
+		try {
+			if(userId != null && user != null){
+				obj = userService.updateUserById(userId, user, role, session);
+			}
+		} catch (Exception  e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Object>(obj, HttpStatus.OK);
+	}
 	
 }

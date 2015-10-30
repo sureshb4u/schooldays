@@ -68,7 +68,15 @@
 		  function(error){
 		  });
     };
-    
+    $scope.loadDesignationList =function(){
+		  var url ='/api/common/dropdown/designation';
+		  var data = restService.restCall("",url,'GETLIST');
+		  data.$promise.then(function(response){
+			  $scope.designationList = response;
+		  },
+		  function(error){
+		  });
+  };
     $scope.loadCommunityList =function(){
 		  var url ='/api/common/dropdown/community';
 		  var data = restService.restCall("",url,'GETLIST');

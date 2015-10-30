@@ -1,4 +1,4 @@
-<div resize style="height:{{windowHeight-70+'px'}}" ng-init="edit=false">
+<div resize style="height:{{windowHeight-70+'px'}}" ng-init="edit=false; getProfile();">
 		<div layout-margin layout-padding flex-container="column">
 		<div flex-item layout-margin layout-padding flex-container="row" >
 			<div  flex="30" ng-init="editDesignation = true">			 
@@ -33,56 +33,105 @@
 						</div>							
 	 	 		</div>
 	 	 		<div layout-margin layout-padding flex-container="row">
-	 	 			<div flex="50"  class="fs-subhead black-text" ng-init="editContact = true">
-	 	 					<md-input-container ng-show="editContact" ng-dblclick="editContact = false">
-	 	 						 <label>Contact</label>
-	          					<input ng-model="user.contacts" disabled >
-	        				</md-input-container> 
-	        				<md-input-container ng-hide="editContact" >
-	 	 						 <label>Contact</label>
-	          					<input ng-model="user.contacts" ng-blur="editContact=true; updateProfile(user, 'contact');">
-	        				</md-input-container>
+	 	 			<div flex="50"  class="fs-subhead black-text">
+	 	 					<md-input-container>
+	      						<label>Date of Birth</label>
+						 		<input type="text" pick-a-date="dateOfBirth" ng-model="user.dateOfBirth" md-placeholder="Enter your date" required></md-datepicker>
+	      				</md-input-container>
 	 	 			</div>
-	 	 			<div  flex="50"  class="fs-subhead black-text" ng-init="editEmail = true">
-		 	 			<md-input-container ng-show="editEmail" ng-dblclick="editEmail = false">
-	      					<label>Email</label>
-	      					<input ng-model="user.email" type="email" disabled>
-	   					 </md-input-container>
-	   					 <md-input-container ng-hide="editEmail">
-	      					<label>Email</label>
-	      					<input ng-model="user.email" type="email" ng-blur="editEmail = true">
-	   					 </md-input-container>
-   					 </div>
+	 	 			
+	 	 			<div  flex="50"  class="fs-subhead black-text">
+		 	 			<label> Gender </label>
+		 	 			<br>
+		 	 			<div class="radio-group">
+ 						   	<div class="radio-button">
+        						<input type="radio" id="male" name="gender" value="MALE" ng-model="user.gender" class="radio-button__input">
+        						<label for="male" class="radio-button__label">Male</label>
+    					   	</div>
+
+    						<div class="radio-button">
+        						<input type="radio" id="female" name="gender" value="FEMALE" ng-model="user.gender" class="radio-button__input">
+        						<label for="female" class="radio-button__label">Female</label>
+   	 						</div>
+						</div>
+ 		
+		 	 		 </div>
    				</div>
    				<div layout-margin layout-padding flex-container="row">
-   					<div  flex="50"  class="fs-subhead black-text" ng-init="editAddress = true">
-   						<md-input-container ng-show="editAddress" ng-dblclick="editAddress = false">
-	      				 	 <label>Address</label>
-	       					 <textarea ng-model="user.address" columns="1" md-maxlength="150" disabled ></textarea>
-	      				</md-input-container>
-	   					 <md-input-container ng-hide="editAddress" >
-	      					<label>Address</label>
-	      					<textarea ng-model="user.address" columns="1" md-maxlength="150" ng-blur="editAddress = true"></textarea>
+   					<div  flex="50"  class="fs-subhead black-text">
+   						<md-input-container >
+	      					<label>Email</label>
+	      					<input ng-model="user.emailAddresses" type="emailAddresses" required>
 	   					 </md-input-container>
    					</div>
-	   				<div  flex="50"  class="fs-subhead black-text" ng-init="editBiography = true" >
-	   					<md-input-container ng-show="editBiography" ng-dblclick="editBiography = false">
-	      				 	 <label>Biography</label>
-	       					 <textarea ng-model="user.biography" columns="1" md-maxlength="150" disabled></textarea>
-	      				</md-input-container>
-	      				<md-input-container ng-hide="editBiography">
-	      				 	 <label>Biography</label>
-	       					 <textarea ng-model="user.biography" columns="1" md-maxlength="150" ng-blur="editBiography = true"></textarea>
+	   				<div  flex="50"  class="fs-subhead black-text">
+	   					<md-input-container>
+	      				 	 <label>Address</label>
+	       					 <textarea ng-model="user.addresses" columns="1" md-maxlength="150" ng-blur="updateProfile(user.addresses, 'address')"></textarea>
 	      				</md-input-container>
 	   				</div>
-	 	</div>	 	
-	 	<div layout-margin layout-padding flex-container="row">	
-   				<div flex="50" class="fs-subhead black-text">
-						 <md-input-container> 
-						 	<label>Date of Birth</label>
-						 		<input type="text" pick-a-date="dateOfBirth" ng-model="user.dateOfBirth" md-placeholder="Enter date"></md-datepicker>
-						</md-input-container>
-						</div>	
    				</div>
+	 	<div layout-margin layout-padding flex-container="row">
+   					<div  flex="50"  class="fs-subhead black-text">
+   							<md-input-container >
+	      				 	 <label>Biography</label>
+	       					 <textarea ng-model="user.bioGraphy" columns="1" md-maxlength="150" ng-blur="updateProfile(user.bioGraphy, 'bioGraphy')"></textarea>
+	      				</md-input-container>
+	   				
+	 				</div>
+	 		<div  flex="50"  class="fs-subhead black-text">
+   							<md-input-container >
+	      				 	 <label>Experience</label>
+	       					 <input ng-model="user.experience" ng-blur="updateProfile(user.experience, 'experience')"></input>
+	      				</md-input-container>	      				
+	 				</div>		
+	 	</div>
+	 		<div layout-margin layout-padding flex-container="row">
+   					<div  flex="50"  class="fs-subhead black-text">
+   						<md-input-container >
+	      				 	 <label>Date of Joining</label>
+	       					 <input type="text" pick-a-date="dateOfJoinig" ng-model="user.dateOfJoining" required></input>
+	      				</md-input-container>			
+	 				</div>
+	 				<div  flex="50"  class="fs-subhead black-text">
+   							<md-input-container >
+	      				 	 <label>FatherName</label>
+	       					 <input ng-model="user.fatherName" ></input>
+	      				</md-input-container>
+	 				</div>
+	 		</div>
+	 		<div layout-margin layout-padding flex-container="row" ng-init="loadCommunityList();">
+   					<div  flex="50"  class="fs-subhead black-text">
+   							 <lx-select ng-model="user.community" placeholder="Community" choices="communityList" floating-label required>
+            					<lx-select-selected>
+               						 {{ $selected.value }}
+           						 </lx-select-selected>
+           						 <lx-select-choices>
+                					{{ $choice.value }}
+            					 </lx-select-choices>
+        					 </lx-select>
+   					
+	 				</div>
+	 		<div  flex="50"  class="fs-subhead black-text" ng-init="loadReligionList();">
+   							<lx-select ng-model="user.religion" placeholder="Religion" choices="religionList" floating-label required>
+            					<lx-select-selected>
+               						 {{ $selected.value }}
+           						 </lx-select-selected>
+           						 <lx-select-choices class="black-text">
+                					{{ $choice.value }}
+            					 </lx-select-choices>
+        					 </lx-select>
+	 				</div>
+	 	
+	 	</div>
+	 		<div layout-margin layout-padding flex-container="row">
+   				<div  flex="50"  class="fs-subhead black-text">
+	 				<md-input-container >
+	 	 				 <label>Contact</label>
+	          				<input ng-model="user.contacts" ng-blur="updateProfile(user.contacts, 'contact')">
+	     			</md-input-container> 
+	 			</div>
+	 		</div>	
+	</div>	
 	</div>
 </div>

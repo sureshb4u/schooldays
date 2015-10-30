@@ -2,12 +2,12 @@
 		<div layout-margin layout-padding flex-container="column">
 		<div flex-item layout-margin layout-padding flex-container="row">
 			<div  flex="30">
-		        <lx-select ng-model="nonTchngStaff.designation" placeholder="Designation" choices="designation" floating-label>
+		        <lx-select ng-model="nonTchngStaff.designation" placeholder="Designation" choices="designationList" floating-label ng-init="loadDesignationList()">
             					<lx-select-selected>
-               						 {{ $selected.name + ' ' + $selected.age }}
+               						 {{ $selected.value }}
            						 </lx-select-selected>
            						 <lx-select-choices>
-                					{{ $choice.email }}
+                					{{ $choice.value }}
             					 </lx-select-choices>
         		</lx-select>
 		       <!--  <md-input-container style="  margin-top: 69px;" >

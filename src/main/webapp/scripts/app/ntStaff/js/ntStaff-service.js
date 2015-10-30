@@ -25,7 +25,7 @@
 				deferred.resolve(response);
 			},
 			function(error){
-				alert(error);
+				LxNotificationService.warning('Error in Creating User'+error);
 			});
             return deferred.promise;
 		};

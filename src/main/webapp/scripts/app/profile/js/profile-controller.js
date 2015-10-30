@@ -11,8 +11,8 @@
  * # dashboardCtrl
  * Controller of the atrium
  */
-  vApp.controller('profileController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','$controller',
-                                 function($scope, $translate, restService, $translatePartialLoader, $log, $location, $timeout, $controller) {
+  vApp.controller('profileController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','$controller','profileservice',
+                                 function($scope, $translate, restService, $translatePartialLoader, $log, $location, $timeout, $controller, profileservice) {
 	  
 	  $translate.refresh();
 	  $scope.ids = [];
@@ -42,18 +42,11 @@
 		$scope.htmlcontent = "Hello";
 		$scope.disabled = false;
 		
-		$scope.user = {
-				firstName :'firstName',
-				lastName : 'lastName',
-				email : 'emailh@gmail.com',
-				designation : 'Junior Software Developer',
-				address : 'address',
-				contacts : '999999999',
-				biography : 'First WebApp with Angular',
-				dateOfBirth : '28/05/1994'	
-		}
-		
 		$scope.getProfile = function(){
+			var data=profileservice.loaduserDetail();
+			data.then(function(success){						 
+				$scope.user = success;
+			});
 			
 		};
 		
@@ -61,10 +54,19 @@
 		
 		$scope.updateProfile = function(user, feild){
 			if(feild == 'contact'){
-				$scope.updateUser.contact = user.contact;
+				$scope.updateUser.contact = angular.copy(user);
+			}else if(feild == 'bioGraphy'){
+				$scope.updateUser.bioGraphy = angular.copy(user);
+			}else if(feild == 'address'){
+				$scope.updateUser.address = angular.copy(user);
+			}else if(feild == 'experience'){
+				$scope.updateUser.experience = angular.copy(user);
 			}
-			
 			console.log(JSON.stringify($scope.updateUser));
+			var data = profileservice.updateProfile($scope.updateUser);
+			data.then(function(success){						 
+				console.log(success);
+			});
 		};
 		
 	} ]);

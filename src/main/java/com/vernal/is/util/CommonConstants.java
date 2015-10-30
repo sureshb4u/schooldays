@@ -10,7 +10,7 @@ public class CommonConstants {
 	
 	public static final String LOCALE_EN_US="en-US";
 	public static final String ISO_DATE_FORMAT="yyyy-MM-dd'T'HH:mm:ssZ";
-	public static final String DATE_FORMAT="yyyy-dd-MM";
+	public static final String DATE_FORMAT="yyyy-MM-dd";
 	public static final String DATE_TIME= "yyyy-dd-MM";
 	public static final String DATE_DD_MMMM_YYYY = "dd MMMM, yyyy";
 	//Login variable
@@ -86,4 +86,5 @@ public class CommonConstants {
 	public static final String LIST_TYPE = "type";
 	public static final String IS_DELETED = "0";
 	public static final String GET_USER = "/getUser";
+	public static final String UPDATE_USER = "/updateUser";
 }
