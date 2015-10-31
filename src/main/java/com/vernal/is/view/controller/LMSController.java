@@ -58,7 +58,7 @@ public class LMSController extends BaseController{
 		Object obj = null;
 		try {
 			System.out.println(gson.toJson(leaveManagement));
-		//	obj = lMSService.createLMSRequest(leaveManagement, session);
+			obj = lMSService.createLMSRequest(leaveManagement, session);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

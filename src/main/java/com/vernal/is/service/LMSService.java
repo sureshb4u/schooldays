@@ -61,7 +61,7 @@ public class LMSService extends BaseService {
 		try {
 			HttpEntity<String> entity = preparePost(postString, session);
 			
-			response = restTemplate.exchange(getAPIBaseURL()
+			response = restTemplate.exchange( getAPIBaseURL()
 					+ CommonConstants.LMS_BASE_URL + CommonConstants.CREATE_LEAVE_REQUEST,
 					HttpMethod.POST, entity, Object.class);
 

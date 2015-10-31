@@ -5,6 +5,8 @@ public class LeaveManagement{
 	private Integer id;
 	private String reason;
 	private String from;
+	private String fromTime;
+	private String toTime;
 	private String to;
 	private String status;
 	
@@ -28,6 +30,18 @@ public class LeaveManagement{
 	}
 	public String getTo() {
 		return to;
+	}
+	public String getFromTime() {
+		return fromTime;
+	}
+	public void setFromTime(String fromTime) {
+		this.fromTime = fromTime;
+	}
+	public String getToTime() {
+		return toTime;
+	}
+	public void setToTime(String toTime) {
+		this.toTime = toTime;
 	}
 	public void setTo(String to) {
 		this.to = to;

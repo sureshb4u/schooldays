@@ -165,12 +165,14 @@ public class CommonUtil {
 		return formatter.format(timestamp);
 	}
 	
-	public Timestamp stringToTimestamp(String dateStr, String dateFormat) throws ParseException{
-		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
-		Date date = formatter.parse(dateStr);
-		System.out.println("date>>>>>"+date);
-		Timestamp timestamp = new Timestamp(date.getTime());
-		return timestamp;
+	public String formatgivenStringToTimestamp(String dateStr, String timeStr, String fromFormat, String toFormat) throws ParseException{
+		SimpleDateFormat formatter = new SimpleDateFormat(fromFormat);
+		SimpleDateFormat toformatter = new SimpleDateFormat(toFormat);
+		String date = formatter.format(dateStr);
+		System.out.println("date--------------------"+date);
+		String dateTime = toformatter.format(date);
+		System.out.println("dateTime--------------"+dateTime);
+		return dateTime;
 	}
 	
 	

@@ -2,7 +2,9 @@ package com.vernal.is.translator;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -55,10 +57,10 @@ public class LMSTransator extends BaseTranslator{
 				leaveManagement.setId(leaveManagementDTO.getId());
 			}
 			if(leaveManagementDTO.getStartTime() != null){
-				leaveManagement.setFrom(commonUtil.formatTimeStampToDateString(leaveManagementDTO.getStartTime(), CommonConstants.DATE_DD_MMMM_YYYY));
+			//	leaveManagement.setFrom(commonUtil.formatTimeStampToDateString(leaveManagementDTO.getStartTime(), CommonConstants.DATE_DD_MMMM_YYYY));
 			}
 			if(leaveManagementDTO.getEndTime() != null){
-				leaveManagement.setTo(commonUtil.formatTimeStampToDateString(leaveManagementDTO.getEndTime(), CommonConstants.DATE_DD_MMMM_YYYY));
+			//	leaveManagement.setTo(commonUtil.formatTimeStampToDateString(leaveManagementDTO.getEndTime(), CommonConstants.DATE_DD_MMMM_YYYY));
 			}
 			if(leaveManagementDTO.getReason() != null){
 				leaveManagement.setReason(leaveManagementDTO.getReason());
@@ -76,12 +78,12 @@ public class LMSTransator extends BaseTranslator{
 				leaveManagementDTO.setId(leaveManagement.getId());
 			}
 			
-			if(leaveManagement.getFrom() != null && !leaveManagement.getFrom().isEmpty()){
-				leaveManagementDTO.setStartTime(commonUtil.stringToTimestamp(leaveManagement.getFrom(), CommonConstants.DATE_DD_MMMM_YYYY));
+			if(leaveManagement.getFrom() != null && leaveManagement.getFromTime() != null){
+				leaveManagementDTO.setStartTime(commonUtil.formatgivenStringToDate(leaveManagement.getFrom(), CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_TIME_FORMAT)+" "+timeFormatter(leaveManagement.getFromTime()));
 			}
 			
-			if(leaveManagement.getTo() != null && !leaveManagement.getTo().isEmpty()){
-				leaveManagementDTO.setEndTime(commonUtil.stringToTimestamp(leaveManagement.getTo(), CommonConstants.DATE_DD_MMMM_YYYY));
+			if(leaveManagement.getTo() != null && leaveManagement.getToTime() != null){
+				leaveManagementDTO.setEndTime(commonUtil.formatgivenStringToDate(leaveManagement.getTo(), CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_TIME_FORMAT)+" "+timeFormatter(leaveManagement.getToTime()));
 			}
 			
 			if(leaveManagement.getReason() != null && !leaveManagement.getReason().isEmpty()){
@@ -109,5 +111,10 @@ public class LMSTransator extends BaseTranslator{
 		return leaveManagementDTOList;
 	}
 	
-	
+	public String timeFormatter(String time) throws ParseException{
+		 SimpleDateFormat displayFormat = new SimpleDateFormat("HH:mm:ss");
+		 SimpleDateFormat parseFormat = new SimpleDateFormat("hh:mm a");
+	     Date date = parseFormat.parse(time);
+		return displayFormat.format(date);
+	}
 }

@@ -13,6 +13,7 @@ public class CommonConstants {
 	public static final String DATE_FORMAT="yyyy-MM-dd";
 	public static final String DATE_TIME= "yyyy-dd-MM";
 	public static final String DATE_DD_MMMM_YYYY = "dd MMMM, yyyy";
+	public static final String DATE_DD_MMMM_YYYY_HH_MM_AM = "dd MMMM, yyyy hh:mm a";
 	//Login variable
 	public static final String LOGIN_PAGE = "index";
 	
@@ -87,4 +88,5 @@ public class CommonConstants {
 	public static final String IS_DELETED = "0";
 	public static final String GET_USER = "/getUser";
 	public static final String UPDATE_USER = "/updateUser";
+	public static final String DATE_TIME_FORMAT = "yyyy-MM-dd";
 }
