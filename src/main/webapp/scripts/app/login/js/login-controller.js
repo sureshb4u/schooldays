@@ -26,7 +26,7 @@
     		  loginService.init(true,response.firstName + ' ' +response.lastName);
     		  $scope.authenticationError = false;
     		 // $location.path('/dashboard');
-    		  if(localStorage.getItem('userRole')=='Staff'){
+    		  if(localStorage.getItem('userRole')=='TEACHING STAFF'){
     			  $state.go('home.profile');
     		  }else if(localStorage.getItem('userRole')=='ADMIN'){
     			  $state.go('home.dashboard');

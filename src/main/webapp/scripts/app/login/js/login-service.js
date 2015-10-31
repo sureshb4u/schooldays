@@ -27,7 +27,8 @@
                 if (error.status == "401") {
                     $state.go('login');
                 } else {
-                    LxNotificationService.warning(error.data.Message);
+                   // LxNotificationService.warning(error.data.Message);
+                    LxNotificationService.warning('Error in Signing In');
                 }
                 deferred.reject('ajaxError');
             });

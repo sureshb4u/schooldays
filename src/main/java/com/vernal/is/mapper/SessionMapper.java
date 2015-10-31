@@ -37,12 +37,12 @@ public class SessionMapper implements RowMapper<UserDTO>{
 			role.setRole(rs.getString("ROLE"));
 		    user.setRole(role);
 		}
-		if(rs.getInt("ID_DESIGNATION")!= 0){
+	/*	if(rs.getInt("ID_DESIGNATION")!= 0){
 			DesignationDTO designation = new DesignationDTO();
 			designation.setId(rs.getInt("ID"));
 			designation.setDesignation(rs.getString("DESIGNATION"));
 		    user.setDesignation(designation);
-		}
+		}*/
 		if((rs.getInt("ID_GENDER")) != 0){
 			GenderDTO gender = new GenderDTO();
 			gender.setId(rs.getInt("ID"));

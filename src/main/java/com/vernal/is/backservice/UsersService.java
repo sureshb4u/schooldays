@@ -33,9 +33,9 @@ public class UsersService {
 	 * @param userDTO
 	 * @return
 	 */
-	public ResponseBean updateUser(UserDTO userDTO, Integer userId) {
+	public ResponseBean updateUser(UserDTO userDTO, Integer acessId,  Integer userId) {
 		userDTO = getBasicIds(userDTO);
-		return userDAO.updateUser(userDTO, userId);
+		return userDAO.updateUser(userDTO, acessId, userId);
 	}
 
 	/**

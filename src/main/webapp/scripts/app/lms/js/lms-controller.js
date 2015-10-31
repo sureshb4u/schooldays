@@ -11,8 +11,8 @@
  * # dashboardCtrl
  * Controller of the atrium
  */
-  vApp.controller('lmsController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','$controller','$interval',
-                                 function($scope, $translate, restService, $translatePartialLoader, $log, $location, $timeout, $controller,$interval) {
+  vApp.controller('lmsController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','$controller','$interval','lmsService',
+                                 function($scope, $translate, restService, $translatePartialLoader, $log, $location, $timeout, $controller,$interval, lmsService) {
 	  
 	  $translate.refresh();
 	  $scope.ids = [];
@@ -42,15 +42,6 @@
 		$scope.htmlcontent = "Hello";
 		$scope.disabled = false;
 		
-		$scope.user = {
-				firstName :'Vignesh',
-				lastName : 'Periyanayagam',
-				email : 'viki19nesh@gmail.com',
-				designation : 'Junior Software Developer',
-				address : 'madurai',
-				contacts : '9629400474',
-				biography : 'First WebApp with Angular'
-		}
 		var self = this, j= 0, counter = 0;
 	    self.mode = 'query';
 	    self.activated = true;
@@ -58,15 +49,19 @@
 	    self.determinateValue2 = 30;
 	    self.modes = [ ];
 		$scope.roleCheck = function(){
-			console.log(localStorage.getItem("userRole"));
-			if(localStorage.getItem("userRole")=='Staff'){
-				$scope.display=false;
+			console.log('role----------->'+localStorage.getItem("userRole"));
+			if(localStorage.getItem("userRole")=='TEACHING STAFF'){
+				return false;
 			}else{
-				$scope.display=true;
+				return true;
 			}
 		};
-	 $scope.createNewLeaveRequest = function (){
-			
+		
+		$scope.lms ={};	
+		
+	 $scope.createNewLeaveRequest = function (obj){
+		 //obj
+		 var data = lmsService.createLeaveRequest(obj);
 		};
 		
 		 $interval(function() {

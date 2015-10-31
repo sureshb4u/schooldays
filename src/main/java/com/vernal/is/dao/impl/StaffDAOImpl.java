@@ -14,15 +14,12 @@ import org.springframework.jdbc.support.KeyHolder;
 
 import com.vernal.is.dao.StaffDAO;
 import com.vernal.is.dto.CommunityDTO;
-import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.GenderDTO;
 import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.dto.ResponseBean;
 import com.vernal.is.dto.StaffClassDTO;
 import com.vernal.is.dto.StudentClassDTO;
 import com.vernal.is.dto.StudentDTO;
-import com.vernal.is.mapper.UserListRowMapper;
-import com.vernal.is.util.CommonConstants;
 
 public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffDAO{
 

@@ -15,7 +15,7 @@ public interface UserDAO {
 
 	 public ResponseBean insertUser(UserDTO user, Integer accessId) throws Exception;
 
-	 public ResponseBean updateUser(UserDTO user, Integer userId);
+	 public ResponseBean updateUser(UserDTO user, Integer acessId, Integer userId);
 
 	public ResponseBean deleteUser(Integer userId, Integer accessId);
 

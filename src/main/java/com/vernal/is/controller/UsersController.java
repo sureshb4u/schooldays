@@ -92,9 +92,10 @@ public class UsersController {
 
 	@RequestMapping(value = "updateUser/{userId}", method = RequestMethod.PUT)
 	@ResponseBody
-	public ResponseBean updateUser(@PathVariable Integer userId, @RequestBody UserDTO userDTO, HttpSession session) throws Exception {
+	public ResponseBean updateBills(@PathVariable Integer userId, @RequestBody UserDTO userDTO, HttpSession session, HttpServletRequest request) throws Exception {
+		Integer acessId = Integer.valueOf(request.getHeader(CommonConstants.SESSION_USER_ID));
 		ResponseBean responseBean = new ResponseBean();
-		responseBean = usersService.updateUser(userDTO, userId);
+		responseBean = usersService.updateUser(userDTO, acessId, userId);
 		return responseBean;
 	}
 

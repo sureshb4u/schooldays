@@ -1,12 +1,12 @@
 package com.vernal.is.dto;
 
-import java.sql.Timestamp;
+
 
 public class LeaveManagementDTO extends BaseDTO {
    private Integer id;
    private UserDTO staff;
-   private Timestamp startTime;
-   private Timestamp endTime;
+   private String startTime;
+   private String endTime;
    private String reason;
    private Integer isTaken;
    private FormStatusDTO formStatus;
@@ -22,16 +22,16 @@ public UserDTO getStaff() {
 public void setStaff(UserDTO staff) {
 	this.staff = staff;
 }
-public Timestamp getStartTime() {
+public String getStartTime() {
 	return startTime;
 }
-public void setStartTime(Timestamp startTime) {
+public void setStartTime(String startTime) {
 	this.startTime = startTime;
 }
-public Timestamp getEndTime() {
+public String getEndTime() {
 	return endTime;
 }
-public void setEndTime(Timestamp endTime) {
+public void setEndTime(String endTime) {
 	this.endTime = endTime;
 }
 public String getReason() {

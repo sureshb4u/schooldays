@@ -22,7 +22,7 @@ public class JsonDateSerializer extends JsonSerializer<Date> {
 	@Override
 	public void serialize(Date date, JsonGenerator gen, SerializerProvider provider)
 			throws IOException, JsonProcessingException {
-
+		System.out.println("date>>>>>>>"+date);
 		String formattedDate = dateFormat.format(date);
 
 		gen.writeString(formattedDate);

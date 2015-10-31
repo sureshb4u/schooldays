@@ -1,11 +1,17 @@
 package com.vernal.is.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import javax.annotation.Resource;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -15,7 +21,12 @@ import org.springframework.jdbc.support.KeyHolder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vernal.is.dao.UserDAO;
+import com.vernal.is.dto.CommunityDTO;
+import com.vernal.is.dto.DesignationDTO;
+import com.vernal.is.dto.GenderDTO;
+import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.dto.ResponseBean;
+import com.vernal.is.dto.RoleDTO;
 import com.vernal.is.dto.UserAuthenticationDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.mapper.SessionMapper;
@@ -45,11 +56,11 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
                             sql, inputs, Integer.class);
                     if (staffId!=null) {
                      String USER_INFO = "SELECT A.ID,A.FIRST_NAME,A.ID_ROLE,A.LAST_NAME,"
-                     		+ "R.ID,R.ROLE,A.ID_GENDER,G.ID,G.GENDER,A.EMAIL_ADDRESS,A.ID_DESIGNATION "
+                     		+ "R.ID,R.ROLE,A.ID_GENDER,G.ID,G.GENDER,A.EMAIL_ADDRESS,D.ID,A.ID_DESIGNATION "
                      		+ "FROM USER A "
-                     		+ "INNER JOIN ROLE R ON A.ID_ROLE = R.ID "
-                     		//+ " INNER JOIN DESIGNATION D ON A.ID_DESIGNATION = D.ID "
-                     		+ "INNER JOIN GENDER G ON A.ID_GENDER = G.ID "
+                     		+ "LEFT OUTER JOIN ROLE R ON A.ID_ROLE = R.ID "
+                     		+ " LEFT OUTER JOIN DESIGNATION D ON A.ID_DESIGNATION = D.ID "
+                     		+ "LEFT OUTER JOIN GENDER G ON A.ID_GENDER = G.ID "
                      		+ "WHERE A.ID = ?";
                          Object[] input = new Object[] {staffId};
                    	       user = getJdbcTemplate().queryForObject(USER_INFO, input, 
@@ -144,7 +155,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getLastName())+",";
 				   }
 				   if(user.getDateOfBirth()!=null){
-				   INSERT_USER = INSERT_USER+ user.getDateOfBirth()+",";
+				   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getDateOfBirth())+",";
 				   }
 				   if(user.getEmailAddresses()!=null){
 					      INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getEmailAddresses())+",";
@@ -156,7 +167,10 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 						   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getBioGraphy())+",";
 						   }
 				    if(user.getDateOfJoining() !=null){
-						   INSERT_USER = INSERT_USER+ user.getDateOfJoining()+",";
+						   INSERT_USER = INSERT_USER+ commonUtil.stringFeilds(user.getDateOfJoining())+",";
+						   }
+				    if(user.getDesignation() !=null && user.getDesignation().getId()!= null){
+						   INSERT_USER = INSERT_USER+ user.getDesignation().getId()+",";
 						   }
 				   if(user.getGender() != null){
 				   INSERT_USER = INSERT_USER+ user.getGender().getId()+",";
@@ -220,69 +234,69 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 	
 	
 	@Override
-	public ResponseBean updateUser(UserDTO user, Integer accessId){
+	public ResponseBean updateUser(UserDTO user, Integer acessId, Integer userId){
 		ResponseBean responseBean= new ResponseBean();
 		String UPDATE_USER = "UPDATE `user` SET ";
-		   if(user.getRole().getId()!= null){
+		   if(user.getRole()!= null){
 			   UPDATE_USER = UPDATE_USER+ "`ID_ROLE`="+user.getRole().getId()+",";
    		     }
 		   if(user.getFirstName()!= null){
-		   UPDATE_USER = UPDATE_USER+ " `FIRST_NAME`= "+ user.getFirstName()+",";
+		   UPDATE_USER = UPDATE_USER+ " `FIRST_NAME`= "+ commonUtil.stringFeilds(user.getFirstName())+",";
            }
 		   if(user.getLastName()!=null){
-		   UPDATE_USER = UPDATE_USER+ "`LAST_NAME`="+user.getLastName()+",";
+		   UPDATE_USER = UPDATE_USER+ "`LAST_NAME`="+commonUtil.stringFeilds(user.getLastName())+",";
 		   }
 		   if(user.getDateOfBirth()!=null){
-		   UPDATE_USER = UPDATE_USER+ "`DATE_OF_BIRTH`="+user.getDateOfBirth()+",";
+		   UPDATE_USER = UPDATE_USER+ "`DATE_OF_BIRTH`="+commonUtil.stringFeilds(user.getDateOfBirth())+",";
 		   }
 		   if(user.getEmailAddresses()!=null){
-		      UPDATE_USER = UPDATE_USER+ "`EMAIL_ADDRESS`="+user.getEmailAddresses()+",";
+		      UPDATE_USER = UPDATE_USER+ "`EMAIL_ADDRESS`="+commonUtil.stringFeilds(user.getEmailAddresses())+",";
 		   }
 		   if(user.getExperience()!=null){
 			   UPDATE_USER = UPDATE_USER+ "`EXPERIENCE`="+user.getExperience()+",";
 			   }
 		   if(user.getBioGraphy()!=null){
-			   UPDATE_USER = UPDATE_USER+ "`BIO_GRAPHY`="+user.getBioGraphy()+",";
+			   UPDATE_USER = UPDATE_USER+ "`BIO_GRAPHY`="+commonUtil.stringFeilds(user.getBioGraphy())+",";
 			   }
 		   if(user.getDateOfJoining() !=null){
-			   UPDATE_USER = UPDATE_USER+ "`DATE_OF_JOINING`="+user.getDateOfJoining()+",";
+			   UPDATE_USER = UPDATE_USER+ "`DATE_OF_JOINING`="+commonUtil.stringFeilds(user.getDateOfJoining())+",";
 			   }
-		   if(user.getDesignation().getId() !=null){
+		   if(user.getDesignation() !=null){
 			   UPDATE_USER = UPDATE_USER+ "`ID_DESIGNATION`"+user.getDesignation().getId()+",";
 			   }
-		   if(user.getGender().getId()!= null){
-		   UPDATE_USER = UPDATE_USER+ "`ID_GENDER`"+user.getGender().getId();
+		   if(user.getGender()!= null){
+		   UPDATE_USER = UPDATE_USER+ "`ID_GENDER`"+user.getGender().getId()+",";
 		   }
 		   if(user.getFatherName()!= null){
-		   UPDATE_USER = UPDATE_USER+ "`FATHER_NAME`="+user.getFatherName();
+		   UPDATE_USER = UPDATE_USER+ "`FATHER_NAME`="+commonUtil.stringFeilds(user.getFatherName())+",";
 		   }
 		   if(user.getAge() != null){
-		   UPDATE_USER = UPDATE_USER+ " `AGE`="+user.getAge();
+		   UPDATE_USER = UPDATE_USER+ " `AGE`="+user.getAge()+",";
 		   }
-		   if(user.getReligion().getId() != null){
-		   UPDATE_USER = UPDATE_USER+ "`ID_RELIGION`="+user.getReligion().getId();
+		   if(user.getReligion() != null){
+		   UPDATE_USER = UPDATE_USER+ "`ID_RELIGION`="+user.getReligion().getId()+",";
 		   }
-		   if(user.getCommunity().getId() != null){
-		   UPDATE_USER = UPDATE_USER+ "`ID_COMMUNITY`="+user.getCommunity().getId();
+		   if(user.getCommunity() != null){
+		   UPDATE_USER = UPDATE_USER+ "`ID_COMMUNITY`="+user.getCommunity().getId()+",";
 		   }
 		   
-		   System.out.println("UPDATE_USER>>>>>>>>>....."+UPDATE_USER);
-		   UPDATE_USER = UPDATE_USER+ "`UPDATED_BY` ="+accessId;
-		   UPDATE_USER = UPDATE_USER+ "WHERE ID="+user.getId();
-		   UPDATE_USER = UPDATE_USER+ "AND IS_DELETED = 0";
+		   UPDATE_USER = UPDATE_USER+ "`UPDATED_BY` ="+acessId;
+		   UPDATE_USER = UPDATE_USER+ " WHERE `ID` ="+userId;
+		   UPDATE_USER = UPDATE_USER+ " AND `IS_DELETED` = 0 ";
+		   System.out.println("UPDATE_USER>>>>>>>>>>>."+UPDATE_USER);
 		   try{
-			   SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(
-					   user);
-			   
-			if(user.getId() != null){
-			   getNamedParameterJdbcTemplate().update(UPDATE_USER, namedParameters );
+			  
+			   if(user.getEmailAddresses()!=null){
+				  // insertPassword(authentication);
+			   }
+			   getJdbcTemplate().execute(UPDATE_USER );
 				responseBean.setStatus("SUCCESS");
 				responseBean.setMessage("The new user is added successfully");
-			}
-		   }catch(Exception e){
+
+		   }
+		   catch(DuplicateKeyException dup){
 			   responseBean.setStatus("FAILED");
-			   String eStr = e.getMessage();
-				responseBean.setMessage(eStr);
+				responseBean.setMessage("This email Id is aleady used by other user");
 		   }
 		   return responseBean;
 	}
@@ -311,25 +325,70 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 	@Override
 	public UserDTO getUser(Integer userId) {
 		ResponseBean responseBean = new ResponseBean();
+		final UserDTO user = new UserDTO();
+		 
+		 System.out.println(" idddddd "+userId);
+		 
 		String GET_USER = "SELECT * FROM USER A"
-				+ " INNER JOIN USER_ROLE R ON A.ID_ROLE = R.ID "
-				+ "INNER JOIN DESIGNATION D ON A.ID_DESIGNATION = D.ID "
-				+ "INNER JOIN GENDER G ON A.ID_GENDER = G.ID "
-				+ "INNER JOIN RELIGION REL ON A.ID_RELIGION = REL.ID "
-				+ "INNER JOIN COMMUNITY C ON A.ID_COMMUNITY = C.ID"
-				+ " WHERE A.ID= ? and A.IS_DELETED = 0";
+				+ " LEFT OUTER JOIN ROLE R ON A.ID_ROLE = R.ID "
+				+ "LEFT OUTER JOIN DESIGNATION D ON A.ID_DESIGNATION = D.ID "
+				+ "LEFT OUTER JOIN GENDER G ON A.ID_GENDER = G.ID "
+				+ "LEFT OUTER JOIN RELIGION REL ON A.ID_RELIGION = REL.ID "
+				+ "LEFT OUTER JOIN COMMUNITY C ON A.ID_COMMUNITY = C.ID"
+				+ " WHERE A.ID = "+userId+" and A.IS_DELETED = 0";
 		try{
-		 Object inputs = new Object[] {userId};
-	//	  UserDTO user =  getJdbcTemplate().query(
-      //            GET_USER, inputs,new UserRowMapper());
-		return null;
+		 UserDTO staff =  getJdbcTemplate().query(GET_USER,new ResultSetExtractor<UserDTO>(){
+
+			@Override
+			public UserDTO extractData(ResultSet rs) throws SQLException,
+					DataAccessException {
+				
+
+			    List<UserDTO> users = new ArrayList<UserDTO>();
+			    if(rs.next()){
+				user.setId(rs.getInt("ID"));
+			    RoleDTO role = new RoleDTO();
+				role.setId(rs.getInt("ID"));
+			   role.setRole(rs.getString("ROLE"));
+			   user.setRole(role);
+				user.setFirstName(rs.getString("FIRST_NAME"));
+				user.setLastName(rs.getString("LAST_NAME"));
+				user.setDateOfBirth(rs.getDate("DATE_OF_BIRTH").toString());
+				user.setEmailAddresses(rs.getString("EMAIL_ADDRESS"));
+				user.setExperience(rs.getInt("EXPERIENCE"));
+				user.setBioGraphy(rs.getString("BIO_GRAPHY"));
+				user.setDateOfJoining(rs.getDate("DATE_OF_JOINING").toString());
+				user.setFatherName(rs.getString("FATHER_NAME"));
+				user.setAge(rs.getInt("AGE"));
+					DesignationDTO designation = new DesignationDTO();
+					designation.setId(rs.getInt("ID"));
+					designation.setDesignation(rs.getString("DESIGNATION"));
+				    user.setDesignation(designation);
+					GenderDTO gender = new GenderDTO();
+					gender.setId(rs.getInt("ID"));
+					gender.setGender(rs.getString("GENDER"));
+					user.setGender(gender);
+					CommunityDTO community = new CommunityDTO();
+					community.setId(rs.getInt("ID"));
+					community.setCommunity("COMMUNITY");
+					user.setCommunity(community);
+					ReligionDTO religion = new ReligionDTO();
+					religion.setId(rs.getInt("ID"));
+					religion.setReligion("RELIGION");
+					user.setReligion(religion);
+			    }
+				return user;
+			}
+			
+			  
+		  });
 		}
 		catch (Exception e){
 			 responseBean.setStatus("FAILED");
 			   String eStr = e.getMessage();
 				responseBean.setMessage(eStr);
 		}
-		return null;
+		return user;
 	}
 
 }

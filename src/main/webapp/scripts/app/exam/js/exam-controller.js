@@ -60,10 +60,10 @@
 		
 	    $scope.roleCheck = function(){
 			console.log(localStorage.getItem("userRole"));
-			if(localStorage.getItem("userRole")=='Staff'){
-				$scope.display=false;
+			if(localStorage.getItem("userRole")=='TEACHING STAFF'){
+				$scope.display = false;
 			}else{
-				$scope.display=true;
+				$scope.display = true;
 			}
 		};
 	 $scope.createNewLeaveRequest = function (){

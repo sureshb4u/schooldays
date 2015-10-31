@@ -50,9 +50,10 @@
 			
 		};
 		
-		$scope.updateUser = {};
+		
 		
 		$scope.updateProfile = function(user, feild){
+			$scope.updateUser = {};
 			if(feild == 'contact'){
 				$scope.updateUser.contact = angular.copy(user);
 			}else if(feild == 'bioGraphy'){
