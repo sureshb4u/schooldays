@@ -1,18 +1,18 @@
 <div layout-margin class="m0" layout="column" class="sidenavdemoBasicUsage" show-gt-md ng-init="rolePermission();">
 	<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-	    <md-toolbar class="" style="background-color: #37474f !important;     padding-top: 15px;">
+	    <md-toolbar  style=" background :#009688 ;padding-top: 15px;">
 	    <div layout-fill layout="column" layout-align="center center">
-	    	<span  class="fs-title display-block light-blue-text" >School Days</span>
+	    	<span  class="fs-title display-block" >School Days</span>
 	    	<img src="assets/images/school-logo.gif"style="height: 110px;width: 135px;"/>
 	    </div>
 	    <md-divider style=" margin-top: 15px;" ></md-divider>
 	    </md-toolbar>
-	       <md-content layout="column" flex class="blue-grey darken-3">
+	       <md-content layout="column" flex class="navbar">
 		       <div layout-fill resize style="height:{{windowHeight-215+'px'}};overflow:auto">
 		       <div  ng-repeat="permissions in permission.roleBasedPermissions.menuItems" ng-init="addSelectedClass(permissions.menuItemDisplay)">
-			    <a href="{{permissions.url}}" class="md-raised white-text" id="{{permissions.menuItemDisplay}}" ng-click="changeClass('{{permissions.menuItemDisplay}}')">
+			    <a href="{{permissions.url}}"  id="{{permissions.menuItemDisplay}}" ng-click="changeClass('{{permissions.menuItemDisplay}}')">
 			    	<md-list-item class="md-3-line aligncenter removeClass">
-				        <div class="md-list-item-text">
+				        <div class="md-list-item-text" style="color :#009688 !important;">
 				          <h3>{{permissions.menuTitle}}</h3>
 				        </div>
 			    	</md-list-item>
