@@ -5,12 +5,13 @@
 	    	  <div flex="10">
 		      <img src="/assets/images/no-img.jpg" alt="" class="circle">
 		      </div>
-		      <div flex="60" >
-		      <span class="black-text fs-subhead">{{lists.firstName}} </span><br>
-		      <span class="black-text">  ID : {{lists.id}}  </span><br>
-		      <span class="black-text">DOB: {{lists.dateOfBirth}} </span><br>
+		      <div flex="45" >
+		      <span class="black-text fs-boy-2 display-block">{{lists.firstName}} {{lists.lastName}}</span>
+		      <span class="black-text fontClass ">  ID : {{lists.id}}  </span><br>
+		      <span class="black-text fontClass "><a style="color:#0080FF" href="mailto:{{lists.emailAddresses}}">email : {{lists.emailAddresses}} </a></span><br>
+		      <span class="black-text fontClass">DOB: {{lists.dateOfBirth}} </span><br>
 		      </div>
-		      <div flex="30" class="black-text fs-subhead"> {{lists.designation}}   </div>
+		      <div flex="45" class=" black-text fs-subhead biography"> {{lists.bioGraphy}} </div>
 	      </div>
 	    </li>
   </ul>
