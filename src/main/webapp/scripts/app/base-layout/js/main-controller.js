@@ -230,6 +230,31 @@
     		  $scope.authenticationError = false;
     	  });
     };
+    
+    $scope.checkAdmin = function(){
+    	if($scope.userRole == 'ADMIN'){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    };
+    
+    $scope.checkTeachingStaff = function(){
+    	if($scope.userRole == 'TEACHING STAFF'){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    };
+    
+    $scope.checkNonTeachingStaff = function(){
+    	if($scope.userRole == 'NON TEACHING STAFF'){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    };
+    
    angular.forEach($scope.dyanamicFields.questions, function(value , key) {
     	if(value.type=="isOption"){
     		$scope.isOption=value.typeList;
