@@ -21,6 +21,7 @@
 	var location= window.location.href.split('#')[1];
     $scope.path=window.location.href.split('#')[1];
     $scope.userName = localStorage.getItem("userName");
+    $scope.userRole = localStorage.getItem("userRole")
     var queryparam ="";
     if(localStorage.getItem("linkParam") != "" && localStorage.getItem("linkParam") != null){
     	queryparam = localStorage.getItem("linkParam").split('?')[1];
@@ -93,18 +94,18 @@
 	    $translate.refresh();
 	  };
 	  $scope.selectedClass = function(id){
-		  $("#dashboard").parent().addClass("light-blue");
+		  $("#dashboard").parent().addClass("selected-grey");
 	    };
 	    $scope.addSelectedClass=function(selected){
 	    	 if(selected.toLowerCase() == $scope.path.split('/')[1]){
 	 	        setTimeout(function(){
-	 	        	angular.element("#"+selected).find(".removeClass").addClass("light-blue");
+	 	        	angular.element("#"+selected).find(".removeClass").addClass("selected-grey");
 	 	        	},100);
 	    	 }
 	    }
 	    $scope.changeClass = function(id){
-	    	angular.element(".removeClass").removeClass("light-blue");
-	        angular.element("#"+id).find(".removeClass").addClass("light-blue");
+	    	angular.element(".removeClass").removeClass("selected-grey");
+	        angular.element("#"+id).find(".removeClass").addClass("selected-grey");
 	    };
 	 //$translate.use('fr');
 	 $translate.refresh();

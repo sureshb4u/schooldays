@@ -14,7 +14,9 @@ public class CommonConstants {
 	public static final String DATE_TIME= "yyyy-dd-MM";
 	public static final String DATE_DD_MMMM_YYYY = "dd MMMM, yyyy";
 	public static final String DATE_DD_MMMM_YYYY_HH_MM_AM = "dd MMMM, yyyy hh:mm a";
+	public static final String TIMESTAMP_DD_MMMM_YYYY_HH_MM_SS = "yyyy-MM-dd hh:mm:ss";
 	//Login variable
+	public static final String TIME_FORMAT = "hh:mm a";
 	public static final String LOGIN_PAGE = "index";
 	
 	//Organization URL

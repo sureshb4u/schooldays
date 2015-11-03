@@ -9,7 +9,21 @@ public class LeaveManagement{
 	private String toTime;
 	private String to;
 	private String status;
+	private Staff staff;
+	private boolean approveStatus; 
 	
+	public boolean isApproveStatus() {
+		return approveStatus;
+	}
+	public void setApproveStatus(boolean approveStatus) {
+		this.approveStatus = approveStatus;
+	}
+	public Staff getStaff() {
+		return staff;
+	}
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
 	public Integer getId() {
 		return id;
 	}

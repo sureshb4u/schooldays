@@ -26,6 +26,33 @@
     		  return deferred.promise;
         }
     	
+    	this.getLmsList = function(status){
+    		var url ='api/lms/'+status;
+  		  var deferred = $q.defer();
+  		  var data = restService.restCall('', url, 'GETLIST');
+  		  data.$promise.then(function(response){
+  				deferred.resolve(response);
+  		  },
+  		  function(error){
+  			  LxNotificationService.warning(error);
+  		  });
+  		  return deferred.promise;
+    	};
+    	
+    	this.updateLMS = function(obj){
+    	  var url ='api/lms/updateRequest';
+    	  $rootScope.master = angular.copy(obj);
+  		  var deferred = $q.defer();
+  		  var data = restService.restCall($rootScope.master, url, 'PUT');
+  		  data.$promise.then(function(response){
+  				deferred.resolve(response);
+  		  },
+  		  function(error){
+  			  LxNotificationService.warning(error);
+  		  });
+  		  return deferred.promise;
+    	};
+    	
     }]);
 
 })();

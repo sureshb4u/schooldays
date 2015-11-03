@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -33,8 +34,8 @@ public class LMSController extends BaseController{
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value= "/{status}/list")
-	public Object getLMSList(@PathVariable(value="status")String status, HttpSession session){
+	@RequestMapping(value= "/{status}", method = RequestMethod.GET)
+	public ResponseEntity<?> getLMSList(@PathVariable(value="status")String status, HttpSession session){
 		List<LeaveManagement> lmsList = null;
 		try {
 		if(status != null &&!status.isEmpty()){
@@ -43,7 +44,7 @@ public class LMSController extends BaseController{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return lmsList;
+		return new ResponseEntity<List<LeaveManagement>>(lmsList, HttpStatus.OK);
 	}
 	
 	
@@ -54,11 +55,12 @@ public class LMSController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping(value = CommonConstants.CREATE_LEAVE_REQUEST ,method = RequestMethod.POST)
-	public ResponseEntity<?> createLeaveRequest(@RequestBody LeaveManagement leaveManagement, HttpSession session){
+	public ResponseEntity<?> createLeaveRequest(@RequestBody LeaveManagement leaveManagement, HttpSession session, HttpServletRequest request){
 		Object obj = null;
 		try {
+			Integer userId = Integer.valueOf(session.getAttribute(CommonConstants.SESSION_USER_ID).toString());
 			System.out.println(gson.toJson(leaveManagement));
-			obj = lMSService.createLMSRequest(leaveManagement, session);
+			obj = lMSService.createLMSRequest(leaveManagement, userId, session);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,17 +75,18 @@ public class LMSController extends BaseController{
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = CommonConstants.UPDATE_REQUEST)
-	public Object updateStatusForLeaveRequest(@RequestBody List<LeaveManagement> leaveManagementList, HttpSession session){
+	@RequestMapping(value = CommonConstants.UPDATE_REQUEST , method = RequestMethod.PUT)
+	public ResponseEntity<?> updateStatusForLeaveRequest(@RequestBody List<LeaveManagement> leaveManagementList, HttpSession session){
 		Object obj = null;
 		try {
 			if(leaveManagementList != null && !leaveManagementList.isEmpty()){
+				System.out.println("leaveManagementList----------"+gson.toJson(leaveManagementList));
 				obj = lMSService.updateLMS(leaveManagementList, session);
 			}
 		} catch (ParseException e) {
 				e.printStackTrace();
 		}
-		return  obj ;
+		return  new ResponseEntity<Object>(obj , HttpStatus.OK) ;
 	}
 	
 	

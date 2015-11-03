@@ -35,10 +35,9 @@ public class LMSService extends BaseService {
 		ResponseEntity<Object> response = restTemplate.exchange( getAPIBaseURL()
 						+ CommonConstants.LMS_BASE_URL + CommonConstants.SLASH + status ,
 						HttpMethod.GET, requestEntity, Object.class);
-		
+		System.out.println("response.getBody()>>>>>"+status+">>>>>"+gson.toJson(response.getBody()));
 		leaveManagementDTOList = lMSTransator.convertToListOfLMSDTO(response.getBody()); 
 		leaveManagementList = lMSTransator.translateToLMSList(leaveManagementDTOList);
-		
 	} catch (RestClientException | IOException e) {
 		e.printStackTrace();
 		throw e;
@@ -54,15 +53,15 @@ public class LMSService extends BaseService {
 	 * @throws IOException 
 	 * @throws ParseException 
 	 */
-	public Object createLMSRequest(LeaveManagement leaveManagement,	HttpSession session) throws Exception {
-		LeaveManagementDTO leaveManagementDTO = lMSTransator.translateToLMSDTO(leaveManagement);
+	public Object createLMSRequest(LeaveManagement leaveManagement, Integer userId,	HttpSession session) throws Exception {
+		LeaveManagementDTO leaveManagementDTO = lMSTransator.translateToLMSDTO(leaveManagement, CommonConstants.STATUS_PENDING);
 		String postString = gson.toJson(leaveManagementDTO);
 		ResponseEntity<Object> response = null;
 		try {
 			HttpEntity<String> entity = preparePost(postString, session);
 			
 			response = restTemplate.exchange( getAPIBaseURL()
-					+ CommonConstants.LMS_BASE_URL + CommonConstants.CREATE_LEAVE_REQUEST,
+					+ CommonConstants.LMS_BASE_URL +"/"+ userId + CommonConstants.CREATE_LEAVE_REQUEST,
 					HttpMethod.POST, entity, Object.class);
 
 			return response.getStatusCode();

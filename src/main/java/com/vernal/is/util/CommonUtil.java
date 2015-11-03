@@ -159,10 +159,18 @@ public class CommonUtil {
 	 * @param strDate
 	 * @param toFormat
 	 * @return
+	 * @throws ParseException 
 	 */
-	public String formatTimeStampToDateString(Timestamp timestamp, String toFormat){
-		SimpleDateFormat formatter = new SimpleDateFormat(toFormat);
-		return formatter.format(timestamp);
+	public String formatTimeStampToDateString(String timestamp, String fromFormat, String toFormat) throws ParseException{
+		System.out.println("input timestamp---------"+timestamp);
+		SimpleDateFormat formatter = new SimpleDateFormat(fromFormat);
+		Date date = formatter.parse(timestamp);
+		
+		System.out.println("dateStr----------"+date.getTime());
+		SimpleDateFormat toFormatter = new SimpleDateFormat(toFormat);
+		String returnString = toFormatter.format(date);
+		System.out.println("returnString===="+returnString);
+		return returnString;
 	}
 	
 	public String formatgivenStringToTimestamp(String dateStr, String timeStr, String fromFormat, String toFormat) throws ParseException{

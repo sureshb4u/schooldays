@@ -1,178 +1,41 @@
 <div>
 <div>
-  <md-content class="md-padding" ng-init="display = roleCheck();">
+  <md-content class="md-padding" ng-init="display = roleCheck(); getPendingLms();">
     <md-tabs md-dynamic-height md-border-bottom  md-stretch-tabs="always">
       <md-tab label="LMS pending" >
         <md-content class="md-padding" >
         <div resize>
-          <div flex-container="column" >
+          <div flex-container="column" ng-repeat="list in lmsPending">
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
+					<div class="fs-title" ng-show="display">{{list.staff.firstName}} {{list.staff.lastName}}</div>
+					<div class="black-text">From : {{list.from}} ( {{list.fromTime}} )</div>
+					<div class="black-text">To : {{list.to}} ({{list.toTime}})</div>
+					<div class="fs-subhead">Reason : {{list.reason}}</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
-				<div class="black-text" flex="30" ng-hide="display">Approved</div>
+				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="list.approveStatus"  ng-init="list.approveStatus = false" aria-label="Switch 1"><span ng-show="list.approveStatus" >Approve</span><span ng-hide="list.approveStatus">Decline</span></md-switch></div>
+				<div class="black-text" flex="30" ng-hide="display">{{list.status}}</div>
 			</div>
-		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-		<div flex-container="column" >
-			<div flex-container="row">
-				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
-				</div>
-				<div flex="30"></div>
-				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
-				<div class="black-text" flex="30" ng-hide="display">Approved</div>
-			</div>
-		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-		<div flex-container="column" >
-			<div flex-container="row">
-				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
-				</div>
-				<div flex="30"></div>
-				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
-				<div class="black-text" flex="30" ng-hide="display">Approved</div>
-			</div>
-		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-		<div flex-container="column" >
-			<div flex-container="row">
-				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
-				</div>
-				<div flex="30"></div>
-				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
-				<div class="black-text" flex="30" ng-hide="display">Approved</div>
-			</div>
-		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-		<div flex-container="column" >
-			<div flex-container="row">
-				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
-				</div>
-				<div flex="30"></div>
-				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
-				<div class="black-text" flex="30" ng-hide="display">Approved</div>
-			</div>
-		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-		<div flex-container="column" >
-			<div flex-container="row">
-				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
-				</div>
-				<div flex="30"></div>
-				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
-				<div class="black-text" flex="30" ng-hide="display">Approved</div>
-			</div>
-		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-		<div flex-container="column" >
-			<div flex-container="row">
-				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
-				</div>
-				<div flex="30"></div>
-				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
-				<div class="black-text" flex="30" ng-hide="display">Approved</div>
-			</div>
-		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-		<div flex-container="column" >
-			<div flex-container="row">
-				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Vignesh</div>
-					<div class="fs-subhead">Reason : Sick Leave</div>
-					<div class="black-text">Date : 19-08-15</div>
-				</div>
-				<div flex="30"></div>
-				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="data.cb1"  ng-init="data.cb1=false" aria-label="Switch 1"><span ng-show=data.cb1 >Approved</span><span ng-hide=data.cb1>Decline</span></md-switch></div>
-				<div class="black-text" flex="30" ng-hide="display">Approved</div>
-			</div>
+			<md-divider ng-if="!$last"></md-divider>
 		</div>
 		</div>
         </md-content>
       </md-tab>
       <md-tab label="LMS History">
-        <md-content class="md-padding">
-			<div flex-container="column" >
+        <md-content class="md-padding" ng-init="getHistoryLms();">
+			<div flex-container="column"  ng-repeat="list in lmsHistory" >
 			<div flex-container="row">
 				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
+					<div class="fs-title" ng-show="display">{{list.staff.firstName}} {{list.staff.lastName}}</div>
+					<div class="black-text">From : {{list.from}} ( {{list.fromTime}} )</div>
+					<div class="black-text">To : {{list.to}} ({{list.toTime}})</div>
+					<div class="fs-subhead">Reason : {{list.reason}}</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30">Approved</div>
+				<div class="black-text" flex="30">{{list.status}}</div>
 			</div>
 		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-		<div flex-container="column" >
-			<div flex-container="row">
-				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
-				</div>
-				<div flex="30"></div>
-				<div class="black-text" flex="30">Declined</div>
-			</div>
-		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-		<div flex-container="column" >
-			<div flex-container="row">
-				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
-				</div>
-				<div flex="30"></div>
-				<div class="black-text" flex="30">Approved</div>
-			</div>
-		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-		<div flex-container="column" >
-			<div flex-container="row">
-				<div flex="40"> 
-					<div class="fs-title" ng-show="display"> Joseph</div>
-					<div class="fs-subhead"> Reason : Requesting Leave For Casual Leave</div>
-					<div class="black-text">From 19-08-15 to 21-08-15 (2 Days)</div>
-				</div>
-				<div flex="30"></div>
-				<div class="black-text" flex="30">Approved</div>
-			</div>
-		</div>
-		<md-divider ng-if="!$last"></md-divider>
-		
-
         </md-content>
       </md-tab>
     </md-tabs>

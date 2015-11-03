@@ -10,8 +10,11 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.reflect.TypeToken;
+import com.vernal.is.dto.FormStatusDTO;
 import com.vernal.is.dto.LeaveManagementDTO;
+import com.vernal.is.dto.UserDTO;
 import com.vernal.is.model.LeaveManagement;
+import com.vernal.is.model.Staff;
 import com.vernal.is.util.CommonConstants;
 
 @Component
@@ -32,8 +35,9 @@ public class LMSTransator extends BaseTranslator{
 	 * 
 	 * @param leaveManagementDTOList
 	 * @return
+	 * @throws ParseException 
 	 */
-	public List<LeaveManagement> translateToLMSList(List<LeaveManagementDTO> leaveManagementDTOList) {
+	public List<LeaveManagement> translateToLMSList(List<LeaveManagementDTO> leaveManagementDTOList) throws ParseException {
 		List<LeaveManagement> lmsList = new ArrayList<LeaveManagement>();
 		if(leaveManagementDTOList != null && !leaveManagementDTOList.isEmpty()){
 			for(LeaveManagementDTO leaveManagementDTO : leaveManagementDTOList){
@@ -47,9 +51,10 @@ public class LMSTransator extends BaseTranslator{
 	 * 
 	 * @param leaveManagementDTO
 	 * @return
+	 * @throws ParseException 
 	 */
 
-	public LeaveManagement translateToLMS(LeaveManagementDTO leaveManagementDTO) {
+	public LeaveManagement translateToLMS(LeaveManagementDTO leaveManagementDTO) throws ParseException {
 		LeaveManagement leaveManagement = null;
 		if(leaveManagementDTO != null){
 			leaveManagement = new LeaveManagement();
@@ -57,19 +62,32 @@ public class LMSTransator extends BaseTranslator{
 				leaveManagement.setId(leaveManagementDTO.getId());
 			}
 			if(leaveManagementDTO.getStartTime() != null){
-			//	leaveManagement.setFrom(commonUtil.formatTimeStampToDateString(leaveManagementDTO.getStartTime(), CommonConstants.DATE_DD_MMMM_YYYY));
+				leaveManagement.setFrom(commonUtil.formatTimeStampToDateString(leaveManagementDTO.getStartTime().substring(0, leaveManagementDTO.getStartTime().length() - 2) , CommonConstants.TIMESTAMP_DD_MMMM_YYYY_HH_MM_SS, CommonConstants.DATE_DD_MMMM_YYYY));
+				leaveManagement.setFromTime(commonUtil.formatTimeStampToDateString(leaveManagementDTO.getStartTime().substring(0, leaveManagementDTO.getStartTime().length() - 2) , CommonConstants.TIMESTAMP_DD_MMMM_YYYY_HH_MM_SS, CommonConstants.TIME_FORMAT));
 			}
 			if(leaveManagementDTO.getEndTime() != null){
-			//	leaveManagement.setTo(commonUtil.formatTimeStampToDateString(leaveManagementDTO.getEndTime(), CommonConstants.DATE_DD_MMMM_YYYY));
+				leaveManagement.setTo(commonUtil.formatTimeStampToDateString(leaveManagementDTO.getEndTime().substring(0, leaveManagementDTO.getEndTime().length() - 2) , CommonConstants.TIMESTAMP_DD_MMMM_YYYY_HH_MM_SS, CommonConstants.DATE_DD_MMMM_YYYY));
+				leaveManagement.setToTime(commonUtil.formatTimeStampToDateString(leaveManagementDTO.getStartTime().substring(0, leaveManagementDTO.getStartTime().length() - 2) , CommonConstants.TIMESTAMP_DD_MMMM_YYYY_HH_MM_SS, CommonConstants.TIME_FORMAT));
 			}
 			if(leaveManagementDTO.getReason() != null){
 				leaveManagement.setReason(leaveManagementDTO.getReason());
+			}
+			if(leaveManagementDTO.getFormStatus() != null){
+				leaveManagement.setStatus(leaveManagementDTO.getFormStatus().getStatus());
+			}
+			if(leaveManagementDTO.getStaff() != null){
+				//leaveManagement.setStatus(leaveManagementDTO.getFormStatus().getStatus());
+				Staff staff = new Staff();
+				staff.setFirstName(leaveManagementDTO.getStaff().getFirstName());
+				staff.setLastName(leaveManagementDTO.getStaff().getLastName());
+				staff.setId(leaveManagementDTO.getStaff().getId());
+				leaveManagement.setStaff(staff);
 			}
 		}
 		return leaveManagement;
 	}
 
-	public LeaveManagementDTO translateToLMSDTO(LeaveManagement leaveManagement) throws ParseException {
+	public LeaveManagementDTO translateToLMSDTO(LeaveManagement leaveManagement, String status) throws ParseException {
 		LeaveManagementDTO leaveManagementDTO = null ;
 		if(leaveManagement != null){
 			leaveManagementDTO = new LeaveManagementDTO();
@@ -90,6 +108,17 @@ public class LMSTransator extends BaseTranslator{
 				leaveManagementDTO.setReason(leaveManagement.getReason());
 			}
 			
+			if(status != null){
+				FormStatusDTO formStatusDTO = new FormStatusDTO();
+				formStatusDTO.setStatus(status);
+				leaveManagementDTO.setFormStatus(formStatusDTO);
+			}
+			if(leaveManagement.getStaff()!= null){
+				UserDTO staff = new UserDTO();
+				staff.setId(leaveManagement.getStaff().getId());
+				leaveManagementDTO.setStaff(staff);
+			}
+			
 		}
 		return leaveManagementDTO;
 	}
@@ -101,11 +130,17 @@ public class LMSTransator extends BaseTranslator{
 	 * @throws ParseException
 	 */
 	public List<LeaveManagementDTO> translateToLMSDTOList(List<LeaveManagement> leaveManagementList) throws ParseException {
+		String status = null;
 		List<LeaveManagementDTO> leaveManagementDTOList = null;
 		if(leaveManagementList != null){
 			leaveManagementDTOList = new ArrayList<LeaveManagementDTO>();
 			for(LeaveManagement leaveManagement: leaveManagementList){
-				leaveManagementDTOList.add(translateToLMSDTO(leaveManagement));
+				if(leaveManagement.isApproveStatus()){
+					status = CommonConstants.STATUS_APPROVED;
+				}else{
+					status = CommonConstants.STATUS_DECLINED;
+				}
+				leaveManagementDTOList.add(translateToLMSDTO(leaveManagement, status));
 			}
 		}
 		return leaveManagementDTOList;

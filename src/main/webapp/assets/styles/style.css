@@ -54,7 +54,7 @@ html,body{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none
 .lhauto{ line-height:25px !important;}
 .pv0{padding-top:0px !important; padding-bottom:0px !important;}.pv5{padding-top:5px !important; padding-bottom:5px !important;}.pv10{padding-top:10px !important; padding-bottom:10px !important;}.pv15{padding-top:15px !important; padding-bottom:15px !important;}
 .row{clear:both;display:block; margin:0;}
-a{color: #29b6f6;text-decoration:none;  -webkit-transition-duration: .5s; transition-duration: .5s;}
+a{color: white;text-decoration:none;  -webkit-transition-duration: .5s; transition-duration: .5s;}
 a:hover{ text-decoration:none;  -webkit-transition-duration: .5s; transition-duration: .5s; color: #333;}
 a:focus,input:focus,select:focus{outline:none;}
 .fullheight{height: -moz-calc(100%); height: -webkit-calc(100%); height: calc(100%);}
@@ -218,4 +218,14 @@ md-tabs[md-border-bottom] md-tabs-wrapper {
 .navbar-list{
 	color :#009688 !important;
 	font-size: 16px;
+}
+
+.schooldays{
+color :#009688 !important;
+}
+.bg-schooldays-green{
+	background :#009688 !important;
+}
+.selected-grey{
+	background: #E0F2F1;
 }

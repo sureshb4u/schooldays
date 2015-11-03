@@ -2,7 +2,7 @@
 	"menuItems" : [
 		{
 			"menuTitle": "Profile",
-			"viewby": ["ADMIN", "TEACHING STAFF"],
+			"viewby": ["ADMIN", "TEACHING STAFF","NON TEACHING STAFF"],
 			"style":"",
 			"menuItemDisplay": "profile",
 			"url":"#profile"
@@ -31,7 +31,7 @@
 		},
 		{
 			"menuTitle": "Leave Management System",
-			"viewby": ["ADMIN", "TEACHING STAFF"],
+			"viewby": ["ADMIN", "TEACHING STAFF","NON TEACHING STAFF"],
 			"style":"",
 			"menuItemDisplay": "lms",
 			"url":"#lms"
@@ -45,7 +45,7 @@
 		},
 		{
 			"menuTitle": "School Info",
-			"viewby": ["ADMIN","TEACHING STAFF"],
+			"viewby": ["ADMIN","TEACHING STAFF","NON TEACHING STAFF"],
 			"style":"",
 			"menuItemDisplay": "schoolInfo",
 			"url":"#schoolInfo"

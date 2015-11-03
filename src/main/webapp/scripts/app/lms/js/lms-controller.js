@@ -60,10 +60,43 @@
 		$scope.lms ={};	
 		
 	 $scope.createNewLeaveRequest = function (obj){
-		 //obj
 		 var data = lmsService.createLeaveRequest(obj);
+		 data.then(function(success){						 
+			});
 		};
-		
+	$scope.lmsPending = [];	
+	$scope.getPendingLms = function(){
+		 var data = lmsService.getLmsList("PENDING");
+		 data.then(function(success){
+			 console.log(angular.toJson(success));
+			 $scope.lmsPending = success;
+			});
+	};
+	$scope.getHistoryLms = function(){
+		var data = lmsService.getLmsList("HISTORY");
+		 data.then(function(success){	
+			 console.log('History-------'+angular.toJson(success));
+			 $scope.lmsHistory = success;
+		});
+	};
+	
+	$scope.updateLms = function(obj){
+		$scope.toUpdateLms = [];
+		for(var i=0 ; i<obj.length ; i++){
+			var lms ={};  lms.staff={}; 
+			lms.id = angular.copy(obj[i].id);
+			lms.staff.id = angular.copy(obj[i].staff.id);
+			lms.approveStatus = angular.copy(obj[i].approveStatus);
+			$scope.toUpdateLms.push(lms);
+		}
+		var data = lmsService.updateLMS($scope.toUpdateLms);
+		data.then(function(success){
+			getPendingLms();
+		});
+	};
+	
+	
+	
 		 $interval(function() {
 		      self.determinateValue += 1;
 		      self.determinateValue2 += 1.5;

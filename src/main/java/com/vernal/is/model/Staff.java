@@ -5,7 +5,6 @@ import java.util.List;
 public class Staff extends User{
 
 	
-	private String designation;
 	private String classTeacherID ;
 	private List<Class> classes;
 
@@ -25,12 +24,5 @@ public class Staff extends User{
 		this.classes = classes;
 	}
 
-
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
-	
-	
-	
 	
 }

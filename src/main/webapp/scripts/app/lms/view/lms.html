@@ -15,8 +15,13 @@
 		<ng-md-icon icon="save"  style="fill: grey; cursor: pointer;" size="30" ng-show="create" ng-click="createNewLeaveRequest(lms);mainTemplate('','list');create=false;loader=false">
 			<md-tooltip md-autohide="true">
                         Send Leave Request
-                 </md-tooltip>
-			</ng-md-icon>
+             </md-tooltip>
+		</ng-md-icon>
+		<ng-md-icon icon="save"  style="fill: grey; cursor: pointer;" size="30"  ng-click="updateLms(lmsPending)">
+			<md-tooltip md-autohide="true">
+                       Approve / Decline
+             </md-tooltip>
+		</ng-md-icon>
 		</div>
 	 </div>
 	</md-toolbar>

@@ -22,13 +22,10 @@ public class Test {
 	HttpServletRequest httpServletRequest;
 	
 	public static void main(String args[]) throws ParseException {
-		SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_DD_MMMM_YYYY);
-			Date d = new Date();
-			Timestamp time = new Timestamp(d.getTime());
-			System.out.println("dateto timestamp>>>>>"+time);
-			String date = formatter.format(time);
-			System.out.println("timestamp to date>>>>.."+date);
-
+		   SimpleDateFormat displayFormat = new SimpleDateFormat("HH:mm:ss");
+	       SimpleDateFormat parseFormat = new SimpleDateFormat("hh:mm a");
+	       Date date = parseFormat.parse("10:30 PM");
+	       System.out.println(parseFormat.format(date) + " = " + displayFormat.format(date));
 			
 	}
 	public static void toBeginningOfTheDay(Calendar calendar) {
@@ -71,8 +68,8 @@ public class Test {
 	}
 	public static void dateFormatter() throws ParseException{
 		CommonUtil common = new CommonUtil();
-		Date d = common.formatgivenStringToDate("21 October, 2015", CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT);
-		System.out.println("date>>>>>>>>>>"+d);
+	//	Date d = common.formatgivenStringToDate("21 October, 2015", CommonConstants.DATE_DD_MMMM_YYYY, CommonConstants.DATE_FORMAT);
+	//	System.out.println("date>>>>>>>>>>"+d);
 	}
 	
 	
@@ -92,6 +89,6 @@ public class Test {
 		 
 				// email body
 				String body = "There you go.. You got an email.. Let's understand details on how Spring MVC works -- By Crunchify Admin";
-				emailService.readyToSendEmail(toAddr, fromAddr, subject, body);
+				//emailService.readyToSendEmail(toAddr, fromAddr, subject, body);
 	}
 }

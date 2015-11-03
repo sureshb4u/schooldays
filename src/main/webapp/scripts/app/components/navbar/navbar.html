@@ -1,8 +1,8 @@
 <div layout-margin class="m0" layout="column" class="sidenavdemoBasicUsage" show-gt-md ng-init="rolePermission();">
 	<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-	    <md-toolbar  style=" background :#009688 ;padding-top: 15px;">
+	    <md-toolbar  class="" style="background : white; padding-top: 15px;">
 	    <div layout-fill layout="column" layout-align="center center">
-	    	<span  class="fs-title display-block" >School Days</span>
+	    	<span  class="fs-title display-block schooldays" >School Days</span>
 	    	<img src="assets/images/school-logo.gif"style="height: 110px;width: 135px;"/>
 	    </div>
 	    <md-divider style=" margin-top: 15px;" ></md-divider>
@@ -12,7 +12,7 @@
 		       <div  ng-repeat="permissions in permission.roleBasedPermissions.menuItems" ng-init="addSelectedClass(permissions.menuItemDisplay)">
 			    <a href="{{permissions.url}}"  id="{{permissions.menuItemDisplay}}" ng-click="changeClass('{{permissions.menuItemDisplay}}')">
 			    	<md-list-item class="md-3-line aligncenter removeClass">
-				        <div class="md-list-item-text" style="color :#009688 !important;">
+				        <div class="md-list-item-text schooldays" >
 				          <h3>{{permissions.menuTitle}}</h3>
 				        </div>
 			    	</md-list-item>
@@ -26,16 +26,19 @@
 		       	</div> 
 		       	<div layout layout-align="center center">
 			    	<lx-dropdown class="aligncenter">
-			    		<div lx-dropdown-toggle>
-			    		<div class="user-name">{{userName}}</div>
-							<div  class="white-text user-name fs-title display-block aligncenter">Admin</div>
+			    		<div lx-dropdown-toggle layout="row">
+			    			<div flex="20" ><img class="circle" src="/assets/images/no-img.jpg" alt="" ></div>
+			    			<div flex="80">
+			    			<div class="fs-subhead" >{{userName}}</div>
+							<div  class="black-text fs-caption display-block aligncenter">{{userRole}}</div>
+							</div>
 							<div  class="user-options"><i class="user-options-down"></i></div>
 						</div>
 						<div class="content">
 							<lx-dropdown-menu class="aligncenter">
 								<ul class="user-options-menu">
 									<li><a  href="#login" ng-show="false" class="md-raised fs-subhead display-block  aligncenter" translate="global.menu.login"></a></li>
-						      		<li><a  href="#logout" ng-show="true" class="md-raised fs-subhead display-block  aligncenter" translate="global.menu.logout" ng-click="logout()"></a></li>
+						      		<li><a  href="#logout" ng-show="true" class="md-raised fs-subhead display-block schooldays aligncenter" translate="global.menu.logout" ng-click="logout()"></a></li>
 								</ul>
 							</lx-dropdown-menu>
 					    </div> 

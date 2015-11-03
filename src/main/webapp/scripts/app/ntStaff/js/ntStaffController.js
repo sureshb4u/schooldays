@@ -32,28 +32,6 @@
 			$scope.loadUsersByRoleCA("ADMIN");
 			$scope.loadUsersByRoleCMT();
 		};
-		$scope.religion = [
-		                   { religion: 'Hindu',      },
-		                   { religion: 'Christian',    },
-		                   { religion: 'Muslim',  },
-		                   { religion: 'Jain',  },
-		                   { religion: 'Buddhism', }
-		                   ];
-		
-		$scope.community = [
-		                    { community: 'OC',      },
-		                    { community: 'BC',    },
-		                    { community: 'FC',  },
-		                    { community: 'MBC',  },
-		                    { community: 'SC/ST', }
-		                    ];
-		
-		$scope.designation = [
-		                      { designation: 'Peon',      },
-		                      { designation: 'Clerk',    },
-		                      { designation: 'HouseKeeping',  },
-		                      { designation: 'Bus Driver',  }
-		                     ];
 		
 		$scope.nonTchngStaff = {};
 
