@@ -65,7 +65,7 @@ public class CommonConstants {
 	public static final String ROLE_ADMIN = "ADMIN";
 	public static final String ROLE_T_STAFF = "TEACHING STAFF";
 	public static final String ROLE_NT_STAFF = "NON TEACHING STAFF";
-	public static final Object STATUS_HISTORY = "HISTORY";
+	public static final String STATUS_HISTORY = "HISTORY";
 	public static final String CREATE_LEAVE_REQUEST = "/createRequest";
 	public static final String UPDATE_REQUEST = "/updateRequest";
 	public static final String EMAIL_VERIFICATION = "/email-verification";
