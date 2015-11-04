@@ -12,12 +12,12 @@
                        Cancel
             </md-tooltip>
 		</ng-md-icon>
-		<ng-md-icon icon="save"  style="fill: grey; cursor: pointer;" size="30" ng-show="create" ng-click="createNewLeaveRequest(lms);mainTemplate('','list');create=false;loader=false">
+		<ng-md-icon icon="save"  style="fill: grey; cursor: pointer;" size="30" ng-show="create" ng-click="createNewLeaveRequest(lms);create=false;loader=false">
 			<md-tooltip md-autohide="true">
                         Send Leave Request
              </md-tooltip>
 		</ng-md-icon>
-		<ng-md-icon icon="save"  style="fill: grey; cursor: pointer;" size="30" ng-show="checkAdmin()" ng-click="updateLms(lmsPending)">
+		<ng-md-icon icon="sync"  style="fill: white; cursor: pointer;" size="30" ng-show="checkAdmin()" ng-click="updateLms(lmsPending)">
 			<md-tooltip md-autohide="true">
                        Approve / Decline
              </md-tooltip>

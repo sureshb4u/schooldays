@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vernal.is.dao.StaffDAO;
+import com.vernal.is.dto.ClassesDTO;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.GenderDTO;
 import com.vernal.is.dto.ReligionDTO;
@@ -33,9 +34,9 @@ public class StaffServices {
 	 * @param studentDTO
 	 * @return
 	 */
-	public ResponseBean updateUser(StudentDTO studentDTO, Integer accessId) {
+	public ResponseBean updateStudent(StudentDTO studentDTO, Integer accessId) {
 		studentDTO = getBasicIds(studentDTO);
-		return staffDAO.updateUser(studentDTO, accessId);
+		return staffDAO.updateStudent(studentDTO, accessId);
 	}
 
 	/**
@@ -43,8 +44,8 @@ public class StaffServices {
 	 * @param userId
 	 * @return
 	 */
-	public ResponseBean deleteUser(Integer studentId, Integer accessId) {
-		return staffDAO.deleteUser(studentId, accessId);
+	public ResponseBean deleteStudent(Integer studentId, Integer accessId) {
+		return staffDAO.deleteStudent(studentId, accessId);
 	}
 
 	/**
@@ -56,7 +57,7 @@ public class StaffServices {
 	public ResponseBean createStudent(StudentDTO studentDTO, Integer accessId) throws Exception {
 		studentDTO = getBasicIds(studentDTO);
 		System.out.println("studentDTO>>>>>>>"+gson.toJson(studentDTO));
-		return staffDAO.insertUser(studentDTO, accessId);
+		return staffDAO.createStudent(studentDTO, accessId);
 	}
 
 	/**
@@ -67,14 +68,10 @@ public class StaffServices {
 		return staffDAO.getStudents(role,search, standardId,sectionId);
 	}
 
-	public List<StudentClassDTO> getClassList(String role,Integer standardId,Integer sectionId) {
-		return staffDAO.getClassList(role, standardId,sectionId);
+	public List<StaffClassDTO> getClassList(String role,Integer staffId,Integer standardId,Integer sectionId) {
+		return staffDAO.getClassList(role,staffId, standardId,sectionId);
 	}
 	
-	
-	public List<StaffClassDTO> getClassListByStaffId (String role,Integer staffId) {
-		return staffDAO.getClassListByStaffId(role, staffId);
-	}
 
 	public StudentDTO getStudent(Integer studentId) {
 		// TODO Auto-generated method stub
@@ -104,6 +101,11 @@ public class StaffServices {
 		}
 	
 		return studentDTO;
+	}
+
+	public List<ClassesDTO> getAllClassList(String role, Integer staffId) {
+		// TODO Auto-generated method stub
+		return staffDAO.getAllClassList(role,staffId);
 	}
 
 }

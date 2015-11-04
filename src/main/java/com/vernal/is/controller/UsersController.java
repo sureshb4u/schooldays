@@ -99,7 +99,7 @@ public class UsersController {
 		return responseBean;
 	}
 
-	@RequestMapping(value = "deleteBill/{userId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteUser/{userId}", method = RequestMethod.DELETE)
 	@ResponseBody
 	public ResponseBean deleteBill(@PathVariable Integer userId, HttpSession session) throws Exception {
 		ResponseBean responseBean = new ResponseBean();

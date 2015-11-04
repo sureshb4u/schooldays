@@ -2,7 +2,7 @@
 <div>
   <md-content class="md-padding" ng-init="display = checkAdmin(); getPendingLms();">
     <md-tabs md-dynamic-height md-border-bottom  md-stretch-tabs="always">
-      <md-tab label="LMS pending" >
+      <md-tab class="schooldays" label="LMS pending" >
         <md-content class="md-padding" >
         <div resize>
           <div flex-container="column" ng-repeat="list in lmsPending">
@@ -15,7 +15,7 @@
 				</div>
 				<div flex="30"></div>
 				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="list.approveStatus"  ng-init="list.approveStatus = false" aria-label="Switch 1"><span ng-show="list.approveStatus" >Approve</span><span ng-hide="list.approveStatus">Decline</span></md-switch></div>
-				<div class="black-text" flex="30" ng-hide="display">{{list.status}}</div>
+				<div class="black-text flag-blue" flex="30" ng-hide="display">{{list.status}}</div>
 			</div>
 			<md-divider ng-if="!$last"></md-divider>
 		</div>
@@ -33,7 +33,7 @@
 					<div class="fs-subhead">Reason : {{list.reason}}</div>
 				</div>
 				<div flex="30"></div>
-				<div class="black-text" flex="30">{{list.status}}</div>
+				<div  flex="30"> <span class="black-text " ng-class="statusClass(list.status)"> {{list.status}} </span></div>
 			</div>
 		</div>
         </md-content>

@@ -348,7 +348,7 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 			    if(rs.next()){
 				user.setId(rs.getInt("ID"));
 			    RoleDTO role = new RoleDTO();
-				role.setId(rs.getInt("ID"));
+				role.setId(rs.getInt("ID_ROLE"));
 			   role.setRole(rs.getString("ROLE"));
 			   user.setRole(role);
 				user.setFirstName(rs.getString("FIRST_NAME"));
@@ -361,19 +361,19 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				user.setFatherName(rs.getString("FATHER_NAME"));
 				user.setAge(rs.getInt("AGE"));
 					DesignationDTO designation = new DesignationDTO();
-					designation.setId(rs.getInt("ID"));
+					designation.setId(rs.getInt("ID_DESIGNATION"));
 					designation.setDesignation(rs.getString("DESIGNATION"));
 				    user.setDesignation(designation);
 					GenderDTO gender = new GenderDTO();
-					gender.setId(rs.getInt("ID"));
+					gender.setId(rs.getInt("ID_GENDER"));
 					gender.setGender(rs.getString("GENDER"));
 					user.setGender(gender);
 					CommunityDTO community = new CommunityDTO();
-					community.setId(rs.getInt("ID"));
+					community.setId(rs.getInt("ID_COMMUNITY"));
 					community.setCommunity("COMMUNITY");
 					user.setCommunity(community);
 					ReligionDTO religion = new ReligionDTO();
-					religion.setId(rs.getInt("ID"));
+					religion.setId(rs.getInt("ID_RELIGION"));
 					religion.setReligion("RELIGION");
 					user.setReligion(religion);
 			    }
