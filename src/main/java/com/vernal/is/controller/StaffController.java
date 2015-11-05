@@ -42,7 +42,7 @@ public class StaffController{
 	@Resource
 	StaffServices staffServices;
 
-	 @RequestMapping(value =  CommonConstants.STANDARD_URL+"/{standardId}"+ CommonConstants.SECTION_URL+"/{sectionId}",
+	/* @RequestMapping(value =  CommonConstants.STANDARD_URL+"/{standardId}"+ CommonConstants.SECTION_URL+"/{sectionId}",
 			 method = RequestMethod.GET)
 	 @ResponseBody
 	 public List<StaffClassDTO> getStudentsList(@PathVariable(value="standardId")Integer standardId, 
@@ -53,7 +53,7 @@ public class StaffController{
 		 List<StaffClassDTO> staffClassList = null;
 		 staffClassList =  staffServices.getClassList(role, staffId,standardId,sectionId);
 		  return staffClassList;
-	 }
+	 }*/
 	 
      	 @RequestMapping(value =  CommonConstants.STANDARD_URL+"/{standardId}"+ CommonConstants.SECTION_URL+"/{sectionId}",
 			 method = RequestMethod.GET)

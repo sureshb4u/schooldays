@@ -101,8 +101,9 @@ public class LMController extends BaseController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = CommonConstants.UPDATE_REQUEST,method = RequestMethod.PUT)
-	public Object updateStatusForLeaveRequest(@RequestBody List<LeaveManagementDTO> leaveManagementListDTO,HttpServletRequest request){
+	@RequestMapping(value = CommonConstants.UPDATE_REQUEST, method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseBean updateStatusForLeaveRequest(@RequestBody List<LeaveManagementDTO> leaveManagementListDTO,HttpServletRequest request){
 		ResponseBean responseBean = new ResponseBean();
 		try {
 			if(leaveManagementListDTO != null && !leaveManagementListDTO.isEmpty()){
@@ -111,7 +112,8 @@ public class LMController extends BaseController {
 				if(userID != null && role != null){
 					Integer userId = Integer.valueOf(userID);
 					responseBean = lMService.statusChange(leaveManagementListDTO, userId);
-			}
+					System.out.println("responseBean--------->"+responseBean);
+				}
 			}
 		} catch (Exception e) {
 				e.printStackTrace();

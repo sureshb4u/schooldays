@@ -13,7 +13,15 @@ public class PagePermission {
 	private String style;
 	private String menuItemDisplay;
 	private String url;
+	private String icon;
 	
+	
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 	public String getMenuTitle() {
 		return menuTitle;
 	}

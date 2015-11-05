@@ -227,7 +227,8 @@ color :#009688 !important;
 	background :#009688 !important;
 }
 .selected-grey{
-	background: #E0F2F1;
+	background: #E0F2F1  !important;
+	color : #009688 !important;
 }
 .loginBackground{
 	background-color: #009688;
@@ -255,4 +256,7 @@ color :#009688 !important;
 	text-align: left;
 	padding-top: 45px;
 	
+}
+.black-t{
+	color :black;
 }

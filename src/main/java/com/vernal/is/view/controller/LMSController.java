@@ -82,8 +82,9 @@ public class LMSController extends BaseController{
 			if(leaveManagementList != null && !leaveManagementList.isEmpty()){
 				System.out.println("leaveManagementList----------"+gson.toJson(leaveManagementList));
 				obj = lMSService.updateLMS(leaveManagementList, session);
+				System.out.println("Obj--------"+gson.toJson(obj));
 			}
-		} catch (ParseException e) {
+		} catch (Exception e) {
 				e.printStackTrace();
 		}
 		return  new ResponseEntity<Object>(obj, HttpStatus.OK) ;

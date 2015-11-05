@@ -18,7 +18,8 @@
     		  var deferred = $q.defer();
     		  var data = restService.restCall($rootScope.master, url, 'POST');
     		  data.$promise.then(function(response){
-    				deferred.resolve(response);
+    			  LxNotificationService.info('Leave Request has been sent successfully !')
+    			  deferred.resolve(response);
     		  },
     		  function(error){
     			  LxNotificationService.warning(error);
@@ -46,6 +47,7 @@
   		  var data = restService.restCall($rootScope.master, url, 'PUT');
   		  data.$promise.then(function(response){
   				deferred.resolve(response);
+  				LxNotificationService.info('All request are Synchronized');
   		  },
   		  function(error){
   			  LxNotificationService.warning(error);

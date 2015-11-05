@@ -11,9 +11,10 @@
 		       <div layout-fill resize style="height:{{windowHeight-215+'px'}};overflow:auto">
 		       <div  ng-repeat="permissions in permission.roleBasedPermissions.menuItems" ng-init="addSelectedClass(permissions.menuItemDisplay)">
 			    <a href="{{permissions.url}}"  id="{{permissions.menuItemDisplay}}" ng-click="changeClass('{{permissions.menuItemDisplay}}')">
-			    	<md-list-item class="md-3-line aligncenter removeClass">
-				        <div class="md-list-item-text schooldays" >
-				          <h3>{{permissions.menuTitle}}</h3>
+			    	<md-list-item class="md-3-line removeClass">
+				        <div class="md-list-item-text " layout="row" >
+				          <ng-md-icon flex="20" class="schooldays" icon="{{permissions.icon}}" style="cursor: pointer;" size="20" ng-hide="create" ng-click="create=true;mainTemplate('staffCreate');" ></ng-md-icon>
+				          <label flex="80" class="fs-subhead  black-t"> {{permissions.menuTitle}}</label>
 				        </div>
 			    	</md-list-item>
 		    	</a>

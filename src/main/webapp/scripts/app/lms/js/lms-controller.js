@@ -62,7 +62,7 @@
 	 $scope.createNewLeaveRequest = function (obj){
 		 var data = lmsService.createLeaveRequest(obj);
 		 data.then(function(success){	
-			 mainTemplate('','details');
+			 $scope.mainTemplate('', 'list');
 		 });
 		};
 		
@@ -93,7 +93,10 @@
 		}
 		var data = lmsService.updateLMS($scope.toUpdateLms);
 		data.then(function(success){
-			getPendingLms();
+			console.log(success);
+			// $scope.mainTemplate('', 'list');
+			$scope.getPendingLms();
+			$scope.getHistoryLms();
 		});
 	};
 	
