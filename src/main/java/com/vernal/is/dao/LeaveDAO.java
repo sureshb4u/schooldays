@@ -10,8 +10,8 @@ public interface LeaveDAO {
 
 	public List<LeaveManagementDTO> getLeaveByStatus(String status,Integer userId,String accessId);
 
-	public ResponseBean Applyleave(LeaveManagementDTO leave,Integer accessId,Integer staffId);
+	public ResponseBean Applyleave(LeaveManagementDTO leave,Integer accessId);
 
-	public ResponseBean  statusChange(List<LeaveManagementDTO> leaveDTO, Integer accessId);
+	public ResponseBean  statusChange(List<LeaveManagementDTO> leaveDTO, Integer userId);
 	
 }

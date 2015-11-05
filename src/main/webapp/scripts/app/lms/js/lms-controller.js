@@ -63,9 +63,8 @@
 		 var data = lmsService.createLeaveRequest(obj);
 		 data.then(function(success){	
 			 $scope.mainTemplate('', 'list');
-		 });
+			});
 		};
-		
 	$scope.lmsPending = [];	
 	$scope.getPendingLms = function(){
 		 var data = lmsService.getLmsList("PENDING");

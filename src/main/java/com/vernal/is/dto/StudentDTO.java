@@ -1,20 +1,19 @@
 package com.vernal.is.dto;
 
+import java.util.Date;
 
 public class StudentDTO {
   
 	private Integer id;
 	private String firstName;
 	private String lastName;
-	private String dateOfBirth;
+	private Date dateOfBirth;
 	private StandardDTO standard;
 	private SectionDTO section;
-	private String emailAddress;
 	private YearDTO year;
 	private GenderDTO gender;
 	private Integer age;
 	private String fatherName;
-	private String dateOfJoining;
 	private CommunityDTO community;
 	private ReligionDTO religion;
 	private BloodGroupDTO bloodGroup;
@@ -37,24 +36,11 @@ public class StudentDTO {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-	public String getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(String dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
-	}
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-	public String getDateOfJoining() {
-		return dateOfJoining;
-	}
-	public void setDateOfJoining(String dateOfJoining) {
-		this.dateOfJoining = dateOfJoining;
 	}
 	public StandardDTO getStandard() {
 		return standard;

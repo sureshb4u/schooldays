@@ -14,18 +14,18 @@ public class LMService {
 	@Resource
       LeaveDAO leaveDAO;
 	
-	public List<LeaveManagementDTO> getLMSList(String status, Integer userId, String role) {
+	public List<LeaveManagementDTO> getLMSList(String status,Integer userId, String role) {
 		// TODO Auto-generated method stub
 		return leaveDAO.getLeaveByStatus(status, userId,role);
 	}
-	public ResponseBean applyleave(LeaveManagementDTO leaveDTO, Integer accessId, Integer staffId) {
+	public ResponseBean Applyleave(LeaveManagementDTO leaveDTO, Integer userId) {
 		// TODO Auto-generated method stub
-		return leaveDAO.Applyleave(leaveDTO, accessId, staffId);
+		return leaveDAO.Applyleave(leaveDTO,userId);
 	}
 	
 	 
-	public ResponseBean statusChange(List<LeaveManagementDTO> leaveDTO, Integer accessId) {
+	public ResponseBean statusChange(List<LeaveManagementDTO> leaveDTO, Integer userId) {
 		// TODO Auto-generated method stub
-		return  leaveDAO.statusChange(leaveDTO,accessId);
+		return  leaveDAO.statusChange(leaveDTO,userId);
 	}
 }

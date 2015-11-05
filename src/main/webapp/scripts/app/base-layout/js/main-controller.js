@@ -49,15 +49,6 @@
     $('.modal-trigger').leanModal();
     $scope.selectedIndex = 0;
     
-    $scope.statusClass = function(text){
-    	if(text == 'APPROVED'){
-    		return 'flag-green';
-    	}else if(text == 'DECLINED'){
-    		return 'flag-red';
-    	}
-    };
-    
-    
     $scope.rolePermission = function(){
     	
     	  var url ='/api/getUserRoles';

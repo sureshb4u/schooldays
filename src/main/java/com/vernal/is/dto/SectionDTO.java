@@ -2,20 +2,18 @@ package com.vernal.is.dto;
 
 public class SectionDTO {
   private Integer id;
-  private String section;
+  private String name;
 public Integer getId() {
 	return id;
 }
 public void setId(Integer id) {
 	this.id = id;
 }
-public String getSection() {
-	return section;
+public String getName() {
+	return name;
 }
-public void setSection(String section) {
-	this.section = section;
+public void setName(String name) {
+	this.name = name;
 }
-
-
   
 }

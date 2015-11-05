@@ -5,9 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.vernal.is.dto.FormStatusDTO;
 import com.vernal.is.dto.LeaveManagementDTO;
-import com.vernal.is.dto.UserDTO;
 
 public class LeaveManagementRowMapper implements RowMapper<LeaveManagementDTO>{
 
@@ -19,19 +17,12 @@ public class LeaveManagementRowMapper implements RowMapper<LeaveManagementDTO>{
 		}
 		LeaveManagementDTO leaveManagementDTO = new LeaveManagementDTO();
 		leaveManagementDTO.setId(rs.getInt("ID"));
-		leaveManagementDTO.setStartTime(rs.getTimestamp("START_TIME").toString());
-		leaveManagementDTO.setEndTime(rs.getTimestamp("END_TIME").toString());
+		//leaveManagementDTO.setIdStaff(rs.getInt("ID_STATUS"));
+		leaveManagementDTO.setStartTime(rs.getTimestamp("START_TIME"));
+		leaveManagementDTO.setEndTime(rs.getTimestamp("END_DATE"));
 		leaveManagementDTO.setReason(rs.getString("REASON"));
 		leaveManagementDTO.setIsTaken(rs.getInt("IS_TAKEN"));
-		FormStatusDTO formStatus = new FormStatusDTO();
-		formStatus.setId(rs.getInt("ID_FORM_STATUS"));
-		formStatus.setStatus(rs.getString("STATUS"));
-		leaveManagementDTO.setFormStatus(formStatus);
-		UserDTO user = new UserDTO();
-		user.setId(rs.getInt("ID_STAFF"));
-		user.setFirstName(rs.getString("FIRST_NAME"));
-		user.setLastName(rs.getString("LAST_NAME"));
-		leaveManagementDTO.setStaff(user);
+		//leaveManagementDTO.setIdFormStatus(rs.getInt("ID_FORM_STATUS"));
 		return leaveManagementDTO;
 	}
 
