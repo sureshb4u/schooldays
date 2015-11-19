@@ -3,35 +3,35 @@
 	  <div class="tc-white-1" flex-container="row">
 	  	<a href="javascript:;" data-activates="slide-out" class="hide-on-large-only" ng-click="toggleLeft()"><i class="mdi-navigation-menu material-icons tiny"></i></a>
 	  </div>
-	  <div layout class="tc-white-1 mt++" flex-container="row" layout-align="space-around center">
-	    <div flex="30"><span class="fs-title display-block">Students</span></div>
-	 </div>
-	 <div layout-container="column" class="frt">
-	 <div class="mt">
-	 	<div class="fab ml">
-	 		<button class="fab__primary btn btn--xl btn--indigo btn--fab" lx-ripple lx-tooltip="Lorem Ipsum" tooltip-position="bottom">
-            <i class="mdi mdi-android"></i>
-            <i class="mdi mdi-plus"></i>
+	  <div layout class="tc-white-1 mt++" flex-container="row">
+	    <div flex="90"  ><span  class="fs-title display-block space-around center">Students</span></div>
+	    <div  flex="10" class="frt">
+			 <div class="mt">
+		 	<div class="fab">
+	 		<button class="fab__primary btn btn--l  btn--fab rounded" lx-ripple >
+            <i class="mdi mdi-apps"></i>
+             <i class="mdi mdi-apps"></i>
         </button>
-        <div class="fab__actions fab__actions--right">
-        	<button class="btn btn--l btn--black btn--fab" lx-ripple lx-tooltip="Lorem Ipsum" tooltip-position="bottom">
-        		<i class="mdi mdi-pencil"></i>
+        <div class="fab__actions fab__actions--left">
+        	<button class="btn btn--l btn--black btn--fab rounded" lx-ripple lx-tooltip="Create New Student" tooltip-position="bottom">
+        		<ng-md-icon icon="person_add" ></ng-md-icon>
         	</button>
-        	 <button class="btn btn--l btn--black btn--fab" lx-ripple lx-tooltip="Lorem Ipsum" tooltip-position="bottom">
+        	 <button class="btn btn--l btn--black btn--fab rounded" lx-ripple lx-tooltip="Lorem Ipsum" tooltip-position="bottom">
         	 	<i class="mdi mdi-package"></i>
         	 </button> 
-        	 <button class="btn btn--l btn--black btn--fab" lx-ripple lx-tooltip="Lorem Ipsum" tooltip-position="bottom">
+        	 <button class="btn btn--l btn--black btn--fab rounded" lx-ripple lx-tooltip="Lorem Ipsum" tooltip-position="bottom">
         	 	<i class="mdi mdi-delete"></i>
         	 </button>
         	 </div>
         </div>
     </div>
 	 </div>
+	 </div>
 	</md-toolbar>
  </div>
-<div class="details" layout-fill layout-wrap ng-init="mainTemplate('evaluations','list')">
+<div layout-fill layout-wrap ng-init="mainTemplate('evaluations','list')">
   <div layout-fill class="tc-white-1" >
   	<md-progress-linear layout-margin ng-show="loader" md-mode="indeterminate"></md-progress-linear>
-    <div layout-margin class="white"  resize style="height:{{windowHeight-150+'px'}};border:1px solid #ddd;overflow:auto"><div ng-include="template1.pageDetails"></div></div>
+    <div layout-margin class="white"  resize style="height:{{windowHeight-150+'px'}};overflow:auto"><div ng-include="template1.pageDetails"></div></div>
   </div>
 </div>
