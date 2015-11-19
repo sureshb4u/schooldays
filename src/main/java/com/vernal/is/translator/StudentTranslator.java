@@ -14,8 +14,10 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.reflect.TypeToken;
 import com.vernal.is.dto.StudentDTO;
+import com.vernal.is.model.Section;
+import com.vernal.is.model.Standard;
 import com.vernal.is.model.Student;
-
+import com.vernal.is.model.Class;
 /**
  * @author Vignesh
  *
@@ -50,7 +52,27 @@ public class StudentTranslator  extends BaseTranslator{
 		if(studentDTO!= null){
 			student = new Student();
 			BeanUtils.copyProperties(studentDTO, student);
-			
+			if(studentDTO.getEmailAddress() != null){
+				student.setEmailAddresses(studentDTO.getEmailAddress());
+			}
+			if(studentDTO.getStandard() != null && studentDTO.getSection() != null){
+				Class classes = new Class(); Standard standard = new Standard(); Section section = new Section();
+				if(studentDTO.getStandard().getId() != null){
+					standard.setId(studentDTO.getStandard().getId());
+				}
+				if(studentDTO.getStandard().getStandard() != null){
+					standard.setStandard(studentDTO.getStandard().getStandard());
+				}
+				if(studentDTO.getSection().getId() != null){
+					section.setId(studentDTO.getSection().getId());
+				}
+				if(studentDTO.getStandard().getStandard() != null){
+					section.setSection(studentDTO.getSection().getSection());
+				}
+				classes.setStandard(standard);
+				classes.setSection(section);
+			}
+		
 		}
 		return student;
 	}

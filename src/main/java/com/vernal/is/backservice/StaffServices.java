@@ -9,11 +9,14 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vernal.is.dao.StaffDAO;
+import com.vernal.is.dto.ClassesDTO;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.GenderDTO;
 import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.dto.ResponseBean;
+import com.vernal.is.dto.SectionDTO;
 import com.vernal.is.dto.StaffClassDTO;
+import com.vernal.is.dto.StandardDTO;
 import com.vernal.is.dto.StudentClassDTO;
 import com.vernal.is.dto.StudentDTO;
 import com.vernal.is.util.CommonConstants;
@@ -24,6 +27,7 @@ public class StaffServices {
 
 	public static final Gson gson = new GsonBuilder().setDateFormat(CommonConstants.ISO_DATE_FORMAT).create();
 	
+	@Resource
 	StaffDAO staffDAO;
 	
 	@Resource
@@ -33,9 +37,9 @@ public class StaffServices {
 	 * @param studentDTO
 	 * @return
 	 */
-	public ResponseBean updateUser(StudentDTO studentDTO, Integer accessId) {
+	public ResponseBean updateStudent(StudentDTO studentDTO, Integer accessId) {
 		studentDTO = getBasicIds(studentDTO);
-		return staffDAO.updateUser(studentDTO, accessId);
+		return staffDAO.updateStudent(studentDTO, accessId);
 	}
 
 	/**
@@ -43,8 +47,8 @@ public class StaffServices {
 	 * @param userId
 	 * @return
 	 */
-	public ResponseBean deleteUser(Integer studentId, Integer accessId) {
-		return staffDAO.deleteUser(studentId, accessId);
+	public ResponseBean deleteStudent(Integer studentId, Integer accessId) {
+		return staffDAO.deleteStudent(studentId, accessId);
 	}
 
 	/**
@@ -56,25 +60,22 @@ public class StaffServices {
 	public ResponseBean createStudent(StudentDTO studentDTO, Integer accessId) throws Exception {
 		studentDTO = getBasicIds(studentDTO);
 		System.out.println("studentDTO>>>>>>>"+gson.toJson(studentDTO));
-		return staffDAO.insertUser(studentDTO, accessId);
+		return staffDAO.createStudent(studentDTO, accessId);
 	}
 
 	/**
 	 * 
 	 * @return
 	 */
-	public List<StudentDTO> getStudents(String role,String search,Integer standardId,Integer sectionId) {
-		return staffDAO.getStudents(role,search, standardId,sectionId);
+	public List<StudentDTO> getStudents(String role, String search, Integer standardId, Integer sectionId) {
+		System.out.println("role---"+role + "standardId--------"+standardId+"sectionId-------"+sectionId);
+		return staffDAO.getStudents(role, standardId, sectionId);
 	}
 
-	public List<StudentClassDTO> getClassList(String role,Integer standardId,Integer sectionId) {
-		return staffDAO.getClassList(role, standardId,sectionId);
+	public List<StaffClassDTO> getClassList(String role,Integer staffId,Integer standardId,Integer sectionId) {
+		return staffDAO.getClassList(role,staffId, standardId,sectionId);
 	}
 	
-	
-	public List<StaffClassDTO> getClassListByStaffId (String role,Integer staffId) {
-		return staffDAO.getClassListByStaffId(role, staffId);
-	}
 
 	public StudentDTO getStudent(Integer studentId) {
 		// TODO Auto-generated method stub
@@ -86,6 +87,8 @@ public class StaffServices {
 		GenderDTO genderDTO = null;
 		ReligionDTO religionDTO =null;
 		CommunityDTO communityDTO = null;
+		StandardDTO standard = null;
+		SectionDTO section = null; 
 		if(studentDTO.getGender() != null){
 			genderDTO = studentDTO.getGender() ;
 			genderDTO.setId(commonService.getId(genderDTO.getGender(), CommonConstants.GENDER));
@@ -102,8 +105,23 @@ public class StaffServices {
 			communityDTO.setId(commonService.getId(communityDTO.getCommunity(), CommonConstants.COMMUNITY));
 			studentDTO.setCommunity(communityDTO);
 		}
+		if(studentDTO.getStandard() != null){
+			standard = studentDTO.getStandard() ;
+			standard.setId(commonService.getId(standard.getStandard(), CommonConstants.STANDARD));
+			studentDTO.setStandard(standard);
+		}
+		if(studentDTO.getCommunity() != null){
+			section = studentDTO.getSection() ;
+			section.setId(commonService.getId(section.getSection(), CommonConstants.SECTION));
+			studentDTO.setSection(section);
+		}
 	
 		return studentDTO;
+	}
+
+	public List<ClassesDTO> getAllClassList() {
+		// TODO Auto-generated method stub
+		return staffDAO.getAllClassList();
 	}
 
 }

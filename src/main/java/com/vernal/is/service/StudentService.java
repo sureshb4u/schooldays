@@ -49,9 +49,10 @@ public class StudentService extends BaseService{
 		
 			ResponseEntity<Object> response = restTemplate.exchange( getAPIBaseURL()
 							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.STANDARD_URL +"/" + standardId
-							+ CommonConstants.SECTION_URL + "/" + sectionId,
+							+ CommonConstants.SECTION_URL + "/" + sectionId ,
 							HttpMethod.GET, requestEntity, Object.class);
 			
+			System.out.println("response.getBody()>>>>>>>>>>>>>>>>>>>>>"+gson.toJson(response.getBody()));
 			studentDTOList = studentTranslator.convertToListOfStudentDTO(response.getBody()); 
 			studentist = studentTranslator.translateToStudentList(studentDTOList);
 			

@@ -36,8 +36,8 @@
         
         this.getStudentsList = function () {
             var deferred = $q.defer();
-  		    var url = "/api/students/list";
-		    var data = restService.restCall("",url,'GET');
+  		    var url = "/api/student/standard/5/section/6";
+		    var data = restService.restCall("",url,'GETLIST');
 			data.$promise.then(function(response){
 				deferred.resolve(response);
 			},
@@ -45,7 +45,7 @@
                 if (error.status == "401") {
                     $state.go('login');
                 } else {
-                    LxNotificationService.warning(error.data.Message);
+                    LxNotificationService.warning(error);
                 }
                 deferred.reject('ajaxError');
             });
