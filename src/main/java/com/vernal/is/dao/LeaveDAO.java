@@ -8,7 +8,8 @@ import com.vernal.is.dto.ResponseBean;
 public interface LeaveDAO {
 
 
-	public List<LeaveManagementDTO> getLeaveByStatus(String status,Integer userId,String accessId);
+	public List<LeaveManagementDTO> getPendingLeave(String status,Integer userId,String role);
+	public List<LeaveManagementDTO> getHistoryLeave(String status,Integer userId,String role);
 
 	public ResponseBean Applyleave(LeaveManagementDTO leave,Integer accessId);
 

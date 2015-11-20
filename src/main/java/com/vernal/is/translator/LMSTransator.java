@@ -10,7 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.reflect.TypeToken;
-import com.vernal.is.dto.FormStatusDTO;
+import com.vernal.is.dto.StatusDTO;
 import com.vernal.is.dto.LeaveManagementDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.model.LeaveManagement;
@@ -109,7 +109,7 @@ public class LMSTransator extends BaseTranslator{
 			}
 			
 			if(status != null){
-				FormStatusDTO formStatusDTO = new FormStatusDTO();
+				StatusDTO formStatusDTO = new StatusDTO();
 				formStatusDTO.setStatus(status);
 				leaveManagementDTO.setFormStatus(formStatusDTO);
 			}

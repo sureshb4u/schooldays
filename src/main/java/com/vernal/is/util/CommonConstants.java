@@ -91,4 +91,7 @@ public class CommonConstants {
 	public static final String GET_USER = "/getUser";
 	public static final String UPDATE_USER = "/updateUser";
 	public static final String DATE_TIME_FORMAT = "yyyy-MM-dd";
+	public static final String PENDING = "PENDING";
+	public static final String STANDARD = "STANDARD";
+	public static final String SECTION = "SECTION";
 }

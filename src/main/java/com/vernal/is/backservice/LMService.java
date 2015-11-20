@@ -14,10 +14,16 @@ public class LMService {
 	@Resource
       LeaveDAO leaveDAO;
 	
-	public List<LeaveManagementDTO> getLMSList(String status,Integer userId, String role) {
+	public List<LeaveManagementDTO> getPendingLeave(String status,Integer userId, String role) {
 		// TODO Auto-generated method stub
-		return leaveDAO.getLeaveByStatus(status, userId,role);
+		return leaveDAO.getPendingLeave(status, userId,role);
 	}
+	
+	public List<LeaveManagementDTO> getHistoryLeave(String status,Integer userId, String role) {
+		// TODO Auto-generated method stub
+		return leaveDAO.getHistoryLeave(status, userId,role);
+	}
+	
 	public ResponseBean Applyleave(LeaveManagementDTO leaveDTO, Integer userId) {
 		// TODO Auto-generated method stub
 		return leaveDAO.Applyleave(leaveDTO,userId);
