@@ -27,9 +27,17 @@ import com.vernal.is.dto.GenderDTO;
 import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.dto.ResponseBean;
 import com.vernal.is.dto.RoleDTO;
+import com.vernal.is.dto.StaffAddressDTO;
+import com.vernal.is.dto.StaffPhoneNumberDTO;
+import com.vernal.is.dto.StudentAddressDTO;
+import com.vernal.is.dto.StudentPhoneNumberDTO;
 import com.vernal.is.dto.UserAuthenticationDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.mapper.SessionMapper;
+import com.vernal.is.mapper.StaffAddressResultsetExtractor;
+import com.vernal.is.mapper.StaffPhoneNumberResultsetExtractor;
+import com.vernal.is.mapper.StudentAddressResultsetExtractor;
+import com.vernal.is.mapper.StudentPhoneNumberResultsetExtractor;
 import com.vernal.is.mapper.UserListRowMapper;
 import com.vernal.is.mapper.UserRowMapper;
 import com.vernal.is.util.CommonConstants;
@@ -201,6 +209,13 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 			user.setId(idStaff.intValue());
 			System.out.println("id ------------>"+idStaff);
 			if(idStaff != null){
+				Integer id = idStaff.intValue();
+				if(user.getPhoneNumbers() != null){
+				insertPhoneNumber(user.getPhoneNumbers(),id,accessId);
+				}
+				if(user.getAddresses() != null){
+				insertAddressses(user.getAddresses(),id,accessId);	
+				}
 				UserAuthenticationDTO authentication = new UserAuthenticationDTO();
 				authentication.setStaff(user);
 				authentication.setUserSecret(user.getFatherName());
@@ -220,6 +235,55 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 		return responseBean;
 	}
   
+	private void insertAddressses(List<StaffAddressDTO> addresses,Integer idStaff,Integer accessId) {
+		// TODO Auto-generated method stub
+		for(StaffAddressDTO address:addresses){
+			String ADDRESS = "INSERT INTO `staff_address`(";
+			ADDRESS= ADDRESS+"`ID_STAFF`,";
+		if(address.getAddress() != null){
+			ADDRESS= ADDRESS+ " `ADDRESS`,";
+		}
+		if(address.getIsPrimary()!= null){
+			ADDRESS= ADDRESS+ " `IS_PRIMARY`, ";
+		}
+		ADDRESS= ADDRESS+ "`IS_DELETED`, `CREATED_ON`, `CREATED_BY`, ) ";
+		ADDRESS= ADDRESS+ "VALUES ";
+		ADDRESS= ADDRESS+ "("+idStaff+" , ";
+		if(address.getAddress() != null){
+			ADDRESS= ADDRESS+ address.getAddress() ;
+		}
+		if(address.getIsPrimary()!= null){
+			ADDRESS= ADDRESS+ address.getIsPrimary() ;
+		}
+		ADDRESS= ADDRESS+"0,NOW(),"+accessId+")";
+		getJdbcTemplate().update(ADDRESS);
+
+		}
+	}
+	private void insertPhoneNumber(List<StaffPhoneNumberDTO> phoneNumbers,Integer idStaff,Integer accessId) {
+		// TODO Auto-generated method stub
+		for(StaffPhoneNumberDTO phoneNumber: phoneNumbers){
+			String PhoneNumber = "INSERT INTO `staff_phone`(";
+				PhoneNumber= PhoneNumber+"`ID_STAFF`,";
+			if(phoneNumber.getPhoneNumber() != null){
+				PhoneNumber= PhoneNumber+ " `PHONE_NUMBER`,";
+			}
+			if(phoneNumber.getIsPrimary()!= null){
+				PhoneNumber= PhoneNumber+ " `IS_PRIMARY`, ";
+			}
+			PhoneNumber= PhoneNumber+ "`IS_DELETED`, `CREATED_ON`, `CREATED_BY`, ) ";
+			PhoneNumber= PhoneNumber+ "VALUES ";
+			PhoneNumber= PhoneNumber+ "("+idStaff+" , ";
+			if(phoneNumber.getPhoneNumber() != null){
+				PhoneNumber= PhoneNumber+ phoneNumber.getPhoneNumber() ;
+			}
+			if(phoneNumber.getIsPrimary()!= null){
+				PhoneNumber= PhoneNumber+ phoneNumber.getIsPrimary() ;
+			}
+			PhoneNumber= PhoneNumber+"0,NOW(),"+accessId+")";
+			getJdbcTemplate().update(PhoneNumber);
+		}
+	}
 	public void insertPassword(UserAuthenticationDTO authentication){
 	String AUTHENTICATION = "INSERT INTO `user_authentication`( "
 			+ "`USER_NAME`, `USER_SECRET`, `ID_USER`)"
@@ -345,6 +409,8 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				
 
 			    List<UserDTO> users = new ArrayList<UserDTO>();
+			    List<StaffAddressDTO> addresses = new ArrayList<StaffAddressDTO>();
+				List<StaffPhoneNumberDTO> phones = new ArrayList<StaffPhoneNumberDTO>(); 
 			    if(rs.next()){
 				user.setId(rs.getInt("ID"));
 			    RoleDTO role = new RoleDTO();
@@ -376,6 +442,14 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 					religion.setId(rs.getInt("ID"));
 					religion.setReligion("RELIGION");
 					user.setReligion(religion);
+					String GET_ADDRESSES = "SELECT * FROM STUDENT_ADDRESS S "
+							+ " WHERE S.IS_DELETED = 0 AND S.ID_STUDENT = "+user.getId();
+					addresses = getJdbcTemplate().query(GET_ADDRESSES,new StaffAddressResultsetExtractor());
+					user.setAddresses(addresses);
+					String GET_PHONES = "SELECT * FROM STUDENT_PHONE_NUMBER S "
+							+ "WHERE S.IS_DELETED = 0 AND S.ID_STUDENT = "+user.getId();
+					phones = getJdbcTemplate().query(GET_PHONES,new StaffPhoneNumberResultsetExtractor());
+					user.setPhoneNumbers(phones);
 			    }
 				return user;
 			}

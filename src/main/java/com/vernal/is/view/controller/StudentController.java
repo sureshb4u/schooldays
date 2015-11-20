@@ -50,7 +50,7 @@ public class StudentController extends BaseController {
 		 }
 		 List<Class> classesList = null;
 		try {
-			classesList = (List<Class>) studentService.getClassesList(queryString, session);
+			classesList = studentService.getClassesList(queryString, session);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

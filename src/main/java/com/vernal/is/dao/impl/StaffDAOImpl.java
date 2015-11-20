@@ -22,10 +22,12 @@ import com.vernal.is.dto.ResponseBean;
 import com.vernal.is.dto.SectionDTO;
 import com.vernal.is.dto.StaffClassDTO;
 import com.vernal.is.dto.StandardDTO;
-import com.vernal.is.dto.StudentClassDTO;
+import com.vernal.is.dto.StudentAddressDTO;
 import com.vernal.is.dto.StudentDTO;
+import com.vernal.is.dto.StudentPhoneNumberDTO;
 import com.vernal.is.dto.UserDTO;
-import com.vernal.is.util.CommonConstants;
+import com.vernal.is.mapper.StudentAddressResultsetExtractor;
+import com.vernal.is.mapper.StudentPhoneNumberResultsetExtractor;
 
 public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffDAO{
 
@@ -198,6 +200,13 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		     				   if(id!= null){
 		     					   student.setId(id.intValue());
 		     					   getJdbcTemplate().update(ATTENDENCE, id.intValue());
+		     					  Integer idStaff = id.intValue();
+		     						if(student.getPhoneNumbers() != null){
+		     						insertPhoneNumber(student.getPhoneNumbers(),idStaff,accessId);
+		     						}
+		     						if(student.getAddresses() != null){
+		     						insertAddressses(student.getAddresses(),idStaff,accessId);	
+		     						}
 		     				   }
 		     					responseBean.setStatus("SUCCESS");
 		     					responseBean.setMessage("The new student is added successfully");
@@ -208,6 +217,64 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		     					responseBean.setMessage(eStr);
 		     			   }
 		     			   return responseBean;
+	}
+	private void insertAddressses(List<StudentAddressDTO> addresses,Integer idStaff,Integer accessId) {
+		// TODO Auto-generated method stub
+		for(StudentAddressDTO address:addresses){
+			String ADDRESS = "INSERT INTO `student_address`(";
+			ADDRESS= ADDRESS+"`ID_STAFF`,";
+		if(address.getAddress() != null){
+			ADDRESS= ADDRESS+ " `ADDRESS`,";
+		}
+		if(address.getIsPrimary()!= null){
+			ADDRESS= ADDRESS+ " `IS_PRIMARY`, ";
+		}
+		if(address.getStudentRelation()!= null){
+			ADDRESS= ADDRESS+ " `ID_STUDENT_RELATION`, ";
+		}
+		ADDRESS= ADDRESS+ "`IS_DELETED`, `CREATED_ON`, `CREATED_BY`, ) ";
+		ADDRESS= ADDRESS+ "VALUES ";
+		ADDRESS= ADDRESS+ "("+idStaff+" , ";
+		if(address.getAddress() != null){
+			ADDRESS= ADDRESS+ address.getAddress() ;
+		}
+		if(address.getIsPrimary()!= null){
+			ADDRESS= ADDRESS+ address.getIsPrimary() ;
+		}
+		if(address.getStudentRelation()!= null){
+			ADDRESS= ADDRESS+ +address.getStudentRelation().getId();
+		}
+		ADDRESS= ADDRESS+"0,NOW(),"+accessId+")";
+		getJdbcTemplate().update(ADDRESS);
+
+		}
+	}
+	private void insertPhoneNumber(List<StudentPhoneNumberDTO> phoneNumbers,Integer idStaff,Integer accessId) {
+		// TODO Auto-generated method stub
+		for(StudentPhoneNumberDTO phoneNumber: phoneNumbers){
+			String PhoneNumber = "INSERT INTO `student_phone`(";
+				PhoneNumber= PhoneNumber+"`ID_STAFF`,";
+			if(phoneNumber.getPhoneNumber() != null){
+				PhoneNumber= PhoneNumber+ " `PHONE_NUMBER`,";
+			}
+			if(phoneNumber.getIsPrimary()!= null){
+				PhoneNumber= PhoneNumber+ " `IS_PRIMARY`, ";
+			}
+			PhoneNumber= PhoneNumber+ "`IS_DELETED`, `CREATED_ON`, `CREATED_BY`, ) ";
+			PhoneNumber= PhoneNumber+ "VALUES ";
+			PhoneNumber= PhoneNumber+ "("+idStaff+" , ";
+			if(phoneNumber.getPhoneNumber() != null){
+				PhoneNumber= PhoneNumber+ phoneNumber.getPhoneNumber() ;
+			}
+			if(phoneNumber.getIsPrimary()!= null){
+				PhoneNumber= PhoneNumber+ phoneNumber.getIsPrimary() ;
+			}
+			if(phoneNumber.getStudentRelation()!= null){
+				PhoneNumber= PhoneNumber +phoneNumber.getStudentRelation().getId();
+			}
+			PhoneNumber= PhoneNumber+"0,NOW(),"+accessId+")";
+			getJdbcTemplate().update(PhoneNumber);
+		}
 	}
 
 	@Override
@@ -228,6 +295,8 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 			public StudentDTO extractData(ResultSet rs) throws SQLException,
 					DataAccessException {
 				StudentDTO student = new StudentDTO();
+				List<StudentAddressDTO> addresses = new ArrayList<StudentAddressDTO>();
+				List<StudentPhoneNumberDTO> phones = new ArrayList<StudentPhoneNumberDTO>(); 
              if(rs.next()){
 				
 				student.setId(rs.getInt("ID"));
@@ -264,6 +333,15 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 					SectionDTO section = new SectionDTO();
 					section.setId(rs.getInt("ID_SECTION"));
 					section.setSection(rs.getString("SECTION"));
+					
+					String GET_ADDRESSES = "SELECT * FROM STUDENT_ADDRESS S LEFT OUTER JOIN STUDENT_RELATION SR"
+							+ "ON S.ID_STUDENT_RELATION = SR.ID WHERE S.IS_DELETED = 0 AND S.ID_STUDENT = "+student.getId();
+					addresses = getJdbcTemplate().query(GET_ADDRESSES,new StudentAddressResultsetExtractor());
+					student.setAddresses(addresses);
+					String GET_PHONES = "SELECT * FROM STUDENT_PHONE_NUMBER S LEFT OUTER JOIN STUDENT_RELATION SR"
+							+ "ON S.ID_STUDENT_RELATION = SR.ID WHERE S.IS_DELETED = 0 AND S.ID_STUDENT = "+student.getId();
+					phones = getJdbcTemplate().query(GET_PHONES,new StudentPhoneNumberResultsetExtractor());
+					student.setPhoneNumber(phones);
 					student.setSection(section);
              }
 			return student;
@@ -281,12 +359,12 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		System.out.println("**********role---"+role + "standardId--------"+standardId+"sectionId-------"+sectionId);
 		List<StudentDTO> students = new ArrayList<StudentDTO>(); 
 		String GET_STUDENTS = "SELECT * FROM student A " 
-				+ "LEFT OUTER JOIN GENDER G ON A.ID_GENDER = G.ID "
-				+ "LEFT OUTER JOIN STANDARD STD ON A.ID_STANDARD = STD.ID "
-				+ "LEFT OUTER JOIN SECTION SEC ON A.ID_SECTION = SEC.ID "
-				+ "LEFT OUTER JOIN RELIGION REL ON A.ID_RELIGION = REL.ID "
-				+ "LEFT OUTER JOIN COMMUNITY C ON A.ID_COMMUNITY = C.ID "
-				+ " WHERE A.IS_DELETED = 0";		
+				+ " LEFT OUTER JOIN GENDER G ON A.ID_GENDER = G.ID "
+				+ " LEFT OUTER JOIN STANDARD STD ON A.ID_STANDARD = STD.ID AND STD.ID ="+standardId
+				+ " LEFT OUTER JOIN SECTION SEC ON A.ID_SECTION = SEC.ID AND SEC.ID ="+sectionId
+				+ " LEFT OUTER JOIN RELIGION REL ON A.ID_RELIGION = REL.ID "
+				+ " LEFT OUTER JOIN COMMUNITY C ON A.ID_COMMUNITY = C.ID "
+				+ " WHERE A.IS_DELETED = 0 ";		
 		try
 		{
 			students = getJdbcTemplate().query(GET_STUDENTS,new ResultSetExtractor<List<StudentDTO>>(){
@@ -334,7 +412,7 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 					section.setId(rs.getInt("ID_SECTION"));
 					section.setSection(rs.getString("SECTION"));
 					student.setSection(section);
-					
+				
 					students.add(student);
 				     
 			}
@@ -348,9 +426,7 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		return students;
 	}
 	
-	@Override
-	public List<StaffClassDTO> getClassList(String role,Integer staffId, Integer standardId,
-			Integer sectionId) {
+	public List<StaffClassDTO> getClassList(String role,Integer staffId) {
 		System.out.println();
 		List<StaffClassDTO> classList = new ArrayList<StaffClassDTO>();
 		String CLASS_LIST = "SELECT * FROM `staff_class` A "
@@ -358,7 +434,7 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 				+ "LEFT OUTER JOIN SUBJECT SUB ON A.ID_SUBJECT = SUB.ID "
 				+ "LEFT OUTER JOIN STANDARD STD ON A.ID_STANDARD = STD.ID "
 				+ "LEFT OUTER JOIN SECTION SEC ON A.ID_SECTION = SEC.ID "
-				+ "LEFT OUTER JOIN YEAR Y ON A.ID_YEAR = Y.ID"
+				+ "LEFT OUTER JOIN YEAR Y ON A.ID_YEAR = Y.ID "
 				+ "WHERE A.STAFF_ID = "+staffId;	
 	try
 		{

@@ -5,7 +5,6 @@ import java.util.List;
 import com.vernal.is.dto.ClassesDTO;
 import com.vernal.is.dto.ResponseBean;
 import com.vernal.is.dto.StaffClassDTO;
-import com.vernal.is.dto.StudentClassDTO;
 import com.vernal.is.dto.StudentDTO;
 
 public interface StaffDAO {
@@ -21,8 +20,7 @@ public interface StaffDAO {
 
 	public List<StudentDTO> getStudents(String role, Integer standardId, Integer sectionId);
 
-	public List<StaffClassDTO> getClassList(String role,Integer staffId, Integer standardId,
-			Integer sectionId);
+	public List<StaffClassDTO> getClassList(String role,Integer staffId);
 
 	public List<ClassesDTO> getAllClassList();
 

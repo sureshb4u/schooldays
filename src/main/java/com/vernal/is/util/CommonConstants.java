@@ -94,4 +94,5 @@ public class CommonConstants {
 	public static final String PENDING = "PENDING";
 	public static final String STANDARD = "STANDARD";
 	public static final String SECTION = "SECTION";
+	public static final String RELATION = "STUDENT_RELATION";
 }

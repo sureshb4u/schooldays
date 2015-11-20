@@ -17,8 +17,10 @@ import com.vernal.is.dto.ResponseBean;
 import com.vernal.is.dto.SectionDTO;
 import com.vernal.is.dto.StaffClassDTO;
 import com.vernal.is.dto.StandardDTO;
-import com.vernal.is.dto.StudentClassDTO;
+import com.vernal.is.dto.StudentAddressDTO;
 import com.vernal.is.dto.StudentDTO;
+import com.vernal.is.dto.StudentPhoneNumberDTO;
+import com.vernal.is.dto.StudentRelationDTO;
 import com.vernal.is.util.CommonConstants;
 
 
@@ -72,8 +74,8 @@ public class StaffServices {
 		return staffDAO.getStudents(role, standardId, sectionId);
 	}
 
-	public List<StaffClassDTO> getClassList(String role,Integer staffId,Integer standardId,Integer sectionId) {
-		return staffDAO.getClassList(role,staffId, standardId,sectionId);
+	public List<StaffClassDTO> getClassList(String role,Integer staffId) {
+		return staffDAO.getClassList(role,staffId);
 	}
 	
 
@@ -89,6 +91,7 @@ public class StaffServices {
 		CommunityDTO communityDTO = null;
 		StandardDTO standard = null;
 		SectionDTO section = null; 
+		StudentRelationDTO relation = null;
 		if(studentDTO.getGender() != null){
 			genderDTO = studentDTO.getGender() ;
 			genderDTO.setId(commonService.getId(genderDTO.getGender(), CommonConstants.GENDER));
@@ -110,10 +113,25 @@ public class StaffServices {
 			standard.setId(commonService.getId(standard.getStandard(), CommonConstants.STANDARD));
 			studentDTO.setStandard(standard);
 		}
-		if(studentDTO.getCommunity() != null){
+		if(studentDTO.getSection() != null){
 			section = studentDTO.getSection() ;
 			section.setId(commonService.getId(section.getSection(), CommonConstants.SECTION));
 			studentDTO.setSection(section);
+		}
+		if(studentDTO.getPhoneNumbers()!= null){
+			for(StudentPhoneNumberDTO phone: studentDTO.getPhoneNumbers()){
+			 relation = phone.getStudentRelation();
+				relation.setId(commonService.getId(relation.getRelation(),CommonConstants.RELATION));
+				phone.setStudentRelation(relation);
+			}
+			if(studentDTO.getAddresses() != null){
+				for(StudentAddressDTO address: studentDTO.getAddresses()){
+				 relation = address.getStudentRelation();
+					relation.setId(commonService.getId(relation.getRelation(),CommonConstants.RELATION));
+					address.setStudentRelation(relation);
+				}
+			}
+			
 		}
 	
 		return studentDTO;

@@ -70,17 +70,12 @@ public class StudentService extends BaseService{
 	 * @return
 	 * @throws Exception 
 	 */
-	public Object getClassesList(Map<String, String> queryString, HttpSession session) throws Exception {
-		String param ="";
-		if(queryString != null){
-			param = translateQueryParams(queryString);
-		}
-		
+	public List<Class> getClassesList(HttpSession session) throws Exception {
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
 		
 			ResponseEntity<Object> response = restTemplate.exchange( getAPIBaseURL()
-							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.CLASSES_URL +"?"+ param,
+							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.CLASSES_URL ,
 							HttpMethod.GET, requestEntity, Object.class);
 			
 		} catch (RestClientException | IOException e) {

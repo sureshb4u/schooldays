@@ -1,5 +1,7 @@
 package com.vernal.is.dto;
 
+import java.util.List;
+
 
 public class StudentDTO {
   
@@ -18,6 +20,8 @@ public class StudentDTO {
 	private BloodGroupDTO bloodGroup;
 	private String dateOfJoining;
 	private String emailAddress;
+	private List<StudentAddressDTO> addresses;
+	private List<StudentPhoneNumberDTO> phoneNumbers;
 	public Integer getId() {
 		return id;
 	}
@@ -108,6 +112,19 @@ public class StudentDTO {
 	public void setDateOfJoining(String dateOfJoining) {
 		this.dateOfJoining = dateOfJoining;
 	}
+	public List<StudentAddressDTO> getAddresses() {
+		return addresses;
+	}
+	public void setAddresses(List<StudentAddressDTO> addresses) {
+		this.addresses = addresses;
+	}
+	public List<StudentPhoneNumberDTO> getPhoneNumbers() {
+		return phoneNumbers;
+	}
+	public void setPhoneNumber(List<StudentPhoneNumberDTO> phoneNumbers) {
+		this.phoneNumbers = phoneNumbers;
+	}
+	
 	
 
 		

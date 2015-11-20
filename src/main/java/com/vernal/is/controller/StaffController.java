@@ -1,18 +1,15 @@
 package com.vernal.is.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,16 +35,15 @@ public class StaffController{
 	@Resource
 	StaffServices staffServices;
 
-	
+    @RequestMapping(value =  "/staffClasses", method = RequestMethod.GET)
 	 @ResponseBody
 	 public List<StaffClassDTO> getStudentsList(@PathVariable(value="standardId")Integer standardId, 
 			 @PathVariable(value="sectionId")Integer sectionId, HttpServletRequest request, HttpSession session){
 		 String role = "ADMIN";
-				 //request.getHeader(CommonConstants.SESSION_USERROLE);
-		// String staffid= request.getHeader(CommonConstants.SESSION_USER_ID);
-		 Integer staffId= Integer.valueOf("24"); 
-		 List<StaffClassDTO> staffClassList = null;
-		 staffClassList =  staffServices.getClassList(role, staffId,standardId,sectionId);
+		request.getHeader(CommonConstants.SESSION_USERROLE);
+		 String staffid= request.getHeader(CommonConstants.SESSION_USER_ID);
+		 Integer staffId= Integer.valueOf(staffid); 
+		 List<StaffClassDTO> staffClassList =  staffServices.getClassList(role, staffId);
 		  return staffClassList;
 	 }
 	 
@@ -64,10 +60,10 @@ public class StaffController{
 			@ResponseBody
 			public List<StudentDTO> getStudents(@PathVariable(value="standardId")Integer standardId, @PathVariable(value="sectionId")Integer sectionId,
 					 @RequestParam( value="search" , required = false) String search, HttpServletRequest requests)  {
-				String role = "ADMIN";
-						 //request.getHeader(CommonConstants.SESSION_USERROLE);
-				//if(role != null){
+						 String role = requests.getHeader(CommonConstants.SESSION_USERROLE);
+				if(role != null){
 					return staffServices.getStudents(role, search, standardId, sectionId);
+				}return null;
 			}
 			
 			@RequestMapping(value = "/getStudent/{studentId}", method = RequestMethod.GET)
