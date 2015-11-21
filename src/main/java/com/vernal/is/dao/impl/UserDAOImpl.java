@@ -353,6 +353,12 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 			   if(user.getEmailAddresses()!=null){
 				  // insertPassword(authentication);
 			   }
+			   if(user.getAddresses()!= null){
+					updateAddress(user.getAddresses(),acessId);
+					}
+			   if(user.getPhoneNumbers()!= null){
+					updatePhone(user.getPhoneNumbers(),acessId);
+					 }
 			   getJdbcTemplate().execute(UPDATE_USER );
 				responseBean.setStatus("SUCCESS");
 				responseBean.setMessage("The new user is added successfully");
@@ -365,19 +371,54 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 		   return responseBean;
 	}
 	
+	private void updateAddress(List<StaffAddressDTO> addresses,
+			Integer accessId) {
+        	String UPDATE_ADDRESS = "UPDATE `staff_address` SET ";
+        	for(StaffAddressDTO address : addresses ){
+        		if(address.getAddress()!= null){
+        			UPDATE_ADDRESS=UPDATE_ADDRESS+ "`ADDRESS`="+address.getAddress()+",";
+        		}
+        		if(address.getIsPrimary()!= null){
+        			UPDATE_ADDRESS=UPDATE_ADDRESS+ "`IS_PRIMARY`="+address.getIsPrimary()+",";
+        		}
+        		UPDATE_ADDRESS=UPDATE_ADDRESS+ "`UPDATED_BY`="+accessId+"  WHERE ID = "+address.getId();
+        		getJdbcTemplate().update(UPDATE_ADDRESS );
+		}
+	}
+
+	private void updatePhone(List<StaffPhoneNumberDTO> phoneNumbers,
+			Integer accessId) {
+		  String UPDATE_PHONE = "UPDATE `staff_phone` SET ";
+       	for(StaffPhoneNumberDTO phone : phoneNumbers ){
+       	if(phone.getPhoneNumber() != null){
+       		UPDATE_PHONE = UPDATE_PHONE+ "`PHONE_NUMBER`="+phone.getPhoneNumber()+",";
+       	}if(phone.getIsPrimary() != null){
+       		UPDATE_PHONE = UPDATE_PHONE+ "`IS_PRIMARY`="+phone.getIsPrimary()+",";
+       	}
+       		UPDATE_PHONE = UPDATE_PHONE+ "`UPDATED_BY`="+accessId+"  WHERE ID = "+phone.getId();
+			getJdbcTemplate().update(UPDATE_PHONE );
+
+       }		
+	}
 
 
-	public ResponseBean deleteUser(Integer userId,  Integer accessId) {
+
+	public ResponseBean deleteUser(Integer userId, Integer phoneNumberId,Integer addressId, Integer accessId) {
 		ResponseBean responseBean = new ResponseBean();
 		String DELETE_USER ="UPDATE `user` SET IS_DELETED = 1,UPDATED_BY ="+accessId +" WHERE USER ="+userId;
-		   try{
-			   SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(
-					   userId);
-			if(userId != null){
-			   getNamedParameterJdbcTemplate().update(DELETE_USER, namedParameters );
+		String DELETE_PHONE = "UPDATE `STUDENT_PHONE` SET IS_DELETED = 0,UPDATED_BY ="+accessId +" WHERE ID = "+phoneNumberId;
+		String DELETE_ADDRESS = "UPDATE `STUDENT_ADDRESS` SET IS_DELETED = 0,UPDATED_BY ="+accessId +" WHERE ID ="+addressId;
+		try{
+				if(phoneNumberId!= null){
+				getJdbcTemplate().update(DELETE_PHONE);
+				}if(addressId != null){
+				getJdbcTemplate().update(DELETE_ADDRESS);
+				}if(userId != null){
+			    getJdbcTemplate().update(DELETE_USER );
+		        }
 				responseBean.setStatus("SUCCESS");
 				responseBean.setMessage("The user is deleted sccessfully");
-			}
+			
 		   }catch(Exception e){
 			   responseBean.setStatus("FAILED");
 			   String eStr = e.getMessage();

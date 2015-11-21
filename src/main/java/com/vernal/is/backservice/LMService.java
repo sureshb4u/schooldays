@@ -14,6 +14,7 @@ public class LMService {
 	@Resource
       LeaveDAO leaveDAO;
 	
+	
 	public List<LeaveManagementDTO> getPendingLeave(String status,Integer userId, String role) {
 		// TODO Auto-generated method stub
 		return leaveDAO.getPendingLeave(status, userId,role);

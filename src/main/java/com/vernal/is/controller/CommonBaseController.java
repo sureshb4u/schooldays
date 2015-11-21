@@ -12,6 +12,8 @@ import com.vernal.is.backservice.CommonService;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.ReligionDTO;
+import com.vernal.is.dto.SectionDTO;
+import com.vernal.is.dto.StandardDTO;
 import com.vernal.is.util.CommonConstants;
 
 @Controller
@@ -37,5 +39,15 @@ public class CommonBaseController {
 	@ResponseBody
 	public List<ReligionDTO> getReligionList(){
 		return commonServic.getReligion();
+	}
+	@RequestMapping(value= "/"+ CommonConstants.STANDARD_URL)
+	@ResponseBody
+	public List<StandardDTO> getStandardList(){
+		return commonServic.getStandard();
+	}
+	@RequestMapping(value= "/"+ CommonConstants.SECTION_URL)
+	@ResponseBody
+	public List<SectionDTO> getSectionList(){
+		return commonServic.getSection();
 	}
 }

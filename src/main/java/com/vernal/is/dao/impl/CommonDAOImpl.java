@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+
 import com.vernal.is.dao.CommonDAO;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.ReligionDTO;
+import com.vernal.is.dto.SectionDTO;
+import com.vernal.is.dto.StandardDTO;
 import com.vernal.is.mapper.CommunityRowMapper;
 import com.vernal.is.mapper.DesignationRowMapper;
 import com.vernal.is.mapper.ReligionRowMapper;
+import com.vernal.is.mapper.SectionRowMapper;
+import com.vernal.is.mapper.StandardRowMapper;
 import com.vernal.is.util.CommonUtil;
 
 public class CommonDAOImpl  extends NamedParameterJdbcDaoSupport implements CommonDAO {
@@ -28,7 +34,7 @@ public class CommonDAOImpl  extends NamedParameterJdbcDaoSupport implements Comm
 				  communities,new CommunityRowMapper());
 		}
 		catch (Exception e){
-			   String eStr = e.getMessage();
+			System.out.println( e.getMessage());
 		}
 		
 		return communityList;
@@ -43,7 +49,7 @@ public class CommonDAOImpl  extends NamedParameterJdbcDaoSupport implements Comm
 				  religion,new ReligionRowMapper());
 		}
 		catch (Exception e){
-			   String eStr = e.getMessage();
+			System.out.println( e.getMessage());
 		}
 		
 		return religionList;
@@ -57,7 +63,7 @@ public class CommonDAOImpl  extends NamedParameterJdbcDaoSupport implements Comm
 					designations,new DesignationRowMapper());
 		}
 		catch (Exception e){
-			   String eStr = e.getMessage();
+			System.out.println( e.getMessage());
 			   
 		}
 		
@@ -72,6 +78,39 @@ public class CommonDAOImpl  extends NamedParameterJdbcDaoSupport implements Comm
 				GET_ID,Integer.class); 
 	return id;
 	}
+
+
+	@Override
+	public List<StandardDTO> getStandard() {
+		List<StandardDTO> standardList = new ArrayList<StandardDTO>();
+		String designations = "SELECT * FROM STANDARD";
+		try{
+			standardList =  getJdbcTemplate().query(
+					designations,new StandardRowMapper());
+		}
+		catch (Exception e){
+			   System.out.println( e.getMessage());
+			   
+		}		return standardList;
+	}
+
+
+	@Override
+	public List<SectionDTO> getSection() {
+		List<SectionDTO> sectionList = new ArrayList<SectionDTO>();
+		String section = "SELECT * FROM SECTION";
+		try{
+			sectionList =  getJdbcTemplate().query(
+					section,new SectionRowMapper());
+		}
+		catch (Exception e){
+			System.out.println( e.getMessage());
+			   
+		}		
+		return sectionList;
+	}
+
+
 
 
 	

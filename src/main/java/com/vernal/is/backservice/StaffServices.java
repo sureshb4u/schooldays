@@ -49,8 +49,8 @@ public class StaffServices {
 	 * @param userId
 	 * @return
 	 */
-	public ResponseBean deleteStudent(Integer studentId, Integer accessId) {
-		return staffDAO.deleteStudent(studentId, accessId);
+	public ResponseBean deleteStudent(Integer studentId,Integer phoneNumberId,Integer addressId, Integer accessId) {
+		return staffDAO.deleteStudent(studentId,phoneNumberId,addressId, accessId);
 	}
 
 	/**

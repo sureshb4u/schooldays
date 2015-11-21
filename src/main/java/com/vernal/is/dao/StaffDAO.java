@@ -10,7 +10,7 @@ import com.vernal.is.dto.StudentDTO;
 public interface StaffDAO {
 
 
-	public ResponseBean deleteStudent(Integer studentId, Integer accessId);
+	public ResponseBean deleteStudent(Integer studentId,Integer phoneNumberId,Integer addressId, Integer accessId);
 
 	public ResponseBean createStudent(StudentDTO studentDTO, Integer accessId) ;
 	

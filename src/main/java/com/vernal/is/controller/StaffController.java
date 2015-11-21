@@ -96,12 +96,12 @@ public class StaffController{
 				return responseBean;
 			}
 
-			@RequestMapping(value = "deleteStudent/{studentId}", method = RequestMethod.DELETE)
+			@RequestMapping(value = "deleteStudent/{studentId}{phoneNumberId}/{addressId})", method = RequestMethod.DELETE)
 			@ResponseBody
-			public ResponseBean deleteStaff(@PathVariable Integer studentId,HttpServletRequest request, HttpSession session) throws Exception {
+			public ResponseBean deleteStaff(@PathVariable Integer studentId,Integer phoneNumberId,Integer addressId,HttpServletRequest request, HttpSession session) throws Exception {
 				Integer accessId = Integer.valueOf(request.getHeader(CommonConstants.SESSION_USER_ID));
 				ResponseBean responseBean = new ResponseBean();
-				responseBean = staffServices.deleteStudent(studentId, accessId);
+				responseBean = staffServices.deleteStudent(studentId,phoneNumberId,addressId, accessId);
 				return responseBean;
 			}
 	 

@@ -72,11 +72,12 @@ public class LMController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = CommonConstants.CREATE_LEAVE_REQUEST)
+	@RequestMapping(value = CommonConstants.CREATE_LEAVE_REQUEST,method = RequestMethod.POST)
 	@ResponseBody
-	public Object createLeaveRequest(@RequestBody LeaveManagementDTO leaveManagementListDTO,HttpServletRequest request){
+	public ResponseBean createLeaveRequest(@RequestBody LeaveManagementDTO leaveManagementListDTO,HttpServletRequest request){
 		ResponseBean responseBean = new ResponseBean();
 		try {
+			System.out.println("lllllll");
 			if(leaveManagementListDTO != null ){
 				String userID = request.getHeader(CommonConstants.SESSION_USER_ID);
 				String role = request.getHeader(CommonConstants.SESSION_USERROLE);

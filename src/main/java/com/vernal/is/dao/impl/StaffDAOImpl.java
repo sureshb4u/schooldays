@@ -72,12 +72,20 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 	        UPDATE_STUDENT = UPDATE_STUDENT + " `IS_DELETED` = 0";
 	        UPDATE_STUDENT = UPDATE_STUDENT + "`UPDATED_BY`="+accessId;
 	        UPDATE_STUDENT = UPDATE_STUDENT +") WHERE ID = "+student.getId();
+	      
+	      
 	 	   try{
 			   KeyHolder keyHolder = new GeneratedKeyHolder();
 			   SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(
 					   student);
 			if(student != null)
 			getNamedParameterJdbcTemplate().update(UPDATE_STUDENT, namedParameters, keyHolder );
+			if(student.getAddresses()!= null){
+			updateAddress(student.getAddresses(),accessId);
+			}
+			 if(student.getPhoneNumbers()!= null){
+			updatePhone(student.getPhoneNumbers(),accessId);
+			 }
 			Number idStudent = keyHolder.getKey();
 			student.setId(idStudent.intValue());
 			System.out.println("id ------------>"+idStudent);
@@ -94,12 +102,55 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		return responseBean;
 	}
 
+	private void updateAddress(List<StudentAddressDTO> addresses,
+			Integer accessId) {
+        	String UPDATE_ADDRESS = "UPDATE `student_address` SET ";
+        	for(StudentAddressDTO address : addresses ){
+        		if(address.getAddress()!= null){
+        			UPDATE_ADDRESS=UPDATE_ADDRESS+ "`ADDRESS`="+address.getAddress()+",";
+        		}
+        		if(address.getIsPrimary()!= null){
+        			UPDATE_ADDRESS=UPDATE_ADDRESS+ "`IS_PRIMARY`="+address.getIsPrimary()+",";
+        		}if(address.getStudentRelation().getId()!= null){
+        			UPDATE_ADDRESS=UPDATE_ADDRESS+ "`ID_STUDENT_RELATION`="+address.getStudentRelation().getId()+",";
+        		}
+        		UPDATE_ADDRESS=UPDATE_ADDRESS+ "`UPDATED_BY`="+accessId+"  WHERE ID = "+address.getId();
+        		getJdbcTemplate().update(UPDATE_ADDRESS );
+		}
+	}
+
+	private void updatePhone(List<StudentPhoneNumberDTO> phoneNumbers,
+			Integer accessId) {
+		  String UPDATE_PHONE = "UPDATE `student_phone` SET ";
+       	for(StudentPhoneNumberDTO phone : phoneNumbers ){
+       	if(phone.getPhoneNumber() != null){
+       		UPDATE_PHONE = UPDATE_PHONE+ "`PHONE_NUMBER`="+phone.getPhoneNumber()+",";
+       	}if(phone.getIsPrimary() != null){
+       		UPDATE_PHONE = UPDATE_PHONE+ "`IS_PRIMARY`="+phone.getIsPrimary()+",";
+       	}if(phone.getStudentRelation() != null){
+       		UPDATE_PHONE = UPDATE_PHONE+ "`ID_STUDENT_RELATION`="+phone.getStudentRelation().getId()+",";
+       	}
+       		UPDATE_PHONE = UPDATE_PHONE+ "`UPDATED_BY`="+accessId+"  WHERE ID = "+phone.getId();
+			getJdbcTemplate().update(UPDATE_PHONE );
+
+       }		
+	}
+
 	@Override
-	public ResponseBean deleteStudent(Integer studentId, Integer accessId) {
+	public ResponseBean deleteStudent(Integer studentId,Integer phoneNumberId,Integer addressId, Integer accessId) {
 		ResponseBean responseBean = new ResponseBean();
-		String DELETE_STUDENT = "UPDATE `student` SET IS_DELETED = 0 WHERE ID = ?";
+		String DELETE_STUDENT = "UPDATE `student` SET IS_DELETED = 0,UPDATED_BY ="+accessId +" WHERE ID ="+studentId;
+		String DELETE_PHONE = "UPDATE `STUDENT_PHONE` SET IS_DELETED = 0,UPDATED_BY ="+accessId +" WHERE ID = "+phoneNumberId;
+		String DELETE_ADDRESS = "UPDATE `STUDENT_ADDRESS` SET IS_DELETED = 0,UPDATED_BY ="+accessId +" WHERE ID ="+addressId;
 		try{
+			if(studentId != null){
 		getJdbcTemplate().update(DELETE_STUDENT);
+			}
+		if(phoneNumberId!= null){
+		getJdbcTemplate().update(DELETE_PHONE);
+		}if(addressId != null){
+		getJdbcTemplate().update(DELETE_ADDRESS);
+		}
 		responseBean.setStatus("SUCCESS");
 	    responseBean.setMessage("The student is deleted successfully");
 		
@@ -360,11 +411,11 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		List<StudentDTO> students = new ArrayList<StudentDTO>(); 
 		String GET_STUDENTS = "SELECT * FROM student A " 
 				+ " LEFT OUTER JOIN GENDER G ON A.ID_GENDER = G.ID "
-				+ " LEFT OUTER JOIN STANDARD STD ON A.ID_STANDARD = STD.ID AND STD.ID ="+standardId
-				+ " LEFT OUTER JOIN SECTION SEC ON A.ID_SECTION = SEC.ID AND SEC.ID ="+sectionId
+				+ " LEFT OUTER JOIN STANDARD STD ON A.ID_STANDARD = STD.ID "
+				+ " LEFT OUTER JOIN SECTION SEC ON A.ID_SECTION = SEC.ID"
 				+ " LEFT OUTER JOIN RELIGION REL ON A.ID_RELIGION = REL.ID "
 				+ " LEFT OUTER JOIN COMMUNITY C ON A.ID_COMMUNITY = C.ID "
-				+ " WHERE A.IS_DELETED = 0 ";		
+				+ " WHERE A.IS_DELETED = 0 AND STD.ID ="+standardId+" AND SEC.ID ="+sectionId;		
 		try
 		{
 			students = getJdbcTemplate().query(GET_STUDENTS,new ResultSetExtractor<List<StudentDTO>>(){

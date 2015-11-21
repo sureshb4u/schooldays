@@ -17,7 +17,7 @@ public interface UserDAO {
 
 	 public ResponseBean updateUser(UserDTO user, Integer acessId, Integer userId);
 
-	public ResponseBean deleteUser(Integer userId, Integer accessId);
+	public ResponseBean deleteUser(Integer userId,Integer phoneNumberId,Integer addressId, Integer accessId);
 
 	public List<UserDTO> getUsers(String role);
 	

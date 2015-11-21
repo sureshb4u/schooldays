@@ -43,8 +43,8 @@ public class UsersService {
 	 * @param userId
 	 * @return
 	 */
-	public ResponseBean deleteUser(Integer userId, Integer accessId) {
-		return userDAO.deleteUser(userId, accessId);
+	public ResponseBean deleteUser(Integer userId,Integer phoneNumberId,Integer addressId, Integer accessId) {
+		return userDAO.deleteUser(userId,phoneNumberId,addressId, accessId);
 	}
 
 	/**

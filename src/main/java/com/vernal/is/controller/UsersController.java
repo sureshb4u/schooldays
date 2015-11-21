@@ -99,11 +99,11 @@ public class UsersController {
 		return responseBean;
 	}
 
-	@RequestMapping(value = "deleteBill/{userId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteBill/{userId}/{phoneNumberid}/{addressId}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseBean deleteBill(@PathVariable Integer userId, HttpSession session) throws Exception {
+	public ResponseBean deleteBill(@PathVariable Integer userId,Integer phoneNumberId,Integer addressId, HttpSession session) throws Exception {
 		ResponseBean responseBean = new ResponseBean();
-		responseBean = usersService.deleteUser(userId, userId);
+		responseBean = usersService.deleteUser(userId,phoneNumberId, addressId, userId);
 		return responseBean;
 	}
 
