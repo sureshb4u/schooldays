@@ -354,10 +354,10 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 				  // insertPassword(authentication);
 			   }
 			   if(user.getAddresses()!= null){
-					updateAddress(user.getAddresses(),acessId);
+					updateAddress(user.getAddresses(),userId,acessId);
 					}
 			   if(user.getPhoneNumbers()!= null){
-					updatePhone(user.getPhoneNumbers(),acessId);
+					updatePhone(user.getPhoneNumbers(),userId,acessId);
 					 }
 			   getJdbcTemplate().execute(UPDATE_USER );
 				responseBean.setStatus("SUCCESS");
@@ -371,10 +371,11 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 		   return responseBean;
 	}
 	
-	private void updateAddress(List<StaffAddressDTO> addresses,
+	private void updateAddress(List<StaffAddressDTO> addresses,Integer idStaff,
 			Integer accessId) {
         	String UPDATE_ADDRESS = "UPDATE `staff_address` SET ";
         	for(StaffAddressDTO address : addresses ){
+        		if (address.getId() != null){
         		if(address.getAddress()!= null){
         			UPDATE_ADDRESS=UPDATE_ADDRESS+ "`ADDRESS`="+address.getAddress()+",";
         		}
@@ -383,13 +384,36 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
         		}
         		UPDATE_ADDRESS=UPDATE_ADDRESS+ "`UPDATED_BY`="+accessId+"  WHERE ID = "+address.getId();
         		getJdbcTemplate().update(UPDATE_ADDRESS );
+        		}else{
+        			String ADDRESS = "INSERT INTO `staff_address`(";
+        			ADDRESS= ADDRESS+"`ID_STAFF`,";
+        		if(address.getAddress() != null){
+        			ADDRESS= ADDRESS+ " `ADDRESS`,";
+        		}
+        		if(address.getIsPrimary()!= null){
+        			ADDRESS= ADDRESS+ " `IS_PRIMARY`, ";
+        		}
+        		ADDRESS= ADDRESS+ "`IS_DELETED`, `CREATED_ON`, `CREATED_BY`, ) ";
+        		ADDRESS= ADDRESS+ "VALUES ";
+        		ADDRESS= ADDRESS+ "("+idStaff+" , ";
+        		if(address.getAddress() != null){
+        			ADDRESS= ADDRESS+ address.getAddress() ;
+        		}
+        		if(address.getIsPrimary()!= null){
+        			ADDRESS= ADDRESS+ address.getIsPrimary() ;
+        		}
+        		ADDRESS= ADDRESS+"0,NOW(),"+accessId+")";
+        		getJdbcTemplate().update(ADDRESS);
+
+        		}
 		}
 	}
 
-	private void updatePhone(List<StaffPhoneNumberDTO> phoneNumbers,
+	private void updatePhone(List<StaffPhoneNumberDTO> phoneNumbers,Integer idStaff,
 			Integer accessId) {
 		  String UPDATE_PHONE = "UPDATE `staff_phone` SET ";
        	for(StaffPhoneNumberDTO phone : phoneNumbers ){
+       		if(phone.getId()!= null){
        	if(phone.getPhoneNumber() != null){
        		UPDATE_PHONE = UPDATE_PHONE+ "`PHONE_NUMBER`="+phone.getPhoneNumber()+",";
        	}if(phone.getIsPrimary() != null){
@@ -397,8 +421,29 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
        	}
        		UPDATE_PHONE = UPDATE_PHONE+ "`UPDATED_BY`="+accessId+"  WHERE ID = "+phone.getId();
 			getJdbcTemplate().update(UPDATE_PHONE );
-
-       }		
+       }
+       	else{
+       		String PhoneNumber = "INSERT INTO `staff_phone`(";
+			PhoneNumber= PhoneNumber+"`ID_STAFF`,";
+		if(phone.getPhoneNumber() != null){
+			PhoneNumber= PhoneNumber+ " `PHONE_NUMBER`,";
+		}
+		if(phone.getIsPrimary()!= null){
+			PhoneNumber= PhoneNumber+ " `IS_PRIMARY`, ";
+		}
+		PhoneNumber= PhoneNumber+ "`IS_DELETED`, `CREATED_ON`, `CREATED_BY`, ) ";
+		PhoneNumber= PhoneNumber+ "VALUES ";
+		PhoneNumber= PhoneNumber+ "("+idStaff+" , ";
+		if(phone.getPhoneNumber() != null){
+			PhoneNumber= PhoneNumber+ phone.getPhoneNumber() ;
+		}
+		if(phone.getIsPrimary()!= null){
+			PhoneNumber= PhoneNumber+ phone.getIsPrimary() ;
+		}
+		PhoneNumber= PhoneNumber+"0,NOW(),"+accessId+")";
+		getJdbcTemplate().update(PhoneNumber);
+       	}
+       	}
 	}
 
 
