@@ -4,6 +4,7 @@
 package com.vernal.is.translator;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.reflect.TypeToken;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.GenderDTO;
 import com.vernal.is.dto.SectionDTO;
@@ -84,7 +84,7 @@ public class StudentTranslator  extends BaseTranslator{
 		}
 		return student;
 	}
-	public StudentDTO translateToStudentDTO(Student student) throws ParseException, java.text.ParseException {
+	public StudentDTO translateToStudentDTO(Student student) throws ParseException {
 		StudentDTO studentDTO = null;
 		if(student != null){
 			studentDTO = new StudentDTO();
