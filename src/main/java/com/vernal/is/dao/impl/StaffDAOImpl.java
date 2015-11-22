@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -28,9 +30,11 @@ import com.vernal.is.dto.StudentPhoneNumberDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.mapper.StudentAddressResultsetExtractor;
 import com.vernal.is.mapper.StudentPhoneNumberResultsetExtractor;
+import com.vernal.is.util.CommonUtil;
 
 public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffDAO{
-
+  @Resource
+  CommonUtil commonUtil;
 	@Override
 	public ResponseBean updateStudent(StudentDTO student, Integer accessId) {
 		ResponseBean responseBean = new ResponseBean();
@@ -186,6 +190,15 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		        if(student.getYear() != null && student.getYear().getId() != null){
 		        CREATE_STUDENT = CREATE_STUDENT + "`ID_YEAR`, ";
 		        }
+		        if(student.getGender() != null ){
+			        CREATE_STUDENT = CREATE_STUDENT + "`ID_GENDER`, ";
+			        }
+		        if(student.getEmailAddress() != null ){
+			        CREATE_STUDENT = CREATE_STUDENT + "`EMAIL_ADDRESS`, ";
+			        }
+		        if(student.getDateOfJoining() != null ){
+			        CREATE_STUDENT = CREATE_STUDENT + "`DATE_OF_JOINING`, ";
+			        }
 		        if(student.getAge() != null){
 		        CREATE_STUDENT = CREATE_STUDENT + "`AGE`, ";
 		        }
@@ -206,28 +219,37 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		        CREATE_STUDENT = CREATE_STUDENT + "`CREATED_BY`) VALUES (";
 		        
 		        		 if(student.getFirstName() !=null){
-		     				CREATE_STUDENT = CREATE_STUDENT + student.getFirstName()+",";
+		     				CREATE_STUDENT = CREATE_STUDENT + commonUtil.stringFeilds(student.getFirstName())+",";
 		     		        }
 		     		        if(student.getLastName() != null){
-		     		         CREATE_STUDENT = CREATE_STUDENT + student.getLastName()+",";
+		     		         CREATE_STUDENT = CREATE_STUDENT + commonUtil.stringFeilds(student.getLastName())+",";
 		     		        }
 		     		        if(student.getDateOfBirth() != null){
-		     		        CREATE_STUDENT = CREATE_STUDENT +  student.getDateOfBirth()+",";
+		     		        CREATE_STUDENT = CREATE_STUDENT +  commonUtil.stringFeilds(student.getDateOfBirth())+",";
 		     		        }
 		     		        if(student.getStandard() != null && student.getStandard().getId() != null){
-		     		        CREATE_STUDENT = CREATE_STUDENT + student.getDateOfBirth()+",";
+		     		        CREATE_STUDENT = CREATE_STUDENT + student.getStandard().getId()+",";
 		     		        }
 		     		        if(student.getSection() != null && student.getSection().getId() != null){
-		     		        CREATE_STUDENT = CREATE_STUDENT + student.getDateOfBirth()+",";
+		     		        CREATE_STUDENT = CREATE_STUDENT + student.getSection().getId()+",";
 		     		        }
 		     		        if(student.getYear() != null && student.getYear().getId() != null){
 		     		        CREATE_STUDENT = CREATE_STUDENT + student.getYear()+",";
 		     		        }
+		     		       if(student.getGender() != null ){
+		   			        CREATE_STUDENT = CREATE_STUDENT + student.getGender().getId()+", ";
+		   			        }
+		   		           if(student.getEmailAddress() != null ){
+		   			        CREATE_STUDENT = CREATE_STUDENT + student.getEmailAddress()+", ";
+		   			        }
+		   		            if(student.getDateOfJoining() != null ){
+		   			        CREATE_STUDENT = CREATE_STUDENT + commonUtil.stringFeilds(student.getDateOfJoining())+", ";
+		   			        }
 		     		        if(student.getAge() != null){
 		     		        CREATE_STUDENT = CREATE_STUDENT + student.getAge()+",";
 		     		        }
 		     		        if(student.getFatherName() != null){
-		     		        CREATE_STUDENT = CREATE_STUDENT + student.getFatherName()+",";
+		     		        CREATE_STUDENT = CREATE_STUDENT + commonUtil.stringFeilds(student.getFatherName())+",";
 		     		        }
 		     		        if(student.getBloodGroup() != null && student.getBloodGroup().getId() != null){
 		     		        CREATE_STUDENT = CREATE_STUDENT + student.getBloodGroup()+",";
@@ -238,25 +260,25 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		     		        if(student.getReligion() != null && student.getReligion().getId() != null){
 		     		        CREATE_STUDENT = CREATE_STUDENT + student.getReligion()+",";
 		     		        }	
-		     		       CREATE_STUDENT = CREATE_STUDENT + ")";
+		     		       CREATE_STUDENT = CREATE_STUDENT + "0,NOW(),"+accessId+")";
 		     		       
 		     		      String ATTENDENCE = "INSERT INTO `attendence`(`ID_STUDENT`, `IS_ABSENT`) VALUES (?,0)";
 		     		      try{
 		     		    	  KeyHolder keyHolder = new GeneratedKeyHolder();
 		     				   SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(
 		     						   student);
-		     					
+		     					System.out.println("query   "+CREATE_STUDENT);
 		     				   getNamedParameterJdbcTemplate().update(CREATE_STUDENT, namedParameters,keyHolder );
 		     				   Number id = keyHolder.getKey();
 		     				   if(id!= null){
 		     					   student.setId(id.intValue());
 		     					   getJdbcTemplate().update(ATTENDENCE, id.intValue());
-		     					  Integer idStaff = id.intValue();
+		     					  Integer idStudent = id.intValue();
 		     						if(student.getPhoneNumbers() != null){
-		     						insertPhoneNumber(student.getPhoneNumbers(),idStaff,accessId);
+		     						insertPhoneNumber(student.getPhoneNumbers(),idStudent,accessId);
 		     						}
 		     						if(student.getAddresses() != null){
-		     						insertAddressses(student.getAddresses(),idStaff,accessId);	
+		     						insertAddressses(student.getAddresses(),idStudent,accessId);	
 		     						}
 		     				   }
 		     					responseBean.setStatus("SUCCESS");
@@ -269,11 +291,11 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		     			   }
 		     			   return responseBean;
 	}
-	private void insertAddressses(List<StudentAddressDTO> addresses,Integer idStaff,Integer accessId) {
+	private void insertAddressses(List<StudentAddressDTO> addresses,Integer idStudent,Integer accessId) {
 		// TODO Auto-generated method stub
 		for(StudentAddressDTO address:addresses){
 			String ADDRESS = "INSERT INTO `student_address`(";
-			ADDRESS= ADDRESS+"`ID_STAFF`,";
+			ADDRESS= ADDRESS+"`ID_STUDENT`,";
 		if(address.getAddress() != null){
 			ADDRESS= ADDRESS+ " `ADDRESS`,";
 		}
@@ -283,24 +305,24 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		if(address.getStudentRelation()!= null){
 			ADDRESS= ADDRESS+ " `ID_STUDENT_RELATION`, ";
 		}
-		ADDRESS= ADDRESS+ "`IS_DELETED`, `CREATED_ON`, `CREATED_BY`, ) ";
+		ADDRESS= ADDRESS+ "`IS_DELETED`, `CREATED_ON`, `CREATED_BY` ) ";
 		ADDRESS= ADDRESS+ "VALUES ";
-		ADDRESS= ADDRESS+ "("+idStaff+" , ";
+		ADDRESS= ADDRESS+ "("+idStudent+" , ";
 		if(address.getAddress() != null){
-			ADDRESS= ADDRESS+ address.getAddress() ;
+			ADDRESS= ADDRESS+ commonUtil.stringFeilds(address.getAddress())+" , " ;
 		}
 		if(address.getIsPrimary()!= null){
-			ADDRESS= ADDRESS+ address.getIsPrimary() ;
+			ADDRESS= ADDRESS+ address.getIsPrimary() +" , ";
 		}
 		if(address.getStudentRelation()!= null){
-			ADDRESS= ADDRESS+ +address.getStudentRelation().getId();
+			ADDRESS= ADDRESS+ +address.getStudentRelation().getId()+" , ";
 		}
 		ADDRESS= ADDRESS+"0,NOW(),"+accessId+")";
 		getJdbcTemplate().update(ADDRESS);
 
 		}
 	}
-	private void insertPhoneNumber(List<StudentPhoneNumberDTO> phoneNumbers,Integer idStaff,Integer accessId) {
+	private void insertPhoneNumber(List<StudentPhoneNumberDTO> phoneNumbers,Integer idStudent,Integer accessId) {
 		// TODO Auto-generated method stub
 		for(StudentPhoneNumberDTO phoneNumber: phoneNumbers){
 			String PhoneNumber = "INSERT INTO `student_phone`(";
@@ -311,17 +333,17 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 			if(phoneNumber.getIsPrimary()!= null){
 				PhoneNumber= PhoneNumber+ " `IS_PRIMARY`, ";
 			}
-			PhoneNumber= PhoneNumber+ "`IS_DELETED`, `CREATED_ON`, `CREATED_BY`, ) ";
+			PhoneNumber= PhoneNumber+ "`IS_DELETED`, `CREATED_ON`, `CREATED_BY` ) ";
 			PhoneNumber= PhoneNumber+ "VALUES ";
-			PhoneNumber= PhoneNumber+ "("+idStaff+" , ";
+			PhoneNumber= PhoneNumber+ "("+idStudent+" , ";
 			if(phoneNumber.getPhoneNumber() != null){
-				PhoneNumber= PhoneNumber+ phoneNumber.getPhoneNumber() ;
+				PhoneNumber= PhoneNumber+ phoneNumber.getPhoneNumber() +" , ";
 			}
 			if(phoneNumber.getIsPrimary()!= null){
-				PhoneNumber= PhoneNumber+ phoneNumber.getIsPrimary() ;
+				PhoneNumber= PhoneNumber+ phoneNumber.getIsPrimary() +" , ";
 			}
 			if(phoneNumber.getStudentRelation()!= null){
-				PhoneNumber= PhoneNumber +phoneNumber.getStudentRelation().getId();
+				PhoneNumber= PhoneNumber +phoneNumber.getStudentRelation().getId()+" , ";
 			}
 			PhoneNumber= PhoneNumber+"0,NOW(),"+accessId+")";
 			getJdbcTemplate().update(PhoneNumber);
