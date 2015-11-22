@@ -4,7 +4,9 @@
 package com.vernal.is.service;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -17,7 +19,10 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 
 import com.google.gson.JsonSyntaxException;
+import com.vernal.is.dto.LeaveManagementDTO;
 import com.vernal.is.dto.StudentDTO;
+import com.vernal.is.model.Class;
+import com.vernal.is.model.LeaveManagement;
 import com.vernal.is.model.Student;
 import com.vernal.is.translator.StudentTranslator;
 import com.vernal.is.util.CommonConstants;
@@ -46,9 +51,6 @@ public class StudentService extends BaseService{
 		List<Student> studentist = null; 
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
-		System.out.println(getAPIBaseURL()
-							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.STANDARD_URL +"/" + standardId
-							+ CommonConstants.SECTION_URL + "/" + sectionId);
 		
 			ResponseEntity<Object> response = restTemplate.exchange( getAPIBaseURL()
 							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.STANDARD_URL +"/" + standardId
@@ -73,18 +75,19 @@ public class StudentService extends BaseService{
 	 * @return
 	 * @throws Exception 
 	 */
-	public Object getClassesList(HttpSession session) throws Exception {
-		ResponseEntity<Object> response = null;
+	public List<Class> getClassesList(HttpSession session) throws Exception {
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
-			response = restTemplate.exchange( getAPIBaseURL()
+		
+			ResponseEntity<Object> response = restTemplate.exchange( getAPIBaseURL()
 							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.CLASSES_URL ,
 							HttpMethod.GET, requestEntity, Object.class);
 			
-			} catch (RestClientException | IOException e) {
+		} catch (RestClientException | IOException e) {
+			e.printStackTrace();
 			throw e;
-			}
-		return response.getBody();
+		}
+		return null;
 		}
 
 	public Object createStudent(Student student, HttpSession session) throws Exception {
@@ -107,5 +110,5 @@ public class StudentService extends BaseService{
 			throw e;
 		}  
 	}
-	
+
 }

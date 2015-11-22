@@ -73,7 +73,7 @@ public class StaffController{
 				return staffServices.getStudent(studentId);
 			}
 			
-			@RequestMapping(value = "/createStudent", headers="Accept=*/*", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+			@RequestMapping(value = "/create", method = RequestMethod.POST)
 			@ResponseBody
 			public ResponseEntity<?> addUsers(@RequestBody StudentDTO studentDTO) throws Exception {
 				 String accessId ="22";
