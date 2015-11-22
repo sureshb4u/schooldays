@@ -5,16 +5,16 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.vernal.is.dto.FormStatusDTO;
+import com.vernal.is.dto.StatusDTO;
 
-public class FormStatusRowMapper implements RowMapper<FormStatusDTO> {
+public class FormStatusRowMapper implements RowMapper<StatusDTO> {
 
 	@Override
-	public FormStatusDTO mapRow(ResultSet rs, int arg1) throws SQLException {
+	public StatusDTO mapRow(ResultSet rs, int arg1) throws SQLException {
 		if (rs == null) {
 			return null;
 		}
-		FormStatusDTO formStatusDTO = new FormStatusDTO();
+	   StatusDTO formStatusDTO = new StatusDTO();
 		formStatusDTO.setId(rs.getInt("ID"));
 		formStatusDTO.setStatus(rs.getString("STATUS"));
 		return formStatusDTO;

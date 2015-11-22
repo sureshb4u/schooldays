@@ -9,7 +9,7 @@ public class LeaveManagementDTO extends BaseDTO {
    private String endTime;
    private String reason;
    private Integer isTaken;
-   private FormStatusDTO formStatus;
+   private StatusDTO status;
 public Integer getId() {
 	return id;
 }
@@ -46,11 +46,11 @@ public Integer getIsTaken() {
 public void setIsTaken(Integer isTaken) {
 	this.isTaken = isTaken;
 }
-public FormStatusDTO getFormStatus() {
-	return formStatus;
+public StatusDTO getFormStatus() {
+	return status;
 }
-public void setFormStatus(FormStatusDTO formStatus) {
-	this.formStatus = formStatus;
+public void setFormStatus(StatusDTO status) {
+	this.status = status;
 }
 
 

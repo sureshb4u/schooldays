@@ -2,7 +2,6 @@ package com.vernal.is.view.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -46,12 +45,8 @@ public class StudentController extends BaseController {
 	 
 	 @RequestMapping(value = "/classes", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	 public ResponseEntity<?> getClassesList(@RequestParam (value="standardId" , required=false )String StandardId ,HttpSession session) {
-			Map<String, String> queryString = null;
-		 if(StandardId != null){
-			 queryString = new TreeMap<String, String>();
-			 queryString.put("standardId", StandardId);
-		 }
-		 Object classesList = null;
+			Map<String, String> queryString = null; Object classesList = null;
+		
 		try {
 			classesList = studentService.getClassesList(session);
 			System.out.println(gson.toJson(classesList));

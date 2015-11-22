@@ -16,7 +16,7 @@ public class SectionRowMapper implements RowMapper<SectionDTO>{
 		}
 		SectionDTO sectionDTO = new SectionDTO();
 		sectionDTO.setId(rs.getInt("ID"));
-		sectionDTO.setName(rs.getString("NAME"));
+		sectionDTO.setSection(rs.getString("SECTION"));
 		return sectionDTO;
 	}
 

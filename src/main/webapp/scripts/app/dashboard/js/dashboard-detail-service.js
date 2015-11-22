@@ -32,6 +32,24 @@
             return deferred.promise;
         };
         
+        this.getStudentCreate = function (){
+        	var deferred = $q.defer();
+        	var url = "/api/dashboard/studentCreate";
+        	var data = restService.restCall("",url,'POST');
+        	data.$promise.then(function(response){
+        		deferred.resolve(response);
+        	},
+        	function(error){
+        		if(error.status == "401"){
+        			$state.go('login');
+        		}else{
+        			LxNotificationService.warning(error.data.Message);
+        		}
+        	deferred.reject('ajaxError');
+        	});
+        	 return deferred.promise;
+        }
+        
     }]);
 
 })();

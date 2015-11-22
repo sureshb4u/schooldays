@@ -84,7 +84,7 @@ public class StudentTranslator  extends BaseTranslator{
 		}
 		return student;
 	}
-	public StudentDTO translateToStudentDTO(Student student) throws ParseException {
+	public StudentDTO translateToStudentDTO(Student student) throws ParseException, java.text.ParseException {
 		StudentDTO studentDTO = null;
 		if(student != null){
 			studentDTO = new StudentDTO();

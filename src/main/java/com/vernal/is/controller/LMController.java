@@ -29,7 +29,7 @@ public class LMController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value= "/pending")
+	@RequestMapping(value= "/PENDING")
 	@ResponseBody
 	public List<LeaveManagementDTO> getPendingLMSList(HttpEntity<String> entity, HttpServletRequest request){
 		List<LeaveManagementDTO> lmsList = null;
@@ -38,7 +38,8 @@ public class LMController {
 			String role = request.getHeader(CommonConstants.SESSION_USERROLE);
 			if(userID != null && role != null){
 				Integer userId = Integer.valueOf(userID);
-				lmsList = lMService.getLMSList(CommonConstants.STATUS_PENDING, userId, role);
+				System.out.println("userId"+userID+role);
+				lmsList = lMService.getPendingLeave(CommonConstants.STATUS_PENDING, userId, role);
 			}
 			
 		} catch (Exception e) {
@@ -48,7 +49,7 @@ public class LMController {
 	}
 	
 	
-	@RequestMapping(value= "/history")
+	@RequestMapping(value= "/HISTORY")
 	@ResponseBody
 	public Object getHistoryLMSList( HttpServletRequest request){
 		List<LeaveManagementDTO> lmsList = null;
@@ -57,7 +58,7 @@ public class LMController {
 			String role = request.getHeader(CommonConstants.SESSION_USERROLE);
 			if(userID != null && role != null){
 				Integer userId = Integer.valueOf(userID);
-				lmsList = lMService.getLMSList(CommonConstants.STATUS_PENDING, userId, role);
+				lmsList = lMService.getHistoryLeave(CommonConstants.STATUS_HISTORY, userId, role);
 		}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -71,11 +72,12 @@ public class LMController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = CommonConstants.CREATE_LEAVE_REQUEST)
+	@RequestMapping(value = CommonConstants.CREATE_LEAVE_REQUEST,method = RequestMethod.POST)
 	@ResponseBody
-	public Object createLeaveRequest(@RequestBody LeaveManagementDTO leaveManagementListDTO,HttpServletRequest request){
+	public ResponseBean createLeaveRequest(@RequestBody LeaveManagementDTO leaveManagementListDTO,HttpServletRequest request){
 		ResponseBean responseBean = new ResponseBean();
 		try {
+			System.out.println("lllllll");
 			if(leaveManagementListDTO != null ){
 				String userID = request.getHeader(CommonConstants.SESSION_USER_ID);
 				String role = request.getHeader(CommonConstants.SESSION_USERROLE);

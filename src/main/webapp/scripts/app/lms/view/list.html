@@ -15,10 +15,7 @@
 				</div>
 				<div flex="30"></div>
 				<div class="black-text" flex="30" ng-show="display"><md-switch ng-model="list.approveStatus"  ng-init="list.approveStatus = false" aria-label="Switch 1"><span ng-show="list.approveStatus" >Approve</span><span ng-hide="list.approveStatus">Decline</span></md-switch></div>
-
 				<div class="black-text flag-blue" flex="30" ng-class="statusClass(list.status)" ng-hide="display">{{list.status}}</div>
-
-				<div class="black-text" flex="30" ng-hide="display">{{list.status}}</div>
 			</div>
 			<md-divider ng-if="!$last"></md-divider>
 		</div>

@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vernal.is.backservice.UsersService;
 import com.vernal.is.dto.ResponseBean;
+import com.vernal.is.dto.RoleDTO;
 import com.vernal.is.dto.UserAuthenticationDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.util.CommonConstants;
@@ -94,16 +95,20 @@ public class UsersController {
 	@ResponseBody
 	public ResponseBean updateBills(@PathVariable Integer userId, @RequestBody UserDTO userDTO, HttpSession session, HttpServletRequest request) throws Exception {
 		Integer acessId = Integer.valueOf(request.getHeader(CommonConstants.SESSION_USER_ID));
+		String role = String.valueOf(request.getHeader(CommonConstants.SESSION_USERROLE));
 		ResponseBean responseBean = new ResponseBean();
+		RoleDTO roleDTO = new RoleDTO();
+		roleDTO.setRole(role);
+		userDTO.setRole(roleDTO);
 		responseBean = usersService.updateUser(userDTO, acessId, userId);
 		return responseBean;
 	}
 
-	@RequestMapping(value = "deleteBill/{userId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteBill/{userId}/{phoneNumberid}/{addressId}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseBean deleteBill(@PathVariable Integer userId, HttpSession session) throws Exception {
+	public ResponseBean deleteBill(@PathVariable Integer userId,Integer phoneNumberId,Integer addressId, HttpSession session) throws Exception {
 		ResponseBean responseBean = new ResponseBean();
-		responseBean = usersService.deleteUser(userId, userId);
+		responseBean = usersService.deleteUser(userId,phoneNumberId, addressId, userId);
 		return responseBean;
 	}
 
