@@ -4,6 +4,7 @@
 			<div  flex="30">
 			<div flex-container="column" >
 					<div flex="50">
+					<span class="black-text">{{ $selected.value }}</span>
 				        <lx-select ng-model="student.standard" placeholder="Standard" choices="standardList" floating-label ng-init="loadStandardList()">
 		            					<lx-select-selected>
 		               						 {{ $selected.value }}
@@ -138,7 +139,7 @@
    				<div  flex="50"  class="fs-subhead black-text">
 	 				<md-input-container >
 	 	 				 <label>Contact</label>
-	          				<input ng-model="student.contacts">
+	          				<input ng-model="student.contact">
 	     			</md-input-container> 
 	 			</div>
 	 			<div  flex="50"  class="fs-subhead black-text">

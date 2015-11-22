@@ -97,21 +97,21 @@ public class StudentTranslator  extends BaseTranslator{
 				studentDTO.setLastName(student.getLastName());
 			}
 			if(student.getDateOfBirth() != null){
-				studentDTO.setDateOfBirth(commonUtil.formatgivenStringToDate(student.getDateOfBirth(),  CommonConstants.DATE_FORMAT, CommonConstants.DATE_DD_MMMM_YYYY));
+				studentDTO.setDateOfBirth(commonUtil.formatgivenStringToDate(student.getDateOfBirth(), CommonConstants.DATE_DD_MMMM_YYYY,  CommonConstants.DATE_FORMAT));
 			}
 			if(student.getDateOfJoining() != null){
-				studentDTO.setDateOfJoining(commonUtil.formatgivenStringToDate(student.getDateOfJoining(),  CommonConstants.DATE_FORMAT, CommonConstants.DATE_DD_MMMM_YYYY));
+				studentDTO.setDateOfJoining(commonUtil.formatgivenStringToDate(student.getDateOfJoining(), CommonConstants.DATE_DD_MMMM_YYYY,  CommonConstants.DATE_FORMAT));
 			}
 			if(student.getStandard() != null){
 				StandardDTO standard = new StandardDTO();
-				standard.setId(student.getStandard().getId());
-				standard.setStandard(student.getStandard().getStandard());
+				standard.setId(Integer.valueOf(student.getStandard().getId()));
+				standard.setStandard(student.getStandard().getValue());
 				studentDTO.setStandard(standard);
 			}
 			if(student.getSection() != null){
 				SectionDTO section = new SectionDTO();
-				section.setId(student.getSection().getId());
-				section.setSection(student.getSection().getSection());
+				section.setId(Integer.valueOf(student.getSection().getId()));
+				section.setSection(student.getSection().getValue());
 				studentDTO.setSection(section);
 			}
 			if(student.getCommunity() != null){

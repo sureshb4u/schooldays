@@ -60,6 +60,7 @@ public class StudentController extends BaseController {
 	 @RequestMapping(value ="/create")
 	 public ResponseEntity<?> createStudent(@RequestBody Student student, HttpSession session){
 		 Object obj = null;
+		 System.out.println("student--"+gson.toJson(student));
 		 try {
 			 obj = studentService.createStudent(student, session);
 		} catch (Exception e) {

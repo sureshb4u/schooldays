@@ -37,6 +37,7 @@
 
 		$scope.save = function(){
 			console.log("SUBMITTED");
+			
 			var data = ntStaffservice.createStaff($scope.nonTchngStaff,'nonTeaching');
 		};
 

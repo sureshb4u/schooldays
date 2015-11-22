@@ -32,10 +32,10 @@
             return deferred.promise;
         };
         
-        this.getStudentCreate = function (){
+        this.getStudentCreate = function (student){
         	var deferred = $q.defer();
-        	var url = "/api/dashboard/studentCreate";
-        	var data = restService.restCall("",url,'POST');
+        	var url = "/api/student/create";
+        	var data = restService.restCall(student, url, 'POST');
         	data.$promise.then(function(response){
         		deferred.resolve(response);
         	},

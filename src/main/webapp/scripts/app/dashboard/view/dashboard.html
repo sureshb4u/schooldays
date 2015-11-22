@@ -16,7 +16,7 @@
         	<button ng-hide="create" class="btn btn--l btn--black btn--fab rounded" ng-click="mainTemplate('','student-profile'); create= true;" lx-ripple lx-tooltip="Create New Student" tooltip-position="bottom">
         		<ng-md-icon  icon="person_add" ></ng-md-icon>
         	</button>
-        	<button ng-show ="create" class="btn btn--l btn--black btn--fab rounded" ng-click="mainTemplate('','classlist'); create=false;" lx-ripple lx-tooltip="Save" tooltip-position="bottom">
+        	<button ng-show ="create" class="btn btn--l btn--black btn--fab rounded" ng-click="studentCreate(student)" lx-ripple lx-tooltip="Save" tooltip-position="bottom">
         		<ng-md-icon  icon="save" ></ng-md-icon>
         	</button>
         	<button ng-show ="create" class="btn btn--l btn--black btn--fab rounded" ng-click="mainTemplate('','classlist'); create=false;" lx-ripple lx-tooltip="Cancel" tooltip-position="bottom">

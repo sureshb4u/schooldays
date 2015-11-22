@@ -7,8 +7,8 @@ package com.vernal.is.model;
 
 public class Student extends Person{
 	
-	private Standard standard;
-	private Section section;
+	private DropDownValue standard;
+	private DropDownValue section;
 	private Class clas;
 
 
@@ -20,19 +20,19 @@ public class Student extends Person{
 		this.clas = clas;
 	}
 
-	public Standard getStandard() {
+	public DropDownValue getStandard() {
 		return standard;
 	}
 
-	public void setStandard(Standard standard) {
+	public void setStandard(DropDownValue standard) {
 		this.standard = standard;
 	}
 
-	public Section getSection() {
+	public DropDownValue getSection() {
 		return section;
 	}
 
-	public void setSection(Section section) {
+	public void setSection(DropDownValue section) {
 		this.section = section;
 	}
 	

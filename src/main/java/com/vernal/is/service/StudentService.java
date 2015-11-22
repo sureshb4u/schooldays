@@ -95,7 +95,7 @@ public class StudentService extends BaseService{
 			HttpEntity<String> entity = preparePost(postString, session);
 			
 			response = restTemplate.exchange( getAPIBaseURL()
-					+ CommonConstants.LMS_BASE_URL +"/"+ CommonConstants.CREATE_LEAVE_REQUEST,
+					+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.CREATE,
 					HttpMethod.POST, entity, Object.class);
 
 			return response.getStatusCode();

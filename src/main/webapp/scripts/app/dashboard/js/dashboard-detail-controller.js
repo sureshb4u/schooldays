@@ -17,9 +17,10 @@
         * State: ""
         * This controller will retrieve and display the dashboard list
         */
-        
-	  $scope.studentCreate=function(){
-		  var data = dashboardDetailService.getStudentCreate();
+     $scope.student ={};   
+	  $scope.studentCreate=function(student){
+		  console.log('student--------'+angular.toJson($scope.student));
+		  var data = dashboardDetailService.getStudentCreate($scope.student);
 		  data.then(function (success){
 			  var studentCreate=success;
 		 });
