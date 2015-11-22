@@ -131,14 +131,14 @@ public class StudentTranslator  extends BaseTranslator{
 				StudentAddressDTO studentAddressDTO = new StudentAddressDTO();
 				studentAddressDTO.setAddress(student.getAddresses());
 				addresses.add(studentAddressDTO);
-				//studentDTO.setAddresses(addresses);
+				studentDTO.setAddresses(addresses);
 			}
 			if(student.getContact() != null){
 				List<StudentPhoneNumberDTO> phoneNumbers = new ArrayList<StudentPhoneNumberDTO>();
 				StudentPhoneNumberDTO phoneNumber = new StudentPhoneNumberDTO();
 				phoneNumber.setPhoneNumber(Long.getLong(student.getContact()));
 				phoneNumbers.add(phoneNumber);
-			//	studentDTO.setPhoneNumber(phoneNumbers);
+				studentDTO.setPhoneNumber(phoneNumbers);
 			}
 		}
 		return studentDTO;
