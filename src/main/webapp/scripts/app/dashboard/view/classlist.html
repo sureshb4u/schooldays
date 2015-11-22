@@ -1,0 +1,46 @@
+ <div>
+	<!-- <ul class="collection grey-text m0" ng-init="loadClassList()">
+	    <li class="collection-item avatar" ng-repeat="lists in classList">
+	    <div flex-container="row" ng-click="loadStudentsList(lists.standard.id, lists.section.id)" class="cursor-pointer">
+	    	<div flex="10">
+		      <img src="/assets/images/vernalis_home_logo.png" alt="" class="circle">
+		      </div>
+		      <div flex="60">
+		      <span class="black-text fs-subhead" > " {{lists.standard.standard}} " std   {{lists.section.section}}</span><br>
+		      <span class="black-text">   </span><br>
+		      </div>
+		 </div>
+	    </li>
+  </ul> -->
+  <div class="md-padding black-text"  ng-init="loadClassList()">
+   <!--  <md-tabs md-selected="selectedTab" md-autoselect >
+      <md-tab ng-repeat="tab in classList" class="black-text" ng-click="loadStudentsList(tab.standard.id, tab.section.id)"
+              label="{{tab.standard.standard}} -  {{tab.section.section}}">
+      </md-tab>
+    </md-tabs> -->
+    <md-tabs md-dynamic-height md-border-bottom style="    min-height: 50px;">
+      <md-tab ng-repeat="tab in classList"  label="{{tab.standard.standard}} -  {{tab.section.section}}" ng-click="loadStudentsList(tab.standard.id, tab.section.id)">
+      </md-tab>
+      </md-tabs>
+  </div> 
+   <<!-- lx-tabs ng-init="loadClassList()">
+   <div class="card">
+        <lx-tab ng-repeat="tab in classList" heading="{{tab.standard.standard}} -  {{tab.section.section}}" >
+            <p class="p+">Lorem Ipsum Content 1</p>
+        </lx-tab>
+        </div> -->
+  </lx-tabs>
+   <div ng-include="'scripts/app/dashboard/view/list.html'"></div>
+</div>
+ <!-- <div flex-container="column" class="grey-text" layout-fill layout-margin >
+ 		<div flex-container="row">
+ 			<div flex="20"><img src="/assets/images/vernalis_home_logo.png" alt="" class="circle"></div>
+ 			<div flex="50" class="black-text">Student Name</div>
+ 			<div flex="50"><div class="switch"><input type="checkbox" id="switch1" class="switch__input"> <label for="switch1" class="switch__label">Switch</label></div></div>
+ 		
+ 		</div> -->
+ 
+ 
+ 
+ </div>
+

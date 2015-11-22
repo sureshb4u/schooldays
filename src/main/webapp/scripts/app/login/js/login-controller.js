@@ -15,9 +15,10 @@
 	  localStorage.setItem("isAuthenticated", false);
 	  localStorage.setItem("userName", "");
 	  localStorage.setItem("userRole", "");
-	  $scope.helpDesk="Please describe your problem here and an atrium representative will get back to you as soon as possible";
-	  
+	  $scope.helpDesk="Please describe your problem here and a School Management representative will get back to you as soon as possible";
+	  $scope.spin =false;
 	  $scope.login = function (user) {
+		  $scope.spin =true;
 		  var data = loginAuthService.getLoginAuthentication(user);
     	  data.then(function(response){
     		  $scope.loginResponse = response;
@@ -37,6 +38,7 @@
     		  $log.debug("Controller Log promise" + error.status); 
     		  loginService.init(false,'');
     		  $location.path('/login');
+    		  $scope.spin=false;
     		  $scope.authenticationError = true;
     	  });
       };

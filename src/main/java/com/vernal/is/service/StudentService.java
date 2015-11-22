@@ -5,7 +5,6 @@ package com.vernal.is.service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -14,10 +13,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 
+import com.google.gson.JsonSyntaxException;
 import com.vernal.is.dto.StudentDTO;
-import com.vernal.is.model.Class;
 import com.vernal.is.model.Student;
 import com.vernal.is.translator.StudentTranslator;
 import com.vernal.is.util.CommonConstants;
@@ -46,6 +46,9 @@ public class StudentService extends BaseService{
 		List<Student> studentist = null; 
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
+		System.out.println(getAPIBaseURL()
+							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.STANDARD_URL +"/" + standardId
+							+ CommonConstants.SECTION_URL + "/" + sectionId);
 		
 			ResponseEntity<Object> response = restTemplate.exchange( getAPIBaseURL()
 							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.STANDARD_URL +"/" + standardId
@@ -70,25 +73,39 @@ public class StudentService extends BaseService{
 	 * @return
 	 * @throws Exception 
 	 */
-	public Object getClassesList(Map<String, String> queryString, HttpSession session) throws Exception {
-		String param ="";
-		if(queryString != null){
-			param = translateQueryParams(queryString);
-		}
-		
+	public Object getClassesList(HttpSession session) throws Exception {
+		ResponseEntity<Object> response = null;
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
-		
-			ResponseEntity<Object> response = restTemplate.exchange( getAPIBaseURL()
-							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.CLASSES_URL +"?"+ param,
+			response = restTemplate.exchange( getAPIBaseURL()
+							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.CLASSES_URL ,
 							HttpMethod.GET, requestEntity, Object.class);
 			
-		} catch (RestClientException | IOException e) {
-			e.printStackTrace();
+			} catch (RestClientException | IOException e) {
 			throw e;
+			}
+		return response.getBody();
 		}
-		return null;
-		}
-	
+
+	public Object createStudent(Student student, HttpSession session) throws Exception {
+		StudentDTO studentDTO = studentTranslator.translateToStudentDTO(student);
+		String postString = gson.toJson(studentDTO);
+		ResponseEntity<Object> response = null;
+		try {
+			HttpEntity<String> entity = preparePost(postString, session);
+			
+			response = restTemplate.exchange( getAPIBaseURL()
+					+ CommonConstants.LMS_BASE_URL +"/"+ CommonConstants.CREATE_LEAVE_REQUEST,
+					HttpMethod.POST, entity, Object.class);
+
+			return response.getStatusCode();
+		}catch (IOException e) {
+			throw e;
+		}catch (JsonSyntaxException e) {
+			throw e;
+		} catch (HttpClientErrorException e) {
+			throw e;
+		}  
+	}
 	
 }

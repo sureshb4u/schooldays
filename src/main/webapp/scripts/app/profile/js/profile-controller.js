@@ -62,6 +62,10 @@
 				$scope.updateUser.address = angular.copy(user);
 			}else if(feild == 'experience'){
 				$scope.updateUser.experience = angular.copy(user);
+			}else if(field == 'emailAddress'){
+				$scope.updateUser.emailAddress = angular.copy(user);
+			}else if(field == 'dateOJoining'){
+				$scope.updateUser.dateOfJoining = angular.copy(user);
 			}
 			console.log(JSON.stringify($scope.updateUser));
 			var data = profileservice.updateProfile($scope.updateUser);

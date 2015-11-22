@@ -3,17 +3,20 @@ package com.vernal.is.view.controller;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.vernal.is.model.Class;
+
 import com.vernal.is.model.Student;
 import com.vernal.is.service.StudentService;
 
@@ -48,13 +51,27 @@ public class StudentController extends BaseController {
 			 queryString = new TreeMap<String, String>();
 			 queryString.put("standardId", StandardId);
 		 }
-		 List<Class> classesList = null;
+		 Object classesList = null;
 		try {
-			classesList = (List<Class>) studentService.getClassesList(queryString, session);
+			classesList = studentService.getClassesList(session);
+			System.out.println(gson.toJson(classesList));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		 return new ResponseEntity<List<Class>>(classesList, HttpStatus.OK);
+		 return new ResponseEntity<Object>(classesList, HttpStatus.OK);
 	 }
 	 
+	 
+	 @RequestMapping(value ="/create")
+	 public ResponseEntity<?> createStudent(@RequestBody Student student, HttpSession session){
+		 Object obj = null;
+		 try {
+			 obj = studentService.createStudent(student, session);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Object>(obj , HttpStatus.ACCEPTED);
+	 }
+
 }

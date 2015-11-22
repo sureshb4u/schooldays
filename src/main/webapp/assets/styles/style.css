@@ -255,8 +255,6 @@ color :#3F51B5 !important;
 	color: #FF4081 !important;
 	font-size:medium;
 	text-align: left;
-	padding-top: 45px;
-	
 }
 .black-t{
     color :black;
@@ -330,4 +328,35 @@ color :#3F51B5 !important;
 	top: 40px ! important ;
 	left: 45% ! important ;
 	text-align: center;
+}
+
+.rounded{
+	border-radius : 50px !important;
+}
+.imglft{
+	float: left !important ;
+}
+
+.uc{
+	
+	text-transform: capitalize !important;
+}
+.profileImg{
+	margin-top: 15px;
+	width: 60px !important;
+	height: 60px !important;
+}
+.picker__day--selected{
+	background-color: #FF4081 !important;
+}
+.picker__day.picker__day--today{
+	color: #FF4081 !important;
+}
+.radio-button__input:checked + .radio-button__label::after{
+	background-color:  #FF4081 !important;
+}
+[type="radio"]:checked + label::after{
+	background-color : #FF4081 !important;
+	border: 2 px solid  #FF4081 !important;
+	
 }

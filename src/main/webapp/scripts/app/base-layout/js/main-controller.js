@@ -49,6 +49,15 @@
     $('.modal-trigger').leanModal();
     $scope.selectedIndex = 0;
     
+    $scope.statusClass = function(text){
+    	if(text == 'APPROVED'){
+    		return 'flag-green';
+    	}else if(text == 'DECLINED'){
+    		return 'flag-red';
+    	}
+    };
+    
+    
     $scope.rolePermission = function(){
     	
     	  var url ='/api/getUserRoles';
@@ -69,6 +78,27 @@
 		  function(error){
 		  });
     };
+    
+    $scope.loadStandardList =function(){
+		  var url ='api/common/dropdown/standard';
+		  var data = restService.restCall("",url,'GETLIST');
+		  data.$promise.then(function(response){
+			  $scope.standardList = response;
+		  },
+		  function(error){
+		  });
+  };
+    
+  $scope.loadSectionList =function(){
+	  var url ='api/common/dropdown/section';
+	  var data = restService.restCall("",url,'GETLIST');
+	  data.$promise.then(function(response){
+		  $scope.sectionList = response;
+	  },
+	  function(error){
+	  });
+};
+    
     $scope.loadDesignationList =function(){
 		  var url ='/api/common/dropdown/designation';
 		  var data = restService.restCall("",url,'GETLIST');

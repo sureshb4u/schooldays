@@ -10,6 +10,8 @@ import com.google.gson.reflect.TypeToken;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.ReligionDTO;
+import com.vernal.is.dto.SectionDTO;
+import com.vernal.is.dto.StandardDTO;
 import com.vernal.is.model.DropDownValue;
 
 @Component
@@ -84,4 +86,38 @@ public class CommonTranslator extends BaseTranslator {
 		return dropDownList;
 	}
 
+	public List<StandardDTO> convertToStandardDTOList(Object object) {
+		Type listType = new TypeToken<List<StandardDTO>>() {}.getType();
+		List<StandardDTO> standardDTOList = gson.fromJson(translateObjectToJson(object), listType);
+		return standardDTOList;
+	}
+
+	public List<DropDownValue> translateToStandardDropDownList(List<StandardDTO> standardDTOList) {
+		List<DropDownValue> dropDownList = null;
+		if(standardDTOList != null && !standardDTOList.isEmpty()){
+			dropDownList = new ArrayList<DropDownValue>();
+			for(StandardDTO standardDTO : standardDTOList){
+				dropDownList.add(translateToDropDown(standardDTO.getId().toString(), standardDTO.getStandard()));
+			}
+		}
+		return dropDownList;
+	}
+
+	public List<SectionDTO> convertToSectionDTOList(Object object) {
+		Type listType = new TypeToken<List<SectionDTO>>() {}.getType();
+		List<SectionDTO> sectionDTOList = gson.fromJson(translateObjectToJson(object), listType);
+		return sectionDTOList;
+	}
+
+
+	public List<DropDownValue> translateToSectionDropDownList(List<SectionDTO> sectionDTOList) {
+		List<DropDownValue> dropDownList = null;
+		if(sectionDTOList != null && !sectionDTOList.isEmpty()){
+			dropDownList = new ArrayList<DropDownValue>();
+			for(SectionDTO sectionDTO : sectionDTOList){
+				dropDownList.add(translateToDropDown(sectionDTO.getId().toString(), sectionDTO.getSection()));
+			}
+		}
+		return dropDownList;
+	}
 }

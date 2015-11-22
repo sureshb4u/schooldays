@@ -26,18 +26,30 @@
           });
 	  };*/
 	  $scope.status = 'Absent';
-	  $scope.loadStudentsList = function() {
+	  
+	  $scope.loadStudentsList = function(standardId, sectionId) {
+		  console.log('loadStudentsList----------')
 		  $scope.loader = true;
-          var data = dashboardListService.getStudentsList();
+          var data = dashboardListService.getStudentsList(standardId, sectionId);
 		  data.then(function(success){
-			 
+			  console.log(angular.toJson(success));
 			  $scope.students = success;
+			  //$scope.mainTemplate('','list');
 			  setTimeout(function(){
 				  $scope.loader = false;
 			  },1000);
 		  });
 	  };
+	 
+	  $scope.selectedTab=0;
 	  
+	  $scope.loadClassList =function(){
+		  var data = dashboardListService.getClassList();
+		  data.then(function(success){
+			  console.log(angular.toJson(success));
+			  $scope.classList = success;
+		  })
+	  }
 	  $scope.loadActivityList = function() {
           var data = dashboardListService.getActivityList();
           data.then(function (success) {

@@ -1,5 +1,6 @@
 {
 	"menuItems" : [
+		
 		{
 			"menuTitle": "Profile",
 			"viewby": ["ADMIN", "TEACHING STAFF","NON TEACHING STAFF"],
@@ -34,6 +35,15 @@
 			"url":"#ntStaffs"
 		},
 		{
+			"menuTitle": "Attendence",
+			"viewby": ["TEACHING STAFF"],
+			"style":"",
+			"menuItemDisplay": "attendence",
+			"icon": "spellcheck",
+			"url":"#profile"
+			
+		},
+		{
 			"menuTitle": "Leave Management System",
 			"viewby": ["ADMIN", "TEACHING STAFF","NON TEACHING STAFF"],
 			"style":"",
@@ -41,6 +51,7 @@
 				"icon": "mail",
 			"url":"#lms"
 		},
+			
 		{
 			"menuTitle": "Logs",
 			"viewby": ["ADMIN"],

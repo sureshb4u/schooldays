@@ -52,5 +52,17 @@ public class CommonController extends BaseController {
 		List<DropDownValue> dropDownList = commonServices.getCommunityList(session);
 		return new ResponseEntity<List<DropDownValue>>(dropDownList, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/dropdown/standard", method = RequestMethod.GET)
+	public ResponseEntity<?> getStandardList(HttpSession session){
+		List<DropDownValue> dropDownList = commonServices.getStandardList(session);
+		return new ResponseEntity<List<DropDownValue>>(dropDownList, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/dropdown/section", method = RequestMethod.GET)
+	public ResponseEntity<?> getSectionList(HttpSession session){
+		List<DropDownValue> dropDownList = commonServices.getSectionList(session);
+		return new ResponseEntity<List<DropDownValue>>(dropDownList, HttpStatus.OK);
+	}
 
 }

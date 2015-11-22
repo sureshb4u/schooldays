@@ -2,7 +2,7 @@
 	<div flex-sm="80" flex-md="50" flex-lg="40" flex="25" flex-container="column">
 	  <form name="loginForm" id="loginForm" ng-submit="login(user)">
     	<div flex-item>
-    	<div style="margin-bottom: 120px;" class="fs-headline display-block white-text aligncenter m20 text-darken-3">School Days Login</div>
+    	<div style="margin-bottom: 120px;" class="fs-headline display-block white-text aligncenter m20 text-darken-3">School Management</div>
 	        <div style="top:-50px;" class="card cardBorder" layout-fill>
 	        	<md-toolbar class="white" layout="row">
                      <div class="p20 aligncenter">
@@ -39,10 +39,10 @@
 	                <div class="tc-white-1" flex-container="row" layout-sm="column" layout-align="space-around center" layout layout-fill>
 					    <div layout layout-sm="row" layout-md="row" flex="50" layout-align="center center">
 					     	<div layout layout-sm="column" layout-md="column">
-					     		<md-button type="submit" class="md-raised light-blue darken-2 md-primary" md-theme-watch="true">login</md-button>
+					     		<button type="submit" class="md-button md-raised light-blue darken-2 md-primary " data-style="expand-left" ladda="spin" md-theme-watch="true">login</button>
 					     	</div>
 				    	</div>
-				    	<div layout layout-sm="column" layout-md="column" flex="50"><a href="#forgotPassword" class="fs-subhead display-block">Forgot Password</a></div>
+				    	<div layout layout-sm="column" layout-md="column" flex="50"><a href="#forgotPassword" class="fs-subhead display-block black-text">Forgot Password</a></div>
 					</div>
 	            </div>
 	        </div>
@@ -83,8 +83,8 @@
 		   </div>
 	    </div>
 	    <div class="dialog__actions" layout-sm="column">
-	        <button layout id="closeDialog" class="btn btn--m  light-blue darken-2 btn--flat" type="submit" lx-ripple>Send to Priority Support</button>
-	        <button layout class="btn btn--m  light-blue darken-2 btn--flat" lx-ripple lx-dialog-close type="button">Cancel</button>
+	        <button layout id="closeDialog" class="btn btn--m  light-blue darken-2 btn--flat " type="submit" lx-ripple>Send to Priority Support</button>
+	        <button layout class="btn btn--m  light-blue darken-2 btn--flat " lx-ripple lx-dialog-close type="button">Cancel</button>
 	    </div>
     </form>
 </lx-dialog>

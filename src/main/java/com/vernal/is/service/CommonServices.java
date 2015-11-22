@@ -15,6 +15,8 @@ import org.springframework.web.client.RestClientException;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.DesignationDTO;
 import com.vernal.is.dto.ReligionDTO;
+import com.vernal.is.dto.SectionDTO;
+import com.vernal.is.dto.StandardDTO;
 import com.vernal.is.model.DropDownValue;
 import com.vernal.is.translator.CommonTranslator;
 import com.vernal.is.util.CommonConstants;
@@ -122,4 +124,42 @@ public class CommonServices extends BaseService {
 		} 
 		return dropDownList;
 	}
+
+	public List<DropDownValue> getStandardList(HttpSession session){
+		ResponseEntity<Object> response = null;
+		List<DropDownValue> dropDownList = null;
+		HttpEntity<String> requestEntity;
+		try {
+			requestEntity = prepareGet(session);
+			
+			response = restTemplate.exchange( getAPIBaseURL() + CommonConstants.COMMON_BASE_URL 
+					+ CommonConstants.STANDARD_URL ,
+					HttpMethod.GET, requestEntity, Object.class);
+			List<StandardDTO> standardDTOList = commonTranslator.convertToStandardDTOList(response.getBody());
+			dropDownList = commonTranslator.translateToStandardDropDownList(standardDTOList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		return dropDownList;
+	}
+
+	public List<DropDownValue> getSectionList(HttpSession session){
+		ResponseEntity<Object> response = null;
+		List<DropDownValue> dropDownList = null;
+		HttpEntity<String> requestEntity;
+		try {
+			requestEntity = prepareGet(session);
+			
+			response = restTemplate.exchange( getAPIBaseURL() + CommonConstants.COMMON_BASE_URL 
+					+ CommonConstants.SECTION_URL ,
+					HttpMethod.GET, requestEntity, Object.class);
+			List<SectionDTO> standardDTOList = commonTranslator.convertToSectionDTOList(response.getBody());
+			dropDownList = commonTranslator.translateToSectionDropDownList(standardDTOList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		return dropDownList;
+	}
+
+
 }

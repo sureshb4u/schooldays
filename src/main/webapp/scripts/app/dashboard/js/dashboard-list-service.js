@@ -34,9 +34,9 @@
             return deferred.promise;
         };*/
         
-        this.getStudentsList = function () {
+        this.getStudentsList = function (standardId, sectionId) {
             var deferred = $q.defer();
-  		    var url = "/api/student/standard/5/section/6";
+  		    var url = 'api/student/standard/'+standardId+'/section/'+sectionId;
 		    var data = restService.restCall("",url,'GETLIST');
 			data.$promise.then(function(response){
 				deferred.resolve(response);
@@ -51,6 +51,24 @@
             });
             return deferred.promise;
         };
+
+        this.getClassList = function(){
+        	var deferred = $q.defer();
+  		    var url = "api/student/classes";
+		    var data = restService.restCall("",url,'GETLIST');
+			data.$promise.then(function(response){
+				deferred.resolve(response);
+			},
+            function (error) {
+                if (error.status == "401") {
+                    $state.go('login');
+                } else {
+                    LxNotificationService.warning(error);
+                }
+                deferred.reject('ajaxError');
+            });
+            return deferred.promise;
+        }
         
         this.getActivityList = function () {
             var deferred = $q.defer();

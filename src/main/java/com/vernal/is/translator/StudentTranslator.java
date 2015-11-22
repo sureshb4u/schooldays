@@ -13,11 +13,19 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.reflect.TypeToken;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+import com.vernal.is.dto.CommunityDTO;
+import com.vernal.is.dto.GenderDTO;
+import com.vernal.is.dto.SectionDTO;
+import com.vernal.is.dto.StandardDTO;
+import com.vernal.is.dto.StudentAddressDTO;
 import com.vernal.is.dto.StudentDTO;
+import com.vernal.is.dto.StudentPhoneNumberDTO;
+import com.vernal.is.model.Class;
 import com.vernal.is.model.Section;
 import com.vernal.is.model.Standard;
 import com.vernal.is.model.Student;
-import com.vernal.is.model.Class;
+import com.vernal.is.util.CommonConstants;
 /**
  * @author Vignesh
  *
@@ -76,5 +84,65 @@ public class StudentTranslator  extends BaseTranslator{
 		}
 		return student;
 	}
+	public StudentDTO translateToStudentDTO(Student student) throws ParseException {
+		StudentDTO studentDTO = null;
+		if(student != null){
+			studentDTO = new StudentDTO();
+			
+			if(student.getFirstName() != null){
+				studentDTO.setFirstName(student.getFirstName());
+			}
+			
+			if(student.getLastName() != null){
+				studentDTO.setLastName(student.getLastName());
+			}
+			if(student.getDateOfBirth() != null){
+				studentDTO.setDateOfBirth(commonUtil.formatgivenStringToDate(student.getDateOfBirth(),  CommonConstants.DATE_FORMAT, CommonConstants.DATE_DD_MMMM_YYYY));
+			}
+			if(student.getDateOfJoining() != null){
+				studentDTO.setDateOfJoining(commonUtil.formatgivenStringToDate(student.getDateOfJoining(),  CommonConstants.DATE_FORMAT, CommonConstants.DATE_DD_MMMM_YYYY));
+			}
+			if(student.getStandard() != null){
+				StandardDTO standard = new StandardDTO();
+				standard.setId(student.getStandard().getId());
+				standard.setStandard(student.getStandard().getStandard());
+				studentDTO.setStandard(standard);
+			}
+			if(student.getSection() != null){
+				SectionDTO section = new SectionDTO();
+				section.setId(student.getSection().getId());
+				section.setSection(student.getSection().getSection());
+				studentDTO.setSection(section);
+			}
+			if(student.getCommunity() != null){
+				CommunityDTO communityDTO = new CommunityDTO();
+				communityDTO.setCommunity(student.getCommunity().getValue());
+			}
+			if(student.getFatherName() != null){
+				studentDTO.setFatherName(student.getFatherName());
+			}
+			if(student.getGender() != null){
+				GenderDTO gender = new GenderDTO();
+				gender.setGender(student.getGender());
+				studentDTO.setGender(gender);
+			}
+			if(student.getAddresses() != null){
+				List<StudentAddressDTO> addresses = new ArrayList<StudentAddressDTO>();
+				StudentAddressDTO studentAddressDTO = new StudentAddressDTO();
+				studentAddressDTO.setAddress(student.getAddresses());
+				addresses.add(studentAddressDTO);
+				//studentDTO.setAddresses(addresses);
+			}
+			if(student.getContact() != null){
+				List<StudentPhoneNumberDTO> phoneNumbers = new ArrayList<StudentPhoneNumberDTO>();
+				StudentPhoneNumberDTO phoneNumber = new StudentPhoneNumberDTO();
+				phoneNumber.setPhoneNumber(Long.getLong(student.getContact()));
+				phoneNumbers.add(phoneNumber);
+			//	studentDTO.setPhoneNumber(phoneNumbers);
+			}
+		}
+		return studentDTO;
+	}
 	
+
 }

@@ -61,7 +61,7 @@ public class LMSService extends BaseService {
 			HttpEntity<String> entity = preparePost(postString, session);
 			
 			response = restTemplate.exchange( getAPIBaseURL()
-					+ CommonConstants.LMS_BASE_URL +"/"+ userId + CommonConstants.CREATE_LEAVE_REQUEST,
+					+ CommonConstants.LMS_BASE_URL + CommonConstants.CREATE_LEAVE_REQUEST,
 					HttpMethod.POST, entity, Object.class);
 
 			return response.getStatusCode();
@@ -84,10 +84,10 @@ public class LMSService extends BaseService {
 	public Object updateLMS(List<LeaveManagement> leaveManagementList,	HttpSession session) throws ParseException {
 		List<LeaveManagementDTO> leaveManagementDTOList = lMSTransator.translateToLMSDTOList(leaveManagementList);
 		String postString = gson.toJson(leaveManagementDTOList);
+		System.out.println(postString);
 		ResponseEntity<Object> response = null;
 		try {
 			HttpEntity<String> entity = preparePut(postString, session);
-			
 			response = restTemplate.exchange(getAPIBaseURL()
 					+ CommonConstants.LMS_BASE_URL + CommonConstants.UPDATE_REQUEST,
 					HttpMethod.PUT, entity, Object.class);

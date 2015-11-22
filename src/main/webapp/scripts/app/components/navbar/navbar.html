@@ -2,16 +2,16 @@
 	<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
 	    <md-toolbar  class="" style="background : white; padding-top: 15px;">
 	    <div layout-fill layout="column" layout-align="center center">
-	    	<span  class="fs-title display-block schooldays" >School Days</span>
-	    	<img src="assets/images/school-logo.gif"style="height: 110px;width: 135px;"/>
+	    	<span  class="fs-title display-block schooldays" >School Management</span>
+	    	<img src="assets/images/logo.jpg"style="height: 110px;width: 135px;"/>
 	    </div>
 	    <md-divider style=" margin-top: 15px;" ></md-divider>
 	    </md-toolbar>
 	       <md-content layout="column" flex class="navbar">
 		       <div layout-fill resize style="height:{{windowHeight-215+'px'}};overflow:auto">
 		       <div  ng-repeat="permissions in permission.roleBasedPermissions.menuItems" ng-init="addSelectedClass(permissions.menuItemDisplay)">
-			    <a href="{{permissions.url}}"  id="{{permissions.menuItemDisplay}}" ng-click="changeClass('{{permissions.menuItemDisplay}}')">
-			    	<md-list-item class="md-3-line removeClass">
+			    <a href="{{permissions.url}}"  id="{{permissions.menuItemDisplay}}" >
+			    	<md-list-item class="md-3-line removeClass" ng-click="changeClass('{{permissions.menuItemDisplay}}')">
 				        <div class="md-list-item-text " layout="row" >
 				          <ng-md-icon flex="20" class="schooldays" icon="{{permissions.icon}}" style="cursor: pointer;" size="20" ng-hide="create" ng-click="create=true;mainTemplate('staffCreate');" ></ng-md-icon>
 				          <label flex="80" class="fs-subhead  black-t"> {{permissions.menuTitle}}</label>
@@ -39,7 +39,7 @@
 							<lx-dropdown-menu class="aligncenter">
 								<ul class="user-options-menu">
 									<li><a  href="#login" ng-show="false" class="md-raised fs-subhead display-block  aligncenter" translate="global.menu.login"></a></li>
-						      		<li><a  href="#logout" ng-show="true" class="md-raised fs-subhead display-block schooldays aligncenter" translate="global.menu.logout" ng-click="logout()"></a></li>
+						      		<li><a  href="#logout" ng-show="true" class="md-raised fs-subhead display-block schooldays aligncenter" translate="global.menu.logout" ></a></li>
 								</ul>
 							</lx-dropdown-menu>
 					    </div> 

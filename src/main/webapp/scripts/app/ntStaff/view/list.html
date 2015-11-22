@@ -1,19 +1,25 @@
  <div ng-init="nonTeachingStaff();">
-	<ul class="collection grey-text m0" >
-	    <li class="collection-item avatar" ng-repeat="lists in staffList">
+	<div class="collection grey-text m0" >
+	    <div class="collection-item avatar" ng-repeat="lists in staffList">
 	    <div flex-container="row">
-	    	  <div flex="10">
-		      <img src="/assets/images/no-img.jpg" alt="" class="circle">
+	    	  <div flex="10" layout-padding>
+		    	  <div class="circle profileImg">
+			      	<img src="/assets/images/no-img.jpg"  >
+			      </div>
 		      </div>
-		      <div flex="60" >
-		      <span class="black-text fs-subhead">{{lists.firstName}} </span><br>
-		      <span class="black-text">  ID : {{lists.id}}  </span><br>
-		      <span class="black-text">DOB: {{lists.dateOfBirth}} </span><br>
+		      <div flex="50" >
+		      <div flex-container="column" >
+			      <div flex="20" class="black-text fs-subhead">{{lists.firstName}} {{lists.lastName}}</div>
+			      <div flex="20" class="black-text">  ID : {{lists.id}}  </div>
+			      <div flex="20" class="black-text fs-boy-2 fontClass ">E-mail :<a style="color:#08298A" href="mailto:{{lists.emailAddresses}}"> {{lists.emailAddresses}} </a></div>
+			      <div flex="20" class="black-text">DOB: {{lists.dateOfBirth}} </div>
 		      </div>
-		      <div flex="30" class="black-text fs-subhead"> {{lists.designation}}   </div>
+		     </div>
+		      <div flex="40" class=" black-text fs-subhead biography"> - {{lists.bioGraphy}} </div>
 	      </div>
-	    </li>
-  </ul>
+		      <!-- <div flex="45" class="black-text fs-subhead"> {{lists.designation}}   </div> -->
+	    </div>
+  </div>
 </div>
 
  

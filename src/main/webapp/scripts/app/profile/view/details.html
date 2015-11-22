@@ -1,4 +1,4 @@
-<div resize style="height:{{windowHeight-70+'px'}}" ng-init="edit=false; getProfile();">
+<div resize style="height:{{windowHeight-150+'px'}} ;" ng-init="edit=false; getProfile();">
 		<div layout-margin layout-padding flex-container="column">
 		<div flex-item layout-margin layout-padding flex-container="row" >
 			<div  flex="30" ng-init="editDesignation = true">			 
@@ -36,7 +36,7 @@
 	 	 			<div flex="50"  class="fs-subhead black-text">
 	 	 					<md-input-container>
 	      						<label>Date of Birth</label>
-						 		<input type="text" pick-a-date="dateOfBirth" ng-model="user.dateOfBirth" md-placeholder="Enter your date" required></md-datepicker>
+						 		<input type="text" pick-a-date="dateOfBirth" ng-model="user.dateOfBirth" md-placeholder="Enter your date" required disabled></md-datepicker>
 	      				</md-input-container>
 	 	 			</div>
 	 	 			
@@ -45,12 +45,12 @@
 		 	 			<br>
 		 	 			<div class="radio-group">
  						   	<div class="radio-button">
-        						<input type="radio" id="male" name="gender" value="MALE" ng-model="user.gender" class="radio-button__input">
+        						<input type="radio" id="male" name="gender" value="MALE" ng-model="user.gender" class="radio-button__input" disabled>
         						<label for="male" class="radio-button__label">Male</label>
     					   	</div>
 
     						<div class="radio-button">
-        						<input type="radio" id="female" name="gender" value="FEMALE" ng-model="user.gender" class="radio-button__input">
+        						<input type="radio" id="female" name="gender" value="FEMALE" ng-model="user.gender" class="radio-button__input" disabled>
         						<label for="female" class="radio-button__label">Female</label>
    	 						</div>
 						</div>
@@ -61,7 +61,7 @@
    					<div  flex="50"  class="fs-subhead black-text">
    						<md-input-container >
 	      					<label>Email</label>
-	      					<input ng-model="user.emailAddresses" type="emailAddresses" required>
+	      					<input ng-model="user.emailAddresses" type="emailAddresses" required ng-blur="updateProfile(user.emailAddress, 'emailAddress' )">
 	   					 </md-input-container>
    					</div>
 	   				<div  flex="50"  class="fs-subhead black-text">
@@ -90,13 +90,13 @@
    					<div  flex="50"  class="fs-subhead black-text">
    						<md-input-container >
 	      				 	 <label>Date of Joining</label>
-	       					 <input type="text" pick-a-date="dateOfJoinig" ng-model="user.dateOfJoining" required></input>
+	       					 <input type="text" pick-a-date="dateOfJoinig" ng-model="user.dateOfJoining" required ng-blur="updateProfile(user.dateOfJoining, 'dateOfJoining')"></input>
 	      				</md-input-container>			
 	 				</div>
 	 				<div  flex="50"  class="fs-subhead black-text">
    							<md-input-container >
 	      				 	 <label>FatherName</label>
-	       					 <input ng-model="user.fatherName" ></input>
+	       					 <input ng-model="user.fatherName" disabled></input>
 	      				</md-input-container>
 	 				</div>
 	 		</div>
