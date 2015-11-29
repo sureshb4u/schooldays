@@ -176,5 +176,17 @@
         	}
         }
         })
+        .state('home.logs', {
+            url: '/noticeboard',
+            parent: 'home',
+            views: {
+                'viewPage': {
+                    templateUrl: '/scripts/app/logs/view/noticeBoard.html',
+                    controller: 'noticeBoardController',
+                   
+                }
+            }
+        })
+        
 }] );
 })();
