@@ -360,3 +360,20 @@ color :#3F51B5 !important;
 	border: 2 px solid  #FF4081 !important;
 	
 }
+
+.toolbarButton{
+	padding: 55px;
+}
+
+.logoutpop{
+    opacity: 1 !important;
+    left: 52px !important;
+    bottom: 55px !important;
+    width: 170px !important;
+    height: auto !important;
+
+}
+.logoutpop:hover{
+	background-color:#00a2d3 !important;
+	color: white !important; 
+}
