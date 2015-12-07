@@ -5,23 +5,30 @@
 	  </div>
 	  <div  layout="row" style="height:{{windowHeight-150+'px'}}; ">
 	     <div flex="80" class="aligncenter"><span class="fs-display-1 display-block">LMS</span></div>
-	     <div flex="20" class="aligncenter" ng-init="createEdit = checkAdmin(); create = false;">
+	     <div flex="20" class="aligncenter toolbarButton " ng-init="createEdit = checkAdmin(); create = false;">
+		<div flex="50">
 		<button class="btn btn--m btn--transparent btn--fab iconBg"  ng-hide="createEdit || create" ng-click="create=true;  mainTemplate('','details');loader=true"  lx-ripple lx-tooltip="Create New Leave Request" tooltip-position="left" ><i class="mdi mdi-plus"></i></button>
 		<ng-md-icon icon="highlight_remove" style="color : white;cursor: pointer;" size="30" ng-show="create" ng-click="create=false;mainTemplate('','list'); loader=false;">
 			<md-tooltip md-autohide="true">
                        Cancel
             </md-tooltip>
 		</ng-md-icon>
+		</div>
+		<div flex="50">
 		<ng-md-icon icon="send" style="color : white; cursor: pointer;" size="30" ng-show="create" ng-click="createNewLeaveRequest(lms);mainTemplate('','list');create=false;loader=false">
 			<md-tooltip md-autohide="true">
                         Send Leave Request
              </md-tooltip>
 		</ng-md-icon>
+		</div>
+		<div flex="50">
 		<ng-md-icon icon="save"  style="fill: grey; cursor: pointer;" size="30" ng-show="checkAdmin()" ng-click="updateLms(lmsPending)">
 			<md-tooltip md-autohide="true">
                        Approve / Decline
              </md-tooltip>
 		</ng-md-icon>
+		</div>
+		</div>
 		</div>
 	 </div>
 	</md-toolbar>

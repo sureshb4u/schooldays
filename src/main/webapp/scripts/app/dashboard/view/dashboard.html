@@ -8,24 +8,24 @@
 	    <div  flex="10" class="frt">
 			 <div class="mt">
 		 	<div class="fab">
-	 		<button class="fab__primary btn btn--xl  btn--fab rounded" lx-ripple >
+	 		<button class="fab__primary btn btn--xl iconBg btn--fab rounded" lx-ripple >
             <i class="mdi mdi-apps"></i>
              <i class="mdi mdi-apps"></i>
         </button>
         <div class="fab__actions fab__actions--left" ng-init="create=false">
-        	<button ng-hide="create" class="btn btn--l btn--black btn--fab rounded" ng-click="mainTemplate('','student-profile'); create= true;" lx-ripple lx-tooltip="Create New Student" tooltip-position="bottom">
+        	<button ng-hide="create" class="btn btn--l btn--black btn--fab iconBg rounded" ng-click="mainTemplate('','student-profile'); create= true;" lx-ripple lx-tooltip="Create New Student" tooltip-position="bottom">
         		<ng-md-icon  icon="person_add" ></ng-md-icon>
         	</button>
-        	<button ng-show ="create" class="btn btn--l btn--black btn--fab rounded" ng-click="studentCreate(student)" lx-ripple lx-tooltip="Save" tooltip-position="bottom">
+        	<button ng-show ="create" class="btn btn--l btn--black btn--fab iconBg rounded" ng-click="studentCreate(student)" lx-ripple lx-tooltip="Save" tooltip-position="bottom">
         		<ng-md-icon  icon="save" ></ng-md-icon>
         	</button>
-        	<button ng-show ="create" class="btn btn--l btn--black btn--fab rounded" ng-click="mainTemplate('','classlist'); create=false;" lx-ripple lx-tooltip="Cancel" tooltip-position="bottom">
+        	<button ng-show ="create" class="btn btn--l btn--black btn--fab iconBg rounded" ng-click="mainTemplate('','classlist'); create=false;" lx-ripple lx-tooltip="Cancel" tooltip-position="bottom">
         		<ng-md-icon  icon="cancel" ></ng-md-icon>
         	</button>
-        	 <button ng-hide="create" class="btn btn--l btn--black btn--fab rounded" lx-ripple lx-tooltip="Sort" tooltip-position="bottom">
+        	 <button ng-hide="create" class="btn btn--l btn--black btn--fab iconBg rounded" lx-ripple lx-tooltip="Sort" tooltip-position="bottom">
         	 	<i class="mdi mdi-sort-alphabetical"></i>
         	 </button> 
-        	 <button ng-hide="create" class="btn btn--l btn--black btn--fab rounded" lx-ripple lx-tooltip="Lorem Ipsum" tooltip-position="bottom">
+        	 <button ng-hide="create" class="btn btn--l btn--black btn--fab iconBg rounded" lx-ripple lx-tooltip="Lorem Ipsum" tooltip-position="bottom">
         	 	<i class="mdi mdi-delete"></i>
         	 </button>
         	 </div>
