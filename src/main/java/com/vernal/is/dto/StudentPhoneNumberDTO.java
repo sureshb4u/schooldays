@@ -3,7 +3,7 @@ package com.vernal.is.dto;
 public class StudentPhoneNumberDTO {
   private Integer id;
   private Integer idStudent;
-  private Long phoneNumber;
+  private String phoneNumber;
   private Integer isPrimary;
   private Integer idStudentRelation;
   private StudentRelationDTO studentRelation;
@@ -20,12 +20,7 @@ public Integer getIdStudent() {
 public void setIdStudent(Integer idStudent) {
 	this.idStudent = idStudent;
 }
-public Long getPhoneNumber() {
-	return phoneNumber;
-}
-public void setPhoneNumber(Long phoneNumber) {
-	this.phoneNumber = phoneNumber;
-}
+
 public Integer getIsPrimary() {
 	return isPrimary;
 }
@@ -43,6 +38,12 @@ public StudentRelationDTO getStudentRelation() {
 }
 public void setStudentRelation(StudentRelationDTO studentRelation) {
 	this.studentRelation = studentRelation;
+}
+public String getPhoneNumber() {
+	return phoneNumber;
+}
+public void setPhoneNumber(String phoneNumber) {
+	this.phoneNumber = phoneNumber;
 }
 
 

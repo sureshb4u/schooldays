@@ -166,6 +166,17 @@
         }
         })
         
+         .state('home.fms',{
+        url: '/fms',
+        parent:'home',
+        views:{
+        	'viewPage': {
+        		templateUrl :'/scripts/app/fms/view/fms.html',
+        		controller:'fmsController'
+        	}
+        }
+        })
+        
         .state('home.exams',{
         url: '/exams',
         parent:'home',

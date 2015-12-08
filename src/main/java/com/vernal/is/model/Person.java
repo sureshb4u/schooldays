@@ -53,6 +53,8 @@ public class Person {
     
     private String fatherName;
     
+    private String motherName;
+    
     private DropDownValue community;
     
     private DropDownValue religion;
@@ -267,6 +269,15 @@ public class Person {
 	public String getFatherName() {
 		return fatherName;
 	}
+	
+	public String getMotherName() {
+		return motherName;
+	}
+
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
+
 	public void setFatherName(String fatherName) {
 		this.fatherName = fatherName;
 	}

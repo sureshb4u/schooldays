@@ -152,7 +152,7 @@ public class UserTranslator extends BaseTranslator{
 			
 			if(user.getReligion() != null){
 				ReligionDTO religionDTO = new ReligionDTO();
-				religionDTO.setId(Integer.valueOf(user.getCommunity().getId()));
+				religionDTO.setId(Integer.valueOf(user.getReligion().getId()));
 				religionDTO.setReligion(user.getReligion().getValue());
 				userDTO.setReligion(religionDTO);
 			}

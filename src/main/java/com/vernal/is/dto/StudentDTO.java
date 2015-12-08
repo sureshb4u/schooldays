@@ -15,6 +15,7 @@ public class StudentDTO {
 	private GenderDTO gender;
 	private Integer age;
 	private String fatherName;
+	private String motherName;
 	private CommunityDTO community;
 	private ReligionDTO religion;
 	private BloodGroupDTO bloodGroup;
@@ -99,6 +100,16 @@ public class StudentDTO {
 	}
 	public void setBloodGroup(BloodGroupDTO bloodGroup) {
 		this.bloodGroup = bloodGroup;
+	}
+	
+	public String getMotherName() {
+		return motherName;
+	}
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
+	public void setPhoneNumbers(List<StudentPhoneNumberDTO> phoneNumbers) {
+		this.phoneNumbers = phoneNumbers;
 	}
 	public GenderDTO getGender() {
 		return gender;

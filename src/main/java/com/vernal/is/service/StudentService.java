@@ -75,11 +75,12 @@ public class StudentService extends BaseService{
 	 * @return
 	 * @throws Exception 
 	 */
-	public List<Class> getClassesList(HttpSession session) throws Exception {
+	public Object getClassesList(HttpSession session) throws Exception {
+		ResponseEntity<Object> response = null;
 		try {
 			HttpEntity<String> requestEntity = prepareGet(session); 
 		
-			ResponseEntity<Object> response = restTemplate.exchange( getAPIBaseURL()
+		 response = restTemplate.exchange( getAPIBaseURL()
 							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.CLASSES_URL ,
 							HttpMethod.GET, requestEntity, Object.class);
 			
@@ -87,7 +88,7 @@ public class StudentService extends BaseService{
 			e.printStackTrace();
 			throw e;
 		}
-		return null;
+		return response.getBody();
 		}
 
 	public Object createStudent(Student student, HttpSession session) throws Exception {

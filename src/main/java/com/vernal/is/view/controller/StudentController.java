@@ -45,8 +45,7 @@ public class StudentController extends BaseController {
 	 
 	 @RequestMapping(value = "/classes", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
 	 public ResponseEntity<?> getClassesList(@RequestParam (value="standardId" , required=false )String StandardId ,HttpSession session) {
-			Map<String, String> queryString = null; Object classesList = null;
-		
+		 Object classesList = null;
 		try {
 			classesList = studentService.getClassesList(session);
 			System.out.println(gson.toJson(classesList));

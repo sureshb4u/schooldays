@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.reflect.TypeToken;
 import com.vernal.is.dto.CommunityDTO;
 import com.vernal.is.dto.GenderDTO;
+import com.vernal.is.dto.ReligionDTO;
 import com.vernal.is.dto.SectionDTO;
 import com.vernal.is.dto.StandardDTO;
 import com.vernal.is.dto.StudentAddressDTO;
@@ -116,15 +117,29 @@ public class StudentTranslator  extends BaseTranslator{
 			}
 			if(student.getCommunity() != null){
 				CommunityDTO communityDTO = new CommunityDTO();
+				communityDTO.setId(Integer.valueOf(student.getCommunity().getId()));
 				communityDTO.setCommunity(student.getCommunity().getValue());
+				studentDTO.setCommunity(communityDTO);
+			}
+			if(student.getReligion() != null){
+				ReligionDTO religionDTO = new ReligionDTO();
+				religionDTO.setId(Integer.valueOf(student.getReligion().getId()));
+				religionDTO.setReligion(student.getReligion().getValue());
+				studentDTO.setReligion(religionDTO);
 			}
 			if(student.getFatherName() != null){
 				studentDTO.setFatherName(student.getFatherName());
+			}
+			if(student.getMotherName() != null){
+				studentDTO.setMotherName(student.getMotherName());
 			}
 			if(student.getGender() != null){
 				GenderDTO gender = new GenderDTO();
 				gender.setGender(student.getGender());
 				studentDTO.setGender(gender);
+			}
+			if(student.getEmailAddresses() != null){
+				studentDTO.setEmailAddress(student.getEmailAddresses());
 			}
 			if(student.getAddresses() != null){
 				List<StudentAddressDTO> addresses = new ArrayList<StudentAddressDTO>();
@@ -136,7 +151,8 @@ public class StudentTranslator  extends BaseTranslator{
 			if(student.getContact() != null){
 				List<StudentPhoneNumberDTO> phoneNumbers = new ArrayList<StudentPhoneNumberDTO>();
 				StudentPhoneNumberDTO phoneNumber = new StudentPhoneNumberDTO();
-				phoneNumber.setPhoneNumber(Long.getLong(student.getContact()));
+//				Long contact =Long.getLong(student.getContact());
+				phoneNumber.setPhoneNumber(student.getContact());
 				phoneNumbers.add(phoneNumber);
 				studentDTO.setPhoneNumber(phoneNumbers);
 			}
