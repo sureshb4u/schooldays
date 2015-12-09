@@ -72,7 +72,7 @@
 				$scope.staffList = success;
 				setTimeout(function(){
 					$scope.loader = false;
-				},1000);
+				},100);
 			});
 		}
 

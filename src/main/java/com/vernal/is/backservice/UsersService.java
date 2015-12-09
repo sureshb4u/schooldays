@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,6 +34,7 @@ public class UsersService {
 	 * @param userDTO
 	 * @return
 	 */
+	 @Transactional
 	public ResponseBean updateUser(UserDTO userDTO, Integer acessId,  Integer userId) {
 		userDTO = getBasicIds(userDTO);
 		return userDAO.updateUser(userDTO, acessId, userId);
@@ -43,6 +45,7 @@ public class UsersService {
 	 * @param userId
 	 * @return
 	 */
+	 @Transactional
 	public ResponseBean deleteUser(Integer userId,Integer phoneNumberId,Integer addressId, Integer accessId) {
 		return userDAO.deleteUser(userId,phoneNumberId,addressId, accessId);
 	}
@@ -53,6 +56,7 @@ public class UsersService {
 	 * @return
 	 * @throws Exception 
 	 */
+	 @Transactional
 	public ResponseBean insertUser(UserDTO userDTO, Integer accessId) throws Exception {
 		userDTO = getBasicIds(userDTO);
 		System.out.println("userDTO>>>>>>>"+gson.toJson(userDTO));

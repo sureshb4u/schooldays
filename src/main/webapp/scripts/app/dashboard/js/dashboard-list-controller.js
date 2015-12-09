@@ -26,21 +26,24 @@
           });
 	  };*/
 	  $scope.status = 'Absent';
-	  
+	  $scope.create = false;
 	  $scope.loadStudentsList = function(standardId, sectionId) {
-		  console.log('loadStudentsList----------')
-		  $scope.loader = true;
-          var data = dashboardListService.getStudentsList(standardId, sectionId);
-		  data.then(function(success){
-			  console.log(angular.toJson(success));
-			  $scope.students = success;
-			  //$scope.mainTemplate('','list');
-			  setTimeout(function(){
-				  $scope.loader = false;
-			  },1000);
-		  });
+		  console.log('loadStudentsList----------'+standardId+'--------sectionId---'+sectionId);
+		  if(standardId != '' && sectionId != ''){
+			  $scope.loader = true;
+	          var data = dashboardListService.getStudentsList(standardId, sectionId);
+			  data.then(function(success){
+				  console.log(angular.toJson(success));
+				  $scope.students = success;
+				  //$scope.mainTemplate('','list');
+					  $scope.loader = false;
+			  });
+		  }
 	  };
 	 
+	  $scope.standardId =''; 
+	  $scope.sectionId ='';
+	  
 	  $scope.selectedTab=0;
 	  
 	  $scope.loadClassList =function(){
@@ -48,7 +51,8 @@
 		  data.then(function(success){
 			  console.log(angular.toJson(success));
 			  $scope.classList = success;
-		  })
+			  $scope.loadStudentsList($scope.classList[0].standard.id, $scope.classList[0].section.id);
+		  });
 	  }
 	  $scope.loadActivityList = function() {
           var data = dashboardListService.getActivityList();

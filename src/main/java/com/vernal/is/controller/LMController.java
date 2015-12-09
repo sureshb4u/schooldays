@@ -79,9 +79,11 @@ public class LMController {
 		try {
 			System.out.println("lllllll");
 			if(leaveManagementListDTO != null ){
+				System.out.println("lllllll");
 				String userID = request.getHeader(CommonConstants.SESSION_USER_ID);
 				String role = request.getHeader(CommonConstants.SESSION_USERROLE);
 				if(userID != null && role != null){
+					System.out.println("lllllll");
 					Integer userId = Integer.valueOf(userID);
 					responseBean = lMService.Applyleave(leaveManagementListDTO,userId);
 			}

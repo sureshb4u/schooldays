@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.vernal.is.dao.LeaveDAO;
 import com.vernal.is.dto.LeaveManagementDTO;
@@ -24,13 +25,13 @@ public class LMService {
 		// TODO Auto-generated method stub
 		return leaveDAO.getHistoryLeave(status, userId,role);
 	}
-	
+	 @Transactional
 	public ResponseBean Applyleave(LeaveManagementDTO leaveDTO, Integer userId) {
 		// TODO Auto-generated method stub
 		return leaveDAO.Applyleave(leaveDTO,userId);
 	}
 	
-	 
+	 @Transactional
 	public ResponseBean statusChange(List<LeaveManagementDTO> leaveDTO, Integer userId) {
 		// TODO Auto-generated method stub
 		return  leaveDAO.statusChange(leaveDTO,userId);
