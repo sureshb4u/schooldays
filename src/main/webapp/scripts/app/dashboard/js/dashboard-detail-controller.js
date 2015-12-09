@@ -9,25 +9,28 @@
      * Controller of the atrium
      */
 
-    vApp.controller('dashboardDetailController', ['$scope', '$q', '$compile', '$log', 'restService', 'dashboardDetailService', 
-       function ($scope, $q, $compile, $log, restService, dashboardDetailService) {
+    vApp.controller('dashboardDetailController', ['$scope', '$q', '$compile', '$log', 'restService', 'dashboardDetailService', '$rootScope',
+       function ($scope, $q, $compile, $log, restService, dashboardDetailService, $rootScope) {
 
         /*
         * Controller : getEventDetail
         * State: ""
         * This controller will retrieve and display the dashboard list
         */
-     $scope.student ={};   
-	  $scope.studentCreate=function(student){
+     $rootScope.student ={};   
+	  $scope.studentCreate = function(student){
 		  console.log('student--------'+angular.toJson($scope.student));
 		  $scope.loader = true;
 		  $scope.create = false;
-		  var data = dashboardDetailService.getStudentCreate($scope.student);
-		  data.then(function (success){
-			  $scope.mainTemplate('','classlist');
-			  $scope.loader = false;
-		 });
-	  }
+		  if(student){
+			 var data = dashboardDetailService.getStudentCreate($scope.student);
+			  data.then(function (success){
+				  $scope.mainTemplate('','classlist');
+				  $scope.loader = false;
+				  $scope.student = {};
+			 });
+		  }
+	  };
 	  
     }]);
 })();
