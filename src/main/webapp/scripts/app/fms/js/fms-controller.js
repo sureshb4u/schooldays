@@ -13,7 +13,7 @@
  */
   vApp.controller('fmsController', [ '$scope','$translate','restService','$translatePartialLoader','$log','$location','$timeout','$controller','$interval','lmsService','dashboardListService',
                                  function($scope, $translate, restService, $translatePartialLoader, $log, $location, $timeout, $controller,$interval, lmsService, dashboardListService) {
-	  
+	   angular.extend(this, $controller('dashboardListController', { $scope: $scope }));
 	  $translate.refresh();
 	  $scope.ids = [];
 	  
@@ -33,32 +33,12 @@
 			};
 	  
 	
-	  $scope.loadClassList =function(){
-			  var data = dashboardListService.getClassList();
-			  data.then(function(success){
-				  console.log(angular.toJson(success));
-				  $scope.classList = success;
-				  })
-		 };
 		 
 		 $scope.feesDetails = function (dialog, obj){
 			 $scope.opendDialog(dialog);
 			 $scope.selectedStudent = angular.copy(obj);
 		 };
 		 
-	   $scope.loadStudentsList = function(standardId, sectionId) {
-			  console.log('loadStudentsList----------')
-			  $scope.loader = true;
-	          var data = dashboardListService.getStudentsList(standardId, sectionId);
-			  data.then(function(success){
-				  console.log(angular.toJson(success));
-				  $scope.students = success;
-				  //$scope.mainTemplate('','list');
-				  setTimeout(function(){
-					  $scope.loader = false;
-				  },1000);
-			  });
-		  };	
 			
 	  $scope.openDeclrations = function(){
 		  $timeout(function(){

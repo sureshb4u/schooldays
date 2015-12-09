@@ -96,4 +96,5 @@ public class CommonConstants {
 	public static final String SECTION = "SECTION";
 	public static final String RELATION = "STUDENT_RELATION";
 	public static final String CREATE = "/create";
+	public static final String STAFF_CLASSES_URL = "/staffClasses";
 }

@@ -109,9 +109,7 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 				if(leave.getIsTaken() != null){
 					INSERT_LEAVE = INSERT_LEAVE+ " `IS_TAKEN`, ";
 				}
-				if(leave.getFormStatus() != null ){
 				INSERT_LEAVE = INSERT_LEAVE+ " `ID_FORM_STATUS`, ";
-				}
 				INSERT_LEAVE = INSERT_LEAVE+ "`IS_DELETED`,"
 				+ "`CREATED_ON`,"
 				+ " `CREATED_BY`) "
@@ -130,14 +128,13 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 					if(leave.getIsTaken() != null){
 						INSERT_LEAVE = INSERT_LEAVE+ leave.getIsTaken()+",";
 					}
-					if(leave.getFormStatus() != null ){
 					INSERT_LEAVE = INSERT_LEAVE+"?,";
-					}
 				INSERT_LEAVE = INSERT_LEAVE+ CommonConstants.IS_DELETED+","+"NOW()"+","+accessId
 				+")";
 				try{
-					if(leave.getFormStatus() != null && leave.getFormStatus().getStatus()!= null){
-					String[] statusInput= {leave.getFormStatus().getStatus()};
+					
+					String[] statusInput= {"PENDING"};
+					System.out.println("statusInput   "+statusInput);
 					Integer statusId=  getJdbcTemplate().queryForObject(
 		                    ID_STATUS,statusInput,Integer.class);
 					
@@ -146,12 +143,12 @@ public class LeaveManagementImpl  extends NamedParameterJdbcDaoSupport implement
 						  Object [] inputs = {statusId};
 						getJdbcTemplate().update(INSERT_LEAVE, inputs );
 						
-					
+					  System.out.println(INSERT_LEAVE);
 							responseBean.setStatus("SUCCESS");
 							responseBean.setMessage("Leave Is applied");
 						
 					}
-					}
+					
 				}
 					catch(Exception e){
 						responseBean.setStatus("FAILED");

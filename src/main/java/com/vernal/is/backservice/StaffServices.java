@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,6 +40,7 @@ public class StaffServices {
 	 * @param studentDTO
 	 * @return
 	 */
+	 @Transactional
 	public ResponseBean updateStudent(StudentDTO studentDTO, Integer accessId) {
 		studentDTO = getBasicIds(studentDTO);
 		return staffDAO.updateStudent(studentDTO, accessId);
@@ -49,6 +51,7 @@ public class StaffServices {
 	 * @param userId
 	 * @return
 	 */
+	 @Transactional
 	public ResponseBean deleteStudent(Integer studentId,Integer phoneNumberId,Integer addressId, Integer accessId) {
 		return staffDAO.deleteStudent(studentId,phoneNumberId,addressId, accessId);
 	}
@@ -59,11 +62,17 @@ public class StaffServices {
 	 * @return
 	 * @throws Exception 
 	 */
+	 @Transactional
 	public ResponseBean createStudent(StudentDTO studentDTO, Integer accessId) throws Exception {
 		studentDTO = getBasicIds(studentDTO);
 		System.out.println("studentDTO>>>>>>>"+gson.toJson(studentDTO));
 		return staffDAO.createStudent(studentDTO, accessId);
 	}
+	 
+	 @Transactional
+		public ResponseBean updateAttendence(List<Integer> idStudent, Integer accessId) throws Exception {
+			return staffDAO.updateAttendence(idStudent, accessId);
+		}
 
 	/**
 	 * 
@@ -74,8 +83,8 @@ public class StaffServices {
 		return staffDAO.getStudents(role, standardId, sectionId);
 	}
 
-	public List<StaffClassDTO> getClassList(String role,Integer staffId) {
-		return staffDAO.getClassList(role,staffId);
+	public List<StaffClassDTO> getClassList(Integer staffId) {
+		return staffDAO.getClassList(staffId);
 	}
 	
 
@@ -118,11 +127,12 @@ public class StaffServices {
 			section.setId(commonService.getId(section.getSection(), CommonConstants.SECTION));
 			studentDTO.setSection(section);
 		}
-		if(studentDTO.getPhoneNumbers()!= null){
+		/*if(studentDTO.getPhoneNumbers()!= null){
 			for(StudentPhoneNumberDTO phone: studentDTO.getPhoneNumbers()){
 			 relation = phone.getStudentRelation();
 				relation.setId(commonService.getId(relation.getRelation(),CommonConstants.RELATION));
 				phone.setStudentRelation(relation);
+			}
 			}
 			if(studentDTO.getAddresses() != null){
 				for(StudentAddressDTO address: studentDTO.getAddresses()){
@@ -130,9 +140,8 @@ public class StaffServices {
 					relation.setId(commonService.getId(relation.getRelation(),CommonConstants.RELATION));
 					address.setStudentRelation(relation);
 				}
-			}
 			
-		}
+		}*/
 	
 		return studentDTO;
 	}
@@ -140,6 +149,11 @@ public class StaffServices {
 	public List<ClassesDTO> getAllClassList() {
 		// TODO Auto-generated method stub
 		return staffDAO.getAllClassList();
+	}
+
+	public List<StudentDTO> getAttendence(Integer staffId) {
+		// TODO Auto-generated method stub
+		return staffDAO.getAttendence(staffId);
 	}
 
 }

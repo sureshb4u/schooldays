@@ -18,7 +18,7 @@ public class StudentPhoneNumberResultsetExtractor implements ResultSetExtractor 
 		StudentRelationDTO relation = new StudentRelationDTO();
 		relation.setId(rs.getInt("ID_STUDENT_RELATION"));
 		relation.setRelation(rs.getString("STUDENT_RELATION"));
-		studentphoneDTO.setPhoneNumber(Long.valueOf(rs.getInt("PHONE_NUMBER")));
+		studentphoneDTO.setPhoneNumber(String.valueOf(rs.getInt("PHONE_NUMBER")));
 		studentphoneDTO.setIsPrimary(rs.getInt("IS_PRIMARY"));
 		return studentphoneDTO;
 		

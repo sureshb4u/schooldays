@@ -37,13 +37,11 @@ public class StaffController{
 
     @RequestMapping(value =  "/staffClasses", method = RequestMethod.GET)
 	 @ResponseBody
-	 public List<StaffClassDTO> getStudentsList(@PathVariable(value="standardId")Integer standardId, 
-			 @PathVariable(value="sectionId")Integer sectionId, HttpServletRequest request, HttpSession session){
-		 String role = "ADMIN";
+	 public List<StaffClassDTO> getStudentsList( HttpServletRequest request, HttpSession session){
 		request.getHeader(CommonConstants.SESSION_USERROLE);
 		 String staffid= request.getHeader(CommonConstants.SESSION_USER_ID);
 		 Integer staffId= Integer.valueOf(staffid); 
-		 List<StaffClassDTO> staffClassList =  staffServices.getClassList(role, staffId);
+		 List<StaffClassDTO> staffClassList =  staffServices.getClassList(staffId);
 		  return staffClassList;
 	 }
 	 
@@ -65,6 +63,21 @@ public class StaffController{
 					return staffServices.getStudents(role, search, standardId, sectionId);
 				}return null;
 			}
+     
+     
+     
+     @RequestMapping(value = "/Attendence", method = RequestMethod.GET)
+	@ResponseBody
+	public List<StudentDTO> getAttendence(@RequestParam( value="search" , required = false) String search, HttpServletRequest requests)  {
+						 String role = requests.getHeader(CommonConstants.SESSION_USERROLE);
+				if(role != null){
+					 String staffid= requests.getHeader(CommonConstants.SESSION_USER_ID);
+					 Integer staffId= Integer.valueOf(staffid); 
+					return staffServices.getAttendence(staffId);
+				}return null;
+			}
+     
+     
 			
 			@RequestMapping(value = "/getStudent/{studentId}", method = RequestMethod.GET)
 			@ResponseBody

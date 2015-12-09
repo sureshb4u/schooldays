@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vernal.is.model.Student;
 import com.vernal.is.service.StudentService;
+import com.vernal.is.util.CommonConstants;
 
 /**
  * @author Vignesh
@@ -44,11 +45,16 @@ public class StudentController extends BaseController {
 	 }
 	 
 	 @RequestMapping(value = "/classes", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	 public ResponseEntity<?> getClassesList(@RequestParam (value="standardId" , required=false )String StandardId ,HttpSession session) {
+	 public ResponseEntity<?> getClassesList(HttpSession session) {
 		 Object classesList = null;
 		try {
-			classesList = studentService.getClassesList(session);
-			System.out.println(gson.toJson(classesList));
+			String userRole = session.getAttribute(CommonConstants.SESSION_USERROLE).toString();
+			System.out.println("userRole----------"+userRole);
+			if(userRole.equalsIgnoreCase("ADMIN")){
+				classesList = studentService.getClassesList(session);
+			}else{
+				classesList = studentService.getClassesListByStaff(session);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

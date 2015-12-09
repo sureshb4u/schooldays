@@ -144,6 +144,18 @@
             }
         })
         
+         .state('home.attendence', {
+            url: '/attendence',
+            parent: 'home',
+            views: {
+                'viewPage': {
+                    templateUrl: '/scripts/app/attendence/view/attendence.html',
+                    controller: 'attendenceController',
+                   
+                }
+            }
+        })
+        
         .state('home.profile',{
         url: '/profile',
         parent:'home',

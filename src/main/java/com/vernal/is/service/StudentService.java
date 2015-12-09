@@ -89,8 +89,28 @@ public class StudentService extends BaseService{
 			throw e;
 		}
 		return response.getBody();
-		}
+	}
 
+	public Object getClassesListByStaff(HttpSession session) throws Exception {
+		ResponseEntity<Object> response = null;
+		try {
+			HttpEntity<String> requestEntity = prepareGet(session); 
+		
+		 response = restTemplate.exchange( getAPIBaseURL()
+							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.STAFF_CLASSES_URL ,
+							HttpMethod.GET, requestEntity, Object.class);
+			
+		} catch (RestClientException | IOException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return response.getBody();
+	}
+
+	
+	
+	
+	
 	public Object createStudent(Student student, HttpSession session) throws Exception {
 		StudentDTO studentDTO = studentTranslator.translateToStudentDTO(student);
 		String postString = gson.toJson(studentDTO);
