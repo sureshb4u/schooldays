@@ -60,9 +60,11 @@
 		$scope.lms ={};	
 		
 	 $scope.createNewLeaveRequest = function (obj){
+		 $scope.loader =true;
 		 var data = lmsService.createLeaveRequest(obj);
 		 data.then(function(success){	
 			 $scope.mainTemplate('', 'list');
+			  $scope.loader =false;
 			});
 		};
 	$scope.lmsPending = [];	
@@ -71,6 +73,8 @@
 		 data.then(function(success){
 			 console.log(angular.toJson(success));
 			 $scope.lmsPending = success;
+			  $scope.loader =false;
+
 			});
 	};
 	$scope.getHistoryLms = function(){
@@ -78,6 +82,8 @@
 		 data.then(function(success){	
 			 console.log('History-------'+angular.toJson(success));
 			 $scope.lmsHistory = success;
+			  $scope.loader =false;
+
 		});
 	};
 	
@@ -96,6 +102,8 @@
 			// $scope.mainTemplate('', 'list');
 			$scope.getPendingLms();
 			$scope.getHistoryLms();
+			  $scope.loader =false;
+
 		});
 	};
 	
