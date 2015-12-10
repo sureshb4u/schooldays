@@ -2,14 +2,14 @@
 	<ul class="collection grey-text m0" >
 	    <li class="collection-item avatar" ng-repeat="lists in staffList">
 	    <div flex-container="row">
-	    	  <div flex="10" layout-padding>
-		    	  <div class="circle profileImg">
-			      	<img src="/assets/images/no-img.jpg"  >
-			      </div>
-		      </div>
-		      <div flex="45" >
+		    	 <div layout="row" layout-padding layout-margin>
+		    	  <div class="circle profileImg" >
+			      	<img src="/assets/images/no-img.jpg"></img>
+		      	</div>
+		      	</div>
+		      <div flex="45">
 		      	<div flex-container="column"></div>
-			      <div flex="20" class="black-text fs-subhead display-block">{{lists.firstName}} {{lists.lastName}}</div>
+			      <div flex="20" class="black-text fs-subhead display-block schooldays">{{lists.firstName}} {{lists.lastName}}</div>
 			      <div flex="20" class="black-text fs-boy-2 fontClass "> Staff ID : {{lists.id}}  </div>
 			      <div flex="20" class="black-text fs-boy-2 fontClass ">E-mail :<a style="color:#08298A" href="mailto:{{lists.emailAddresses}}"> {{lists.emailAddresses}} </a></div>
 			      <div flex="20" class="black-text fs-boy-2 fontClass"> DOB : {{lists.dateOfBirth}} </div>
