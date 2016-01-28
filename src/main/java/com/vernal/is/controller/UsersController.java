@@ -74,9 +74,9 @@ public class UsersController {
 		System.out.println("saveUsers>>>>>>>>>>");
 		return "success";
 	}
-	@RequestMapping(value = "/{accessId}/createUser", headers="Accept=*/*", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{accessId}/createUser", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> addUsers( @PathVariable(value ="accessId") String accessId, HttpEntity<String> entity) throws Exception {
+	public Object addUsers( @PathVariable(value ="accessId") String accessId, HttpEntity<String> entity) throws Exception {
 		 String postString = entity.getBody();
 		
 	        UserDTO userDTO = gson.fromJson(postString, UserDTO.class);
@@ -87,7 +87,7 @@ public class UsersController {
 			 userid = Integer.valueOf(accessId);
 			 usersService.insertUser(userDTO, userid);
 		}
-		return new ResponseEntity<String>("SUCESS", HttpStatus.OK);
+		return "SUCESS";
 	}
 
 

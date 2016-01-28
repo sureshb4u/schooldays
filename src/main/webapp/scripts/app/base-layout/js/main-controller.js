@@ -16,7 +16,7 @@
  */
   var htmlText="";
 
-  vApp.controller('mainCtrl', [ '$scope','$q', '$compile', '$controller', '$templateCache', '$http', '$rootScope','$timeout','$translate','$location','$mdSidenav','$mdUtil','$log','LxDialogService','LxNotificationService','Upload','LxProgressService','$window','restService','$interval','$document','loginService', function($scope,$q, $compile, $controller, $templateCache, $http, $rootScope,$timeout,$translate,$location,$mdSidenav,$mdUtil,$log,LxDialogService,LxNotificationService,Upload,LxProgressService,$window,restService,$interval,$document,loginService) {
+  vApp.controller('mainCtrl', [ '$scope','$q', '$compile', '$controller', '$templateCache', '$http', '$rootScope','$timeout','$translate','$location','$mdSidenav','$mdUtil','$log','LxDialogService','LxNotificationService','Upload','LxProgressService','$window','restService','$interval','$document','loginService', 'loginAuthService' , '$state', function($scope,$q, $compile, $controller, $templateCache, $http, $rootScope,$timeout,$translate,$location,$mdSidenav,$mdUtil,$log,LxDialogService,LxNotificationService,Upload,LxProgressService,$window,restService,$interval,$document,loginService,loginAuthService,$state) {
 
 	var location= window.location.href.split('#')[1];
     $scope.path=window.location.href.split('#')[1];
@@ -242,24 +242,24 @@
     		                  }
     		              ]
     		          };
-    
+   
     $scope.logout = function(){
-    	var url ='/api/logout';
-		  var data = restService.restCall("",url,'GET');
-    	  //var data = loginService.logout( $scope );
-    	  data.$promise.then(function(response){
-    		  $log.debug("Controller Logout success"); 
-    		  console.log("inside logout function");
-    		  $scope.authenticationError = false;
-    		  loginService.init(false,'');
-    		  $location.path('/');
-    	  },
-    	  function(error){
-    		  $log.debug("Controller Logout error" + error.status); 
-    		  $location.path($scope.returnUrl);
-    		  $scope.authenticationError = false;
-    	  });
-    };
+	var data = loginAuthService.logout();
+  	data.then(function(response){
+  		  $log.debug("Controller Logout success"); 
+  		  console.log("inside logout function");
+  		  $scope.authenticationError = false;
+  		  loginService.init(false,'');
+  		 // $location.path('/login');
+  		  $state.go('logout');
+  	  },
+  	  function(error){
+  		  $log.debug("Controller Logout error" + error.status); 
+  		  $location.path($scope.returnUrl);
+  		  $scope.authenticationError = false;
+  	  });
+  };
+
     
     $scope.checkAdmin = function(){
     	if($scope.userRole == 'ADMIN'){

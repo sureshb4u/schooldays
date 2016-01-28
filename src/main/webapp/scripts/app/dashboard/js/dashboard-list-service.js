@@ -68,7 +68,25 @@
                 deferred.reject('ajaxError');
             });
             return deferred.promise;
-        }
+        };
+        
+        this.getStudentsByStaff = function(){
+        	var deferred = $q.defer();
+  		    var url = "api/student/classTeacher";
+		    var data = restService.restCall("",url,'GETLIST');
+			data.$promise.then(function(response){
+				deferred.resolve(response);
+			},
+            function (error) {
+                if (error.status == "401") {
+                    $state.go('login');
+                } else {
+                    LxNotificationService.warning(error);
+                }
+                deferred.reject('ajaxError');
+            });
+            return deferred.promise;
+        };
         
         this.getActivityList = function () {
             var deferred = $q.defer();

@@ -343,7 +343,8 @@ public class UserDAOImpl extends NamedParameterJdbcDaoSupport implements UserDAO
 		   if(user.getCommunity() != null){
 		   UPDATE_USER = UPDATE_USER+ "`ID_COMMUNITY`="+user.getCommunity().getId()+",";
 		   }
-		   
+
+		   UPDATE_USER = UPDATE_USER+ "`UPDATED_ON` = NOW() , ";
 		   UPDATE_USER = UPDATE_USER+ "`UPDATED_BY` ="+acessId;
 		   UPDATE_USER = UPDATE_USER+ " WHERE `ID` ="+userId;
 		   UPDATE_USER = UPDATE_USER+ " AND `IS_DELETED` = 0 ";

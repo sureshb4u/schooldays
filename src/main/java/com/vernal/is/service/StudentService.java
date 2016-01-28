@@ -4,9 +4,7 @@
 package com.vernal.is.service;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -19,10 +17,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 
 import com.google.gson.JsonSyntaxException;
-import com.vernal.is.dto.LeaveManagementDTO;
 import com.vernal.is.dto.StudentDTO;
-import com.vernal.is.model.Class;
-import com.vernal.is.model.LeaveManagement;
 import com.vernal.is.model.Student;
 import com.vernal.is.translator.StudentTranslator;
 import com.vernal.is.util.CommonConstants;
@@ -91,6 +86,12 @@ public class StudentService extends BaseService{
 		return response.getBody();
 	}
 
+	/**
+	 * 
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
 	public Object getClassesListByStaff(HttpSession session) throws Exception {
 		ResponseEntity<Object> response = null;
 		try {
@@ -108,16 +109,49 @@ public class StudentService extends BaseService{
 	}
 
 	
+	/**
+	 * 
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Student> getStudentsByStaffClass(String staffId, HttpSession session) throws Exception {
+		try {
+		 ResponseEntity<Object> response = null;
+		 HttpEntity<String> requestEntity = prepareGet(session); 
+		 List<StudentDTO> studentDTOList = null; 
+		 List<Student> studentList = null; 
+		 response = restTemplate.exchange( getAPIBaseURL()
+							+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.STAFF_URL
+							+ CommonConstants.SLASH + staffId,
+							HttpMethod.GET, requestEntity, Object.class);
+			
+		 studentDTOList =  studentTranslator.convertToListOfStudentDTO(response.getBody()); 
+		 studentList = studentTranslator.translateToStudentList(studentDTOList);
+		 return studentList;
+		} catch (RestClientException | IOException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 	
 	
 	
+	/***
+	 * 
+	 * @param student
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 */
 	public Object createStudent(Student student, HttpSession session) throws Exception {
 		StudentDTO studentDTO = studentTranslator.translateToStudentDTO(student);
 		String postString = gson.toJson(studentDTO);
 		ResponseEntity<Object> response = null;
 		try {
 			HttpEntity<String> entity = preparePost(postString, session);
-			
+			System.out.println("postString"+gson.toJson(postString));
 			response = restTemplate.exchange( getAPIBaseURL()
 					+ CommonConstants.STUDENTS_BASE_URL + CommonConstants.CREATE,
 					HttpMethod.POST, entity, Object.class);

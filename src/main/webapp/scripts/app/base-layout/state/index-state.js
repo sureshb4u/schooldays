@@ -49,7 +49,7 @@
                 requireLogin: false
             }
         })
-            .state('logout', {
+         .state('logout', {
                 url: '/logout',
                 views: {
                     'right': {

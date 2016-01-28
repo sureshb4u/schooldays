@@ -14,7 +14,14 @@
       <httpclient.version>4.1.1</httpclient.version>
       <gson.version>2.2.4</gson.version>
       <springsecurity.version>3.2.5.RELEASE</springsecurity.version>
-   </properties>
+   </properties> 
+   <!-- <repositories>
+   	 <repository>
+   	  <id>VS Core Repository</id>
+   	  <name>VS Core Repository</name>
+      <url>http://vsmdugit.vsconnect.net:81/releases/maven</url>
+     </repository>
+   </repositories> -->
    <dependencies>
       <dependency>
          <groupId>junit</groupId>
@@ -174,12 +181,28 @@
        <version>1.2.0</version>
      </dependency>
      <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-tx</artifactId>
+		<version>4.1.0.RELEASE</version>
+	</dependency>
+      <dependency>
 	<groupId>javax.mail</groupId>
 	<artifactId>mail</artifactId>
 	<version>1.4</version>
-</dependency>
-       
-      <!-- Spring Jdbc -->
+    </dependency>
+	<!-- DTO files -->
+    <!--  <dependency>
+       <groupId>com.vernal.is</groupId>
+       <artifactId>atrium-dto_2.11</artifactId>
+       <version>1.2.5</version>
+    </dependency>
+    <dependency>
+        <groupId>com.ocpsoft</groupId>
+        <artifactId>ocpsoft-pretty-time</artifactId>
+        <version>1.0.7</version>
+	</dependency> -->
+	
+	 <!-- Spring Jdbc -->
 	  <dependency>
 		 <groupId>org.springframework</groupId>
 		 <artifactId>spring-jdbc</artifactId>
@@ -192,89 +215,152 @@
 		<artifactId>mysql-connector-java</artifactId>
 		<version>5.1.27</version>
 	  </dependency>
-	  
-	  
 	  <!-- Spring and Transactions -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring-framework.version}</version>
-        </dependency>
-        
-        
-         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring-framework.version}</version>
-        </dependency>
-     
+	  
   </dependencies>
   <build>
-    <finalName>atrium-frontend</finalName>
-    <pluginManagement>
+    <finalName>/</finalName>
     <plugins>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.1</version>
-            <configuration>
-               <source>1.7</source>
-               <target>1.7</target>
-            </configuration>
-         </plugin>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.16</version>
-            <configuration>
-               <skipTests>true</skipTests>
-            </configuration>
-         </plugin>
-         <plugin>
-            <groupId>org.apache.tomcat.maven</groupId>
-            <artifactId>tomcat7-maven-plugin</artifactId>
-            <version>2.0</version>
-            <configuration>
-               <path>/</path>
-               <port>8080</port>
-            </configuration>
-         </plugin>
-          <plugin>
-                    <groupId>com.github.trecloux</groupId>
-                        <artifactId>yeoman-maven-plugin</artifactId>
-                        <version>0.4</version>
-                        <executions>
-                            <execution>
-                                <id>run-frontend-build</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>build</goal>
-                                </goals>
-                                <configuration>
-                                    <buildTool>grunt</buildTool>
-                                    <buildArgs>build --force --no-color</buildArgs>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <yeomanProjectDirectory>${project.basedir}</yeomanProjectDirectory>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <version>2.5</version>
-                        <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>src/main/webapp/dist</directory>
-                                </fileset>
-                                <fileset>
-                                    <directory>.tmp</directory>
-                                </fileset>
-                              </filesets>
-                        </configuration>
-                    </plugin>
+              <!--   <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin> -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.16</version>
+                    <configuration>
+                        <skipTests>true</skipTests>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.0</version>
+                    <configuration>
+                        <path>/</path>
+                        <port>8080</port>
+                    </configuration>
+                </plugin>
+                <plugin>
+			        <groupId>com.github.eirslett</groupId>
+			        <artifactId>frontend-maven-plugin</artifactId>
+			        <version>0.0.27</version>
+			         <executions>
+			            <execution>
+			                <id>install node and npm</id>
+			                <goals>
+			                    <goal>install-node-and-npm</goal>
+			                </goals>
+			                <configuration>
+			                    <nodeVersion>v0.12.7</nodeVersion>
+			                    <npmVersion>3.5.2</npmVersion>
+			                </configuration>
+			            </execution>
+			 
+			            <execution>
+			                <id>npm install</id>
+			                <goals>
+			                    <goal>npm</goal>
+			                </goals>
+			                <configuration>
+			                    <arguments>install</arguments>
+			                </configuration>
+			            </execution>
+			            
+			            <execution>
+						    <id>bower install</id>
+						    <goals>
+						        <goal>bower</goal>
+						    </goals>
+						
+						    <configuration>
+						        <arguments>install</arguments>
+						    </configuration>
+						</execution>
+			 			<!--  <execution>
+			                <id>bower install</id>
+			                <goals>
+			                    <goal>bower</goal>
+			                </goals>
+			                <configuration>
+			                    <arguments>install</arguments>
+			                </configuration>
+			            </execution> -->
+			            <!-- <execution>
+			                <id>grunt build</id>
+			                <goals>
+			                    <goal>grunt</goal>
+			                </goals>
+			                <configuration>
+			                    <arguments>build</arguments>
+			                </configuration>
+			            </execution> -->
+			 
+			        </executions>
+			       <configuration>
+					    <srcdir>${basedir}/src/main/webapp/scripts/app</srcdir>
+					    <outputdir>${basedir}/src/main/webapp/scripts/app</outputdir>
+					    <triggerfiles>
+					        <triggerfile>Gruntfile.js</triggerfile>
+					        <triggerfile>package.json</triggerfile>
+					    </triggerfiles>
+					    <arguments>${target.environment}</arguments>
+					</configuration>
+			    </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <filesets>
+                            <fileset>
+                                <directory>src/main/webapp/dist</directory>
+                            </fileset>
+                            <fileset>
+                                <directory>.tmp</directory>
+                            </fileset>
+                        </filesets>
+                    </configuration>
+                </plugin>
+
             </plugins>
-            </pluginManagement>
+    <pluginManagement>
+    	<plugins>
+    		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+    		<plugin>
+    			<groupId>org.eclipse.m2e</groupId>
+    			<artifactId>lifecycle-mapping</artifactId>
+    			<version>1.0.0</version>
+    			<configuration>
+    				<lifecycleMappingMetadata>
+    					<pluginExecutions>
+    						<pluginExecution>
+    							<pluginExecutionFilter>
+    								<groupId>
+    									org.apache.maven.plugins
+    								</groupId>
+    								<artifactId>
+    									maven-war-plugin
+    								</artifactId>
+    								<versionRange>[2.2,)</versionRange>
+    								<goals>
+    									<goal>war</goal>
+    								</goals>
+    							</pluginExecutionFilter>
+    							<action>
+    								<ignore></ignore>
+    							</action>
+    						</pluginExecution>
+    					</pluginExecutions>
+    				</lifecycleMappingMetadata>
+    			</configuration>
+    		</plugin>
+    	</plugins>
+    </pluginManagement>
   </build>
 </project>

@@ -22,7 +22,7 @@
 	        	<button ng-show ="create" class="btn btn--l btn--black btn--fab iconBg rounded" ng-click="mainTemplate('','classlist'); create=false;" lx-ripple lx-tooltip="Cancel" tooltip-position="bottom">
 	        		<ng-md-icon  icon="cancel" ></ng-md-icon>
 	        	</button>
-	        	 <button ng-hide="create" class="btn btn--l btn--black btn--fab iconBg rounded" lx-ripple lx-tooltip="Sort" tooltip-position="bottom">
+	        	 <button ng-hide="create" class="btn btn--l btn--black btn--fab iconBg rounded" lx-ripple lx-tooltip="Sort" tooltip-position="bottom" ng-click="order('firstName');">
 	        	 	<i class="mdi mdi-sort-alphabetical"></i>
 	        	 </button> 
 	        	 <button ng-hide="create" class="btn btn--l btn--black btn--fab iconBg rounded" lx-ripple lx-tooltip="Delete" tooltip-position="bottom">

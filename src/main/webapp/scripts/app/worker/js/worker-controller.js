@@ -68,7 +68,10 @@
 	  			$scope.save = function(){
 	  				console.log("SUBMITTED");
 	  				var data = ntStaffservice.createStaff($scope.tchngStaff,'teaching');
-	  			};
+	  				data.then(function(success){	
+	  					$scope.mainTemplate('','list');
+	  					});
+	  				};
 	  			
 	} ]);
  })(); 

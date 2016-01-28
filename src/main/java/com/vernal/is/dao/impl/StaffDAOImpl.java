@@ -1,5 +1,6 @@
 package com.vernal.is.dao.impl;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +15,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.vernal.is.dao.StaffDAO;
 import com.vernal.is.dto.ClassesDTO;
 import com.vernal.is.dto.CommunityDTO;
@@ -30,12 +34,16 @@ import com.vernal.is.dto.StudentPhoneNumberDTO;
 import com.vernal.is.dto.UserDTO;
 import com.vernal.is.mapper.StudentAddressResultsetExtractor;
 import com.vernal.is.mapper.StudentPhoneNumberResultsetExtractor;
+import com.vernal.is.util.CommonConstants;
 import com.vernal.is.util.CommonUtil;
 
 public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffDAO{
   @Resource
   CommonUtil commonUtil;
+  public static final Gson gson = new GsonBuilder().setDateFormat(CommonConstants.ISO_DATE_FORMAT).create();
+  
 	@Override
+	@Transactional ("transactionManager")
 	public ResponseBean updateStudent(StudentDTO student, Integer accessId) {
 		ResponseBean responseBean = new ResponseBean();
 		
@@ -83,13 +91,13 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 			   SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(
 					   student);
 			if(student != null)
-			getNamedParameterJdbcTemplate().update(UPDATE_STUDENT, namedParameters, keyHolder );
-			if(student.getAddresses()!= null){
+			getJdbcTemplate().update(UPDATE_STUDENT, namedParameters, keyHolder );
+			//if(student.getAddresses()!= null){
 			updateAddress(student.getAddresses(),accessId);
-			}
-			 if(student.getPhoneNumbers()!= null){
+			//}
+			// if(student.getPhoneNumbers()!= null){
 			updatePhone(student.getPhoneNumbers(),accessId);
-			 }
+			// }
 			Number idStudent = keyHolder.getKey();
 			student.setId(idStudent.intValue());
 			System.out.println("id ------------>"+idStudent);
@@ -192,6 +200,7 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 	}
 
 	@Override
+/*	@Transactional ("transactionManager")*/
 	public ResponseBean createStudent(StudentDTO student, Integer accessId) {
 		
 		ResponseBean responseBean = new ResponseBean();
@@ -299,18 +308,21 @@ public class StaffDAOImpl extends NamedParameterJdbcDaoSupport implements StaffD
 		     				   SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(
 		     						   student);
 		     					System.out.println("query   "+CREATE_STUDENT);
-		     				   getNamedParameterJdbcTemplate().update(CREATE_STUDENT, namedParameters,keyHolder );
+		     				   getJdbcTemplate().update(CREATE_STUDENT, namedParameters,keyHolder );
 		     				   Number id = keyHolder.getKey();
 		     				   if(id!= null){
 		     					   student.setId(id.intValue());
 		     					   getJdbcTemplate().update(ATTENDENCE, id.intValue());
-		     					  Integer idStudent = id.intValue();
-		     						if(student.getPhoneNumbers() != null){
+		     					   Integer idStudent = id.intValue();
+		     					   System.out.println("student.getPhoneNumbers()-----"+gson.toJson(student.getPhoneNumbers()));
+		     				//	   if(!student.getPhoneNumbers().isEmpty()){
+		     							System.out.println("Inside phone number");
 		     						insertPhoneNumber(student.getPhoneNumbers(),idStudent,accessId);
-		     						}
-		     						if(student.getAddresses() != null){
+		     					//	}
+		     						//if(!student.getAddresses().isEmpty()){
+		     							System.out.println("Inside address number");
 		     						insertAddressses(student.getAddresses(),idStudent,accessId);	
-		     						}
+		     						//}
 		     				   }
 		     					responseBean.setStatus("SUCCESS");
 		     					responseBean.setMessage("The new student is added successfully");

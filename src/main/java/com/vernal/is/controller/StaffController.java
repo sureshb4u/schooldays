@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.vernal.is.backservice.StaffServices;
 import com.vernal.is.dto.ClassesDTO;
 import com.vernal.is.dto.ResponseBean;
@@ -32,6 +34,8 @@ import com.vernal.is.util.CommonConstants;
 @RequestMapping(CommonConstants.STUDENTS_BASE_URL)
 public class StaffController{
 
+	
+	public static final Gson gson = new GsonBuilder().setDateFormat(CommonConstants.ISO_DATE_FORMAT).create();
 	@Resource
 	StaffServices staffServices;
 
@@ -66,16 +70,15 @@ public class StaffController{
      
      
      
-     @RequestMapping(value = "/Attendence", method = RequestMethod.GET)
+    @RequestMapping(value = "/staff/{staffId}", method = RequestMethod.GET)
 	@ResponseBody
-	public List<StudentDTO> getAttendence(@RequestParam( value="search" , required = false) String search, HttpServletRequest requests)  {
-						 String role = requests.getHeader(CommonConstants.SESSION_USERROLE);
-				if(role != null){
-					 String staffid= requests.getHeader(CommonConstants.SESSION_USER_ID);
-					 Integer staffId= Integer.valueOf(staffid); 
-					return staffServices.getAttendence(staffId);
-				}return null;
-			}
+	public List<StudentDTO> getAttendence(@PathVariable( value="staffId") String staffId, HttpServletRequest requests)  {
+		 if(staffId != null){
+			 System.out.println("staffId======="+staffId);
+			return staffServices.getAttendence(Integer.valueOf(staffId));
+	   	}
+	return null;
+	}
      
      
 			
@@ -88,15 +91,17 @@ public class StaffController{
 			
 			@RequestMapping(value = "/create", method = RequestMethod.POST)
 			@ResponseBody
-			public ResponseEntity<?> addUsers(@RequestBody StudentDTO studentDTO) throws Exception {
-				 String accessId ="22";
-				Integer userid = null ;
-				if(accessId != null && !accessId.isEmpty()){
+			public ResponseBean addUsers(@RequestBody StudentDTO studentDTO, HttpServletRequest requests) throws Exception {
+				ResponseBean responseBean = null;
+				String staffid = requests.getHeader(CommonConstants.SESSION_USER_ID);
+				 Integer accessId= Integer.valueOf(staffid); 
+				if(accessId != null ){
 					System.out.println("accessId>>>>>>>"+accessId);
-					 userid = Integer.valueOf(accessId);
-					 staffServices.createStudent(studentDTO, userid);
+					accessId = Integer.valueOf(accessId);
+					System.out.println("json>>>>>>>>>>>>"+gson.toJson(studentDTO));
+					responseBean = staffServices.createStudent(studentDTO, accessId);
 				}
-				return new ResponseEntity<String>("SUCESS", HttpStatus.OK);
+				return  responseBean;
 			}
 
 

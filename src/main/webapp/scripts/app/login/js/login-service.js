@@ -44,6 +44,17 @@
 			});
             return deferred.promise;
         };
+      
+        
+        this.logout = function(){
+        	 var deferred = $q.defer();
+             var url ='/api/logout';
+             var data = restService.restCall('', url, 'GET');
+ 			 data.$promise.then(function(response){
+ 				deferred.resolve(response);
+ 			});
+             return deferred.promise;
+        }
         
     }]);
 

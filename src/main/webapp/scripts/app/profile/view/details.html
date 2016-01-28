@@ -3,19 +3,18 @@
 		<div flex-item layout-margin layout-padding flex-container="row" >
 			<div  flex="30">
 			<div layout="column">
-				<div class="fs-headline display-block schooldays" style="color:#3f51b5">{{user.firstName}} {{user.lastName}}</div>
+				<div class="md-headline  black-t" style="color:#3f51b5">{{user.firstName}} {{user.lastName}}</div>
 				<div layout="row">
 					<div flex="10">
-						<i class="mdi mdi-gender-male schooldays"  ng-if="user.gender == 'MALE'"></i>
-						<i class="mdi mdi-gender-female titles"   ng-if="user.gender == 'FEMALE'"></i>
+						<i class="mdi mdi-gender-male" style="color: #3f51b5;" ng-if="user.gender == 'MALE'"></i>
+						<i class="mdi mdi-gender-female" style="color: #FF4081;"  ng-if="user.gender == 'FEMALE'"></i>
 					</div>
 				<div flex="90">
-					<span class="fs-body-2  b2lack-t " >{{user.gender}}</span>
+					<span class="fs-subhead  black-t" >{{user.gender}}</span>
 				</div>
 				</div>
 				<!-- <div class="fs-subhead  black-t">{{user.designation}}</div> -->
-				<span class="fs-body-2  black-t" >{{user.dateOfBirth}}</span>
-				<div class="fs-body-2 display-block black-t">EXPERIENCE : {{user.experience}} Years</div>
+				<span class="fs-subhead  black-t" >{{user.dateOfBirth}}</span>
 			</div>			 
 	        </div> 
 	        <div  flex="40">
@@ -48,20 +47,12 @@
 	      				</md-input-container>
 	   				
 	 				</div>
-	 				<div layout-margin layout-padding flex-container="row">
-   				<div  flex="50"  class="fs-subhead black-text">
-	 				<md-input-container >
-	 	 				 <label class="caption">Contact</label>
-	          			<input ng-model="user.contacts" ng-blur="updateProfile(user.contacts, 'contact')">
-	     			</md-input-container> 
-	 			</div>
-	 		</div>	
-	 		<!-- <div  flex="50"  class="fs-subhead black-text">
+	 		<div  flex="50"  class="fs-subhead black-text">
    							<md-input-container >
 	      				 	 <label class="caption">Experience</label>
 	       					 <input ng-model="user.experience" ng-blur="updateProfile(user.experience, 'experience')"></input>
 	      				</md-input-container>	      				
-	 				</div>	 -->	
+	 				</div>		
 	 	</div>
 	 		<div layout-margin layout-padding flex-container="row">
    					<div  flex="50"  class="fs-subhead black-text">
@@ -101,7 +92,14 @@
 	 				</div>
 	 	
 	 	</div>
-	 		
+	 		<div layout-margin layout-padding flex-container="row">
+   				<div  flex="50"  class="fs-subhead black-text">
+	 				<md-input-container >
+	 	 				 <label class="caption">Contact</label>
+	          			<input ng-model="user.contacts" ng-blur="updateProfile(user.contacts, 'contact')">
+	     			</md-input-container> 
+	 			</div>
+	 		</div>	
 	</div>	
 	</div>
 </div>

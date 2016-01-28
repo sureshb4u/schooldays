@@ -1,5 +1,5 @@
  <div>
-	<ul class="collection grey-text m0" >
+	<ul class="collection grey-text m0"  ng-init="getStudentsByStaff()">
 	    <li class="collection-item avatar cursor-pointer" ng-repeat="lists in students">
 	    <div flex-container="row">
 	    	  <div flex="10" layout-padding>
@@ -16,7 +16,7 @@
 		      </div>
 	      </div>
 	    </li>
-	    <div ng-show="!students.length" layout-padding layout-margin class="align-center"> <span>No Students</span> </div>
+	      <div ng-show="!students.length" layout-padding layout-margin class="align-center"> <span>No Students</span> </div>
   </ul>
 </div>
 

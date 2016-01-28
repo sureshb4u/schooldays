@@ -75,4 +75,20 @@ public class StudentController extends BaseController {
 		return new ResponseEntity<Object>(obj , HttpStatus.ACCEPTED);
 	 }
 
+	 @RequestMapping(value ="/classTeacher")
+	 public ResponseEntity<?> getStudentsByStaff(HttpSession session){
+		 List<Student> studentList = null;
+		 try {
+			String staffId = session.getAttribute(CommonConstants.SESSION_USER_ID).toString();
+			String role = session.getAttribute(CommonConstants.SESSION_USERROLE).toString();	 
+			if(role.equalsIgnoreCase(CommonConstants.TEACHING_STAFF)){
+				studentList = studentService.getStudentsByStaffClass(staffId, session);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<Student>>(studentList , HttpStatus.ACCEPTED);
+	 }
+	 
+	 
 }

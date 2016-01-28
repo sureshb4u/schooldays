@@ -87,16 +87,17 @@ public class LoginController extends BaseController{
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "/logout",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> logout(HttpSession session) throws IOException {
-    	if(session.getAttribute(CommonConstants.SESSION_TOKEN) != null){
-    		try{
-    			loginService.logout(session);
-    		} catch(Exception exception){
-    			return new ResponseEntity<>(setCustomExceptionHandler(exception, MessageUtils.getMessage("error.user.logout")), HttpStatus.INTERNAL_SERVER_ERROR);
-    		}
-    	}
-    	session.removeAttribute(CommonConstants.SESSION_PERSON_ID);
+	@RequestMapping(value = "/logout",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> logout(HttpSession session) {
+			System.out.println("Inside Logout******************************");
+			
+			
+			//loginService.logout(session);
+		/*} catch(Exception exception){
+			exception.printStackTrace();
+			//return new ResponseEntity<>(setCustomExceptionHandler(exception, MessageUtils.getMessage("error.user.logout")), HttpStatus.INTERNAL_SERVER_ERROR);
+		}*/
+    	session.removeAttribute(CommonConstants.SESSION_USER_ID);
     	session.removeAttribute(CommonConstants.SESSION_USERNAME);
     	session.removeAttribute(CommonConstants.SESSION_USERROLE);
     	session.removeAttribute(CommonConstants.SESSION_FIRSTNAME);

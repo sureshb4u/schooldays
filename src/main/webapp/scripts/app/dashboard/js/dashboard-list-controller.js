@@ -53,19 +53,14 @@
 			  $scope.classList = success;
 			  $scope.loadStudentsList($scope.classList[0].standard.id, $scope.classList[0].section.id);
 		  });
-	  }
-	  $scope.loadActivityList = function() {
-          var data = dashboardListService.getActivityList();
-          data.then(function (success) {
-        	  $scope.activityList = success;
-          });
 	  };
 	  
-	  $scope.loadEvaluationList = function() {
-          var data = dashboardListService.getEvaluationList();
-          data.then(function (success) {
-        	  $scope.evaluationList = success;
-          });
+	  $scope.getStudentsByStaff = function (){
+		  var data = dashboardListService.getStudentsByStaff();
+		  data.then(function(success){
+			  console.log(angular.toJson(success));
+			  $scope.students = success;
+		  });
 	  };
 	  
     }]);

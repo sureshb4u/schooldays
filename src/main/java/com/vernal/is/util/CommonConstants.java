@@ -46,6 +46,7 @@ public class CommonConstants {
 	public static final String PERSONS_BASE_URL = "/persons";
 	public static final String ROLE_TYPE = "roleType";
 	public static final String ROLE_BASE_URL = "/role";
+	public static final String STAFF_URL = "/staff";
 	
 	String toAddr = "viki19nesh@gmail.com";
 	public static final String FROMADDRESS = "viki19nesh@gmail.com";
@@ -97,4 +98,5 @@ public class CommonConstants {
 	public static final String RELATION = "STUDENT_RELATION";
 	public static final String CREATE = "/create";
 	public static final String STAFF_CLASSES_URL = "/staffClasses";
+	public static final String TEACHING_STAFF = "TEACHING STAFF";
 }

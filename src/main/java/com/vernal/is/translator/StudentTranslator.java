@@ -151,7 +151,6 @@ public class StudentTranslator  extends BaseTranslator{
 			if(student.getContact() != null){
 				List<StudentPhoneNumberDTO> phoneNumbers = new ArrayList<StudentPhoneNumberDTO>();
 				StudentPhoneNumberDTO phoneNumber = new StudentPhoneNumberDTO();
-//				Long contact =Long.getLong(student.getContact());
 				phoneNumber.setPhoneNumber(student.getContact());
 				phoneNumbers.add(phoneNumber);
 				studentDTO.setPhoneNumber(phoneNumbers);
